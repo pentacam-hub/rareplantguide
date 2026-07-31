@@ -1,0 +1,23 @@
+baseURL = "http://localhost:1313/"
+languageCode = "it-it"
+title = "The Rare Plant Guide"
+theme = "PaperMod"
+
+[params]
+  description = "Guide pratiche per la cura di piante rare e variegate da interno"
+  DateFormat = "2 January 2006"
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = false
+
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 1
+
+[[menu.main]]
+  name = "Articoli"
+  url = "/posts/"
+  weight = 2

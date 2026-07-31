@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Houseplant Care on The Rare Plant Guide</title>
+    <link>http://localhost:1313/tags/houseplant-care/</link>
+    <description>Recent content in Houseplant Care on The Rare Plant Guide</description>
+    <generator>Hugo</generator>
+    <language>it-it</language>
+    <lastBuildDate>Fri, 31 Jul 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/houseplant-care/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Best Grow Lights for Rare Houseplants (2026 Guide)</title>
+      <link>http://localhost:1313/posts/best-grow-lights-rare-houseplants/</link>
+      <pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/best-grow-lights-rare-houseplants/</guid>
+      <description>How to choose the right grow light for variegated and rare houseplants, with wattage, spectrum, and placement guidance.</description>
+    </item>
+    <item>
+      <title>Pests on Rare Houseplants: Identification and Treatment</title>
+      <link>http://localhost:1313/posts/pests-rare-houseplants/</link>
+      <pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/pests-rare-houseplants/</guid>
+      <description>How to identify and treat the most common pests on rare and variegated houseplants before they spread to the rest of your collection.</description>
+    </item>
+    <item>
+      <title>Rare Houseplant Care: The Complete Guide</title>
+      <link>http://localhost:1313/posts/rare-houseplant-care-guide/</link>
+      <pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/rare-houseplant-care-guide/</guid>
+      <description>A complete guide to caring for rare and variegated houseplants — light, watering, humidity, and propagation basics every collector needs to know.</description>
+    </item>
+    <item>
+      <title>Why Is My Rare Plant Losing Its Variegation?</title>
+      <link>http://localhost:1313/posts/rare-plant-losing-variegation/</link>
+      <pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/rare-plant-losing-variegation/</guid>
+      <description>The difference between normal variegation shifts and real reversion, and what actually causes a rare plant to lose its pattern over time.</description>
+    </item>
+    <item>
+      <title>Why Is My Variegated Plant Turning Green?</title>
+      <link>http://localhost:1313/posts/variegated-plant-turning-green/</link>
+      <pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/variegated-plant-turning-green/</guid>
+      <description>Understanding reversion in variegated houseplants — why it happens, whether it can be reversed, and how to prevent it.</description>
+    </item>
+  </channel>
+</rss>
