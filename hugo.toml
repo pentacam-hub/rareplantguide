@@ -1,11 +1,11 @@
-baseURL = "http://localhost:1313/"
-languageCode = "it-it"
+baseURL = "https://rareplantguide.wemallc-del.workers.dev/"
+locale = "en_US"
 title = "The Rare Plant Guide"
 theme = "PaperMod"
 
 [params]
-  description = "Guide pratiche per la cura di piante rare e variegate da interno"
-  DateFormat = "2 January 2006"
+  description = "Practical care guides for rare and variegated houseplants"
+  DateFormat = "January 2, 2006"
   ShowReadingTime = true
   ShowShareButtons = false
   ShowPostNavLinks = true
@@ -18,6 +18,6 @@ theme = "PaperMod"
   weight = 1
 
 [[menu.main]]
-  name = "Articoli"
+  name = "Articles"
   url = "/posts/"
   weight = 2
