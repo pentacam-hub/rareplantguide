@@ -14,10 +14,11 @@ theme = "PaperMod"
   ShowToc = true
   TocOpen = false
   ShowRssButtonInSectionTermList = true
+  mainSections = ["posts"]
 
   [params.homeInfoParams]
     Title = "Welcome to The Rare Plant Guide 🌿"
-    Content = "Practical, no-nonsense care guides for rare and variegated houseplants — collector to collector."
+    Content = "Practical, no-nonsense care guides for rare and variegated houseplants — collector to collector. Browse the latest guides below, or head to the full archive."
 
 [[menu.main]]
   name = "Home"
@@ -28,3 +29,6 @@ theme = "PaperMod"
   name = "Articles"
   url = "/posts/"
   weight = 2
+
+[params.list]
+  showFullTextinRSS = false
