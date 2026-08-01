@@ -10,7 +10,6 @@ cover:
     relative: false
 ---
 
-![Monstera leaf showing variegation pattern](/images/monstera-reverted-green.jpg)
 
 Watching an expensive variegated plant slowly produce all-green leaves is one of the most frustrating experiences for a collector. This process is called **reversion**, and understanding why it happens is the first step to stopping it.
 

@@ -10,7 +10,6 @@ cover:
     relative: false
 ---
 
-![Plant cutting being propagated](/images/plant-propagation-cutting.jpg)
 
 Propagation is how collectors turn one expensive plant into several — and it's also how you preserve a specific variegation pattern before a stem section reverts to green. For general care fundamentals first, see the [Complete Rare Houseplant Care Guide](/posts/rare-houseplant-care-guide/).
 

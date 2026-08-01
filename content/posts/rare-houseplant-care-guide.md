@@ -11,8 +11,6 @@ cover:
     relative: false
 ---
 
-![Close-up of variegated Monstera deliciosa leaf](/images/monstera-variegated-hero.jpg)
-
 Rare and variegated houseplants have exploded in popularity over the last few years, with collectors paying anywhere from $50 to several thousand dollars for a single specimen. But rarity comes with a catch: many of these plants are more delicate than their common cousins, and a small care mistake can set a plant back for months — or kill it outright.
 
 This guide covers the fundamentals every rare plant owner needs, with links to deeper guides on specific problems.

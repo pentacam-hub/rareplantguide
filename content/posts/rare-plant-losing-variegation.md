@@ -10,8 +10,6 @@ cover:
     relative: false
 ---
 
-![Close-up of leaf variegation pattern](/images/variegation-pattern-close.jpg)
-
 "Losing variegation" can mean a few different things, and collectors often panic before identifying which one they're actually seeing. For general care basics, start with the [Complete Rare Houseplant Care Guide](/posts/rare-houseplant-care-guide/).
 
 ## Is It Reversion, or Something Else?

@@ -10,7 +10,6 @@ cover:
     relative: false
 ---
 
-![Grow light positioned above a houseplant](/images/grow-light-setup.jpg)
 
 If your rare or variegated plant is stalling out, stretching toward the window, or losing its variegation, insufficient light is the most common culprit. Natural light from even a bright window is often far weaker than it looks to the human eye — this is where a grow light earns its cost back quickly for a valuable collection.
 

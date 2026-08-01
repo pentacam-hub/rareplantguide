@@ -10,7 +10,6 @@ cover:
     relative: false
 ---
 
-![Inspecting houseplant leaves for pests](/images/houseplant-pest-inspection.jpg)
 
 A pest infestation on an expensive rare plant is worse than on a common one for two reasons: the plant is often more stressed to begin with (see our guides on [light](/posts/best-grow-lights-rare-houseplants/) and [soil](/posts/best-soil-mix-variegated-monstera/) requirements), and losing it costs far more than losing a common houseplant. Catching pests early is critical. For general care fundamentals, see the [Complete Rare Houseplant Care Guide](/posts/rare-houseplant-care-guide/).
 
