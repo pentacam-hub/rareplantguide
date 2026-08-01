@@ -48,6 +48,8 @@ Most rare aroids originate from tropical understories and prefer humidity above 
 
 A chunky, well-draining aroid mix (bark, perlite, sphagnum moss) prevents the root rot that kills more rare plants than any pest or disease. Repot only when roots circle the pot — rare plants resent being disturbed unnecessarily.
 
+![Chunky bark and perlite potting mix for rare aroids](/images/chunky-aroid-soil-mix.jpg)
+
 👉 [Best Soil Mix for Variegated Monstera](/posts/best-soil-mix-variegated-monstera/)
 
 ## Propagation: Turn One Plant Into Several
