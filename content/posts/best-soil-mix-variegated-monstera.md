@@ -4,8 +4,11 @@ date: 2026-07-31T00:00:00
 draft: false
 description: "The ideal chunky, well-draining soil mix for variegated Monstera and other rare aroids, with ratios and what to avoid."
 tags: ["rare plants", "soil mix", "monstera"]
+cover:
+    image: "/images/chunky-aroid-soil-mix.jpg"
+    alt: "Chunky well-draining potting mix for aroids"
+    relative: false
 ---
-
 ![Chunky well-draining potting mix for aroids](/images/chunky-aroid-soil-mix.jpg)
 
 Standard potting soil is one of the fastest ways to kill a rare aroid. It holds too much moisture around the roots for too long, and root rot is the single biggest killer of expensive variegated plants — often faster than any pest or light problem. For the full care basics, see the [Complete Rare Houseplant Care Guide](/posts/rare-houseplant-care-guide/).

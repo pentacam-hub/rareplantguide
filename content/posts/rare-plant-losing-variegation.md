@@ -4,6 +4,10 @@ date: 2026-07-31T00:00:00
 draft: false
 description: "The difference between normal variegation shifts and real reversion, and what actually causes a rare plant to lose its pattern over time."
 tags: ["rare plants", "variegation", "houseplant care"]
+cover:
+    image: "/images/variegation-pattern-close.jpg"
+    alt: "Close-up of leaf variegation pattern"
+    relative: false
 ---
 
 ![Close-up of leaf variegation pattern](/images/variegation-pattern-close.jpg)

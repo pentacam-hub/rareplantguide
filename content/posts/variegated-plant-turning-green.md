@@ -4,6 +4,10 @@ date: 2026-07-31T00:00:00
 draft: false
 description: "Understanding reversion in variegated houseplants — why it happens, whether it can be reversed, and how to prevent it."
 tags: ["rare plants", "variegation", "houseplant care"]
+cover:
+    image: "/images/monstera-reverted-green.jpg"
+    alt: "Monstera leaf showing variegation pattern"
+    relative: false
 ---
 
 ![Monstera leaf showing variegation pattern](/images/monstera-reverted-green.jpg)

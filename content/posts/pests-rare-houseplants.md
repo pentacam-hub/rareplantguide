@@ -4,6 +4,10 @@ date: 2026-07-31T00:00:00
 draft: false
 description: "How to identify and treat the most common pests on rare and variegated houseplants before they spread to the rest of your collection."
 tags: ["rare plants", "pest control", "houseplant care"]
+cover:
+    image: "/images/houseplant-pest-inspection.jpg"
+    alt: "Inspecting houseplant leaves for pests"
+    relative: false
 ---
 
 ![Inspecting houseplant leaves for pests](/images/houseplant-pest-inspection.jpg)

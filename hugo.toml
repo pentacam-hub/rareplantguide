@@ -11,6 +11,13 @@ theme = "PaperMod"
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = false
+  ShowToc = true
+  TocOpen = false
+  ShowRssButtonInSectionTermList = true
+
+  [params.homeInfoParams]
+    Title = "Welcome to The Rare Plant Guide 🌿"
+    Content = "Practical, no-nonsense care guides for rare and variegated houseplants — collector to collector."
 
 [[menu.main]]
   name = "Home"

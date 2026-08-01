@@ -1,9 +1,14 @@
+
 ---
 title: "Rare Houseplant Care: The Complete Guide"
 date: 2026-07-31T00:00:00
 draft: false
 description: "A complete guide to caring for rare and variegated houseplants — light, watering, humidity, and propagation basics every collector needs to know."
 tags: ["rare plants", "houseplant care", "variegated plants"]
+cover:
+    image: "/images/monstera-variegated-hero.jpg"
+    alt: "Variegated Monstera leaf"
+    relative: false
 ---
 
 ![Close-up of variegated Monstera deliciosa leaf](/images/monstera-variegated-hero.jpg)

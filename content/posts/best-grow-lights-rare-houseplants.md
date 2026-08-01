@@ -4,6 +4,10 @@ date: 2026-07-31T00:00:00
 draft: false
 description: "How to choose the right grow light for variegated and rare houseplants, with wattage, spectrum, and placement guidance."
 tags: ["rare plants", "grow lights", "houseplant care"]
+cover:
+    image: "/images/grow-light-setup.jpg"
+    alt: "Grow light positioned above a houseplant"
+    relative: false
 ---
 
 ![Grow light positioned above a houseplant](/images/grow-light-setup.jpg)
