@@ -4,9 +4,8 @@ date: 2026-07-31T00:00:00
 draft: false
 description: "A complete step-by-step guide to propagating variegated Monstera cuttings, from cutting selection to rooting."
 tags: ["rare plants", "propagation", "monstera"]
-cover:
-    image: "/images/plant-propagation-cutting.jpg"
-    alt: "Plant cutting being propagated"
+image: "/images/propagation-water-rooting.jpg"
+    alt: "Variegated Monstera cutting rooting in a glass jar of water"
     relative: false
 ---
 
