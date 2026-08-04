@@ -13,7 +13,15 @@ topics:
   - grow lights
   - light requirements
   image_query: houseplant grow light shelf
-  status: pending
+  status: done
+  published_date: '2026-08-04'
+  slug: how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves
+  pin_title: How Much Light Do Your Rare Aroids Actually Need? A Real-Talk Guide to
+    Happy Leaves
+  pin_description: Stop guessing with "bright indirect light." Learn the exact light
+    requirements for your rare aroids to keep them variegated, healthy, and rot-free.
+  pin_image_path: /images/pins/how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves.jpg
+  pin_status: pending
 - title: The Truth About Sphagnum Moss Propagation for Rare Plants
   keywords:
   - sphagnum moss
