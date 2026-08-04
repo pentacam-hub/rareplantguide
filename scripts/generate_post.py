@@ -48,6 +48,12 @@ def pick_topic(queue):
     return None
 
 
+TITLE_MARK = "===TITLE==="
+DESCRIPTION_MARK = "===DESCRIPTION==="
+TAGS_MARK = "===TAGS==="
+BODY_MARK = "===BODY==="
+
+
 def build_prompt(topic):
     keywords = ", ".join(topic.get("keywords", []))
     return f"""You are the writer behind "The Rare Plant Guide", an English-language blog
@@ -68,28 +74,47 @@ Style and requirements:
 - End with a short, encouraging takeaway
 - Do not fabricate scientific claims; keep care advice realistic and safe for the plants involved
 
-Respond ONLY with a JSON object (no markdown fences, no commentary) with exactly these fields:
-{{
-  "title": "<a natural, click-worthy title, can refine the one given above>",
-  "description": "<one-sentence SEO description, under 155 characters>",
-  "tags": ["<2 to 4 relevant tags>"],
-  "body_markdown": "<the full article body in markdown, starting directly with the first paragraph, no title heading inside it>"
-}}
+Respond in EXACTLY this plain text format, nothing before or after, no markdown code fences
+around the whole response, using these exact section markers on their own line:
+
+{TITLE_MARK}
+<a natural, click-worthy title, one line, no quotes around it>
+{DESCRIPTION_MARK}
+<one-sentence SEO description, under 155 characters, one line>
+{TAGS_MARK}
+<2 to 4 relevant tags, comma-separated, one line>
+{BODY_MARK}
+<the full article body in markdown, starting directly with the first paragraph, no title heading inside it>
 """
+
+
+def parse_article_response(text):
+    def extract(start_mark, end_mark):
+        start = text.index(start_mark) + len(start_mark)
+        end = text.index(end_mark) if end_mark else len(text)
+        return text[start:end].strip()
+
+    title = extract(TITLE_MARK, DESCRIPTION_MARK)
+    description = extract(DESCRIPTION_MARK, TAGS_MARK)
+    tags_line = extract(TAGS_MARK, BODY_MARK)
+    tags = [t.strip() for t in tags_line.split(",") if t.strip()]
+    body_markdown = extract(BODY_MARK, None)
+
+    return {
+        "title": title,
+        "description": description,
+        "tags": tags,
+        "body_markdown": body_markdown,
+    }
 
 
 def generate_article(model, topic):
     prompt = build_prompt(topic)
-    response = model.generate_content(
-        prompt,
-        generation_config={"response_mime_type": "application/json"},
-    )
-    data = json.loads(response.text)
-    required = ["title", "description", "tags", "body_markdown"]
-    missing = [k for k in required if k not in data]
-    if missing:
-        raise ValueError(f"Risposta del modello incompleta, mancano i campi: {missing}")
-    return data
+    response = model.generate_content(prompt)
+    try:
+        return parse_article_response(response.text)
+    except ValueError as e:
+        raise ValueError(f"Impossibile analizzare la risposta del modello: {e}\n\nRisposta grezza:\n{response.text[:2000]}")
 
 
 def fetch_cover_image(query, slug, unsplash_key):
