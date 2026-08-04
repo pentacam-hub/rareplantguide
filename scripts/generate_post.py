@@ -15,16 +15,21 @@ Variabili d'ambiente richieste:
 import os
 import sys
 import json
+import textwrap
 import datetime
 import requests
 import yaml
 from slugify import slugify
+from PIL import Image, ImageDraw, ImageFont, ImageEnhance
 import google.generativeai as genai
 
 QUEUE_PATH = "content-queue.yaml"
 POSTS_DIR = "content/posts"          # <-- adatta se la tua struttura Hugo usa un'altra cartella
 IMAGES_DIR = "static/images"         # le immagini scaricate vanno qui, come le altre già presenti
-MODEL_NAME = "gemini-3.5-flash"      # modello gratuito e attuale
+PINS_DIR = "static/images/pins"      # immagini verticali 1000x1500 pronte per Pinterest
+MODEL_NAME = "gemini-3.5-flash"      # modello gratuito e attuale (verificare periodicamente su ai.google.dev/gemini-api/docs/models se cambia)
+FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"  # presente di default sui runner ubuntu-latest
+
 
 def load_queue():
     with open(QUEUE_PATH, "r", encoding="utf-8") as f:
@@ -168,6 +173,82 @@ def build_markdown_file(article, cover, today):
     return "\n".join(front_matter_lines) + "\n\n" + body + "\n"
 
 
+def wrap_title(draw, text, font, max_width):
+    words = text.split()
+    lines, current = [], ""
+    for word in words:
+        trial = f"{current} {word}".strip()
+        if draw.textlength(trial, font=font) <= max_width:
+            current = trial
+        else:
+            if current:
+                lines.append(current)
+            current = word
+    if current:
+        lines.append(current)
+    return lines
+
+
+def build_pin_image(title, slug, cover_local_path):
+    """Crea un'immagine verticale 1000x1500 con il titolo in overlay,
+    pronta per essere pubblicata su Pinterest. Usa la cover come sfondo
+    se disponibile, altrimenti un gradiente verde neutro."""
+    W, H = 1000, 1500
+
+    if cover_local_path and os.path.exists(cover_local_path.lstrip("/")):
+        base = Image.open(cover_local_path.lstrip("/")).convert("RGB")
+        # crop centrale per riempire 1000x1500 senza deformare
+        src_ratio = base.width / base.height
+        target_ratio = W / H
+        if src_ratio > target_ratio:
+            new_width = int(base.height * target_ratio)
+            left = (base.width - new_width) // 2
+            base = base.crop((left, 0, left + new_width, base.height))
+        else:
+            new_height = int(base.width / target_ratio)
+            top = (base.height - new_height) // 2
+            base = base.crop((0, top, base.width, top + new_height))
+        base = base.resize((W, H))
+        base = ImageEnhance.Brightness(base).enhance(0.75)
+    else:
+        base = Image.new("RGB", (W, H), (36, 66, 46))  # verde scuro neutro
+
+    overlay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+
+    # gradiente scuro nella metà inferiore, per leggibilità del testo
+    gradient_height = int(H * 0.55)
+    for y in range(gradient_height):
+        alpha = int(200 * (y / gradient_height))
+        draw.line([(0, H - gradient_height + y), (W, H - gradient_height + y)], fill=(0, 0, 0, alpha))
+
+    title_font_size = 68
+    title_font = ImageFont.truetype(FONT_PATH, title_font_size)
+    max_text_width = W - 120
+    lines = wrap_title(draw, title, title_font, max_text_width)
+    while len(lines) > 4 and title_font_size > 40:
+        title_font_size -= 4
+        title_font = ImageFont.truetype(FONT_PATH, title_font_size)
+        lines = wrap_title(draw, title, title_font, max_text_width)
+
+    line_height = int(title_font_size * 1.25)
+    text_block_height = line_height * len(lines)
+    y = H - 220 - text_block_height
+    for line in lines:
+        draw.text((60, y), line, font=title_font, fill=(255, 255, 255, 255))
+        y += line_height
+
+    brand_font = ImageFont.truetype(FONT_PATH, 34)
+    draw.text((60, H - 80), "TheRarePlantGuide.com", font=brand_font, fill=(255, 255, 255, 230))
+
+    final = Image.alpha_composite(base.convert("RGBA"), overlay).convert("RGB")
+
+    os.makedirs(PINS_DIR, exist_ok=True)
+    pin_path = os.path.join(PINS_DIR, f"{slug}.jpg")
+    final.save(pin_path, "JPEG", quality=90)
+    return f"/images/pins/{slug}.jpg"
+
+
 def main():
     gemini_key = os.environ.get("GEMINI_API_KEY")
     unsplash_key = os.environ.get("UNSPLASH_ACCESS_KEY")
@@ -204,11 +285,20 @@ def main():
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(content)
 
+    cover_local_path = cover["local_path"] if cover else None
+    pin_image_path = build_pin_image(article["title"], slug, cover_local_path)
+
     topic["status"] = "done"
     topic["published_date"] = today
+    topic["slug"] = slug
+    topic["pin_title"] = article["title"]
+    topic["pin_description"] = article["description"]
+    topic["pin_image_path"] = pin_image_path
+    topic["pin_status"] = "pending"
     save_queue(queue)
 
     print(f"Articolo generato con successo: {filepath}")
+    print(f"Immagine pin salvata in: static{pin_image_path}")
     if cover:
         print(f"Immagine di copertina salvata in: {IMAGES_DIR}/{slug}.jpg")
 
