@@ -1,0 +1,43 @@
+name: Auto Publish Article
+
+on:
+  schedule:
+    # Lunedì e giovedì alle 08:00 UTC (09:00/10:00 ora italiana a seconda dell'ora legale)
+    - cron: '0 8 * * 1,4'
+  workflow_dispatch: {}  # permette di lanciarlo manualmente da GitHub per testare
+
+permissions:
+  contents: write
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Generate article
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+        run: python scripts/generate_post.py
+
+      - name: Commit and push new post
+        run: |
+          git config user.name "rareplantguide-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add content/posts/ static/images/ content-queue.yaml
+          if ! git diff --staged --quiet; then
+            git commit -m "Auto: nuovo articolo generato"
+            git push
+          else
+            echo "Nessuna modifica da pubblicare (coda vuota?)"
+          fi
