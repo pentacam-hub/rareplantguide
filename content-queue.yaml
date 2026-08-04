@@ -1,125 +1,177 @@
 topics:
-  - title: "Why Is My Variegated Monstera Reverting to Green?"
-    keywords: ["variegated monstera", "reversion", "chimeric variegation"]
-    image_query: "variegated monstera leaf"
-    status: pending
-
-  - title: "How Much Light Do Rare Aroids Really Need?"
-    keywords: ["rare aroids", "grow lights", "light requirements"]
-    image_query: "houseplant grow light shelf"
-    status: pending
-
-  - title: "The Truth About Sphagnum Moss Propagation for Rare Plants"
-    keywords: ["sphagnum moss", "propagation", "rare houseplants"]
-    image_query: "sphagnum moss plant propagation"
-    status: pending
-
-  - title: "Signs of Root Rot in Philodendrons (And How to Save Them)"
-    keywords: ["root rot", "philodendron care", "overwatering"]
-    image_query: "philodendron plant roots"
-    status: pending
-
-  - title: "Is It Worth Buying Tissue-Cultured Rare Plants?"
-    keywords: ["tissue culture plants", "TC plantlets", "rare plant shopping"]
-    image_query: "small plant seedling pot"
-    status: pending
-
-  - title: "Humidity Tents vs Greenhouse Cabinets for Rare Plant Collections"
-    keywords: ["humidity tent", "grow cabinet", "rare plant humidity"]
-    image_query: "indoor plant greenhouse cabinet"
-    status: pending
-
-  - title: "How to Spot a Scammer When Buying Rare Plants Online"
-    keywords: ["rare plant scams", "buying plants online", "plant marketplace safety"]
-    image_query: "person shopping online laptop plants"
-    status: pending
-
-  - title: "Why Your Variegated Syngonium Isn't Growing New Variegated Leaves"
-    keywords: ["variegated syngonium", "variegation stability", "syngonium care"]
-    image_query: "syngonium plant leaves"
-    status: pending
-
-  - title: "Best Soil Mix Recipes for Rare Aroid Collections"
-    keywords: ["aroid soil mix", "chunky mix", "rare plant potting"]
-    image_query: "potting soil mix plant repotting"
-    status: pending
-
-  - title: "How to Acclimate a Newly Imported Rare Plant"
-    keywords: ["plant acclimation", "imported plants", "shipping stress"]
-    image_query: "unboxing plant package"
-    status: pending
-
-  - title: "Understanding Variegation Types: Chimeric, Pattern-Gene, and Viral"
-    keywords: ["types of variegation", "pattern variegation", "viral variegation"]
-    image_query: "variegated leaf pattern closeup"
-    status: pending
-
-  - title: "Why Rare Plant Prices Are Dropping (And What It Means for Collectors)"
-    keywords: ["rare plant prices", "plant market trends", "collecting houseplants"]
-    image_query: "rare houseplant collection shelf"
-    status: pending
-
-  - title: "How to Propagate Thai Constellation Monstera Successfully"
-    keywords: ["thai constellation monstera", "propagation cuttings", "node propagation"]
-    image_query: "monstera cutting propagation water"
-    status: pending
-
-  - title: "Dealing With Thrips and Mites on Rare Plants Without Harming Variegation"
-    keywords: ["thrips treatment", "spider mites", "pest control houseplants"]
-    image_query: "houseplant leaf pest closeup"
-    status: pending
-
-  - title: "Anthurium Care for Beginners: Warocqueanum, Veitchii, and More"
-    keywords: ["anthurium care", "warocqueanum", "veitchii"]
-    image_query: "anthurium plant leaf"
-    status: pending
-
-  - title: "How to Build a Rare Plant Collection on a Tight Budget"
-    keywords: ["budget plant collecting", "affordable rare plants", "plant swaps"]
-    image_query: "small houseplant collection windowsill"
-    status: pending
-
-  - title: "Why Some Rare Plants Cost Hundreds of Dollars (Explained)"
-    keywords: ["expensive houseplants", "rare plant value", "plant rarity"]
-    image_query: "rare exotic houseplant"
-    status: pending
-
-  - title: "Common Mistakes When Repotting Rare Aroids"
-    keywords: ["repotting aroids", "transplant shock", "aroid roots"]
-    image_query: "repotting plant hands soil"
-    status: pending
-
-  - title: "How to Winter-Proof Your Rare Plant Collection"
-    keywords: ["winter plant care", "cold damage", "indoor plants winter"]
-    image_query: "indoor plants winter window"
-    status: pending
-
-  - title: "Philodendron Pink Princess: Keeping the Pink Variegation Stable"
-    keywords: ["pink princess philodendron", "stable variegation", "pink princess care"]
-    image_query: "pink princess philodendron leaf"
-    status: pending
-
-  - title: "How to Tell If a Rare Plant Cutting Will Actually Root"
-    keywords: ["plant cuttings", "rooting success", "node health"]
-    image_query: "plant cutting node water jar"
-    status: pending
-
-  - title: "Fertilizing Rare Plants: How Much Is Too Much?"
-    keywords: ["fertilizing houseplants", "overfertilization", "rare plant nutrition"]
-    image_query: "liquid fertilizer houseplant watering"
-    status: pending
-
-  - title: "Best Rare Plants for Beginners Who Want a Challenge (But Not a Disaster)"
-    keywords: ["beginner rare plants", "easy rare aroids", "starting a collection"]
-    image_query: "beginner houseplant collection"
-    status: pending
-
-  - title: "How to Photograph Your Rare Plants Like the Pros on Instagram"
-    keywords: ["plant photography", "instagram plants", "showcasing collection"]
-    image_query: "houseplant photography phone"
-    status: pending
-
-  - title: "Should You Quarantine New Rare Plants? Here's What I Learned the Hard Way"
-    keywords: ["plant quarantine", "pest prevention", "new plant care"]
-    image_query: "isolated houseplant separate room"
-    status: pending
+- title: Why Is My Variegated Monstera Reverting to Green?
+  keywords:
+  - variegated monstera
+  - reversion
+  - chimeric variegation
+  image_query: variegated monstera leaf
+  status: done
+  published_date: '2026-08-04'
+- title: How Much Light Do Rare Aroids Really Need?
+  keywords:
+  - rare aroids
+  - grow lights
+  - light requirements
+  image_query: houseplant grow light shelf
+  status: pending
+- title: The Truth About Sphagnum Moss Propagation for Rare Plants
+  keywords:
+  - sphagnum moss
+  - propagation
+  - rare houseplants
+  image_query: sphagnum moss plant propagation
+  status: pending
+- title: Signs of Root Rot in Philodendrons (And How to Save Them)
+  keywords:
+  - root rot
+  - philodendron care
+  - overwatering
+  image_query: philodendron plant roots
+  status: pending
+- title: Is It Worth Buying Tissue-Cultured Rare Plants?
+  keywords:
+  - tissue culture plants
+  - TC plantlets
+  - rare plant shopping
+  image_query: small plant seedling pot
+  status: pending
+- title: Humidity Tents vs Greenhouse Cabinets for Rare Plant Collections
+  keywords:
+  - humidity tent
+  - grow cabinet
+  - rare plant humidity
+  image_query: indoor plant greenhouse cabinet
+  status: pending
+- title: How to Spot a Scammer When Buying Rare Plants Online
+  keywords:
+  - rare plant scams
+  - buying plants online
+  - plant marketplace safety
+  image_query: person shopping online laptop plants
+  status: pending
+- title: Why Your Variegated Syngonium Isn't Growing New Variegated Leaves
+  keywords:
+  - variegated syngonium
+  - variegation stability
+  - syngonium care
+  image_query: syngonium plant leaves
+  status: pending
+- title: Best Soil Mix Recipes for Rare Aroid Collections
+  keywords:
+  - aroid soil mix
+  - chunky mix
+  - rare plant potting
+  image_query: potting soil mix plant repotting
+  status: pending
+- title: How to Acclimate a Newly Imported Rare Plant
+  keywords:
+  - plant acclimation
+  - imported plants
+  - shipping stress
+  image_query: unboxing plant package
+  status: pending
+- title: 'Understanding Variegation Types: Chimeric, Pattern-Gene, and Viral'
+  keywords:
+  - types of variegation
+  - pattern variegation
+  - viral variegation
+  image_query: variegated leaf pattern closeup
+  status: pending
+- title: Why Rare Plant Prices Are Dropping (And What It Means for Collectors)
+  keywords:
+  - rare plant prices
+  - plant market trends
+  - collecting houseplants
+  image_query: rare houseplant collection shelf
+  status: pending
+- title: How to Propagate Thai Constellation Monstera Successfully
+  keywords:
+  - thai constellation monstera
+  - propagation cuttings
+  - node propagation
+  image_query: monstera cutting propagation water
+  status: pending
+- title: Dealing With Thrips and Mites on Rare Plants Without Harming Variegation
+  keywords:
+  - thrips treatment
+  - spider mites
+  - pest control houseplants
+  image_query: houseplant leaf pest closeup
+  status: pending
+- title: 'Anthurium Care for Beginners: Warocqueanum, Veitchii, and More'
+  keywords:
+  - anthurium care
+  - warocqueanum
+  - veitchii
+  image_query: anthurium plant leaf
+  status: pending
+- title: How to Build a Rare Plant Collection on a Tight Budget
+  keywords:
+  - budget plant collecting
+  - affordable rare plants
+  - plant swaps
+  image_query: small houseplant collection windowsill
+  status: pending
+- title: Why Some Rare Plants Cost Hundreds of Dollars (Explained)
+  keywords:
+  - expensive houseplants
+  - rare plant value
+  - plant rarity
+  image_query: rare exotic houseplant
+  status: pending
+- title: Common Mistakes When Repotting Rare Aroids
+  keywords:
+  - repotting aroids
+  - transplant shock
+  - aroid roots
+  image_query: repotting plant hands soil
+  status: pending
+- title: How to Winter-Proof Your Rare Plant Collection
+  keywords:
+  - winter plant care
+  - cold damage
+  - indoor plants winter
+  image_query: indoor plants winter window
+  status: pending
+- title: 'Philodendron Pink Princess: Keeping the Pink Variegation Stable'
+  keywords:
+  - pink princess philodendron
+  - stable variegation
+  - pink princess care
+  image_query: pink princess philodendron leaf
+  status: pending
+- title: How to Tell If a Rare Plant Cutting Will Actually Root
+  keywords:
+  - plant cuttings
+  - rooting success
+  - node health
+  image_query: plant cutting node water jar
+  status: pending
+- title: 'Fertilizing Rare Plants: How Much Is Too Much?'
+  keywords:
+  - fertilizing houseplants
+  - overfertilization
+  - rare plant nutrition
+  image_query: liquid fertilizer houseplant watering
+  status: pending
+- title: Best Rare Plants for Beginners Who Want a Challenge (But Not a Disaster)
+  keywords:
+  - beginner rare plants
+  - easy rare aroids
+  - starting a collection
+  image_query: beginner houseplant collection
+  status: pending
+- title: How to Photograph Your Rare Plants Like the Pros on Instagram
+  keywords:
+  - plant photography
+  - instagram plants
+  - showcasing collection
+  image_query: houseplant photography phone
+  status: pending
+- title: Should You Quarantine New Rare Plants? Here's What I Learned the Hard Way
+  keywords:
+  - plant quarantine
+  - pest prevention
+  - new plant care
+  image_query: isolated houseplant separate room
+  status: pending
