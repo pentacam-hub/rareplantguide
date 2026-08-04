@@ -24,8 +24,7 @@ import google.generativeai as genai
 QUEUE_PATH = "content-queue.yaml"
 POSTS_DIR = "content/posts"          # <-- adatta se la tua struttura Hugo usa un'altra cartella
 IMAGES_DIR = "static/images"         # le immagini scaricate vanno qui, come le altre già presenti
-MODEL_NAME = "gemini-2.0-flash-exp"  # modello gratuito
-
+MODEL_NAME = "gemini-2.5-flash"      # modello gratuito e stabile
 
 def load_queue():
     with open(QUEUE_PATH, "r", encoding="utf-8") as f:
