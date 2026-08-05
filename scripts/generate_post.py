@@ -165,7 +165,7 @@ def fetch_cover_image(query, slug, unsplash_key):
         return None
 
 
-def build_markdown_file(article, cover, today):
+def build_markdown_file(article, cover, today, weight=None):
     tags_yaml = json.dumps(article["tags"], ensure_ascii=False)
 
     front_matter_lines = [
@@ -177,6 +177,9 @@ def build_markdown_file(article, cover, today):
         f"tags: {tags_yaml}",
         'categories: ["Plant Care"]',
     ]
+
+    if weight is not None:
+        front_matter_lines.append(f"weight: {weight}")
 
     body = article["body_markdown"].strip()
 
@@ -303,7 +306,7 @@ def main():
         image_query = topic.get("image_query", topic["title"])
         cover = fetch_cover_image(image_query, slug, unsplash_key)
 
-    content = build_markdown_file(article, cover, today)
+    content = build_markdown_file(article, cover, today, weight=topic.get("featured_weight"))
 
     os.makedirs(POSTS_DIR, exist_ok=True)
     filepath = os.path.join(POSTS_DIR, f"{slug}.md")
