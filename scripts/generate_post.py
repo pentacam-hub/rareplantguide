@@ -165,7 +165,26 @@ def fetch_cover_image(query, slug, unsplash_key):
         return None
 
 
-def build_markdown_file(article, cover, today, weight=None):
+def get_related_links(queue, current_topic, max_links=3):
+    """Trova fino a max_links articoli già pubblicati nello stesso cluster
+    tematico, da linkare in fondo al nuovo articolo (link interni SEO)."""
+    cluster = current_topic.get("cluster")
+    if not cluster:
+        return []
+    related = []
+    for t in queue.get("topics", []):
+        if (
+            t.get("cluster") == cluster
+            and t.get("status") == "done"
+            and t.get("slug")
+            and t.get("slug") != current_topic.get("slug")
+        ):
+            title = t.get("pin_title") or t.get("title")
+            related.append((title, t["slug"]))
+    return related[:max_links]
+
+
+def build_markdown_file(article, cover, today, weight=None, related_links=None):
     tags_yaml = json.dumps(article["tags"], ensure_ascii=False)
 
     front_matter_lines = [
@@ -182,6 +201,10 @@ def build_markdown_file(article, cover, today, weight=None):
         front_matter_lines.append(f"weight: {weight}")
 
     body = article["body_markdown"].strip()
+
+    if related_links:
+        links_md = "\n".join(f"- [{title}](/posts/{slug}/)" for title, slug in related_links)
+        body += f"\n\n## Related Guides\n\n{links_md}"
 
     if cover:
         front_matter_lines += [
@@ -306,7 +329,8 @@ def main():
         image_query = topic.get("image_query", topic["title"])
         cover = fetch_cover_image(image_query, slug, unsplash_key)
 
-    content = build_markdown_file(article, cover, today, weight=topic.get("featured_weight"))
+    related_links = get_related_links(queue, topic)
+    content = build_markdown_file(article, cover, today, weight=topic.get("featured_weight"), related_links=related_links)
 
     os.makedirs(POSTS_DIR, exist_ok=True)
     filepath = os.path.join(POSTS_DIR, f"{slug}.md")
