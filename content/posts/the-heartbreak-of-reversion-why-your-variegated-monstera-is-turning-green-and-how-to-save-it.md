@@ -31,6 +31,8 @@ So, I waited. The second leaf came out solid green. Then a third. By the time I 
 
 That painful loss taught me my most important rule of rare plant care: never wait and hope when it comes to reversion. You must act as soon as you see the trajectory shifting.
 
+{{< newsletter >}}
+
 ## Why Your Monstera is Choosing Green over White
 
 While genetics play a huge role, environmental factors can push your plant toward reversion. The primary culprit is almost always light.
@@ -60,5 +62,7 @@ If your Monstera is actively reverting, here is the exact protocol I use now to 
 ## Don’t Panic, It’s Part of the Journey
 
 Pruning your prized plant can feel incredibly scary, but it’s a normal part of cultivating chimeric houseplants. Think of it as a collaborative dance between you and nature. By keeping a close eye on the stem, reacting quickly to solid green leaves, and providing abundant light, you can enjoy those stunning, variegated leaves for years to come. Happy growing!
+
+{{< newsletter >}}
 
 *Cover photo by [Sarah Dorweiler](https://unsplash.com/@sarahdorweiler?utm_source=rareplantguide&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=rareplantguide&utm_medium=referral).*
