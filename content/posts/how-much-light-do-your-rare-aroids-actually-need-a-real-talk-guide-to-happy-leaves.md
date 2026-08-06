@@ -2,7 +2,7 @@
 title: "How Much Light Do Your Rare Aroids Actually Need? A Real-Talk Guide to Happy Leaves"
 date: 2026-08-04
 draft: false
-description: "Stop guessing with "bright indirect light." Learn the exact light requirements for your rare aroids to keep them variegated, healthy, and rot-free."
+description: 'Stop guessing with "bright indirect light." Learn the exact light requirements for your rare aroids to keep them variegated, healthy, and rot-free.'
 tags: ["rare plants", "aroid care", "grow lights", "plant styling"]
 categories: ["Plant Care"]
 ---
