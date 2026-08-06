@@ -21,6 +21,8 @@ I set the light just twelve inches above the leaves and went to work. By the tim
 
 That heartbreaking day taught me a vital lesson: variegated tissue is incredibly fragile. It lacks the protective pigments and chlorophyll of green leaves, meaning it cannot process high-intensity light. Since then, I’ve approached lighting not as a "more is always better" equation, but as a delicate balance of intensity, duration, and acclimation.
 
+{{< newsletter >}}
+
 ## Deciphering the Light Spectrum for Aroids
 
 To understand the light requirements of rare aroids, it helps to look at where they come from. Most of the Philodendrons, Anthuriums, and Monsteras we collect are native to the understories of tropical rainforests. They are climbing epiphytes or forest-floor dwellers, meaning the light they receive in nature is filtered through a dense canopy of taller trees. 
@@ -61,3 +63,5 @@ Your plants are highly communicative if you know what to look for. Keep an eye o
 *   **Too Much Light:** If the leaves look washed out, pale, or yellowed, they may be getting bleached by excess intensity. Crispy brown edges on variegated sections, or dry, paper-like brown spots on the highest leaves closest to your light source, are a clear sign to back things off.
 
 Finding the perfect lighting for your rare aroids doesn't require a degree in botany, just a little observation and patience. Start on the side of caution, watch how your plants respond, and adjust your setup gradually. Once you dial in that perfect, gentle glow, your plants will reward you with massive, beautifully variegated leaves that make all the effort entirely worth it. Happy growing!
+
+{{< newsletter >}}
