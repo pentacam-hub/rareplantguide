@@ -1,0 +1,178 @@
+<!-- ============================================================
+     Rare Plant Guide — Newsletter signup shortcode
+     Usage in content .md files:  {{< newsletter >}}
+     Original form logic/markup from MailerLite, restyled to
+     match the site's botanical brand (forest green / gold).
+     ============================================================ -->
+<style type="text/css">
+  #mlb2-44550581.ml-form-embedContainer {
+    box-sizing: border-box;
+    display: table;
+    margin: 32px auto;
+    width: 100% !important;
+    max-width: 480px;
+  }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-embedWrapper {
+    background-color: #f6f4ee;
+    border-width: 1px;
+    border-color: #d8d0bd;
+    border-radius: 8px;
+    border-style: solid;
+    box-sizing: border-box;
+    display: inline-block !important;
+    width: 100%;
+    padding: 4px;
+  }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-embedWrapper.embedForm { max-width: 480px; width: 100%; }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-align-center { text-align: center; }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-embedBody { padding: 24px 24px 20px 24px; }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-embedContent {
+    text-align: center;
+    margin: 0 0 18px 0;
+  }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-embedContent h4 {
+    color: #1f3a2a;
+    font-family: Georgia, 'DejaVu Serif', serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    text-align: center;
+  }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-embedContent p {
+    color: #555044;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 0;
+    text-align: center;
+  }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-embedBody form { margin: 0; width: 100%; }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-formContent { margin: 0 0 14px 0; width: 100%; }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-fieldRow { margin: 0 0 10px 0; width: 100%; }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-fieldRow input {
+    background-color: #ffffff !important;
+    color: #2a2a24 !important;
+    border-color: #cfc7b4;
+    border-radius: 5px !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-size: 14px !important;
+    line-height: 21px !important;
+    margin: 0;
+    padding: 11px 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-embedSubmit { margin: 0; width: 100%; }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-embedSubmit button {
+    background-color: #1f3a2a !important;
+    border: none !important;
+    border-radius: 5px !important;
+    box-shadow: none !important;
+    color: #ffffff !important;
+    cursor: pointer;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.3px;
+    line-height: 21px !important;
+    padding: 11px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    transition: background-color 0.15s ease;
+  }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-embedSubmit button:hover {
+    background-color: #a97c34 !important;
+  }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-successContent h4 {
+    color: #1f3a2a;
+    font-family: Georgia, 'DejaVu Serif', serif;
+    font-size: 22px;
+    margin: 0 0 6px 0;
+  }
+  #mlb2-44550581.ml-form-embedContainer .ml-form-successContent p {
+    color: #555044;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-size: 14px;
+  }
+  .ml-form-embedSubmitLoad {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+  }
+  .ml-form-embedSubmitLoad:after {
+    content: " ";
+    display: block;
+    width: 11px;
+    height: 11px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    border-color: #fff #fff #fff transparent;
+    animation: ml-form-embedSubmitLoad 1.2s linear infinite;
+  }
+  @keyframes ml-form-embedSubmitLoad {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); border: 0;
+  }
+</style>
+
+<div id="mlb2-44550581" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-44550581">
+  <div class="ml-form-align-center">
+    <div class="ml-form-embedWrapper embedForm">
+      <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+        <div class="ml-form-embedContent">
+          <h4>Get Your Free Rare Plant Rescue Checklist</h4>
+          <p>A 5-minute health check for light, water, pests, and reversion — before it's too late.</p>
+        </div>
+
+        <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2559378/forms/195042286103430819/subscribe" data-code="" method="post" target="_blank">
+          <div class="ml-form-formContent">
+            <div class="ml-form-fieldRow ml-last-item">
+              <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Email" autocomplete="email">
+              </div>
+            </div>
+          </div>
+
+          <input type="hidden" name="ml-submit" value="1">
+
+          <div class="ml-form-embedSubmit">
+            <button type="submit" class="primary">Send Me the Checklist</button>
+            <button disabled="disabled" style="display: none;" type="button" class="loading">
+              <div class="ml-form-embedSubmitLoad"></div>
+              <span class="sr-only">Loading...</span>
+            </button>
+          </div>
+
+          <input type="hidden" name="anticsrf" value="true">
+        </form>
+      </div>
+
+      <div class="ml-form-successBody row-success" style="display: none">
+        <div class="ml-form-successContent">
+          <h4>Thank you!</h4>
+          <p>Check your inbox — your checklist is on its way!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function ml_webform_success_44550581() {
+    var $ = ml_jQuery || jQuery;
+    $('.ml-subscribe-form-44550581 .row-success').show();
+    $('.ml-subscribe-form-44550581 .row-form').hide();
+  }
+</script>
+<script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
+<script>
+  fetch("https://assets.mailerlite.com/jsonp/2559378/forms/195042286103430819/takel")
+</script>
