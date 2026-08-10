@@ -4,31 +4,46 @@ title = "The Rare Plant Guide"
 theme = "PaperMod"
 
 [params]
+  env = "production"
   description = "Practical care guides for rare and variegated houseplants"
   DateFormat = "January 2, 2006"
   ShowReadingTime = true
-  ShowShareButtons = false
+  ShowShareButtons = true
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = false
+  ShowWordCount = true
   ShowToc = true
   TocOpen = false
   ShowRssButtonInSectionTermList = true
   mainSections = ["posts"]
+  images = ["images/og-cover.jpg"]
+
+  [params.assets]
+    disableHLJS = true
+
+  [params.label]
+    text = "The Rare Plant Guide"
+    icon = "images/leaf-icon.png"
+    iconHeight = 28
 
   [params.homeInfoParams]
     Title = "Welcome to The Rare Plant Guide 🌿"
     Content = "Practical, no-nonsense care guides for rare and variegated houseplants — collector to collector. Browse the latest guides below, or head to the full archive."
 
+  [params.socialIcons]
+    [[params.socialIcons]]
+      name = "pinterest"
+      url = "https://www.pinterest.com/therareplantguide/"
+
+[params.list]
+  showFullTextinRSS = false
+
 [[menu.main]]
   name = "Home"
   url = "/"
   weight = 1
-
 [[menu.main]]
   name = "Articles"
   url = "/posts/"
   weight = 2
-
-[params.list]
-  showFullTextinRSS = false
