@@ -53,7 +53,14 @@ topics:
   - overwatering
   image_query: philodendron plant roots
   cluster: care-troubleshooting
-  status: pending
+  status: done
+  published_date: '2026-08-10'
+  slug: how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late
+  pin_title: How to Spot and Treat Philodendron Root Rot Before It's Too Late
+  pin_description: Learn the early warning signs of root rot in your philodendrons
+    and get a step-by-step rescue plan to save your favorite houseplants from overwatering.
+  pin_image_path: /images/pins/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late.jpg
+  pin_status: pending
 - title: Is It Worth Buying Tissue-Cultured Rare Plants?
   keywords:
   - tissue culture plants
