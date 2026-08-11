@@ -9,6 +9,13 @@ cover:
     image: "/images/light-requirements-aroids.jpg"
     alt: "Light requirements for rare aroids"
     relative: false
+faq:
+  - question: "How do I know if my aroid is getting enough light without a meter?"
+    answer: "Check the internode spacing on new growth. Tight, close leaves usually mean enough light; long gaps between leaves (legginess) or leaves shrinking in size both point to insufficient light."
+  - question: "Can too much light hurt variegated leaves?"
+    answer: "Yes. White or cream variegated tissue has no chlorophyll to protect it, so it scorches far more easily than solid green tissue under direct or overly intense light -- diffused brightness is safer than direct sun for these sections."
+  - question: "How many hours of grow light do rare aroids need per day?"
+    answer: "12 to 14 hours on a consistent timer is the typical target, mimicking the day length these plants experience near the equator in their native habitat."
 ---
 
 If you’ve dipped your toes into the world of collecting rare aroids, you’ve undoubtedly run into the golden rule of houseplant care: "provide bright, indirect light." It is printed on almost every plastic pot stake and repeated in every basic care guide on the internet. But when you have just invested a significant portion of your monthly budget into a highly variegated Monstera Albo, a delicate Anthurium warocqueanum, or a velvety Philodendron el choco red, "bright indirect" suddenly feels terrifyingly vague. 
