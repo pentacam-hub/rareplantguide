@@ -4,6 +4,7 @@ title = "The Rare Plant Guide"
 theme = "PaperMod"
 
 [params]
+  author = "The Rare Plant Guide"
   env = "production"
   description = "Practical care guides for rare and variegated houseplants"
   DateFormat = "January 2, 2006"
