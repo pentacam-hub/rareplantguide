@@ -8,6 +8,13 @@ cover:
     image: "/images/houseplant-pest-inspection.jpg"
     alt: "Inspecting houseplant leaves for pests"
     relative: false
+faq:
+  - question: "How do I know if my rare plant has pests or is just stressed?"
+    answer: "Check the underside of leaves and stem joints closely. True pest damage usually comes with visible signs -- webbing, sticky residue, small moving dots, or cottony clusters -- rather than just yellowing or drooping."
+  - question: "How long should I quarantine a new plant?"
+    answer: "2 to 3 weeks away from your existing collection, checking leaf undersides and new growth regularly during that window before moving it in with other plants."
+  - question: "Can I save a plant that already has pests spread across it?"
+    answer: "Often yes, if caught within the first week or two -- isolate it immediately, treat with insecticidal soap or neem oil, and repeat every 5-7 days for 2-3 cycles rather than a single treatment."
 ---
 A pest infestation on an expensive rare plant is worse than on a common one for two reasons: the plant is often more stressed to begin with (see our guides on [light](/posts/best-grow-lights-rare-houseplants/) and [soil](/posts/best-soil-mix-variegated-monstera/) requirements), and losing it costs far more than losing a common houseplant. Catching pests early is critical. For general care fundamentals, see the [Complete Rare Houseplant Care Guide](/posts/rare-houseplant-care-guide/).
 ## Spider Mites
