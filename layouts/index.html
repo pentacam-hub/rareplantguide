@@ -6,8 +6,17 @@
 
 {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
 {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
-{{- $pages = $pages.ByDate.Reverse }}
-{{- $featured := first 4 $pages }}
+
+{{- $featured := where $pages "Params.featured" "eq" true }}
+{{- $featured = $featured.ByDate.Reverse }}
+
+{{- $remaining := sub 4 (len $featured) }}
+{{- if gt $remaining 0 }}
+  {{- $nonFeatured := where $pages "Params.featured" "ne" true }}
+  {{- $nonFeatured = $nonFeatured.ByDate.Reverse }}
+  {{- $featured = $featured | append (first $remaining $nonFeatured) }}
+{{- end }}
+{{- $featured = first 4 $featured }}
 
 {{- range $index, $page := $featured }}
 <article class="post-entry">
