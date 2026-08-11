@@ -5,6 +5,10 @@ draft: false
 description: 'Stop guessing with "bright indirect light." Learn the exact light requirements for your rare aroids to keep them variegated, healthy, and rot-free.'
 tags: ["rare plants", "aroid care", "grow lights", "plant styling"]
 categories: ["Plant Care"]
+cover:
+    image: "/images/light-requirements-aroids.jpg"
+    alt: "Light requirements for rare aroids"
+    relative: false
 ---
 
 If you’ve dipped your toes into the world of collecting rare aroids, you’ve undoubtedly run into the golden rule of houseplant care: "provide bright, indirect light." It is printed on almost every plastic pot stake and repeated in every basic care guide on the internet. But when you have just invested a significant portion of your monthly budget into a highly variegated Monstera Albo, a delicate Anthurium warocqueanum, or a velvety Philodendron el choco red, "bright indirect" suddenly feels terrifyingly vague. 
