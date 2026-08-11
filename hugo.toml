@@ -47,3 +47,7 @@ theme = "PaperMod"
   name = "Articles"
   url = "/posts/"
   weight = 2
+[[menu.main]]
+  name = "Symptom Checker"
+  url = "/tools/symptom-checker.html"
+  weight = 3
