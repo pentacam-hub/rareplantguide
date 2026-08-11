@@ -31,10 +31,9 @@ theme = "PaperMod"
     Title = "Welcome to The Rare Plant Guide 🌿"
     Content = "Practical, no-nonsense care guides for rare and variegated houseplants — collector to collector. Browse the latest guides below, or head to the full archive."
 
-  [params.socialIcons]
-    [[params.socialIcons]]
-      name = "pinterest"
-      url = "https://www.pinterest.com/therareplantguide/"
+[[params.socialIcons]]
+  name = "pinterest"
+  url = "https://www.pinterest.com/TUONOMEUTENTE/"
 
 [params.list]
   showFullTextinRSS = false
