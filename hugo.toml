@@ -33,7 +33,7 @@ theme = "PaperMod"
 
 [[params.socialIcons]]
   name = "pinterest"
-  url = "https://www.pinterest.com/TUONOMEUTENTE/"
+  url = "https://www.pinterest.com/therareplantguide/"
 
 [params.list]
   showFullTextinRSS = false
