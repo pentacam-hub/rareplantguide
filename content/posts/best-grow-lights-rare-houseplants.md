@@ -10,14 +10,13 @@ cover:
     relative: false
 ---
 
-
 If your rare or variegated plant is stalling out, stretching toward the window, or losing its variegation, insufficient light is the most common culprit. Natural light from even a bright window is often far weaker than it looks to the human eye — this is where a grow light earns its cost back quickly for a valuable collection.
 
 For the full care fundamentals, start with our [Complete Rare Houseplant Care Guide](/posts/rare-houseplant-care-guide/).
 
 ## Why Rare Plants Need More Light Than Common Ones
 
-Variegated leaves have less chlorophyll-bearing tissue than solid green leaves, so they're less efficient at converting light into energy. A variegated Monstera in the same spot where a plain green Monstera thrives may actually be light-starved — which often shows up as reverting to green, a topic covered in detail in [Why Is My Variegated Plant Turning Green?](/posts/variegated-plant-turning-green/).
+Variegated leaves have less chlorophyll-bearing tissue than solid green leaves, so they're less efficient at converting light into energy. A variegated Monstera in the same spot where a plain green Monstera thrives may actually be light-starved — which often shows up as reverting to green, a topic covered in detail in [The Heartbreak of Reversion](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/).
 
 ## What to Look For in a Grow Light
 
