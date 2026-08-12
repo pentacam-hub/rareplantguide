@@ -54,7 +54,7 @@ Whenever I run into a tricky cultivation issue, I love checking in with fellow g
 
 Many growers share the tip to closely inspect the "variegation line" running along the internodes and petioles of the stem. If you see a strong stripe of white or cream running directly through the node where the next eye (growth bud) is located, you have a very high chance of getting variegated growth. If that section of the stem is solid green, the plant is highly likely to revert, regardless of how much light you give it.
 
-Additionally, the community widely agrees on the power of supplemental lighting. Introducing a high-quality, full-spectrum LED grow light directly above your plant can provide the intense, indirect energy it needs to maintain those white sectors without burning them.
+Additionally, the community widely agrees on the power of supplemental lighting. Introducing a high-quality, full-spectrum LED grow light directly above your plant can provide the intense, indirect energy it needs to maintain those white sectors without burning them — our [grow light guide](/posts/best-grow-lights-rare-houseplants/) covers exactly what to look for.
 
 ## How to Save Your Variegated Monstera: A Step-by-Step Guide
 
