@@ -56,7 +56,7 @@ However, because those white patches lack the protective qualities of chlorophyl
 
 Unless you are blessed with massive, unobstructed east- or north-facing windows, you will likely need to rely on artificial lighting to keep your collection thriving, especially during the gloomy winter months. 
 
-When shopping for grow lights, look for full-spectrum LED fixtures. LEDs are fantastic because they produce very little heat compared to old-school fluorescent tubes, meaning you can place them relatively close to your plants without risking the kind of heat damage I experienced with my Albo. 
+When shopping for grow lights, look for full-spectrum LED fixtures — see our [full grow light buying guide](/posts/best-grow-lights-rare-houseplants/) for exact wattage and placement recommendations. LEDs are fantastic because they produce very little heat compared to old-school fluorescent tubes, meaning you can place them relatively close to your plants without risking the kind of heat damage I experienced with my Albo. 
 
 For my shelving setups, I prefer individual LED light strips mounted to the underside of each shelf. If you are keeping your plants on open tables or plant stands, a stylish pendant grow light hung from the ceiling can work wonders. Keep your lights on a consistent timer, aiming for 12 to 14 hours of light per day. This consistent day length mimics the tropical equator and encourages steady, year-round growth.
 
