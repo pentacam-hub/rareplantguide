@@ -68,7 +68,14 @@ topics:
   - rare plant shopping
   image_query: small plant seedling pot
   cluster: buying-market
-  status: pending
+  status: done
+  published_date: '2026-08-13'
+  slug: is-it-worth-buying-tissue-cultured-rare-plants-a-honest-guide-for-hobbyists
+  pin_title: Is It Worth Buying Tissue-Cultured Rare Plants? A Honest Guide for Hobbyists
+  pin_description: Thinking of buying tissue culture rare plants? Discover the real
+    pros, cons, and essential acclimation tips from an experienced grower.
+  pin_image_path: /images/pins/is-it-worth-buying-tissue-cultured-rare-plants-a-honest-guide-for-hobbyists.jpg
+  pin_status: pending
 - title: Humidity Tents vs Greenhouse Cabinets for Rare Plant Collections
   keywords:
   - humidity tent
