@@ -15,6 +15,7 @@ Variabili d'ambiente richieste:
 import os
 import sys
 import json
+import re
 import textwrap
 import datetime
 import requests
@@ -52,35 +53,76 @@ TITLE_MARK = "===TITLE==="
 DESCRIPTION_MARK = "===DESCRIPTION==="
 TAGS_MARK = "===TAGS==="
 BODY_MARK = "===BODY==="
+MAX_GENERATION_ATTEMPTS = 3
 
 
-def build_prompt(topic):
+def get_internal_link_candidates(queue, current_topic, max_links=6):
+    """Return published posts, prioritizing the current topic cluster."""
+    cluster = current_topic.get("cluster")
+    published = [
+        item for item in queue.get("topics", [])
+        if item.get("status") == "done" and item.get("slug")
+    ]
+    published.sort(key=lambda item: item.get("cluster") != cluster)
+
+    links = []
+    seen = set()
+    for item in published:
+        slug = item["slug"]
+        if slug in seen:
+            continue
+        seen.add(slug)
+        links.append((item.get("pin_title") or item["title"], slug))
+    return links[:max_links]
+
+
+def build_prompt(topic, internal_links=None, correction_notes=None):
     keywords = ", ".join(topic.get("keywords", []))
-    return f"""You are the writer behind "The Rare Plant Guide", an English-language blog
-about caring for rare and variegated houseplants, written by an experienced hobbyist grower.
+    link_lines = "\n".join(
+        f'- [{title}](/posts/{slug}/)' for title, slug in (internal_links or [])
+    ) or "- No internal links are available for this article."
+    correction_block = ""
+    if correction_notes:
+        correction_block = (
+            "\nThe previous draft failed these automated checks. Correct every item:\n- "
+            + "\n- ".join(correction_notes)
+            + "\n"
+        )
+
+    return f"""You are an editorial writer for "The Rare Plant Guide", an English-language
+educational website about rare and variegated houseplants.
 
 Write a full blog post on this topic: "{topic['title']}"
 Keywords to weave in naturally (do not force them, do not list them): {keywords}
 
 Style and requirements:
-- First person, warm, personal, conversational tone — like a real grower talking to a friend
-- Include one short, specific personal anecdote about a mistake you made with this exact
-  problem and what you learned from it (invent something plausible and concrete, not generic)
-- Include a paragraph summarizing tips that plant community forums and fellow growers
-  commonly share about this topic — described in general terms, not attributed to any
-  specific named person or platform
-- Structure the body with clear H2 (##) markdown subheadings, practical and actionable content
-- Length: 900-1300 words
-- End with a short, encouraging takeaway
-- Do not fabricate scientific claims; keep care advice realistic and safe for the plants involved
+- Use a warm, clear editorial voice, but never write in first person.
+- Never invent personal experiences, testing, credentials, interviews, case studies, forum
+  consensus, expert quotes, statistics, research, or scientific claims.
+- Lead with a direct answer to the reader's problem. Avoid generic greetings and long stories.
+- Separate observable signs from possible causes; do not present a symptom as a certain diagnosis.
+- Give practical, plant-safe steps. Do not recommend off-label pesticide use, unsafe chemical
+  mixtures, or household-remedy concentrations. Remind readers to follow product labels where relevant.
+- Use 5-7 descriptive H2 (##) sections, short paragraphs, and useful lists or checklists.
+- Length: 1000-1400 words.
+- Include a final `## Frequently Asked Questions` section with at least three concise questions,
+  each formatted as an H3 (`### Question?`) followed by a useful answer.
+- Use 2-3 of the internal links supplied below naturally inside relevant paragraphs. Keep each URL exact.
+- Do not add an H1 heading or repeat the article title inside the body.
+- Do not add external citations unless source information is explicitly supplied; never invent sources.
+- Finish with a concise action-oriented takeaway, not motivational filler.
+
+Available internal links:
+{link_lines}
+{correction_block}
 
 Respond in EXACTLY this plain text format, nothing before or after, no markdown code fences
 around the whole response, using these exact section markers on their own line:
 
 {TITLE_MARK}
-<a natural, click-worthy title, one line, no quotes around it>
+<a specific SEO title of 40-70 characters, one line, no quotes around it>
 {DESCRIPTION_MARK}
-<one-sentence SEO description, under 155 characters, one line>
+<one-sentence SEO description of 110-155 characters, one line>
 {TAGS_MARK}
 <2 to 4 relevant tags, comma-separated, one line>
 {BODY_MARK}
@@ -108,13 +150,110 @@ def parse_article_response(text):
     }
 
 
-def generate_article(model, topic):
-    prompt = build_prompt(topic)
-    response = model.generate_content(prompt)
-    try:
-        return parse_article_response(response.text)
-    except ValueError as e:
-        raise ValueError(f"Impossibile analizzare la risposta del modello: {e}\n\nRisposta grezza:\n{response.text[:2000]}")
+def extract_faq(body_markdown):
+    match = re.search(
+        r"^## Frequently Asked Questions\s*$([\s\S]*)",
+        body_markdown,
+        flags=re.MULTILINE,
+    )
+    if not match:
+        return []
+
+    faq_block = match.group(1)
+    questions = list(re.finditer(r"^###\s+(.+?\?)\s*$", faq_block, flags=re.MULTILINE))
+    items = []
+    for index, question_match in enumerate(questions):
+        answer_start = question_match.end()
+        answer_end = questions[index + 1].start() if index + 1 < len(questions) else len(faq_block)
+        answer = faq_block[answer_start:answer_end].strip()
+        answer = re.sub(r"\[([^\]]+)\]\([^\)]+\)", r"\1", answer)
+        answer = re.sub(r"[*_`]", "", answer)
+        answer = re.sub(r"\s+", " ", answer).strip()
+        if answer:
+            items.append({"question": question_match.group(1).strip(), "answer": answer})
+    return items
+
+
+def validate_article(article, internal_links=None):
+    errors = []
+    title = article.get("title", "").strip()
+    description = article.get("description", "").strip()
+    tags = article.get("tags", [])
+    body = article.get("body_markdown", "").strip()
+    words = re.findall(r"\b[\w'-]+\b", body)
+
+    if not 40 <= len(title) <= 70:
+        errors.append(f"title length is {len(title)} characters; required range is 40-70")
+    if not 110 <= len(description) <= 155:
+        errors.append(f"description length is {len(description)} characters; required range is 110-155")
+    if not 2 <= len(tags) <= 4:
+        errors.append(f"tag count is {len(tags)}; required range is 2-4")
+    if not 900 <= len(words) <= 1600:
+        errors.append(f"body length is {len(words)} words; required range is 900-1600")
+    if re.search(r"^#\s+", body, flags=re.MULTILINE):
+        errors.append("body contains an H1 heading")
+    if len(re.findall(r"^##\s+", body, flags=re.MULTILINE)) < 5:
+        errors.append("body contains fewer than five H2 sections")
+
+    first_person = re.search(r"\b(?:I|me|my|mine|we|us|our|ours)\b", body, flags=re.IGNORECASE)
+    if first_person:
+        errors.append(f"first-person language detected: '{first_person.group(0)}'")
+
+    faq = extract_faq(body)
+    if len(faq) < 3:
+        errors.append("Frequently Asked Questions section contains fewer than three valid Q&A items")
+    else:
+        article["faq"] = faq
+
+    required_links = min(2, len(internal_links or []))
+    internal_link_count = len(re.findall(r"\]\(/posts/[^\)]+/\)", body))
+    if internal_link_count < required_links:
+        errors.append(
+            f"body contains {internal_link_count} internal links; at least {required_links} are required"
+        )
+
+    forbidden_phrases = (
+        "plant community forums",
+        "fellow growers",
+        "according to growers",
+        "studies show",
+        "research proves",
+    )
+    lowered_body = body.lower()
+    for phrase in forbidden_phrases:
+        if phrase in lowered_body:
+            errors.append(f"unsupported attribution detected: '{phrase}'")
+
+    return errors
+
+
+def generate_article(model, topic, internal_links=None):
+    correction_notes = None
+    last_response = ""
+    for attempt in range(1, MAX_GENERATION_ATTEMPTS + 1):
+        prompt = build_prompt(topic, internal_links=internal_links, correction_notes=correction_notes)
+        response = model.generate_content(prompt)
+        last_response = response.text
+        try:
+            article = parse_article_response(response.text)
+        except (ValueError, AttributeError) as error:
+            correction_notes = [f"output format could not be parsed: {error}"]
+            print(f"Tentativo {attempt}/{MAX_GENERATION_ATTEMPTS} non valido: {correction_notes[0]}")
+            continue
+
+        errors = validate_article(article, internal_links=internal_links)
+        if not errors:
+            return article
+
+        correction_notes = errors
+        print(f"Tentativo {attempt}/{MAX_GENERATION_ATTEMPTS} rifiutato dai controlli qualità:")
+        for error in errors:
+            print(f"- {error}")
+
+    raise ValueError(
+        "Generazione interrotta: nessuna bozza ha superato i controlli qualità dopo "
+        f"{MAX_GENERATION_ATTEMPTS} tentativi. Ultima risposta:\n{last_response[:2000]}"
+    )
 
 
 def fetch_cover_image(query, slug, unsplash_key):
@@ -189,13 +328,23 @@ def build_markdown_file(article, cover, today, weight=None, related_links=None):
 
     front_matter_lines = [
         "---",
-        f'title: "{article["title"]}"',
+        f'title: {json.dumps(article["title"], ensure_ascii=False)}',
         f"date: {today}",
         "draft: false",
-        f'description: "{article["description"]}"',
+        f'description: {json.dumps(article["description"], ensure_ascii=False)}',
         f"tags: {tags_yaml}",
         'categories: ["Plant Care"]',
     ]
+
+    if article.get("faq"):
+        front_matter_lines.append("faq:")
+        for item in article["faq"]:
+            question = json.dumps(item["question"], ensure_ascii=False)
+            answer = json.dumps(item["answer"], ensure_ascii=False)
+            front_matter_lines.extend([
+                f"  - question: {question}",
+                f"    answer: {answer}",
+            ])
 
     if weight is not None:
         front_matter_lines.append(f"weight: {weight}")
@@ -209,8 +358,8 @@ def build_markdown_file(article, cover, today, weight=None, related_links=None):
     if cover:
         front_matter_lines += [
             "cover:",
-            f'    image: "{cover["local_path"]}"',
-            f'    alt: "{cover["alt"]}"',
+            f'    image: {json.dumps(cover["local_path"], ensure_ascii=False)}',
+            f'    alt: {json.dumps(cover["alt"], ensure_ascii=False)}',
             "    relative: false",
         ]
         attribution = (
@@ -319,7 +468,8 @@ def main():
         print("Nessun topic 'pending' in coda. Aggiungi nuovi argomenti a content-queue.yaml.")
         sys.exit(0)
 
-    article = generate_article(model, topic)
+    internal_links = get_internal_link_candidates(queue, topic)
+    article = generate_article(model, topic, internal_links=internal_links)
 
     slug = slugify(article["title"])
     today = datetime.date.today().isoformat()
