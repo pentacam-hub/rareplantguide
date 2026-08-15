@@ -4,6 +4,32 @@
 {{- partial "home_info.html" . }}
 {{- end }}
 
+<section class="home-paths" aria-labelledby="start-here-title">
+  <div class="home-section-heading">
+    <span>Start here</span>
+    <h2 id="start-here-title">What does your plant need?</h2>
+  </div>
+  <div class="home-path-grid">
+    <a class="home-path-card" href="/tools/symptom-checker.html">
+      <strong>Diagnose a problem</strong>
+      <span>Use the free symptom checker for yellow leaves, pests, rot, reversion and more.</span>
+    </a>
+    <a class="home-path-card" href="/posts/rare-houseplant-care-guide/">
+      <strong>Build a care routine</strong>
+      <span>Get the essentials of light, watering, humidity, soil and feeding in one guide.</span>
+    </a>
+    <a class="home-path-card" href="/posts/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late/">
+      <strong>Rescue a struggling plant</strong>
+      <span>Spot root rot early and follow a practical step-by-step recovery plan.</span>
+    </a>
+  </div>
+</section>
+
+<div class="home-section-heading latest-guides">
+  <span>Fresh from the guide</span>
+  <h2>Latest rare plant articles</h2>
+</div>
+
 {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
 {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
 
