@@ -15,6 +15,9 @@ concurrency:
 
 jobs:
   generate-and-publish:
+    # Trial API Pins are visible only to their creator. Enable this repository
+    # variable only after Pinterest approves Standard access.
+    if: vars.PINTEREST_STANDARD_APPROVED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
