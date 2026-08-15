@@ -1,74 +1,73 @@
-# Setup del sistema di agenti — The Rare Plant Guide
+# Daily Content Agent — The Rare Plant Guide
 
-## 1. Copia i file nel repo
-Copia questi file mantenendo la stessa struttura di cartelle dentro
-`rareplantguide`:
+L'agente vive nel repository e gira tramite GitHub Actions anche quando ChatGPT è chiuso.
 
-```
-.github/workflows/auto-post.yml
-scripts/requirements.txt
-scripts/generate_post.py
-content-queue.yaml
-```
+## Cosa fa ogni giorno
 
-✅ Path già verificati e corretti per la tua struttura reale:
-- `POSTS_DIR = "content/posts"` → confermato, è dove hai già i tuoi file `.md`
-- `IMAGES_DIR = "static/images"` → confermato, è dove hai già le immagini scaricate finora
+Il workflow `.github/workflows/auto-post.yml` parte alle **00:15 UTC** e:
 
-Non serve modificare nulla, puoi copiare i file così come sono.
+1. controlla che tutte le credenziali siano configurate;
+2. esegue i test automatici del generatore e dell'integrazione Pinterest;
+3. se non esiste un Pin da ritentare, genera un articolo dalla prima voce `pending` di `content-queue.yaml`;
+4. genera la cover e un'immagine Pinterest verticale 1000×1500;
+5. compila l'intero sito con Hugo e interrompe tutto se il build fallisce;
+6. pubblica articolo e immagini su `main`, facendo partire Cloudflare;
+7. attende che articolo e immagine siano realmente online;
+8. pubblica **un solo Pin** sulla board `Rare Plant Care Tips`;
+9. salva nel repository l'ID restituito da Pinterest.
 
-## 2. Prendi una chiave API Gemini gratuita (per il testo)
-1. Vai su https://aistudio.google.com/app/apikey
-2. Accedi con un account Google, clicca "Create API key"
-3. Copia la chiave (è gratuita, con limiti di utilizzo generosi per
-   pochi articoli a settimana — nessuna carta di credito richiesta)
+Se Pinterest fallisce, il Pin resta `pending`. Il giorno successivo l'agente ritenta quel Pin e non genera un altro articolo: non crea arretrati e non pubblica più di un Pin al giorno. Prima di creare un Pin controlla anche se sul profilo esiste già un Pin con lo stesso link.
 
-## 3. Prendi una chiave API Unsplash gratuita (per le immagini)
-1. Vai su https://unsplash.com/developers e crea un account (gratuito)
-2. "New Application" → accetta i termini → dai un nome all'app
-   (es. "TheRarePlantGuide")
-3. Nella pagina dell'app copia la "Access Key"
-4. Il piano gratuito (demo) permette 50 richieste/ora — più che
-   sufficiente per 1-2 articoli a settimana
+## Configurazione una tantum
 
-## 4. Aggiungi entrambe le chiavi come secret su GitHub
-1. Vai sul repo → Settings → Secrets and variables → Actions
-2. "New repository secret" → nome `GEMINI_API_KEY` → incolla la chiave Gemini → Salva
-3. "New repository secret" → nome `UNSPLASH_ACCESS_KEY` → incolla la chiave Unsplash → Salva
+Aprire:
 
-## 5. Testalo subito (senza aspettare lunedì/giovedì)
-1. Vai su repo → tab "Actions"
-2. Seleziona il workflow "Auto Publish Article"
-3. Clicca "Run workflow" (pulsante in alto a destra) per lanciarlo
-   manualmente e vedere se genera correttamente il primo articolo
+`GitHub → pentacam-hub/rareplantguide → Settings → Secrets and variables → Actions`
 
-Se tutto funziona, vedrai un nuovo commit con un file `.md` dentro
-`content/posts/`, e Cloudflare Pages ripubblicherà il sito da solo
-in pochi minuti.
+Aggiungere questi repository secrets:
 
-## Come funziona la schedulazione
-- Parte automaticamente **lunedì e giovedì alle 08:00 UTC**
-- Ogni esecuzione pesca il prossimo argomento "pending" da
-  `content-queue.yaml`, lo marca come "done" dopo la pubblicazione
-- Quando la coda finisce (25 argomenti = circa 3 mesi a ritmo di
-  2/settimana), aggiungi semplicemente altri topic allo stesso file,
-  seguendo lo stesso formato
+| Secret | Contenuto |
+|---|---|
+| `GEMINI_API_KEY` | Chiave API Google AI Studio usata per il testo |
+| `UNSPLASH_ACCESS_KEY` | Access Key dell'app Unsplash usata per le foto |
+| `PINTEREST_APP_ID` | App ID dell'app Pinterest |
+| `PINTEREST_APP_SECRET` | App secret Pinterest |
+| `PINTEREST_REFRESH_TOKEN` | Continuous refresh token Pinterest con gli scope richiesti |
+| `GH_SECRETS_PAT` | Fine-grained GitHub PAT limitato a questo repository, con `Secrets: Read and write` |
 
-## Note
-- Il modello usato è `gemini-2.0-flash-exp` (gratuito). Se Google lo
-  deprecasse o lo rinominasse, basta cambiare la stringa `MODEL_NAME`
-  in `scripts/generate_post.py`
-- Le immagini di copertina vengono ora scaricate automaticamente da
-  Unsplash (foto reali gratuite, royalty-free) in base alla
-  `image_query` che hai definito per ogni topic in `content-queue.yaml`.
-  Lo script rispetta le linee guida API di Unsplash: notifica il
-  download e aggiunge in fondo all'articolo una riga di attribuzione
-  al fotografo (obbligatoria per l'uso gratuito delle foto)
-- Se non trova un'immagine adatta, o se manca la chiave
-  `UNSPLASH_ACCESS_KEY`, il post viene comunque creato ma senza cover
-  — non blocca mai la pubblicazione del testo
-- Lo stile delle foto Unsplash (fotografia reale) è diverso da quello
-  "editorial botanico" generato con Bing Image Creator che usavi prima:
-  se vuoi restare fedele a quello stile, posso invece impostare lo
-  script per generare le immagini con un modello AI anziché scaricarle
-  da Unsplash — fammi sapere
+Non inserire mai questi valori nei file del repository.
+
+## Requisiti Pinterest
+
+L'app Pinterest deve essere collegata all'account corretto e il token deve includere gli scope minimi:
+
+- `boards:read`
+- `boards:write`
+- `pins:read`
+- `pins:write`
+
+Perché i Pin siano distribuiti pubblicamente, verificare che l'app abbia l'access tier appropriato per la produzione; nel tier Trial i Pin creati via API sono visibili soltanto al loro autore.
+
+Pinterest usa continuous refresh token con scadenza mobile. Ogni esecuzione salva il nuovo token in un file temporaneo del runner e aggiorna automaticamente `PINTEREST_REFRESH_TOKEN` tramite `GH_SECRETS_PAT`. Il PAT deve essere limitato al solo repository `pentacam-hub/rareplantguide`.
+
+Documentazione ufficiale:
+
+- https://developers.pinterest.com/docs/getting-started/set-up-authentication-and-authorization/
+- https://developers.pinterest.com/docs/work-with-organic-content-and-users/create-boards-and-pins/
+- https://docs.github.com/rest/actions/secrets
+
+## Avvio e controllo
+
+Per un test manuale:
+
+`GitHub → Actions → Daily Content Agent → Run workflow`
+
+Un run è riuscito soltanto se termina verde e mostra:
+
+- test superati;
+- build Hugo completata;
+- deploy pubblico rilevato;
+- Pin creato oppure Pin preesistente riconosciuto;
+- stato `posted` e `pinterest_pin_id` salvati in `content-queue.yaml`.
+
+Gli argomenti futuri si aggiungono a `content-queue.yaml` con `status: pending`. Quando la coda è vuota, il workflow termina senza inventare nuovi argomenti.

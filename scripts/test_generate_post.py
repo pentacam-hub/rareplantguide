@@ -7,6 +7,7 @@ from scripts.generate_post import (
     TITLE_MARK,
     build_markdown_file,
     extract_faq,
+    has_pending_pin,
     parse_article_response,
     validate_article,
 )
@@ -51,6 +52,16 @@ Judge recovery through stable new growth over several weeks rather than changes 
 
 
 class GeneratorQualityTests(unittest.TestCase):
+    def test_pending_pin_blocks_another_article(self):
+        queue = {
+            "topics": [
+                {"status": "done", "pin_status": "posted"},
+                {"status": "done", "pin_status": "pending"},
+                {"status": "pending"},
+            ]
+        }
+        self.assertTrue(has_pending_pin(queue))
+
     def test_parse_response(self):
         response = f"""{TITLE_MARK}
 How to Diagnose Common Rare Houseplant Problems

@@ -1,17 +1,22 @@
-name: Auto Publish Article
+name: Daily Content Agent
 
 on:
   schedule:
-    # Lunedì e giovedì alle 08:00 UTC (09:00/10:00 ora italiana a seconda dell'ora legale)
-    - cron: '0 8 * * 1,4'
-  workflow_dispatch: {}  # permette di lanciarlo manualmente da GitHub per testare
+    # Una volta al giorno: 00:15 UTC (sera negli Stati Uniti).
+    - cron: '15 0 * * *'
+  workflow_dispatch: {}
 
 permissions:
   contents: write
 
+concurrency:
+  group: rareplantguide-daily-content-agent
+  cancel-in-progress: false
+
 jobs:
   generate-and-publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -24,8 +29,26 @@ jobs:
       - name: Install dependencies
         run: pip install -r scripts/requirements.txt
 
-      - name: Validate article generator
-        run: python -m unittest scripts/test_generate_post.py
+      - name: Check required secrets
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
+          GH_SECRETS_PAT: ${{ secrets.GH_SECRETS_PAT }}
+        run: |
+          missing=0
+          for name in GEMINI_API_KEY UNSPLASH_ACCESS_KEY PINTEREST_APP_ID PINTEREST_APP_SECRET PINTEREST_REFRESH_TOKEN GH_SECRETS_PAT; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Missing GitHub Actions secret: $name"
+              missing=1
+            fi
+          done
+          exit "$missing"
+
+      - name: Validate agent code
+        run: python -m unittest scripts.test_generate_post scripts.test_post_pin scripts.test_wait_for_deploy
 
       - name: Generate article
         env:
@@ -33,33 +56,62 @@ jobs:
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
         run: python scripts/generate_post.py
 
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.148.2'
+          extended: true
+
+      - name: Validate generated site
+        run: hugo --minify --destination /tmp/rareplantguide-public
+
       - name: Commit and push new post
         run: |
           git config user.name "rareplantguide-bot"
           git config user.email "bot@users.noreply.github.com"
           git add content/posts/ static/images/ content-queue.yaml
           if ! git diff --staged --quiet; then
-            git commit -m "Auto: nuovo articolo generato"
+            git commit -m "Auto: publish daily article and Pin image"
+            git pull --rebase origin main
             git push
           else
-            echo "Nessuna modifica da pubblicare (coda vuota?)"
+            echo "Nessun nuovo articolo: ritento il Pin rimasto pending oppure la coda è vuota."
           fi
 
-      - name: Wait for Cloudflare Pages deploy
-        run: sleep 180  # dà tempo al sito di ripubblicarsi prima che Pinterest scarichi l'immagine
+      - name: Wait for Cloudflare deployment
+        run: python -m scripts.wait_for_deploy --timeout 600 --interval 15
 
       - name: Publish Pinterest pin
+        id: publish_pin
         env:
           PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
           PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
           PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
+          PINTEREST_REFRESH_TOKEN_FILE: ${{ runner.temp }}/pinterest_refresh_token
         run: python scripts/post_pin.py
 
-      - name: Commit pin status update
+      - name: Rotate Pinterest refresh token
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GH_SECRETS_PAT }}
+          TOKEN_FILE: ${{ runner.temp }}/pinterest_refresh_token
         run: |
+          if [ -s "$TOKEN_FILE" ]; then
+            gh secret set PINTEREST_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" < "$TOKEN_FILE"
+            echo "Pinterest continuous refresh token aggiornato in modo sicuro."
+          else
+            echo "Nessun nuovo refresh token restituito."
+          fi
+
+      - name: Commit pin status update
+        if: steps.publish_pin.outcome == 'success'
+        run: |
+          git config user.name "rareplantguide-bot"
+          git config user.email "bot@users.noreply.github.com"
           git add content-queue.yaml
           if ! git diff --staged --quiet; then
-            git commit -m "Auto: stato pin Pinterest aggiornato"
+            git commit -m "Auto: record published Pinterest Pin"
+            git pull --rebase origin main
             git push
           else
             echo "Nessun aggiornamento stato pin da salvare"

@@ -14,7 +14,7 @@ topics:
   pin_description: Is your prized variegated Monstera losing its beautiful white patches?
     Learn why reversion happens and how to prune and light your plant to save it.
   pin_image_path: /images/pins/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it.jpg
-  pin_status: pending
+  pin_status: posted_manual
 - title: How Much Light Do Rare Aroids Really Need?
   keywords:
   - rare aroids
@@ -30,7 +30,7 @@ topics:
   pin_description: A practical, real-talk guide to giving your rare aroids the exact
     light they need to thrive without burning or stalling their growth.
   pin_image_path: /images/pins/how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves.jpg
-  pin_status: pending
+  pin_status: posted_manual
 - title: The Truth About Sphagnum Moss Propagation for Rare Plants
   keywords:
   - sphagnum moss
@@ -45,7 +45,7 @@ topics:
   pin_description: Discover the honest truth about using sphagnum moss for rare plant
     propagation, including how to avoid rot and transition roots safely.
   pin_image_path: /images/pins/is-sphagnum-moss-actually-the-holy-grail-for-rare-plant-propagation.jpg
-  pin_status: pending
+  pin_status: posted_manual
 - title: Signs of Root Rot in Philodendrons (And How to Save Them)
   keywords:
   - root rot
@@ -60,7 +60,7 @@ topics:
   pin_description: Learn the early warning signs of root rot in your philodendrons
     and get a step-by-step rescue plan to save your favorite houseplants from overwatering.
   pin_image_path: /images/pins/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late.jpg
-  pin_status: pending
+  pin_status: posted_manual
 - title: Is It Worth Buying Tissue-Cultured Rare Plants?
   keywords:
   - tissue culture plants
@@ -71,11 +71,11 @@ topics:
   status: done
   published_date: '2026-08-13'
   slug: is-it-worth-buying-tissue-cultured-rare-plants-a-honest-guide-for-hobbyists
-  pin_title: Is It Worth Buying Tissue-Cultured Rare Plants? A Honest Guide for Hobbyists
-  pin_description: Thinking of buying tissue culture rare plants? Discover the real
-    pros, cons, and essential acclimation tips from an experienced grower.
+  pin_title: Is It Worth Buying Tissue-Cultured Rare Plants? An Honest Guide for Hobbyists
+  pin_description: Thinking of buying tissue culture rare plants? Compare the real
+    costs, risks, and acclimation steps before choosing a plantlet or established plant.
   pin_image_path: /images/pins/is-it-worth-buying-tissue-cultured-rare-plants-a-honest-guide-for-hobbyists.jpg
-  pin_status: pending
+  pin_status: posted_manual
 - title: Humidity Tents vs Greenhouse Cabinets for Rare Plant Collections
   keywords:
   - humidity tent
@@ -124,10 +124,10 @@ topics:
   image_query: variegated leaf pattern closeup
   cluster: variegation-care
   status: pending
-- title: Why Rare Plant Prices Are Dropping (And What It Means for Collectors)
+- title: What Determines the Price of a Rare Houseplant?
   keywords:
   - rare plant prices
-  - plant market trends
+  - rare plant value
   - collecting houseplants
   image_query: rare houseplant collection shelf
   cluster: buying-market
@@ -231,7 +231,7 @@ topics:
   image_query: houseplant photography phone
   cluster: buying-market
   status: pending
-- title: Should You Quarantine New Rare Plants? Here's What I Learned the Hard Way
+- title: Should You Quarantine New Rare Plants? A Practical Guide
   keywords:
   - plant quarantine
   - pest prevention
