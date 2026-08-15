@@ -3,9 +3,10 @@ Genera automaticamente un nuovo articolo (testo + immagine di copertina)
 per The Rare Plant Guide.
 
 Pesca il prossimo topic "pending" da content-queue.yaml, chiama l'API
-gratuita di Google Gemini per scrivere il post in tono personale,
-scarica una foto di copertina gratuita da Unsplash, e salva tutto
-pronto per Hugo (tema PaperMod).
+di Google Gemini per scrivere una bozza editoriale sottoposta a controlli
+automatici, scarica una foto di copertina da Unsplash e salva tutto pronto
+per Hugo (tema PaperMod). Se esiste già un Pin non pubblicato, non genera
+un nuovo articolo: il run giornaliero viene usato per ritentare quel Pin.
 
 Variabili d'ambiente richieste:
     GEMINI_API_KEY      -> chiave gratuita da https://aistudio.google.com/app/apikey
@@ -47,6 +48,14 @@ def pick_topic(queue):
         if item.get("status") == "pending":
             return item
     return None
+
+
+def has_pending_pin(queue):
+    """Avoid creating a new article while yesterday's Pin still needs publishing."""
+    return any(
+        item.get("status") == "done" and item.get("pin_status") == "pending"
+        for item in queue.get("topics", [])
+    )
 
 
 TITLE_MARK = "===TITLE==="
@@ -463,6 +472,10 @@ def main():
     model = genai.GenerativeModel(MODEL_NAME)
 
     queue = load_queue()
+    if has_pending_pin(queue):
+        print("Esiste già un Pin in attesa: salto la generazione e ritento prima quel Pin.")
+        sys.exit(0)
+
     topic = pick_topic(queue)
     if not topic:
         print("Nessun topic 'pending' in coda. Aggiungi nuovi argomenti a content-queue.yaml.")
