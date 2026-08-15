@@ -6,7 +6,7 @@ theme = "PaperMod"
 [params]
   author = "The Rare Plant Guide"
   env = "production"
-  description = "Practical care guides for rare and variegated houseplants"
+  description = "Practical rare houseplant care guides, troubleshooting advice, propagation tips and a free plant symptom checker."
   DateFormat = "January 2, 2006"
   ShowReadingTime = true
   ShowShareButtons = true
@@ -29,8 +29,8 @@ theme = "PaperMod"
     iconHeight = 28
 
   [params.homeInfoParams]
-    Title = "Welcome to The Rare Plant Guide 🌿"
-    Content = "Practical, no-nonsense care guides for rare and variegated houseplants — collector to collector. Browse the latest guides below, or head to the full archive."
+    Title = "Keep Rare Houseplants Healthy — Without the Guesswork 🌿"
+    Content = "Practical guides for rare and variegated houseplants: diagnose problems, prevent root rot, improve light and soil, and propagate with confidence. Start with the free Symptom Checker or explore the latest guides below."
 
 [[params.socialIcons]]
   name = "pinterest"
@@ -51,3 +51,11 @@ theme = "PaperMod"
   name = "Symptom Checker"
   url = "/tools/symptom-checker.html"
   weight = 3
+[[menu.main]]
+  name = "About"
+  url = "/about/"
+  weight = 4
+[[menu.main]]
+  name = "Contact"
+  url = "/contact/"
+  weight = 5
