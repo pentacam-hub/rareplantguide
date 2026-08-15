@@ -4,8 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Plant Symptom Checker — The Rare Plant Guide</title>
-<meta name="description" content="Answer two quick questions and find out what's actually wrong with your rare or variegated houseplant.">
+<meta name="description" content="Use this free plant symptom checker to identify yellow leaves, root rot, pests, crispy edges, leggy growth and loss of variegation.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://therareplantguide.com/tools/symptom-checker.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Plant Symptom Checker — The Rare Plant Guide">
+<meta property="og:description" content="Answer two quick questions to identify the likely cause of common rare houseplant problems and find the right care guide.">
+<meta property="og:url" content="https://therareplantguide.com/tools/symptom-checker.html">
+<meta property="og:site_name" content="The Rare Plant Guide">
+<meta property="og:image" content="https://therareplantguide.com/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/images/leaf-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Plant Symptom Checker",
+  "url": "https://therareplantguide.com/tools/symptom-checker.html",
+  "description": "A free interactive tool for identifying common rare houseplant problems and finding relevant care guides.",
+  "applicationCategory": "LifestyleApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "publisher": { "@type": "Organization", "name": "The Rare Plant Guide", "url": "https://therareplantguide.com/" }
+}
+</script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600&display=swap');
 
@@ -170,6 +192,14 @@
     font-family:'Inter',sans-serif;font-size:13px;padding:0;text-decoration:underline;
   }
 
+  .checker-info{margin:48px 0 54px;}
+  .checker-info h2{font-size:28px;color:var(--forest);margin-bottom:14px;}
+  .checker-info h3{font-size:20px;color:var(--primary);margin:28px 0 8px;}
+  .checker-info p{color:var(--secondary);margin:0 0 14px;}
+  .guide-links{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+  .guide-links a{display:block;padding:16px;background:var(--entry);border:1px solid var(--border);border-radius:12px;text-decoration:none;font-weight:600;}
+  .guide-links a:hover{border-color:var(--forest);color:var(--forest);}
+
   footer.site{
     border-top:1px solid var(--border);
     padding:30px 0 50px;
@@ -184,6 +214,7 @@
     .hero h1{font-size:28px;}
     .panel{padding:26px 20px;border-radius:16px;}
     .question{font-size:19px;}
+    .guide-links{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -235,6 +266,20 @@
       <button class="btn-secondary" id="checkAnother">Check another symptom</button>
     </div>
   </div>
+
+  <section class="checker-info" aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How the plant symptom checker works</h2>
+    <p>Select the symptom that best matches what you see, then answer one follow-up question when needed. The tool suggests the most likely cause and links to a detailed guide with practical next steps.</p>
+    <p>Symptoms can overlap, so inspect the soil, roots, stems and both sides of the leaves before taking action. If a stem is mushy, roots smell foul or pests are spreading, isolate the plant and act promptly.</p>
+
+    <h3>Popular troubleshooting guides</h3>
+    <div class="guide-links">
+      <a href="/posts/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late/">How to treat root rot</a>
+      <a href="/posts/pests-rare-houseplants/">Identify common houseplant pests</a>
+      <a href="/posts/how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves/">How much light rare aroids need</a>
+      <a href="/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/">What to do when variegation fades</a>
+    </div>
+  </section>
 
 </div>
 
