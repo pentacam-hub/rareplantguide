@@ -37,6 +37,14 @@ Aggiungere questi repository secrets:
 
 Non inserire mai questi valori nei file del repository.
 
+In `Settings → Secrets and variables → Actions → Variables` aggiungere inoltre:
+
+| Variable | Valore |
+|---|---|
+| `PINTEREST_STANDARD_APPROVED` | `true`, ma soltanto dopo che Pinterest mostra Standard access attivo |
+
+Finché la richiesta Standard è pending, lasciare questa variabile assente: il job giornaliero viene saltato e non consuma la coda editoriale.
+
 ## Requisiti Pinterest
 
 L'app Pinterest deve essere collegata all'account corretto e il token deve includere gli scope minimi:
