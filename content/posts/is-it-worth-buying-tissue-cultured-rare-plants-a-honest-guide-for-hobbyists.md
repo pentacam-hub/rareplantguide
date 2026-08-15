@@ -1,5 +1,5 @@
 ---
-title: "Is It Worth Buying Tissue-Cultured Rare Plants? A Honest Guide for Hobbyists"
+title: "Is It Worth Buying Tissue-Cultured Rare Plants? An Honest Guide for Hobbyists"
 date: 2026-08-13
 draft: false
 description: "Thinking of buying tissue culture rare plants? Discover the real pros, cons, and essential acclimation tips from an experienced grower."
@@ -19,7 +19,7 @@ But as tempting as those lower price tags are, a big question remains: Is it act
 
 ## My First Tissue Culture Disaster: A Hard Lesson in Patience
 
-Before we talk about the science, let let me share a slightly embarrassing story from my own journey. A couple of years ago, when variegated Monstera Thai Constellations were still costing an arm and a leg, I finally decided to take the plunge and buy a tiny tissue-cultured flask. I was absolutely ecstatic. When it arrived, it looked like a perfect, microscopic version of a mature plant, nestled in its little bed of nutrient-rich jelly.
+Before we talk about the science, let me share a slightly embarrassing story from my own journey. A couple of years ago, when variegated Monstera Thai Constellations were still costing an arm and a leg, I finally decided to take the plunge and buy a tiny tissue-cultured flask. I was absolutely ecstatic. When it arrived, it looked like a perfect, microscopic version of a mature plant, nestled in its little bed of nutrient-rich jelly.
 
 My mistake was thinking that because I was an experienced grower, I could skip the tedious "hardening off" phase. I pulled that delicate baby out of the flask, gave it a quick rinse, and immediately potted it up into my standard chunky soil mix under a cheap humidity dome. I didn't sterilize my potting media, and I certainly didn't clean the roots thoroughly enough. 
 

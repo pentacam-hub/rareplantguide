@@ -17,6 +17,8 @@ I’m talking about root rot. It is the single biggest threat to our potted coll
 
 Let's walk through how to identify the warning signs, how to perform a rescue mission, and how to adjust your routine so you never have to deal with this heartbreak again.
 
+Not sure whether the symptoms point to rot, light stress, pests, or normal leaf aging? Start with the free [Plant Symptom Checker](/tools/symptom-checker.html) for a quick diagnosis.
+
 ## My Costly Lesson in "Hover-Parenting"
 
 A few years ago, I finally saved up enough to buy a highly variegated *Philodendron Jose Buono*. It was my absolute prized possession. Because I loved it so much, I hovered over it constantly. Every time the top half-inch of soil looked even slightly dry, I gave it a little sip of water. I thought I was being an attentive plant parent, but I was actually committing the ultimate hobbyist sin: overwatering. 
@@ -70,6 +72,8 @@ Once your plant is on the road to recovery, adjusting your daily routine is the 
 First, get comfortable with the wet-to-dry cycle. Most philodendrons prefer their soil to dry out significantly between waterings. Instead of watering on a strict calendar schedule, stick your finger two inches deep into the soil. If it feels moist, wait a few days and check again. 
 
 Second, pay attention to lighting. A plant sitting in a dark corner uses water much slower than one receiving bright, indirect light. Providing your philodendron with adequate light keeps its metabolism high, which means it will process water efficiently and keep the soil from sitting wet for too long.
+
+For prevention, pair the right watering rhythm with a [fast-draining aroid soil mix](/posts/best-soil-mix-variegated-monstera/) and enough [bright, indirect light](/posts/how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves/).
 
 ## You've Got This!
 
