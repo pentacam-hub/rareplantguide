@@ -96,6 +96,18 @@ h1, h2, h3, h4, h5, h6,
   color: var(--forest);
 }
 
+/* Homepage paths */
+.home-paths { margin: 42px 0; }
+.home-section-heading { margin-bottom: 18px; }
+.home-section-heading span { color: var(--accent-dark); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.home-section-heading h2 { margin: 4px 0 0; color: var(--forest); font-size: 28px; }
+.latest-guides { margin-top: 46px; }
+.home-path-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.home-path-card { display: flex; min-height: 150px; flex-direction: column; gap: 10px; padding: 22px; color: var(--primary); background: var(--entry); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.home-path-card:hover { transform: translateY(-3px); border-color: var(--forest); box-shadow: 0 10px 24px rgba(30,38,28,.08); }
+.home-path-card strong { color: var(--forest); font-family: 'Fraunces', Georgia, serif; font-size: 19px; }
+.home-path-card span { color: var(--secondary); font-size: 14px; line-height: 1.55; }
+
 /* Post cards */
 .post-entry {
   border-radius: var(--radius);
@@ -162,3 +174,10 @@ h1, h2, h3, h4, h5, h6,
 /* Footer */
 .footer { color: var(--secondary); }
 .footer a { color: var(--forest); }
+
+@media (max-width: 720px) {
+  .home-path-grid { grid-template-columns: 1fr; }
+  .home-path-card { min-height: 0; }
+  .first-entry.home-info { padding: 36px 26px; }
+  .home-info .entry-header h1 { font-size: 32px; }
+}
