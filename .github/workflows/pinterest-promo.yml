@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -51,11 +53,20 @@ jobs:
       - name: Prepare evergreen Pin creative
         run: python scripts/post_promo_pin.py --prepare
 
-      - name: Commit and push evergreen creative
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.148.2'
+          extended: true
+
+      - name: Build production site
+        run: hugo --minify
+
+      - name: Commit and push evergreen creative and site
         run: |
           git config user.name "rareplantguide-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add static/images/pins/ content-queue.yaml
+          git add static/images/pins/ content-queue.yaml public/
           if ! git diff --staged --quiet; then
             git commit -m "Auto: prepare evergreen Pinterest Pin"
             git pull --rebase origin main
