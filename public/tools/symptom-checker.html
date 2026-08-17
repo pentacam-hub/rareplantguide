@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plant Symptom Checker — The Rare Plant Guide</title>
+<meta name="description" content="Use this free plant symptom checker to identify yellow leaves, root rot, pests, crispy edges, leggy growth and loss of variegation.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<link rel="canonical" href="https://therareplantguide.com/tools/symptom-checker.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Plant Symptom Checker — The Rare Plant Guide">
+<meta property="og:description" content="Answer two quick questions to identify the likely cause of common rare houseplant problems and find the right care guide.">
+<meta property="og:url" content="https://therareplantguide.com/tools/symptom-checker.html">
+<meta property="og:site_name" content="The Rare Plant Guide">
+<meta property="og:image" content="https://therareplantguide.com/images/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/images/leaf-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Plant Symptom Checker",
+  "url": "https://therareplantguide.com/tools/symptom-checker.html",
+  "description": "A free interactive tool for identifying common rare houseplant problems and finding relevant care guides.",
+  "applicationCategory": "LifestyleApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "publisher": { "@type": "Organization", "name": "The Rare Plant Guide", "url": "https://therareplantguide.com/" }
+}
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600&display=swap');
+
+  :root{
+    --theme: rgb(250, 247, 240);
+    --entry: rgb(255, 253, 248);
+    --primary: rgb(30, 38, 28);
+    --secondary: rgb(93, 104, 88);
+    --tertiary: rgb(214, 205, 180);
+    --border: rgb(226, 217, 195);
+    --accent: rgb(180, 92, 47);
+    --accent-dark: rgb(150, 74, 36);
+    --forest: rgb(58, 82, 54);
+    --radius: 14px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--theme);
+    color:var(--primary);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    letter-spacing:0.01em;
+    line-height:1.6;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  a{color:var(--accent-dark);}
+
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px;}
+
+  header.site{
+    border-bottom:1px solid var(--border);
+    padding:18px 0;
+  }
+  header.site .wrap{display:flex;align-items:center;gap:10px;}
+  header.site img{width:28px;height:28px;}
+  header.site a.brand{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:700;
+    font-size:20px;
+    color:var(--forest);
+    text-decoration:none;
+  }
+  header.site .back{
+    margin-left:auto;
+    font-size:14px;
+    color:var(--secondary);
+    text-decoration:none;
+    font-weight:500;
+  }
+  header.site .back:hover{color:var(--accent);}
+
+  .hero{padding:52px 0 8px;text-align:center;}
+  .hero .eyebrow{
+    display:inline-block;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--accent-dark);
+    margin-bottom:14px;
+  }
+  .hero h1{font-size:36px;color:var(--forest);margin-bottom:12px;}
+  .hero p{font-size:16px;color:var(--secondary);max-width:480px;margin:0 auto;}
+
+  .leaf-indicator{
+    width:64px;height:64px;margin:28px auto 0;
+    transition:filter .4s ease;
+  }
+
+  .panel{
+    background:var(--entry);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:36px 32px;
+    margin:32px 0;
+    box-shadow:0 1px 3px rgba(30,38,28,0.04);
+  }
+
+  .step-label{
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--secondary);
+    margin-bottom:10px;
+  }
+  .question{font-size:22px;color:var(--primary);margin-bottom:22px;}
+
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .opt-btn{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:var(--theme);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:16px 18px;
+    font-family:'Inter',sans-serif;
+    font-size:15.5px;
+    color:var(--primary);
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .opt-btn:hover{
+    border-color:var(--forest);
+    background:var(--entry);
+    transform:translateY(-2px);
+    box-shadow:0 8px 18px rgba(30,38,28,0.08);
+  }
+  .opt-btn:focus-visible{
+    outline:3px solid var(--accent);
+    outline-offset:2px;
+  }
+
+  .result .kicker{
+    font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--accent-dark);margin-bottom:10px;
+  }
+  .result h2{font-size:26px;color:var(--forest);margin-bottom:14px;}
+  .result p{font-size:16px;color:var(--secondary);margin-bottom:22px;}
+
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn-primary{
+    display:inline-block;
+    background:var(--forest);
+    color:var(--theme);
+    text-decoration:none;
+    font-weight:600;
+    font-size:15px;
+    padding:13px 22px;
+    border-radius:10px;
+    transition:background .15s ease;
+  }
+  .btn-primary:hover{background:var(--accent);}
+  .btn-secondary{
+    display:inline-block;
+    background:transparent;
+    color:var(--secondary);
+    text-decoration:none;
+    font-weight:500;
+    font-size:15px;
+    padding:13px 18px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    cursor:pointer;
+    font-family:'Inter',sans-serif;
+  }
+  .btn-secondary:hover{border-color:var(--forest);color:var(--forest);}
+
+  .breadcrumb-trail{
+    font-size:13px;color:var(--secondary);margin-bottom:18px;
+  }
+  .breadcrumb-trail button{
+    background:none;border:none;color:var(--accent-dark);cursor:pointer;
+    font-family:'Inter',sans-serif;font-size:13px;padding:0;text-decoration:underline;
+  }
+
+  .checker-info{margin:48px 0 54px;}
+  .checker-info h2{font-size:28px;color:var(--forest);margin-bottom:14px;}
+  .checker-info h3{font-size:20px;color:var(--primary);margin:28px 0 8px;}
+  .checker-info p{color:var(--secondary);margin:0 0 14px;}
+  .guide-links{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+  .guide-links a{display:block;padding:16px;background:var(--entry);border:1px solid var(--border);border-radius:12px;text-decoration:none;font-weight:600;}
+  .guide-links a:hover{border-color:var(--forest);color:var(--forest);}
+
+  footer.site{
+    border-top:1px solid var(--border);
+    padding:30px 0 50px;
+    text-align:center;
+    color:var(--secondary);
+    font-size:13px;
+  }
+
+  [hidden]{display:none !important;}
+
+  @media (max-width:600px){
+    .hero h1{font-size:28px;}
+    .panel{padding:26px 20px;border-radius:16px;}
+    .question{font-size:19px;}
+    .guide-links{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <img src="/images/leaf-icon.png" alt="">
+    <a class="brand" href="/">The Rare Plant Guide</a>
+    <a class="back" href="/">&larr; Back to articles</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <span class="eyebrow">Free Tool</span>
+    <h1>What's Wrong With Your Plant?</h1>
+    <p>Answer a couple of quick questions and get a straight answer — plus the exact guide to fix it.</p>
+    <svg class="leaf-indicator" id="leafIndicator" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 8 C68 8 84 24 84 46 C84 70 68 88 50 92 C32 88 16 70 16 46 C16 24 32 8 50 8 Z" fill="#3A5236" opacity="0.85"/>
+      <path d="M50 12 L50 88" stroke="#FAF7F0" stroke-width="2" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="panel" id="step1">
+    <div class="step-label">Step 1 of 2</div>
+    <div class="question">What are you seeing on the plant?</div>
+    <div class="options" id="symptomOptions"></div>
+  </div>
+
+  <!-- STEP 2 (follow-up, only for some symptoms) -->
+  <div class="panel" id="step2" hidden>
+    <div class="breadcrumb-trail"><button id="backToStep1">&larr; Start over</button></div>
+    <div class="step-label">Step 2 of 2</div>
+    <div class="question" id="followUpQuestion"></div>
+    <div class="options" id="followUpOptions"></div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="panel result" id="resultPanel" hidden>
+    <div class="breadcrumb-trail"><button id="backToStart">&larr; Check another symptom</button></div>
+    <div class="kicker" id="resultKicker">Likely cause</div>
+    <h2 id="resultTitle"></h2>
+    <p id="resultText"></p>
+    <div class="cta-row">
+      <a class="btn-primary" id="resultLink" href="#">Read the full guide</a>
+      <button class="btn-secondary" id="checkAnother">Check another symptom</button>
+    </div>
+  </div>
+
+  <section class="checker-info" aria-labelledby="how-it-works">
+    <h2 id="how-it-works">How the plant symptom checker works</h2>
+    <p>Select the symptom that best matches what you see, then answer one follow-up question when needed. The tool suggests the most likely cause and links to a detailed guide with practical next steps.</p>
+    <p>Symptoms can overlap, so inspect the soil, roots, stems and both sides of the leaves before taking action. If a stem is mushy, roots smell foul or pests are spreading, isolate the plant and act promptly.</p>
+
+    <h3>Popular troubleshooting guides</h3>
+    <div class="guide-links">
+      <a href="/posts/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late/">How to treat root rot</a>
+      <a href="/posts/pests-rare-houseplants/">Identify common houseplant pests</a>
+      <a href="/posts/how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves/">How much light rare aroids need</a>
+      <a href="/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/">What to do when variegation fades</a>
+    </div>
+  </section>
+
+</div>
+
+<footer class="site">
+  <div class="wrap">The Rare Plant Guide &mdash; therareplantguide.com</div>
+</footer>
+
+<script>
+const DATA = {
+  yellowing: {
+    label: "Yellowing leaves",
+    leafColor: "#C4B040",
+    followUp: {
+      question: "Which leaves are affected?",
+      options: [
+        {
+          label: "Mostly older, lower leaves — the rest looks fine",
+          result: {
+            title: "Probably just natural aging",
+            text: "Older leaves yellow and drop as a plant matures — that's normal turnover, not a problem. If it's just one or two lower leaves and everything else looks healthy, no action needed. If it keeps spreading upward, check your watering routine and soil mix next.",
+            link: "/posts/best-soil-mix-variegated-monstera/",
+            linkLabel: "Read the soil mix guide"
+          }
+        },
+        {
+          label: "Several leaves at once, including newer growth",
+          result: {
+            title: "Likely overwatering or a root issue",
+            text: "Multiple yellowing leaves across the plant, especially newer ones, usually points to soggy soil or early root rot. Check the roots and repot into a fast-draining, chunky mix if the soil is staying wet for more than a few days.",
+            link: "/posts/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late/",
+            linkLabel: "Read the root rot guide"
+          }
+        }
+      ]
+    }
+  },
+  brown_edges: {
+    label: "Brown, crispy edges or tips",
+    leafColor: "#A9713A",
+    result: {
+      title: "Usually dry air or underwatering",
+      text: "Crispy, papery brown edges are a classic sign of low humidity or the soil drying out too much between waterings. Mist regularly, move away from heating vents, or add a humidifier nearby — and check your watering schedule isn't too sparse.",
+      link: "/posts/rare-houseplant-care-guide/",
+      linkLabel: "Read the full care guide"
+    }
+  },
+  leggy: {
+    label: "Leggy growth, long gaps between leaves",
+    leafColor: "#7C9A5E",
+    result: {
+      title: "Not enough light",
+      text: "Long stretches of bare stem between leaves (legginess) is the plant reaching for more light. Small new leaves are the same story. Move it closer to a bright window or add a grow light — this is one of the most common and most fixable issues.",
+      link: "/posts/how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves/",
+      linkLabel: "Read the light guide"
+    }
+  },
+  reverting: {
+    label: "New leaves turning solid green (losing variegation)",
+    leafColor: "#4C7A3E",
+    result: {
+      title: "Your plant is reverting",
+      text: "This is called reversion — the plant is prioritizing energy-producing green tissue over its more fragile variegated patches, usually because it isn't getting enough light. The fix involves pruning back to a variegated node and boosting light.",
+      link: "/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/",
+      linkLabel: "Read the full reversion guide"
+    }
+  },
+  pests: {
+    label: "Webbing, sticky residue, or visible bugs",
+    leafColor: "#8B8B3A",
+    result: {
+      title: "Pest infestation",
+      text: "Webbing usually means spider mites, sticky residue points to mealybugs or scale, and silvery streaks suggest thrips. Isolate the plant immediately and identify the exact pest before treating — the right treatment depends on which one you're dealing with.",
+      link: "/posts/pests-rare-houseplants/",
+      linkLabel: "Identify the pest"
+    }
+  },
+  rot: {
+    label: "Mushy stem, foul smell, or dark roots",
+    leafColor: "#5C4530",
+    result: {
+      title: "Root or stem rot",
+      text: "This needs attention today, not this week. A mushy, dark stem base or foul-smelling roots means rot has already set in — act now to save what you can, and repot into fresh, well-draining soil immediately.",
+      link: "/posts/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late/",
+      linkLabel: "Read the root rot guide"
+    }
+  }
+};
+
+const symptomOptions = document.getElementById('symptomOptions');
+const step1 = document.getElementById('step1');
+const step2 = document.getElementById('step2');
+const resultPanel = document.getElementById('resultPanel');
+const followUpQuestion = document.getElementById('followUpQuestion');
+const followUpOptions = document.getElementById('followUpOptions');
+const leafIndicator = document.getElementById('leafIndicator');
+
+function setLeafColor(hex){
+  const path = leafIndicator.querySelector('path');
+  path.setAttribute('fill', hex);
+}
+
+function showResult(result){
+  document.getElementById('resultTitle').textContent = result.title;
+  document.getElementById('resultText').textContent = result.text;
+  const link = document.getElementById('resultLink');
+  link.href = result.link;
+  link.textContent = result.linkLabel;
+  step1.hidden = true;
+  step2.hidden = true;
+  resultPanel.hidden = false;
+  resultPanel.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function buildStep1(){
+  symptomOptions.innerHTML = '';
+  Object.entries(DATA).forEach(([key, val]) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = val.label;
+    btn.addEventListener('click', () => {
+      setLeafColor(val.leafColor);
+      if (val.followUp) {
+        followUpQuestion.textContent = val.followUp.question;
+        followUpOptions.innerHTML = '';
+        val.followUp.options.forEach(opt => {
+          const b2 = document.createElement('button');
+          b2.className = 'opt-btn';
+          b2.textContent = opt.label;
+          b2.addEventListener('click', () => showResult(opt.result));
+          followUpOptions.appendChild(b2);
+        });
+        step1.hidden = true;
+        step2.hidden = false;
+      } else {
+        showResult(val.result);
+      }
+    });
+    symptomOptions.appendChild(btn);
+  });
+}
+
+function reset(){
+  resultPanel.hidden = true;
+  step2.hidden = true;
+  step1.hidden = false;
+  setLeafColor('#3A5236');
+  step1.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+document.getElementById('backToStep1').addEventListener('click', reset);
+document.getElementById('backToStart').addEventListener('click', reset);
+document.getElementById('checkAnother').addEventListener('click', reset);
+
+buildStep1();
+</script>
+
+</body>
+</html>
