@@ -1,23 +1,23 @@
-name: Daily Content Agent
+name: Pinterest + Content Agent
 
 on:
   schedule:
-    # Una volta al giorno: 00:15 UTC (sera negli Stati Uniti).
-    - cron: '15 0 * * *'
+    # Two daily publishing windows aimed at the US audience.
+    # 14:30 UTC = late morning US East / early morning US West.
+    # 19:30 UTC = afternoon US East / around midday US West.
+    - cron: '30 14 * * *'
+    - cron: '30 19 * * *'
   workflow_dispatch: {}
 
 permissions:
   contents: write
 
 concurrency:
-  group: rareplantguide-daily-content-agent
+  group: rareplantguide-pinterest-content-agent
   cancel-in-progress: false
 
 jobs:
   generate-and-publish:
-    # Trial API Pins are visible only to their creator. Enable this repository
-    # variable only after Pinterest approves Standard access.
-    if: vars.PINTEREST_STANDARD_APPROVED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -53,7 +53,7 @@ jobs:
       - name: Validate agent code
         run: python -m unittest scripts.test_generate_post scripts.test_post_pin scripts.test_wait_for_deploy
 
-      - name: Generate article
+      - name: Generate article and fresh Pin creative
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
@@ -74,11 +74,11 @@ jobs:
           git config user.email "bot@users.noreply.github.com"
           git add content/posts/ static/images/ content-queue.yaml
           if ! git diff --staged --quiet; then
-            git commit -m "Auto: publish daily article and Pin image"
+            git commit -m "Auto: publish article and Pinterest creative"
             git pull --rebase origin main
             git push
           else
-            echo "Nessun nuovo articolo: ritento il Pin rimasto pending oppure la coda è vuota."
+            echo "No new article generated; retrying a pending Pin or the content queue is empty."
           fi
 
       - name: Wait for Cloudflare deployment
@@ -101,9 +101,9 @@ jobs:
         run: |
           if [ -s "$TOKEN_FILE" ]; then
             gh secret set PINTEREST_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" < "$TOKEN_FILE"
-            echo "Pinterest continuous refresh token aggiornato in modo sicuro."
+            echo "Pinterest continuous refresh token updated securely."
           else
-            echo "Nessun nuovo refresh token restituito."
+            echo "No rotated refresh token returned."
           fi
 
       - name: Commit pin status update
@@ -117,5 +117,5 @@ jobs:
             git pull --rebase origin main
             git push
           else
-            echo "Nessun aggiornamento stato pin da salvare"
+            echo "No Pin status update to save."
           fi
