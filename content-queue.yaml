@@ -73,7 +73,8 @@ topics:
   slug: is-it-worth-buying-tissue-cultured-rare-plants-a-honest-guide-for-hobbyists
   pin_title: Is It Worth Buying Tissue-Cultured Rare Plants? An Honest Guide for Hobbyists
   pin_description: Thinking of buying tissue culture rare plants? Compare the real
-    costs, risks, and acclimation steps before choosing a plantlet or established plant.
+    costs, risks, and acclimation steps before choosing a plantlet or established
+    plant.
   pin_image_path: /images/pins/is-it-worth-buying-tissue-cultured-rare-plants-a-honest-guide-for-hobbyists.jpg
   pin_status: posted_manual
 - title: Humidity Tents vs Greenhouse Cabinets for Rare Plant Collections
@@ -83,7 +84,14 @@ topics:
   - rare plant humidity
   image_query: indoor plant greenhouse cabinet
   cluster: care-troubleshooting
-  status: pending
+  status: done
+  published_date: '2026-08-17'
+  slug: humidity-tents-vs-greenhouse-cabinets-for-rare-plants
+  pin_title: Humidity Tents vs Greenhouse Cabinets for Rare Plants
+  pin_description: Deciding between a humidity tent and a grow cabinet? Compare costs,
+    control, and setups to choose the best environment for your rare houseplants.
+  pin_image_path: /images/pins/humidity-tents-vs-greenhouse-cabinets-for-rare-plants.jpg
+  pin_status: pending
 - title: How to Spot a Scammer When Buying Rare Plants Online
   keywords:
   - rare plant scams
