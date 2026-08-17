@@ -1,0 +1,2 @@
+trigger: 2026-08-17T20:04:00Z
+reason: run latest Pinterest workflow after GH_SECRETS_PAT gate fix
