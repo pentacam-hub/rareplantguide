@@ -1,30 +1,53 @@
 """
-Pubblica su Pinterest al massimo un Pin già generato (immagine + testo)
-che risulta ancora "pending" in content-queue.yaml.
+Publish at most one already-generated Pinterest Pin (image + metadata)
+that is still marked as "pending" in content-queue.yaml.
 
-Va lanciato DOPO che generate_post.py ha fatto commit+push e dopo che
-Cloudflare Pages ha finito di ripubblicare il sito, altrimenti Pinterest
-non riuscirà a scaricare l'immagine dal dominio live.
+Run this AFTER generate_post.py has committed and pushed and AFTER
+Cloudflare has deployed the site, so Pinterest can fetch the live image.
 
-Variabili d'ambiente richieste:
-    PINTEREST_APP_ID       -> "App ID" della tua app su developers.pinterest.com
-    PINTEREST_APP_SECRET   -> "App secret" della stessa app
-    PINTEREST_REFRESH_TOKEN      -> ottenuto con l'autorizzazione manuale
-    PINTEREST_REFRESH_TOKEN_FILE -> file temporaneo in cui salvare il nuovo
-                                    continuous refresh token restituito dall'API
+Required environment variables:
+    PINTEREST_APP_ID
+    PINTEREST_APP_SECRET
+    PINTEREST_REFRESH_TOKEN
+    PINTEREST_REFRESH_TOKEN_FILE
 """
 
 import base64
 import os
 import sys
-import yaml
+from urllib.parse import urlsplit, urlunsplit
+
 import requests
+import yaml
 
 QUEUE_PATH = "content-queue.yaml"
-SITE_BASE_URL = "https://therareplantguide.com"  # <-- verifica corrisponda al tuo dominio live
-POST_URL_PREFIX = "/posts"                        # <-- verifica il permalink dei post in hugo.toml
-DEFAULT_BOARD_NAME = "Rare Plant Care Tips"        # board di destinazione dei pin
+SITE_BASE_URL = "https://therareplantguide.com"
+POST_URL_PREFIX = "/posts"
 PINTEREST_API_BASE = "https://api.pinterest.com/v5"
+
+DEFAULT_BOARD = (
+    "Rare Plant Care Tips",
+    "Practical rare houseplant care, troubleshooting, propagation and collecting guides from The Rare Plant Guide.",
+)
+
+BOARD_BY_CLUSTER = {
+    "variegation-care": (
+        "Variegated Plant Care & Monstera Tips",
+        "Variegated Monstera, Philodendron and Syngonium care tips covering light, reversion, growth and healthy variegation.",
+    ),
+    "propagation": (
+        "Rare Plant Propagation & Rooting",
+        "Rare plant propagation guides for cuttings, nodes, sphagnum moss, rooting, acclimation and healthy new growth.",
+    ),
+    "care-troubleshooting": (
+        "Rare Plant Problems & Care Solutions",
+        "Troubleshooting guides for root rot, pests, soil, humidity, repotting, fertilizer and everyday rare plant care problems.",
+    ),
+    "buying-market": (
+        "Rare Plant Buying, Prices & Collecting",
+        "Guides to buying rare plants, avoiding scams, understanding prices, tissue culture and building a collection wisely.",
+    ),
+}
 
 
 def load_queue():
@@ -43,6 +66,34 @@ def pick_pending_pin(queue):
         if topic.get("status") == "done" and topic.get("pin_status") == "pending":
             return topic
     return None
+
+
+def get_board_config(topic):
+    return BOARD_BY_CLUSTER.get(topic.get("cluster"), DEFAULT_BOARD)
+
+
+def build_pin_description(topic):
+    """Build a keyword-rich but readable description, capped at 500 chars."""
+    base = (topic.get("pin_description") or "").strip()
+    keywords = [str(k).strip() for k in topic.get("keywords", []) if str(k).strip()]
+
+    parts = []
+    if base:
+        parts.append(base.rstrip(" .") + ".")
+    if keywords:
+        parts.append("Covers " + ", ".join(keywords[:3]) + ".")
+    parts.append("Save this guide for later and read the full step-by-step article.")
+
+    description = " ".join(parts)
+    return description[:500].rstrip()
+
+
+def build_alt_text(topic):
+    title = (topic.get("pin_title") or topic.get("title") or "Rare plant care guide").strip()
+    keywords = [str(k).strip() for k in topic.get("keywords", []) if str(k).strip()]
+    if keywords:
+        return f"{title}. Visual guide about {', '.join(keywords[:3])}."[:500]
+    return title[:500]
 
 
 def get_access_token(app_id, app_secret, refresh_token):
@@ -71,10 +122,15 @@ def save_rotated_refresh_token(refresh_token):
         token_file.write(refresh_token)
 
 
-def get_or_create_board(access_token, board_name):
+def get_or_create_board(access_token, board_name, board_description):
     headers = {"Authorization": f"Bearer {access_token}"}
 
-    resp = requests.get(f"{PINTEREST_API_BASE}/boards", headers=headers, params={"page_size": 100}, timeout=20)
+    resp = requests.get(
+        f"{PINTEREST_API_BASE}/boards",
+        headers=headers,
+        params={"page_size": 100},
+        timeout=20,
+    )
     resp.raise_for_status()
     for board in resp.json().get("items", []):
         if board["name"].strip().lower() == board_name.strip().lower():
@@ -82,8 +138,8 @@ def get_or_create_board(access_token, board_name):
 
     create_resp = requests.post(
         f"{PINTEREST_API_BASE}/boards",
-        headers=headers,
-        json={"name": board_name, "description": f"Auto-managed board for {SITE_BASE_URL}"},
+        headers={**headers, "Content-Type": "application/json"},
+        json={"name": board_name, "description": board_description},
         timeout=20,
     )
     create_resp.raise_for_status()
@@ -101,17 +157,29 @@ def create_pin(access_token, board_id, topic):
         "media_source": {"source_type": "image_url", "url": image_url},
         "link": article_url,
         "title": topic["pin_title"][:100],
-        "description": topic["pin_description"][:500],
+        "description": build_pin_description(topic),
+        "alt_text": build_alt_text(topic),
     }
     resp = requests.post(f"{PINTEREST_API_BASE}/pins", headers=headers, json=payload, timeout=30)
     resp.raise_for_status()
     return resp.json()
 
 
+def canonical_link(url):
+    """Normalize a Pin/article URL for duplicate detection."""
+    if not url:
+        return ""
+    parsed = urlsplit(url)
+    path = parsed.path.rstrip("/")
+    return urlunsplit((parsed.scheme.lower(), parsed.netloc.lower(), path, "", ""))
+
+
 def find_existing_pin(access_token, article_url, max_pages=5):
     """Prevent a retry from duplicating a Pin if the previous response was lost."""
     headers = {"Authorization": f"Bearer {access_token}"}
     bookmark = None
+    target = canonical_link(article_url)
+
     for _ in range(max_pages):
         params = {"page_size": 100}
         if bookmark:
@@ -120,7 +188,7 @@ def find_existing_pin(access_token, article_url, max_pages=5):
         resp.raise_for_status()
         payload = resp.json()
         for pin in payload.get("items", []):
-            if pin.get("link", "").rstrip("/") == article_url.rstrip("/"):
+            if canonical_link(pin.get("link", "")) == target:
                 return pin
         bookmark = payload.get("bookmark")
         if not bookmark:
@@ -134,33 +202,41 @@ def main():
     refresh_token = os.environ.get("PINTEREST_REFRESH_TOKEN")
 
     if not all([app_id, app_secret, refresh_token]):
-        print("Credenziali Pinterest mancanti (PINTEREST_APP_ID / PINTEREST_APP_SECRET / PINTEREST_REFRESH_TOKEN). Salto la pubblicazione del pin.")
-        sys.exit(0)
+        print(
+            "Pinterest credentials missing "
+            "(PINTEREST_APP_ID / PINTEREST_APP_SECRET / PINTEREST_REFRESH_TOKEN)."
+        )
+        sys.exit(1)
 
     queue = load_queue()
     topic = pick_pending_pin(queue)
     if not topic:
-        print("Nessun pin in attesa di pubblicazione.")
+        print("No pending Pinterest Pin found.")
         sys.exit(0)
 
     access_token, rotated_refresh_token = get_access_token(app_id, app_secret, refresh_token)
     save_rotated_refresh_token(rotated_refresh_token)
-    board_id = get_or_create_board(access_token, DEFAULT_BOARD_NAME)
+
+    board_name, board_description = get_board_config(topic)
+    board_id = get_or_create_board(access_token, board_name, board_description)
 
     try:
         article_url = f"{SITE_BASE_URL}{POST_URL_PREFIX}/{topic['slug']}/"
         existing_pin = find_existing_pin(access_token, article_url)
         if existing_pin:
             result = existing_pin
-            print(f"Pin già presente per '{topic['pin_title']}', aggiorno solo lo stato locale.")
+            print(f"Pin already exists for '{topic['pin_title']}'. Updating local status only.")
         else:
             result = create_pin(access_token, board_id, topic)
-            print(f"Pin pubblicato per '{topic['pin_title']}' (id: {result.get('id')})")
+            print(
+                f"Pinterest Pin published for '{topic['pin_title']}' "
+                f"to board '{board_name}' (id: {result.get('id')})"
+            )
         topic["pin_status"] = "posted"
         topic["pinterest_pin_id"] = result.get("id")
-    except Exception as e:
-        print(f"Errore: pubblicazione Pin fallita per '{topic.get('pin_title')}': {e}")
-        # Lo stato resta pending: il prossimo run ritenta senza generare un nuovo articolo.
+        topic["pinterest_board"] = board_name
+    except Exception as exc:
+        print(f"Pinterest publication failed for '{topic.get('pin_title')}': {exc}")
         raise
 
     save_queue(queue)
