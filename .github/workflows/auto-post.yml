@@ -24,6 +24,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -65,16 +67,16 @@ jobs:
           hugo-version: '0.148.2'
           extended: true
 
-      - name: Validate generated site
-        run: hugo --minify --destination /tmp/rareplantguide-public
+      - name: Build production site
+        run: hugo --minify
 
-      - name: Commit and push new post
+      - name: Commit and push site, post and Pin creative
         run: |
           git config user.name "rareplantguide-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add content/posts/ static/images/ content-queue.yaml
+          git add content/posts/ static/images/ content-queue.yaml public/
           if ! git diff --staged --quiet; then
-            git commit -m "Auto: publish article and Pinterest creative"
+            git commit -m "Auto: publish article, site and Pinterest creative"
             git pull --rebase origin main
             git push
           else
