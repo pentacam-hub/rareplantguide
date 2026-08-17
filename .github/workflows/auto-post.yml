@@ -2,10 +2,8 @@ name: Pinterest + Content Agent
 
 on:
   schedule:
-    # Two daily publishing windows aimed at the US audience.
-    # 14:30 UTC = late morning US East / early morning US West.
-    # 19:30 UTC = afternoon US East / around midday US West.
-    - cron: '30 14 * * *'
+    # One new article + its original Pin per day.
+    # 19:30 UTC covers afternoon US East and around midday US West.
     - cron: '30 19 * * *'
   workflow_dispatch: {}
 
