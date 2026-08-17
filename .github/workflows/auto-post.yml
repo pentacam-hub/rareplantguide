@@ -6,6 +6,9 @@ on:
     # 19:30 UTC covers afternoon US East and around midday US West.
     - cron: '30 19 * * *'
   workflow_dispatch: {}
+  push:
+    paths:
+      - '.github/pinterest-run-trigger'
 
 permissions:
   contents: write
