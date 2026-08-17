@@ -37,10 +37,9 @@ jobs:
           PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
           PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
           PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
-          GH_SECRETS_PAT: ${{ secrets.GH_SECRETS_PAT }}
         run: |
           missing=0
-          for name in GEMINI_API_KEY UNSPLASH_ACCESS_KEY PINTEREST_APP_ID PINTEREST_APP_SECRET PINTEREST_REFRESH_TOKEN GH_SECRETS_PAT; do
+          for name in GEMINI_API_KEY UNSPLASH_ACCESS_KEY PINTEREST_APP_ID PINTEREST_APP_SECRET PINTEREST_REFRESH_TOKEN; do
             if [ -z "${!name}" ]; then
               echo "::error::Missing GitHub Actions secret: $name"
               missing=1
@@ -97,12 +96,16 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_SECRETS_PAT }}
           TOKEN_FILE: ${{ runner.temp }}/pinterest_refresh_token
         run: |
-          if [ -s "$TOKEN_FILE" ]; then
-            gh secret set PINTEREST_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" < "$TOKEN_FILE"
-            echo "Pinterest continuous refresh token updated securely."
-          else
+          if [ ! -s "$TOKEN_FILE" ]; then
             echo "No rotated refresh token returned."
+            exit 0
           fi
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::warning::GH_SECRETS_PAT is not configured. Pin publishing can continue, but the rotated Pinterest refresh token was not persisted. Add GH_SECRETS_PAT before the current Pinterest refresh token expires to keep unattended publishing continuous."
+            exit 0
+          fi
+          gh secret set PINTEREST_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" < "$TOKEN_FILE"
+          echo "Pinterest continuous refresh token updated securely."
 
       - name: Commit pin status update
         if: steps.publish_pin.outcome == 'success'
