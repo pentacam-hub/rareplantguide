@@ -1,0 +1,48 @@
+name: Pinterest Automation CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/post_pin.py'
+      - 'scripts/post_promo_pin.py'
+      - 'scripts/test_post_pin.py'
+      - 'scripts/test_post_promo_pin.py'
+      - '.github/workflows/pinterest-ci.yml'
+      - '.github/workflows/pinterest-promo.yml'
+      - '.github/workflows/auto-post.yml'
+  pull_request:
+    paths:
+      - 'scripts/post_pin.py'
+      - 'scripts/post_promo_pin.py'
+      - 'scripts/test_post_pin.py'
+      - 'scripts/test_post_promo_pin.py'
+      - '.github/workflows/pinterest-ci.yml'
+      - '.github/workflows/pinterest-promo.yml'
+      - '.github/workflows/auto-post.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Compile Pinterest scripts
+        run: python -m py_compile scripts/post_pin.py scripts/post_promo_pin.py
+
+      - name: Run Pinterest unit tests
+        run: python -m unittest scripts.test_post_pin scripts.test_post_promo_pin
