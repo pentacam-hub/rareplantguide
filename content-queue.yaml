@@ -99,7 +99,14 @@ topics:
   - plant marketplace safety
   image_query: person shopping online laptop plants
   cluster: buying-market
-  status: pending
+  status: done
+  published_date: '2026-08-18'
+  slug: spotting-rare-plant-scams-online-a-houseplant-buyer-s-guide
+  pin_title: 'Spotting Rare Plant Scams Online: A Houseplant Buyer''s Guide'
+  pin_description: Learn how to identify rare plant scams when buying plants online.
+    Keep your collection and your wallet safe with our practical security checklist.
+  pin_image_path: /images/pins/spotting-rare-plant-scams-online-a-houseplant-buyer-s-guide.jpg
+  pin_status: pending
 - title: Why Your Variegated Syngonium Isn't Growing New Variegated Leaves
   keywords:
   - variegated syngonium
