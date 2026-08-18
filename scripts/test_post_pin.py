@@ -6,6 +6,7 @@ from scripts.post_pin import (
     canonical_link,
     get_board_config,
     pick_pending_pin,
+    pick_pending_pins,
 )
 
 
@@ -19,6 +20,19 @@ class PinterestQueueTests(unittest.TestCase):
             ]
         }
         self.assertEqual(pick_pending_pin(queue)["slug"], "retry-first")
+
+    def test_can_select_two_pending_pins_for_backlog_recovery(self):
+        queue = {
+            "topics": [
+                {"slug": "first", "status": "done", "pin_status": "pending"},
+                {"slug": "second", "status": "done", "pin_status": "pending"},
+                {"slug": "third", "status": "done", "pin_status": "pending"},
+            ]
+        }
+        self.assertEqual(
+            [item["slug"] for item in pick_pending_pins(queue, 2)],
+            ["first", "second"],
+        )
 
     def test_ignores_unpublished_article(self):
         queue = {"topics": [{"status": "pending", "pin_status": "pending"}]}
