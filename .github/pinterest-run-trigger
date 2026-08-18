@@ -1,2 +1,2 @@
-trigger: 2026-08-18T21:08:00Z
-reason: publish both pending Pins with client credentials and direct base64 image upload
+trigger: 2026-08-18T21:12:00Z
+reason: run instrumented Pinterest recovery and capture exact failure if publication still fails
