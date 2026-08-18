@@ -15,7 +15,7 @@ permissions:
 
 concurrency:
   group: rareplantguide-pinterest-publisher
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   generate-and-publish:
