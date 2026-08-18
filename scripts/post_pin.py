@@ -3,7 +3,8 @@ Publish already-generated Pinterest Pins that are still marked as pending.
 
 The preferred auth path is Pinterest Client Credentials, which avoids refresh-token
 rotation for first-party automation. A refresh token can remain configured as a
-fallback for compatibility.
+fallback for compatibility. Pin images are uploaded directly to Pinterest as
+base64 so publication does not depend on Pinterest fetching an image from the site.
 """
 
 import argparse
@@ -178,21 +179,35 @@ def get_or_create_board(access_token, board_name, board_description):
     return create_resp.json()["id"]
 
 
+def build_image_media_source(pin_image_path):
+    """Read the generated local JPG and build Pinterest's image_base64 media source."""
+    local_path = os.path.join("static", pin_image_path.lstrip("/"))
+    if not os.path.isfile(local_path):
+        raise FileNotFoundError(f"Pinterest creative not found: {local_path}")
+    with open(local_path, "rb") as image_file:
+        encoded = base64.b64encode(image_file.read()).decode("ascii")
+    return {
+        "source_type": "image_base64",
+        "content_type": "image/jpeg",
+        "data": encoded,
+        "is_standard": True,
+    }
+
+
 def create_pin(access_token, board_id, topic):
     headers = {"Authorization": f"Bearer {access_token}", "Content-Type": "application/json"}
     slug = topic["slug"]
-    image_url = f"{SITE_BASE_URL}{topic['pin_image_path']}"
     article_url = f"{SITE_BASE_URL}{POST_URL_PREFIX}/{slug}/"
 
     payload = {
         "board_id": board_id,
-        "media_source": {"source_type": "image_url", "url": image_url},
+        "media_source": build_image_media_source(topic["pin_image_path"]),
         "link": article_url,
         "title": topic["pin_title"][:100],
         "description": build_pin_description(topic),
         "alt_text": build_alt_text(topic),
     }
-    resp = requests.post(f"{PINTEREST_API_BASE}/pins", headers=headers, json=payload, timeout=30)
+    resp = requests.post(f"{PINTEREST_API_BASE}/pins", headers=headers, json=payload, timeout=45)
     resp.raise_for_status()
     return resp.json()
 
