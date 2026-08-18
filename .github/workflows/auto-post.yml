@@ -60,7 +60,9 @@ jobs:
           fi
 
       - name: Validate agent code
-        run: python -m unittest scripts.test_generate_post scripts.test_post_pin scripts.test_wait_for_deploy
+        run: |
+          set -o pipefail
+          python -m unittest scripts.test_generate_post scripts.test_post_pin scripts.test_wait_for_deploy 2>&1 | tee /tmp/pinterest_validate.log
 
       - name: Generate article and fresh Pin creative
         if: github.event_name != 'push'
@@ -76,7 +78,9 @@ jobs:
           extended: true
 
       - name: Build production site
-        run: hugo --minify
+        run: |
+          set -o pipefail
+          hugo --minify 2>&1 | tee /tmp/pinterest_hugo.log
 
       - name: Commit and push site, post and Pin creative
         run: |
@@ -92,7 +96,9 @@ jobs:
           fi
 
       - name: Wait for pending article links
-        run: python -m scripts.wait_for_deploy --kind original --max-pins 2 --article-only --timeout 600 --interval 15
+        run: |
+          set -o pipefail
+          python -m scripts.wait_for_deploy --kind original --max-pins 2 --article-only --timeout 600 --interval 15 2>&1 | tee /tmp/pinterest_wait.log
 
       - name: Publish pending Pinterest pins
         id: publish_pin
@@ -101,7 +107,9 @@ jobs:
           PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
           PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
           PINTEREST_REFRESH_TOKEN_FILE: ${{ runner.temp }}/pinterest_refresh_token
-        run: python scripts/post_pin.py --max-pins 2
+        run: |
+          set -o pipefail
+          python scripts/post_pin.py --max-pins 2 2>&1 | tee /tmp/pinterest_publish.log
 
       - name: Rotate fallback Pinterest refresh token
         if: always()
@@ -132,3 +140,39 @@ jobs:
             git push
           else
             echo "No Pin status update to save."
+          fi
+
+      - name: Record safe failure diagnostic
+        if: failure()
+        run: |
+          git config user.name "rareplantguide-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git pull --rebase origin main || true
+          {
+            echo "Pinterest publisher failure"
+            echo "run: $GITHUB_RUN_ID"
+            echo "sha: $GITHUB_SHA"
+            echo
+            for file in /tmp/pinterest_validate.log /tmp/pinterest_hugo.log /tmp/pinterest_wait.log /tmp/pinterest_publish.log; do
+              echo "===== $(basename "$file") ====="
+              if [ -f "$file" ]; then tail -n 40 "$file"; else echo "not reached"; fi
+              echo
+            done
+          } > .github/pinterest-last-failure.txt
+          git add .github/pinterest-last-failure.txt
+          if ! git diff --staged --quiet; then
+            git commit -m "Debug: record Pinterest publisher failure"
+            git push
+          fi
+
+      - name: Clear previous failure diagnostic
+        if: success()
+        run: |
+          if [ -f .github/pinterest-last-failure.txt ]; then
+            git config user.name "rareplantguide-bot"
+            git config user.email "bot@users.noreply.github.com"
+            git rm .github/pinterest-last-failure.txt
+            git commit -m "Debug: clear Pinterest publisher failure"
+            git pull --rebase origin main
+            git push
+          fi
