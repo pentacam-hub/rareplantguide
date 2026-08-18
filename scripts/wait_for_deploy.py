@@ -1,21 +1,34 @@
-"""Wait until the pending article and Pin image are publicly available."""
+"""Wait until pending Pinterest article and creative assets are publicly available."""
 
 import argparse
 import time
 
 import requests
 
-from scripts.post_pin import POST_URL_PREFIX, SITE_BASE_URL, load_queue, pick_pending_pin
+from scripts.post_pin import POST_URL_PREFIX, SITE_BASE_URL, load_queue, pick_pending_pins
 
 
-def pending_urls(queue):
-    topic = pick_pending_pin(queue)
-    if not topic:
-        return None
-    return {
-        "article": f"{SITE_BASE_URL}{POST_URL_PREFIX}/{topic['slug']}/",
-        "image": f"{SITE_BASE_URL}{topic['pin_image_path']}",
-    }
+def pending_urls(queue, kind="original", limit=1):
+    if kind == "promo":
+        topics = [
+            topic
+            for topic in queue.get("topics", [])
+            if topic.get("status") == "done"
+            and topic.get("promo_pin_status") == "pending"
+            and topic.get("promo_pin_image_path")
+        ][: max(0, limit)]
+        image_key = "promo_pin_image_path"
+    else:
+        topics = pick_pending_pins(queue, max(0, limit))
+        image_key = "pin_image_path"
+
+    return [
+        {
+            "article": f"{SITE_BASE_URL}{POST_URL_PREFIX}/{topic['slug']}/",
+            "image": f"{SITE_BASE_URL}{topic[image_key]}",
+        }
+        for topic in topics
+    ]
 
 
 def url_is_ready(url, expected_type):
@@ -30,14 +43,20 @@ def url_is_ready(url, expected_type):
 def wait_for_urls(urls, timeout, interval):
     deadline = time.monotonic() + timeout
     while time.monotonic() < deadline:
-        article_ready = url_is_ready(urls["article"], "text/html")
-        image_ready = url_is_ready(urls["image"], "image/")
-        if article_ready and image_ready:
+        states = []
+        all_ready = True
+        for item in urls:
+            article_ready = url_is_ready(item["article"], "text/html")
+            image_ready = url_is_ready(item["image"], "image/")
+            states.append((article_ready, image_ready))
+            all_ready = all_ready and article_ready and image_ready
+        if all_ready:
             return True
-        print(
-            "Deploy non ancora pronto "
-            f"(articolo={article_ready}, immagine={image_ready}); nuovo controllo tra {interval}s."
+        state_text = ", ".join(
+            f"#{index + 1}:articolo={article},immagine={image}"
+            for index, (article, image) in enumerate(states)
         )
+        print(f"Deploy non ancora pronto ({state_text}); nuovo controllo tra {interval}s.")
         time.sleep(interval)
     return False
 
@@ -46,18 +65,20 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--timeout", type=int, default=600)
     parser.add_argument("--interval", type=int, default=15)
+    parser.add_argument("--kind", choices=("original", "promo"), default="original")
+    parser.add_argument("--max-pins", type=int, default=1)
     args = parser.parse_args()
 
-    urls = pending_urls(load_queue())
+    urls = pending_urls(load_queue(), kind=args.kind, limit=max(1, args.max_pins))
     if not urls:
-        print("Nessun Pin pending: controllo deploy non necessario.")
+        print(f"Nessun Pin {args.kind} pending: controllo deploy non necessario.")
         return
 
     if not wait_for_urls(urls, args.timeout, args.interval):
         raise SystemExit(
             "Deploy non disponibile entro il timeout; Pinterest verrà ritentato al prossimo run."
         )
-    print(f"Deploy pronto: {urls['article']} e {urls['image']}")
+    print(f"Deploy pronto per {len(urls)} Pin {args.kind} pending.")
 
 
 if __name__ == "__main__":
