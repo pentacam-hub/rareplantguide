@@ -1,4 +1,4 @@
-"""Wait until pending Pinterest article and creative assets are publicly available."""
+"""Wait until pending Pinterest article and, when needed, creative assets are public."""
 
 import argparse
 import time
@@ -40,14 +40,14 @@ def url_is_ready(url, expected_type):
         return False
 
 
-def wait_for_urls(urls, timeout, interval):
+def wait_for_urls(urls, timeout, interval, article_only=False):
     deadline = time.monotonic() + timeout
     while time.monotonic() < deadline:
         states = []
         all_ready = True
         for item in urls:
             article_ready = url_is_ready(item["article"], "text/html")
-            image_ready = url_is_ready(item["image"], "image/")
+            image_ready = True if article_only else url_is_ready(item["image"], "image/")
             states.append((article_ready, image_ready))
             all_ready = all_ready and article_ready and image_ready
         if all_ready:
@@ -67,6 +67,7 @@ def main():
     parser.add_argument("--interval", type=int, default=15)
     parser.add_argument("--kind", choices=("original", "promo"), default="original")
     parser.add_argument("--max-pins", type=int, default=1)
+    parser.add_argument("--article-only", action="store_true")
     args = parser.parse_args()
 
     urls = pending_urls(load_queue(), kind=args.kind, limit=max(1, args.max_pins))
@@ -74,7 +75,7 @@ def main():
         print(f"Nessun Pin {args.kind} pending: controllo deploy non necessario.")
         return
 
-    if not wait_for_urls(urls, args.timeout, args.interval):
+    if not wait_for_urls(urls, args.timeout, args.interval, article_only=args.article_only):
         raise SystemExit(
             "Deploy non disponibile entro il timeout; Pinterest verrà ritentato al prossimo run."
         )
