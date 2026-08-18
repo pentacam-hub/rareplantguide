@@ -48,7 +48,7 @@ jobs:
           exit "$missing"
 
       - name: Validate Pinterest code
-        run: python -m unittest scripts.test_post_pin scripts.test_post_promo_pin
+        run: python -m unittest scripts.test_post_pin scripts.test_post_promo_pin scripts.test_wait_for_deploy
 
       - name: Prepare evergreen Pin creative
         run: python scripts/post_promo_pin.py --prepare
@@ -75,8 +75,8 @@ jobs:
             echo "No new evergreen Pin creative to publish."
           fi
 
-      - name: Wait for Cloudflare deployment
-        run: python -m scripts.wait_for_deploy --timeout 600 --interval 15
+      - name: Wait for evergreen Pin assets
+        run: python -m scripts.wait_for_deploy --kind promo --max-pins 1 --timeout 600 --interval 15
 
       - name: Publish evergreen Pinterest Pin
         id: publish_pin
@@ -94,15 +94,15 @@ jobs:
           TOKEN_FILE: ${{ runner.temp }}/pinterest_refresh_token
         run: |
           if [ ! -s "$TOKEN_FILE" ]; then
-            echo "No rotated refresh token returned."
+            echo "Client Credentials used or no rotated refresh token returned."
             exit 0
           fi
           if [ -z "$GH_TOKEN" ]; then
-            echo "::warning::GH_SECRETS_PAT is not configured. Evergreen Pin publishing can continue, but the rotated Pinterest refresh token was not persisted."
+            echo "::warning::A fallback refresh token rotated but GH_SECRETS_PAT is not configured."
             exit 0
           fi
           gh secret set PINTEREST_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" < "$TOKEN_FILE"
-          echo "Pinterest continuous refresh token updated securely."
+          echo "Fallback Pinterest refresh token updated securely."
 
       - name: Commit evergreen Pin status
         if: steps.publish_pin.outcome == 'success'
