@@ -1,2 +1,2 @@
-trigger: 2026-08-18T21:12:00Z
-reason: run instrumented Pinterest recovery and capture exact failure if publication still fails
+trigger: 2026-08-18T21:16:00Z
+reason: skip deploy wait and run Pinterest API recovery immediately with exact diagnostics
