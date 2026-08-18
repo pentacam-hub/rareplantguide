@@ -96,6 +96,7 @@ jobs:
           fi
 
       - name: Wait for pending article links
+        if: github.event_name != 'push'
         run: |
           set -o pipefail
           python -m scripts.wait_for_deploy --kind original --max-pins 2 --article-only --timeout 600 --interval 15 2>&1 | tee /tmp/pinterest_wait.log
