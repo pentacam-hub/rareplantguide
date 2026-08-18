@@ -59,7 +59,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
-        run: python scripts/generate_post.py
+        run: python scripts/run_daily_article.py
 
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v3
@@ -80,7 +80,7 @@ jobs:
             git pull --rebase origin main
             git push
           else
-            echo "No new article generated; retrying a pending Pin or the content queue is empty."
+            echo "No new article generated; content queue may be empty."
           fi
 
       - name: Wait for Cloudflare deployment
@@ -124,4 +124,3 @@ jobs:
             git push
           else
             echo "No Pin status update to save."
-          fi
