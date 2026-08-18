@@ -1,17 +1,12 @@
 """
-Publish at most one already-generated Pinterest Pin (image + metadata)
-that is still marked as "pending" in content-queue.yaml.
+Publish already-generated Pinterest Pins that are still marked as pending.
 
-Run this AFTER generate_post.py has committed and pushed and AFTER
-Cloudflare has deployed the site, so Pinterest can fetch the live image.
-
-Required environment variables:
-    PINTEREST_APP_ID
-    PINTEREST_APP_SECRET
-    PINTEREST_REFRESH_TOKEN
-    PINTEREST_REFRESH_TOKEN_FILE
+The preferred auth path is Pinterest Client Credentials, which avoids refresh-token
+rotation for first-party automation. A refresh token can remain configured as a
+fallback for compatibility.
 """
 
+import argparse
 import base64
 import os
 import sys
@@ -24,6 +19,7 @@ QUEUE_PATH = "content-queue.yaml"
 SITE_BASE_URL = "https://therareplantguide.com"
 POST_URL_PREFIX = "/posts"
 PINTEREST_API_BASE = "https://api.pinterest.com/v5"
+PINTEREST_SCOPES = "boards:read,boards:write,pins:read,pins:write"
 
 DEFAULT_BOARD = (
     "Rare Plant Care Tips",
@@ -60,12 +56,20 @@ def save_queue(data):
         yaml.safe_dump(data, f, allow_unicode=True, sort_keys=False)
 
 
+def pick_pending_pins(queue, limit=1):
+    """Return the oldest pending original Pins, capped to avoid burst publishing."""
+    pending = [
+        topic
+        for topic in queue.get("topics", [])
+        if topic.get("status") == "done" and topic.get("pin_status") == "pending"
+    ]
+    return pending[: max(0, limit)]
+
+
 def pick_pending_pin(queue):
-    """Return the oldest pending Pin so a run never publishes more than one."""
-    for topic in queue.get("topics", []):
-        if topic.get("status") == "done" and topic.get("pin_status") == "pending":
-            return topic
-    return None
+    """Backward-compatible helper returning the oldest pending Pin."""
+    pins = pick_pending_pins(queue, 1)
+    return pins[0] if pins else None
 
 
 def get_board_config(topic):
@@ -96,24 +100,52 @@ def build_alt_text(topic):
     return title[:500]
 
 
-def get_access_token(app_id, app_secret, refresh_token):
-    basic = base64.b64encode(f"{app_id}:{app_secret}".encode()).decode()
-    resp = requests.post(
+def _basic_auth_header(app_id, app_secret):
+    encoded = base64.b64encode(f"{app_id}:{app_secret}".encode()).decode()
+    return {
+        "Authorization": f"Basic {encoded}",
+        "Content-Type": "application/x-www-form-urlencoded",
+    }
+
+
+def get_access_token(app_id, app_secret, refresh_token=None):
+    """Prefer Client Credentials; fall back to a configured refresh token."""
+    headers = _basic_auth_header(app_id, app_secret)
+
+    client_resp = requests.post(
         f"{PINTEREST_API_BASE}/oauth/token",
-        headers={
-            "Authorization": f"Basic {basic}",
-            "Content-Type": "application/x-www-form-urlencoded",
-        },
-        data={"grant_type": "refresh_token", "refresh_token": refresh_token},
+        headers=headers,
+        data={"grant_type": "client_credentials", "scope": PINTEREST_SCOPES},
         timeout=20,
     )
-    resp.raise_for_status()
-    payload = resp.json()
-    return payload["access_token"], payload.get("refresh_token")
+    if client_resp.ok:
+        payload = client_resp.json()
+        print("Pinterest OAuth: using client_credentials.")
+        return payload["access_token"], None
+
+    if refresh_token:
+        print(
+            "Pinterest client_credentials unavailable "
+            f"(HTTP {client_resp.status_code}); trying refresh-token fallback."
+        )
+        refresh_resp = requests.post(
+            f"{PINTEREST_API_BASE}/oauth/token",
+            headers=headers,
+            data={"grant_type": "refresh_token", "refresh_token": refresh_token},
+            timeout=20,
+        )
+        refresh_resp.raise_for_status()
+        payload = refresh_resp.json()
+        return payload["access_token"], payload.get("refresh_token")
+
+    raise RuntimeError(
+        "Pinterest authentication failed with client_credentials "
+        f"(HTTP {client_resp.status_code}) and no refresh-token fallback is configured."
+    )
 
 
 def save_rotated_refresh_token(refresh_token):
-    """Store the rotated token in a runner-only file for the workflow to persist."""
+    """Store a fallback rotated token in a runner-only file when Pinterest returns one."""
     token_path = os.environ.get("PINTEREST_REFRESH_TOKEN_FILE")
     if not refresh_token or not token_path:
         return
@@ -196,50 +228,60 @@ def find_existing_pin(access_token, article_url, max_pages=5):
     return None
 
 
+def publish_topic(access_token, queue, topic):
+    board_name, board_description = get_board_config(topic)
+    board_id = get_or_create_board(access_token, board_name, board_description)
+    article_url = f"{SITE_BASE_URL}{POST_URL_PREFIX}/{topic['slug']}/"
+
+    existing_pin = find_existing_pin(access_token, article_url)
+    if existing_pin:
+        result = existing_pin
+        print(f"Pin already exists for '{topic['pin_title']}'. Updating local status only.")
+    else:
+        result = create_pin(access_token, board_id, topic)
+        print(
+            f"Pinterest Pin published for '{topic['pin_title']}' "
+            f"to board '{board_name}' (id: {result.get('id')})"
+        )
+
+    topic["pin_status"] = "posted"
+    topic["pinterest_pin_id"] = result.get("id")
+    topic["pinterest_board"] = board_name
+    save_queue(queue)
+
+
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--max-pins", type=int, default=1)
+    args = parser.parse_args()
+
     app_id = os.environ.get("PINTEREST_APP_ID")
     app_secret = os.environ.get("PINTEREST_APP_SECRET")
     refresh_token = os.environ.get("PINTEREST_REFRESH_TOKEN")
 
-    if not all([app_id, app_secret, refresh_token]):
-        print(
-            "Pinterest credentials missing "
-            "(PINTEREST_APP_ID / PINTEREST_APP_SECRET / PINTEREST_REFRESH_TOKEN)."
-        )
+    if not all([app_id, app_secret]):
+        print("Pinterest credentials missing (PINTEREST_APP_ID / PINTEREST_APP_SECRET).")
         sys.exit(1)
 
     queue = load_queue()
-    topic = pick_pending_pin(queue)
-    if not topic:
+    topics = pick_pending_pins(queue, max(1, args.max_pins))
+    if not topics:
         print("No pending Pinterest Pin found.")
         sys.exit(0)
 
     access_token, rotated_refresh_token = get_access_token(app_id, app_secret, refresh_token)
     save_rotated_refresh_token(rotated_refresh_token)
 
-    board_name, board_description = get_board_config(topic)
-    board_id = get_or_create_board(access_token, board_name, board_description)
+    published = 0
+    for topic in topics:
+        try:
+            publish_topic(access_token, queue, topic)
+            published += 1
+        except Exception as exc:
+            print(f"Pinterest publication failed for '{topic.get('pin_title')}': {exc}")
+            raise
 
-    try:
-        article_url = f"{SITE_BASE_URL}{POST_URL_PREFIX}/{topic['slug']}/"
-        existing_pin = find_existing_pin(access_token, article_url)
-        if existing_pin:
-            result = existing_pin
-            print(f"Pin already exists for '{topic['pin_title']}'. Updating local status only.")
-        else:
-            result = create_pin(access_token, board_id, topic)
-            print(
-                f"Pinterest Pin published for '{topic['pin_title']}' "
-                f"to board '{board_name}' (id: {result.get('id')})"
-            )
-        topic["pin_status"] = "posted"
-        topic["pinterest_pin_id"] = result.get("id")
-        topic["pinterest_board"] = board_name
-    except Exception as exc:
-        print(f"Pinterest publication failed for '{topic.get('pin_title')}': {exc}")
-        raise
-
-    save_queue(queue)
+    print(f"Pinterest original Pins processed successfully: {published}")
 
 
 if __name__ == "__main__":
