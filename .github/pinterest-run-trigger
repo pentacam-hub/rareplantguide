@@ -1,2 +1,2 @@
-trigger: 2026-08-18T21:04:00Z
-reason: cancel stale publisher run and clear both pending original Pins with client credentials
+trigger: 2026-08-18T21:08:00Z
+reason: publish both pending Pins with client credentials and direct base64 image upload
