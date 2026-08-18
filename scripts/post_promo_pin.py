@@ -8,8 +8,8 @@ Usage:
     python scripts/post_promo_pin.py --publish
 
 --prepare creates a visually distinct 1000x1500 image for an older article and
-marks it pending in content-queue.yaml. The workflow commits it and waits for the
-site deployment. --publish then sends that deployed image to Pinterest.
+marks it pending in content-queue.yaml. --publish uploads that local creative
+directly to Pinterest as base64, avoiding a dependency on Pinterest fetching it.
 """
 
 import argparse
@@ -27,6 +27,7 @@ from scripts.post_pin import (
     QUEUE_PATH,
     SITE_BASE_URL,
     build_alt_text,
+    build_image_media_source,
     canonical_link,
     get_access_token,
     get_board_config,
@@ -163,7 +164,6 @@ def build_promo_image(topic):
     overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     draw = ImageDraw.Draw(overlay)
 
-    # Distinct top editorial card instead of the original Pin's lower gradient layout.
     draw.rounded_rectangle((55, 85, 945, 790), radius=42, fill=(255, 255, 255, 235))
 
     keywords = [str(k).strip() for k in topic.get("keywords", []) if str(k).strip()]
@@ -250,13 +250,12 @@ def find_existing_promo_pin(access_token, article_url, promo_title, max_pages=5)
 def create_promo_pin(access_token, board_id, topic):
     slug = topic["slug"]
     article_url = f"{SITE_BASE_URL}{POST_URL_PREFIX}/{slug}/"
-    image_url = f"{SITE_BASE_URL}{topic['promo_pin_image_path']}"
     promo_topic = dict(topic)
     promo_topic["pin_title"] = topic["promo_pin_title"]
 
     payload = {
         "board_id": board_id,
-        "media_source": {"source_type": "image_url", "url": image_url},
+        "media_source": build_image_media_source(topic["promo_pin_image_path"]),
         "link": article_url,
         "title": topic["promo_pin_title"][:100],
         "description": topic["promo_pin_description"][:500],
@@ -266,7 +265,7 @@ def create_promo_pin(access_token, board_id, topic):
         f"{PINTEREST_API_BASE}/pins",
         headers={"Authorization": f"Bearer {access_token}", "Content-Type": "application/json"},
         json=payload,
-        timeout=30,
+        timeout=45,
     )
     resp.raise_for_status()
     return resp.json()
@@ -281,8 +280,8 @@ def publish(queue):
     app_id = os.environ.get("PINTEREST_APP_ID")
     app_secret = os.environ.get("PINTEREST_APP_SECRET")
     refresh_token = os.environ.get("PINTEREST_REFRESH_TOKEN")
-    if not all([app_id, app_secret, refresh_token]):
-        raise RuntimeError("Pinterest credentials are missing.")
+    if not all([app_id, app_secret]):
+        raise RuntimeError("Pinterest credentials are missing (PINTEREST_APP_ID / PINTEREST_APP_SECRET).")
 
     access_token, rotated_refresh_token = get_access_token(app_id, app_secret, refresh_token)
     save_rotated_refresh_token(rotated_refresh_token)
