@@ -91,8 +91,8 @@ jobs:
             echo "No content changes to commit; continuing with pending Pinterest retries."
           fi
 
-      - name: Wait for pending original Pin assets
-        run: python -m scripts.wait_for_deploy --kind original --max-pins 2 --timeout 600 --interval 15
+      - name: Wait for pending article links
+        run: python -m scripts.wait_for_deploy --kind original --max-pins 2 --article-only --timeout 600 --interval 15
 
       - name: Publish pending Pinterest pins
         id: publish_pin
