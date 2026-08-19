@@ -1,0 +1,73 @@
+Pinterest publisher failure
+run: 32295296518
+sha: b51d25b003db5b59a11bf0db53db7f1d4f4c0498
+
+===== pinterest_validate.log =====
+................
+----------------------------------------------------------------------
+Ran 16 tests in 0.003s
+
+OK
+
+===== pinterest_hugo.log =====
+Start building sites … 
+hugo v0.148.2-40c3d8233d4b123eff74725e5766fc6272f0a84d+extended linux/amd64 BuildDate=2025-07-27T12:43:24Z VendorInfo=gohugoio
+
+
+                  │ EN 
+──────────────────┼────
+ Pages            │ 84 
+ Paginator pages  │  1 
+ Non-page files   │  0 
+ Static files     │ 28 
+ Processed images │  0 
+ Aliases          │ 30 
+ Cleaned          │  0 
+
+Total in 140 ms
+
+===== pinterest_wait.log =====
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+Deploy non ancora pronto (#1:articolo=False,immagine=True); nuovo controllo tra 15s.
+
+===== pinterest_publish.log =====
+not reached
+
