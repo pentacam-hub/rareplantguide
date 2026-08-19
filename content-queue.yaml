@@ -118,7 +118,14 @@ topics:
   - syngonium care
   image_query: syngonium plant leaves
   cluster: variegation-care
-  status: pending
+  status: done
+  published_date: '2026-08-19'
+  slug: why-your-variegated-syngonium-is-losing-its-color
+  pin_title: Why Your Variegated Syngonium Is Losing Its Color
+  pin_description: Learn why your variegated syngonium is producing solid green leaves
+    and discover practical steps to restore its beautiful variegation.
+  pin_image_path: /images/pins/why-your-variegated-syngonium-is-losing-its-color.jpg
+  pin_status: pending
 - title: Best Soil Mix Recipes for Rare Aroid Collections
   keywords:
   - aroid soil mix
