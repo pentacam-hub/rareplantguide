@@ -1,2 +1,2 @@
-trigger: 2026-08-18T21:16:00Z
-reason: skip deploy wait and run Pinterest API recovery immediately with exact diagnostics
+trigger: 2026-08-20T05:18:00Z
+reason: retry pending Syngonium Pin after making Cloudflare readiness advisory only
