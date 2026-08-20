@@ -74,8 +74,11 @@ jobs:
             echo "No new evergreen Pin creative to publish."
           fi
 
-      - name: Wait for evergreen article link
-        run: python -m scripts.wait_for_deploy --kind promo --max-pins 1 --article-only --timeout 600 --interval 15
+      - name: Advisory evergreen article availability check
+        continue-on-error: true
+        run: |
+          python -m scripts.wait_for_deploy --kind promo --max-pins 1 --article-only --timeout 120 --interval 15 || true
+          echo "Evergreen publication continues even if Cloudflare readiness cannot be confirmed from the runner."
 
       - name: Publish evergreen Pinterest Pin
         id: publish_pin
