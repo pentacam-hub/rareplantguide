@@ -135,7 +135,14 @@ topics:
   - rare plant potting
   image_query: potting soil mix plant repotting
   cluster: care-troubleshooting
-  status: pending
+  status: done
+  published_date: '2026-08-20'
+  slug: best-soil-mix-recipes-for-rare-aroid-collections
+  pin_title: Best Soil Mix Recipes for Rare Aroid Collections
+  pin_description: Discover the ultimate aroid soil mix recipes to prevent root rot
+    and help your rare Philodendrons, Monsteras, and Anthuriums thrive.
+  pin_image_path: /images/pins/best-soil-mix-recipes-for-rare-aroid-collections.jpg
+  pin_status: pending
 - title: How to Acclimate a Newly Imported Rare Plant
   keywords:
   - plant acclimation
