@@ -100,7 +100,7 @@ jobs:
         continue-on-error: true
         run: |
           set -o pipefail
-          python -m scripts.wait_for_deploy --kind original --max-pins 2 --article-only --timeout 120 --interval 15 2>&1 | tee /tmp/pinterest_wait.log
+          python -m scripts.wait_for_deploy --kind original --max-pins 1 --article-only --timeout 120 --interval 15 2>&1 | tee /tmp/pinterest_wait.log
           status=${PIPESTATUS[0]}
           if [ "$status" -ne 0 ]; then
             echo "::warning::Cloudflare article readiness check did not pass. Continuing because the Pin image is uploaded directly to Pinterest and the generated HTML is already committed."
@@ -116,7 +116,7 @@ jobs:
           PINTEREST_REFRESH_TOKEN_FILE: ${{ runner.temp }}/pinterest_refresh_token
         run: |
           set -o pipefail
-          python scripts/post_pin.py --max-pins 2 2>&1 | tee /tmp/pinterest_publish.log
+          python scripts/post_pin.py --max-pins 1 2>&1 | tee /tmp/pinterest_publish.log
 
       - name: Rotate fallback Pinterest refresh token
         if: always()
