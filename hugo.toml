@@ -6,7 +6,7 @@ theme = "PaperMod"
 [params]
   author = "The Rare Plant Guide"
   env = "production"
-  description = "Practical rare houseplant care guides, troubleshooting advice, propagation tips and a free plant symptom checker."
+  description = "Rare houseplant care and troubleshooting guides for Monstera, Philodendron, Anthurium and other aroids: variegation, light, soil, root rot, pests and propagation."
   DateFormat = "January 2, 2006"
   ShowReadingTime = true
   ShowShareButtons = true
@@ -29,8 +29,8 @@ theme = "PaperMod"
     iconHeight = 28
 
   [params.homeInfoParams]
-    Title = "Keep Rare Houseplants Healthy — Without the Guesswork 🌿"
-    Content = "Practical guides for rare and variegated houseplants: diagnose problems, prevent root rot, improve light and soil, and propagate with confidence. Start with the free Symptom Checker or explore the latest guides below."
+    Title = "Rare Houseplant Care — Diagnose Problems and Grow With Confidence 🌿"
+    Content = "Practical help for Monstera, Philodendron, Anthurium and other rare aroids. Diagnose root rot, pests and reversion, improve light and soil, or learn propagation step by step. Start with the free Symptom Checker or choose a guide below."
 
 [[params.socialIcons]]
   name = "pinterest"
