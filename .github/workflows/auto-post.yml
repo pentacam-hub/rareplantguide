@@ -2,9 +2,9 @@ name: Pinterest + Content Agent
 
 on:
   schedule:
-    # One new article + its original Pin per day.
+    # New article + its original Pin only on Monday and Thursday.
     # 19:30 UTC covers afternoon US East and around midday US West.
-    - cron: '30 19 * * *'
+    - cron: '30 19 * * 1,4'
   workflow_dispatch: {}
   push:
     paths:
