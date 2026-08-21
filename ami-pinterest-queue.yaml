@@ -1,0 +1,125 @@
+brand: Analyze My Income
+site_url: https://analyzemyincome.com
+cadence: 2 pins per day
+updated: 2026-08-21
+
+pins:
+  - id: ami-001
+    status: pending
+    title: "1099 Tax Calculator: Estimate Your 2026 Contractor Taxes"
+    description: "Estimate how much you may owe on 1099 income in 2026. Enter freelance or contractor income, business expenses, health insurance and state to estimate federal income tax, self-employment tax, state tax and take-home pay. Save this calculator for tax planning."
+    board: "1099 Tax Tips"
+    board_description: "2026 1099 tax calculators, self-employment tax guidance, quarterly tax planning and tax-saving tools for freelancers and independent contractors."
+    kicker: "1099 TAX CALCULATOR"
+    graphic_title: "See What You May Owe in 2026"
+    destination: "https://analyzemyincome.com/1099-tax-calculator/"
+
+  - id: ami-002
+    status: pending
+    title: "How Much Should You Set Aside for 1099 Taxes?"
+    description: "Not sure how much of each freelance or contractor payment to save for taxes? Use this free 1099 tax set-aside calculator to estimate federal, self-employment and state taxes and see a personalized set-aside percentage for 2026."
+    board: "1099 Tax Tips"
+    board_description: "2026 1099 tax calculators, self-employment tax guidance, quarterly tax planning and tax-saving tools for freelancers and independent contractors."
+    kicker: "1099 TAXES"
+    graphic_title: "How Much Should You Set Aside?"
+    destination: "https://analyzemyincome.com/1099-tax-set-aside-calculator/"
+
+  - id: ami-003
+    status: pending
+    title: "W-2 vs 1099 Calculator: Compare Your Real Take-Home Pay"
+    description: "Compare a W-2 salary with 1099 contractor income using realistic 2026 tax assumptions. See estimated take-home pay, self-employment taxes, business costs and the contractor pay needed to match a W-2 offer."
+    board: "W-2 vs 1099"
+    board_description: "W-2 vs 1099 comparisons, contractor offer decisions, take-home pay examples and independent contractor compensation planning."
+    kicker: "W-2 VS 1099"
+    graphic_title: "Which Offer Really Pays More?"
+    destination: "https://analyzemyincome.com/"
+
+  - id: ami-004
+    status: pending
+    title: "1099 Rate Calculator: What Contractor Rate Replaces Your Salary?"
+    description: "Turn a W-2 salary into an estimated 1099 contractor rate using 2026 taxes and contractor costs. Use the free calculator to find the annual and hourly contractor pay needed to replace employee compensation."
+    board: "Contractor Rates & Salary Calculators"
+    board_description: "Contractor rate calculators, salary conversions and negotiation tools for freelancers, consultants and independent contractors."
+    kicker: "1099 RATE CALCULATOR"
+    graphic_title: "What Rate Replaces Your Salary?"
+    destination: "https://analyzemyincome.com/w2-to-1099/"
+
+  - id: ami-005
+    status: pending
+    title: "Quarterly Tax Calculator 2026 for 1099 Contractors"
+    description: "Estimate quarterly federal tax payments for freelance and 1099 income using a free 2026 planning calculator. See what you may need to pay next instead of guessing at estimated taxes."
+    board: "1099 Tax Tips"
+    board_description: "2026 1099 tax calculators, self-employment tax guidance, quarterly tax planning and tax-saving tools for freelancers and independent contractors."
+    kicker: "QUARTERLY TAXES"
+    graphic_title: "What Should You Pay Next?"
+    destination: "https://analyzemyincome.com/quarterly-tax-calculator/"
+
+  - id: ami-006
+    status: pending
+    title: "1099 Tax Deductions Calculator: See the Estimated Tax Effect"
+    description: "Test eligible business deductions and self-employed health insurance against a 2026 tax estimate. See the modeled reduction in federal income tax, self-employment tax and state tax without confusing an expense with free money."
+    board: "Freelance Taxes & Money"
+    board_description: "Freelance money management, tax deductions, retirement planning and practical financial tools for self-employed workers."
+    kicker: "1099 DEDUCTIONS"
+    graphic_title: "See What Eligible Deductions May Save"
+    destination: "https://analyzemyincome.com/1099-tax-deductions-calculator/"
+
+  - id: ami-007
+    status: pending
+    title: "2026 Business Mileage Deduction Calculator for 1099 Workers"
+    description: "Calculate the 2026 business mileage deduction using the correct split-year IRS mileage rates, then optionally estimate the tax effect. Built for freelancers, contractors and sole proprietors tracking deductible business miles."
+    board: "Freelance Taxes & Money"
+    board_description: "Freelance money management, tax deductions, retirement planning and practical financial tools for self-employed workers."
+    kicker: "BUSINESS MILEAGE"
+    graphic_title: "Calculate Your 2026 Mileage Deduction"
+    destination: "https://analyzemyincome.com/1099-mileage-deduction-calculator/"
+
+  - id: ami-008
+    status: pending
+    title: "Home Office Deduction Calculator 2026 for Self-Employed Workers"
+    description: "Estimate the simplified 2026 home-office deduction using qualified square footage and part-year use. The calculator applies the simplified-method cap and monthly averaging logic for an owner-only home office estimate."
+    board: "Freelance Taxes & Money"
+    board_description: "Freelance money management, tax deductions, retirement planning and practical financial tools for self-employed workers."
+    kicker: "HOME OFFICE"
+    graphic_title: "Estimate Your 2026 Deduction"
+    destination: "https://analyzemyincome.com/1099-home-office-deduction-calculator/"
+
+  - id: ami-009
+    status: pending
+    title: "QBI Deduction Calculator 2026: Estimate Your Section 199A Deduction"
+    description: "Estimate the 2026 qualified business income deduction with Section 199A threshold, SSTB and wage/property limits. See the modeled QBI deduction and its estimated federal income-tax effect."
+    board: "Freelance Taxes & Money"
+    board_description: "Freelance money management, tax deductions, retirement planning and practical financial tools for self-employed workers."
+    kicker: "QBI / SECTION 199A"
+    graphic_title: "Estimate Your 2026 QBI Deduction"
+    destination: "https://analyzemyincome.com/1099-qbi-deduction-calculator/"
+
+  - id: ami-010
+    status: pending
+    title: "Solo 401(k) vs SEP IRA Calculator 2026"
+    description: "Compare estimated 2026 Solo 401(k) and SEP IRA contribution capacity for an owner-only Schedule C sole proprietor. See employee, employer and catch-up contribution estimates plus the modeled federal tax and QBI effect."
+    board: "Freelance Taxes & Money"
+    board_description: "Freelance money management, tax deductions, retirement planning and practical financial tools for self-employed workers."
+    kicker: "SOLO 401(K) VS SEP IRA"
+    graphic_title: "Which Lets You Contribute More?"
+    destination: "https://analyzemyincome.com/solo-401k-vs-sep-ira-calculator/"
+
+  - id: ami-011
+    status: pending
+    title: "Self-Employment Tax Calculator 2026 for 1099 Income"
+    description: "Estimate Social Security and Medicare self-employment tax generated by 1099 net business profit using a focused 2026 calculator. Useful for freelancers and independent contractors planning taxes before filing season."
+    board: "1099 Tax Tips"
+    board_description: "2026 1099 tax calculators, self-employment tax guidance, quarterly tax planning and tax-saving tools for freelancers and independent contractors."
+    kicker: "SELF-EMPLOYMENT TAX"
+    graphic_title: "Estimate Your 2026 SE Tax"
+    destination: "https://analyzemyincome.com/self-employment-tax-calculator/"
+
+  - id: ami-012
+    status: pending
+    title: "Free 1099 Calculators for Contractors and Freelancers"
+    description: "Choose the 2026 calculator you need: W-2 vs 1099, contractor rate, 1099 taxes, tax set-aside, quarterly payments, deductions, mileage, home office, QBI and retirement planning. Save the calculator hub for later."
+    board: "Freelance Taxes & Money"
+    board_description: "Freelance money management, tax deductions, retirement planning and practical financial tools for self-employed workers."
+    kicker: "FREE 1099 CALCULATORS"
+    graphic_title: "One Hub for Your Contractor Money Questions"
+    destination: "https://analyzemyincome.com/calculators/"
