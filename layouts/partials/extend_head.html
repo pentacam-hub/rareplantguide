@@ -1,3 +1,37 @@
+{{- if .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "The Rare Plant Guide",
+  "url": "https://therareplantguide.com/",
+  "description": "Rare houseplant care and troubleshooting guides for Monstera, Philodendron, Anthurium and other aroids.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "The Rare Plant Guide",
+    "url": "https://therareplantguide.com/"
+  }
+}
+</script>
+{{- end }}
+
+{{- if and .IsSection (eq .Section "posts") }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ .Title | jsonify | safeJS }},
+  "url": {{ .Permalink | jsonify | safeJS }},
+  "description": {{ .Description | jsonify | safeJS }},
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "The Rare Plant Guide",
+    "url": "https://therareplantguide.com/"
+  }
+}
+</script>
+{{- end }}
+
 {{- if and .IsPage .Params.faq }}
 <script type="application/ld+json">
 {
