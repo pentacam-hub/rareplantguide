@@ -1,0 +1,89 @@
+name: Analyze My Income Pinterest Publisher
+
+on:
+  schedule:
+    # Two daily Pins. GitHub cron uses UTC.
+    - cron: '30 14 * * *'
+    - cron: '30 19 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: analyze-my-income-pinterest-publisher
+  cancel-in-progress: false
+
+jobs:
+  publish-pin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install publisher dependencies
+        run: pip install pyyaml==6.0.2 requests==2.32.3 Pillow==10.4.0
+
+      - name: Check Pinterest credentials
+        env:
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          AMI_PINTEREST_REFRESH_TOKEN: ${{ secrets.AMI_PINTEREST_REFRESH_TOKEN }}
+        run: |
+          missing=0
+          for name in PINTEREST_APP_ID PINTEREST_APP_SECRET AMI_PINTEREST_REFRESH_TOKEN; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Missing GitHub Actions secret: $name"
+              missing=1
+            fi
+          done
+          exit "$missing"
+
+      - name: Validate Analyze My Income Pinterest publisher
+        run: python -m unittest scripts.test_ami_pinterest
+
+      - name: Publish next Analyze My Income Pin
+        id: publish_pin
+        env:
+          AMI_PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          AMI_PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          AMI_PINTEREST_REFRESH_TOKEN: ${{ secrets.AMI_PINTEREST_REFRESH_TOKEN }}
+          AMI_PINTEREST_REFRESH_TOKEN_FILE: ${{ runner.temp }}/ami_pinterest_refresh_token
+        run: python scripts/ami_pinterest.py
+
+      - name: Rotate Analyze My Income Pinterest refresh token
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GH_SECRETS_PAT }}
+          TOKEN_FILE: ${{ runner.temp }}/ami_pinterest_refresh_token
+        run: |
+          if [ ! -s "$TOKEN_FILE" ]; then
+            echo "No rotated Analyze My Income refresh token returned."
+            exit 0
+          fi
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::warning::Refresh token rotated but GH_SECRETS_PAT is not configured."
+            exit 0
+          fi
+          gh secret set AMI_PINTEREST_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" < "$TOKEN_FILE"
+          echo "Analyze My Income Pinterest refresh token updated securely."
+
+      - name: Commit Analyze My Income Pin status
+        if: steps.publish_pin.outcome == 'success'
+        run: |
+          git config user.name "analyzemyincome-pinterest-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add ami-pinterest-queue.yaml
+          if ! git diff --staged --quiet; then
+            git commit -m "Auto: record Analyze My Income Pinterest Pin"
+            git pull --rebase origin main
+            git push
+          else
+            echo "No Analyze My Income Pinterest queue update to save."
+          fi

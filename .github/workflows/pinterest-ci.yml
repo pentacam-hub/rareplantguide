@@ -6,19 +6,27 @@ on:
     paths:
       - 'scripts/post_pin.py'
       - 'scripts/post_promo_pin.py'
+      - 'scripts/ami_pinterest.py'
       - 'scripts/test_post_pin.py'
       - 'scripts/test_post_promo_pin.py'
+      - 'scripts/test_ami_pinterest.py'
+      - 'ami-pinterest-queue.yaml'
       - '.github/workflows/pinterest-ci.yml'
       - '.github/workflows/pinterest-promo.yml'
+      - '.github/workflows/analyze-my-income-pinterest.yml'
       - '.github/workflows/auto-post.yml'
   pull_request:
     paths:
       - 'scripts/post_pin.py'
       - 'scripts/post_promo_pin.py'
+      - 'scripts/ami_pinterest.py'
       - 'scripts/test_post_pin.py'
       - 'scripts/test_post_promo_pin.py'
+      - 'scripts/test_ami_pinterest.py'
+      - 'ami-pinterest-queue.yaml'
       - '.github/workflows/pinterest-ci.yml'
       - '.github/workflows/pinterest-promo.yml'
+      - '.github/workflows/analyze-my-income-pinterest.yml'
       - '.github/workflows/auto-post.yml'
   workflow_dispatch: {}
 
@@ -42,7 +50,7 @@ jobs:
         run: pip install -r scripts/requirements.txt
 
       - name: Compile Pinterest scripts
-        run: python -m py_compile scripts/post_pin.py scripts/post_promo_pin.py
+        run: python -m py_compile scripts/post_pin.py scripts/post_promo_pin.py scripts/ami_pinterest.py
 
       - name: Run Pinterest unit tests
-        run: python -m unittest scripts.test_post_pin scripts.test_post_promo_pin
+        run: python -m unittest scripts.test_post_pin scripts.test_post_promo_pin scripts.test_ami_pinterest
