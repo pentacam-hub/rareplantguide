@@ -1,0 +1,112 @@
+name: Connect Analyze My Income Pinterest
+
+on:
+  workflow_dispatch:
+    inputs:
+      authorization_code:
+        description: 'Temporary Pinterest authorization code from analyzemyincome.com/pinterest-callback'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  exchange-code:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check required secrets
+        env:
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          GH_SECRETS_PAT: ${{ secrets.GH_SECRETS_PAT }}
+        run: |
+          missing=0
+          for name in PINTEREST_APP_ID PINTEREST_APP_SECRET GH_SECRETS_PAT; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Missing GitHub Actions secret: $name"
+              missing=1
+            fi
+          done
+          exit "$missing"
+
+      - name: Exchange Pinterest authorization code
+        id: exchange
+        env:
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          PINTEREST_AUTHORIZATION_CODE: ${{ inputs.authorization_code }}
+          REDIRECT_URI: https://analyzemyincome.com/pinterest-callback
+          TOKEN_FILE: ${{ runner.temp }}/ami_pinterest_refresh_token
+        shell: python
+        run: |
+          import base64
+          import json
+          import os
+          import urllib.parse
+          import urllib.request
+
+          app_id = os.environ['PINTEREST_APP_ID']
+          app_secret = os.environ['PINTEREST_APP_SECRET']
+          code = os.environ['PINTEREST_AUTHORIZATION_CODE'].strip()
+          redirect_uri = os.environ['REDIRECT_URI']
+          token_file = os.environ['TOKEN_FILE']
+
+          if not code:
+              raise SystemExit('Pinterest authorization code is empty.')
+
+          credentials = base64.b64encode(f'{app_id}:{app_secret}'.encode()).decode()
+          body = urllib.parse.urlencode({
+              'grant_type': 'authorization_code',
+              'code': code,
+              'redirect_uri': redirect_uri,
+          }).encode()
+
+          request = urllib.request.Request(
+              'https://api.pinterest.com/v5/oauth/token',
+              data=body,
+              headers={
+                  'Authorization': f'Basic {credentials}',
+                  'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              method='POST',
+          )
+
+          try:
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  payload = json.loads(response.read().decode())
+          except Exception as exc:
+              raise SystemExit(f'Pinterest token exchange failed: {exc}')
+
+          refresh_token = payload.get('refresh_token')
+          granted_scope = payload.get('scope', '')
+          if not refresh_token:
+              raise SystemExit('Pinterest did not return a refresh token.')
+
+          required = {'boards:read', 'boards:write', 'pins:read', 'pins:write'}
+          normalized = set(str(granted_scope).replace(',', ' ').split())
+          missing = sorted(required - normalized)
+          if missing:
+              raise SystemExit('Pinterest token is missing required scopes: ' + ', '.join(missing))
+
+          fd = os.open(token_file, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+          with os.fdopen(fd, 'w', encoding='utf-8') as handle:
+              handle.write(refresh_token)
+
+          print('Pinterest authorization code exchanged successfully.')
+          print('Required board/pin scopes verified.')
+
+      - name: Save Analyze My Income refresh token as GitHub secret
+        env:
+          GH_TOKEN: ${{ secrets.GH_SECRETS_PAT }}
+          TOKEN_FILE: ${{ runner.temp }}/ami_pinterest_refresh_token
+        run: |
+          test -s "$TOKEN_FILE"
+          gh secret set AMI_PINTEREST_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" < "$TOKEN_FILE"
+          echo "AMI_PINTEREST_REFRESH_TOKEN saved securely."
+
+      - name: Connection complete
+        run: |
+          echo "Analyze My Income Pinterest OAuth connection completed."
+          echo "The scheduled publisher can now use AMI_PINTEREST_REFRESH_TOKEN."
