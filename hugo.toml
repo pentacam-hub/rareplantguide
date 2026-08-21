@@ -1,4 +1,5 @@
 baseURL = "https://therareplantguide.com/"
+cleanDestinationDir = true
 locale = "en_US"
 title = "The Rare Plant Guide"
 theme = "PaperMod"
