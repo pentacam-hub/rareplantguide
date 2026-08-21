@@ -2,9 +2,11 @@ name: Pinterest Evergreen Promo
 
 on:
   schedule:
-    # Second daily Pin: 14:30 UTC.
-    # This catches late morning US East; the original Pin runs later for US West.
+    # First daily evergreen Pin: 14:30 UTC.
     - cron: '30 14 * * *'
+    # Second evergreen Pin only on days without a new article.
+    # Monday and Thursday use the article workflow as the second daily Pin.
+    - cron: '30 19 * * 0,2,3,5,6'
   workflow_dispatch: {}
 
 permissions:
