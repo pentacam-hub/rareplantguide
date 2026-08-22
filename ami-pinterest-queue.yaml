@@ -1,7 +1,7 @@
 brand: Analyze My Income
 site_url: https://analyzemyincome.com
 cadence: 2 pins per day
-updated: '2026-08-21'
+updated: '2026-08-22'
 pins:
 - id: ami-001
   status: posted
@@ -18,7 +18,7 @@ pins:
   pinterest_pin_id: '879961214758040904'
   published_date: '2026-08-21'
 - id: ami-002
-  status: pending
+  status: posted
   title: How Much Should You Set Aside for 1099 Taxes?
   description: Not sure how much of each freelance or contractor payment to save for taxes? Use this free 1099 tax set-aside
     calculator to estimate federal, self-employment and state taxes and see a personalized set-aside percentage for 2026.
@@ -28,6 +28,8 @@ pins:
   kicker: 1099 TAXES
   graphic_title: How Much Should You Set Aside?
   destination: https://analyzemyincome.com/1099-tax-set-aside-calculator/
+  pinterest_pin_id: '879961214758062627'
+  published_date: '2026-08-22'
 - id: ami-003
   status: pending
   title: 'W-2 vs 1099 Calculator: Compare Your Real Take-Home Pay'
