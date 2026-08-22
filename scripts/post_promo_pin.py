@@ -1,21 +1,16 @@
 """Create and publish one fresh evergreen Pinterest Pin for an older article.
 
-The normal content workflow publishes one new article and its original Pin per day.
-This script supplies the second daily Pin without creating a second article.
+The normal content workflow publishes one new article and its original Pin on the
+article cadence. This script supplies evergreen Pins without creating an article.
 
-Usage:
-    python scripts/post_promo_pin.py --prepare
-    python scripts/post_promo_pin.py --publish
-
---prepare creates a visually distinct 1000x1500 image for an older article and
-marks it pending in content-queue.yaml. --publish uploads that local creative
-directly to Pinterest as base64, avoiding a dependency on Pinterest fetching it.
+Evergreen creatives must always be image-led. The generator resolves the real
+article cover from front matter first, then falls back to the original Pin image.
+It deliberately refuses to generate a flat-color placeholder.
 """
 
 import argparse
 import datetime
 import os
-import textwrap
 
 import requests
 import yaml
@@ -37,6 +32,7 @@ from scripts.post_pin import (
 
 PINS_DIR = "static/images/pins"
 IMAGES_DIR = "static/images"
+CONTENT_DIR = "content/posts"
 FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 PROMO_MIN_AGE_DAYS = 3
 
@@ -136,70 +132,138 @@ def wrap_lines(draw, text, font, max_width):
     return lines
 
 
+def _frontmatter_cover_image(slug):
+    """Return the image path declared by the article's Hugo front matter."""
+    article_path = os.path.join(CONTENT_DIR, f"{slug}.md")
+    if not os.path.isfile(article_path):
+        return None
+
+    with open(article_path, "r", encoding="utf-8") as handle:
+        raw = handle.read()
+    if not raw.startswith("---"):
+        return None
+
+    parts = raw.split("---", 2)
+    if len(parts) < 3:
+        return None
+    metadata = yaml.safe_load(parts[1]) or {}
+    cover = metadata.get("cover") or {}
+    image_path = cover.get("image") if isinstance(cover, dict) else None
+    if not image_path:
+        return None
+    return os.path.join("static", str(image_path).lstrip("/"))
+
+
+def resolve_promo_background(topic):
+    """Resolve a real image for the evergreen creative; never use a solid-color fallback."""
+    slug = topic["slug"]
+    candidates = []
+
+    frontmatter_cover = _frontmatter_cover_image(slug)
+    if frontmatter_cover:
+        candidates.append(frontmatter_cover)
+
+    # New auto-generated posts normally use slug.jpg.
+    candidates.append(os.path.join(IMAGES_DIR, f"{slug}.jpg"))
+
+    # Older/manual posts may use a differently named cover but have a valid original Pin image.
+    pin_image_path = topic.get("pin_image_path")
+    if pin_image_path:
+        candidates.append(os.path.join("static", str(pin_image_path).lstrip("/")))
+
+    seen = set()
+    for candidate in candidates:
+        if candidate in seen:
+            continue
+        seen.add(candidate)
+        if os.path.isfile(candidate):
+            return candidate
+
+    raise FileNotFoundError(
+        f"No real image found for evergreen Pinterest creative '{slug}'. "
+        "Refusing to publish a flat-color placeholder."
+    )
+
+
 def make_vertical_background(source_path, width=1000, height=1500):
-    if os.path.exists(source_path):
-        base = Image.open(source_path).convert("RGB")
-        src_ratio = base.width / base.height
-        target_ratio = width / height
-        if src_ratio > target_ratio:
-            crop_width = int(base.height * target_ratio)
-            left = (base.width - crop_width) // 2
-            base = base.crop((left, 0, left + crop_width, base.height))
-        else:
-            crop_height = int(base.width / target_ratio)
-            top = (base.height - crop_height) // 2
-            base = base.crop((0, top, base.width, top + crop_height))
-        base = base.resize((width, height))
-        return ImageEnhance.Brightness(base).enhance(0.78)
-    return Image.new("RGB", (width, height), (40, 67, 48))
+    if not source_path or not os.path.isfile(source_path):
+        raise FileNotFoundError(f"Pinterest background image not found: {source_path}")
+
+    base = Image.open(source_path).convert("RGB")
+    src_ratio = base.width / base.height
+    target_ratio = width / height
+    if src_ratio > target_ratio:
+        crop_width = int(base.height * target_ratio)
+        left = (base.width - crop_width) // 2
+        base = base.crop((left, 0, left + crop_width, base.height))
+    else:
+        crop_height = int(base.width / target_ratio)
+        top = (base.height - crop_height) // 2
+        base = base.crop((0, top, base.width, top + crop_height))
+    base = base.resize((width, height))
+    return ImageEnhance.Brightness(base).enhance(0.92)
 
 
 def build_promo_image(topic):
-    """Create a second, visually distinct creative from the article cover."""
+    """Create an image-led 2:3 Pinterest creative from the real article imagery."""
     width, height = 1000, 1500
     slug = topic["slug"]
-    cover_path = os.path.join(IMAGES_DIR, f"{slug}.jpg")
-    base = make_vertical_background(cover_path, width, height).convert("RGBA")
+    source_path = resolve_promo_background(topic)
+    base = make_vertical_background(source_path, width, height).convert("RGBA")
 
     overlay = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     draw = ImageDraw.Draw(overlay)
 
-    draw.rounded_rectangle((55, 85, 945, 790), radius=42, fill=(255, 255, 255, 235))
+    # Soft dark gradient behind the headline while keeping the plant photo dominant.
+    gradient_start = 500
+    for y in range(gradient_start, height):
+        progress = (y - gradient_start) / (height - gradient_start)
+        alpha = int(35 + 185 * progress)
+        draw.rectangle((0, y, width, y + 1), fill=(10, 25, 15, alpha))
 
     keywords = [str(k).strip() for k in topic.get("keywords", []) if str(k).strip()]
     kicker = (keywords[0] if keywords else "RARE PLANT GUIDE").upper()[:42]
-    kicker_font = ImageFont.truetype(FONT_PATH, 30)
-    draw.text((105, 145), kicker, font=kicker_font, fill=(45, 88, 58, 255))
+    kicker_font = ImageFont.truetype(FONT_PATH, 28)
+    kicker_box = draw.textbbox((0, 0), kicker, font=kicker_font)
+    kicker_width = kicker_box[2] - kicker_box[0]
+    draw.rounded_rectangle((58, 72, 105 + kicker_width, 138), radius=28, fill=(248, 250, 246, 238))
+    draw.text((82, 89), kicker, font=kicker_font, fill=(38, 83, 51, 255))
 
     title = build_promo_title(topic)
-    title_size = 64
-    max_width = 790
-    while title_size >= 42:
+    title_size = 70
+    max_width = 830
+    while title_size >= 46:
         title_font = ImageFont.truetype(FONT_PATH, title_size)
         lines = wrap_lines(draw, title, title_font, max_width)
-        if len(lines) <= 5:
+        if len(lines) <= 4:
             break
         title_size -= 4
 
-    y = 225
-    line_height = int(title_size * 1.22)
-    for line in lines[:5]:
-        draw.text((105, y), line, font=title_font, fill=(25, 35, 28, 255))
+    line_height = int(title_size * 1.18)
+    block_height = line_height * min(len(lines), 4)
+    y = max(700, 1120 - block_height)
+    for line in lines[:4]:
+        # Tiny shadow improves legibility without turning the Pin into a text card.
+        draw.text((72 + 3, y + 3), line, font=title_font, fill=(0, 0, 0, 150))
+        draw.text((72, y), line, font=title_font, fill=(255, 255, 255, 255))
         y += line_height
 
-    cta_font = ImageFont.truetype(FONT_PATH, 32)
-    draw.text((105, 690), "SAVE THIS GUIDE", font=cta_font, fill=(45, 88, 58, 255))
+    cta_font = ImageFont.truetype(FONT_PATH, 29)
+    cta = "SAVE THIS GUIDE"
+    cta_box = draw.textbbox((0, 0), cta, font=cta_font)
+    cta_width = cta_box[2] - cta_box[0]
+    cta_y = min(1290, y + 45)
+    draw.rounded_rectangle((72, cta_y, 125 + cta_width, cta_y + 66), radius=30, fill=(52, 124, 73, 245))
+    draw.text((98, cta_y + 16), cta, font=cta_font, fill=(255, 255, 255, 255))
 
-    footer = Image.new("RGBA", (width, 105), (20, 38, 26, 225))
-    overlay.alpha_composite(footer, (0, height - 105))
-    brand_font = ImageFont.truetype(FONT_PATH, 30)
-    draw.text((65, height - 72), "TheRarePlantGuide.com", font=brand_font, fill=(255, 255, 255, 245))
+    brand_font = ImageFont.truetype(FONT_PATH, 28)
+    draw.text((72, 1415), "TheRarePlantGuide.com", font=brand_font, fill=(255, 255, 255, 245))
 
     final = Image.alpha_composite(base, overlay).convert("RGB")
     os.makedirs(PINS_DIR, exist_ok=True)
     filename = f"{slug}-save-guide.jpg"
     local_path = os.path.join(PINS_DIR, filename)
-    final.save(local_path, "JPEG", quality=91)
+    final.save(local_path, "JPEG", quality=92, optimize=True)
     return f"/images/pins/{filename}"
 
 
