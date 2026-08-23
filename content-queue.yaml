@@ -152,7 +152,12 @@ topics:
   - shipping stress
   image_query: unboxing plant package
   cluster: propagation
-  status: pending
+  status: done
+  published_date: '2026-08-23'
+  slug: how-to-acclimate-imported-rare-plants
+  pin_title: How to Acclimate Imported Rare Plants After Shipping
+  pin_description: Learn how to acclimate imported rare plants after shipping, protect stressed roots, manage light and humidity, and avoid common recovery mistakes.
+  pin_status: needs_creative
 - title: 'Understanding Variegation Types: Chimeric, Pattern-Gene, and Viral'
   keywords:
   - types of variegation
