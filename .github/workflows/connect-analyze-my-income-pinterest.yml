@@ -16,14 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Check required secrets
+      - name: Check required Analyze My Income app secrets
         env:
-          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
-          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          AMI_PINTEREST_APP_ID: ${{ secrets.AMI_PINTEREST_APP_ID }}
+          AMI_PINTEREST_APP_SECRET: ${{ secrets.AMI_PINTEREST_APP_SECRET }}
           GH_SECRETS_PAT: ${{ secrets.GH_SECRETS_PAT }}
         run: |
           missing=0
-          for name in PINTEREST_APP_ID PINTEREST_APP_SECRET GH_SECRETS_PAT; do
+          for name in AMI_PINTEREST_APP_ID AMI_PINTEREST_APP_SECRET GH_SECRETS_PAT; do
             if [ -z "${!name}" ]; then
               echo "::error::Missing GitHub Actions secret: $name"
               missing=1
@@ -34,8 +34,8 @@ jobs:
       - name: Exchange code and verify Pinterest profile identity
         id: exchange
         env:
-          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
-          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          AMI_PINTEREST_APP_ID: ${{ secrets.AMI_PINTEREST_APP_ID }}
+          AMI_PINTEREST_APP_SECRET: ${{ secrets.AMI_PINTEREST_APP_SECRET }}
           PINTEREST_AUTHORIZATION_CODE: ${{ inputs.authorization_code }}
           EXPECTED_PINTEREST_USERNAME: iserviceseood
           REDIRECT_URI: https://analyzemyincome.com/pinterest-callback
@@ -48,8 +48,8 @@ jobs:
           import urllib.parse
           import urllib.request
 
-          app_id = os.environ['PINTEREST_APP_ID']
-          app_secret = os.environ['PINTEREST_APP_SECRET']
+          app_id = os.environ['AMI_PINTEREST_APP_ID']
+          app_secret = os.environ['AMI_PINTEREST_APP_SECRET']
           code = os.environ['PINTEREST_AUTHORIZATION_CODE'].strip()
           expected_username = os.environ['EXPECTED_PINTEREST_USERNAME'].strip().lstrip('@').lower()
           redirect_uri = os.environ['REDIRECT_URI']
@@ -118,6 +118,7 @@ jobs:
               handle.write(refresh_token)
 
           print(f'Pinterest profile verified: @{actual_username}')
+          print('Dedicated Analyze My Income Pinterest app credentials verified.')
           print('Required board/pin scopes verified.')
 
       - name: Save Analyze My Income refresh token as GitHub secret
@@ -132,4 +133,4 @@ jobs:
       - name: Connection complete
         run: |
           echo "Analyze My Income Pinterest OAuth connection completed for @iserviceseood."
-          echo "The publisher remains manual-only until creatives are approved and scheduling is intentionally restored."
+          echo "The publisher remains manual-only until one test Pin is visually verified."
