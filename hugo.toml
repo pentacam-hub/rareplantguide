@@ -23,6 +23,10 @@ theme = "PaperMod"
 
   [params.assets]
     disableHLJS = true
+    favicon = "images/leaf-icon.png"
+    favicon16x16 = "images/leaf-icon.png"
+    favicon32x32 = "images/leaf-icon.png"
+    apple_touch_icon = "images/leaf-icon.png"
 
   [params.label]
     text = "The Rare Plant Guide"
