@@ -7,6 +7,10 @@ on:
         description: 'Temporary Pinterest authorization code from analyzemyincome.com/pinterest-callback'
         required: true
         type: string
+      expected_username:
+        description: 'Exact Pinterest username for the Analyze My Income profile (without @)'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -31,12 +35,13 @@ jobs:
           done
           exit "$missing"
 
-      - name: Exchange Pinterest authorization code
+      - name: Exchange code and verify Pinterest profile identity
         id: exchange
         env:
           PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
           PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
           PINTEREST_AUTHORIZATION_CODE: ${{ inputs.authorization_code }}
+          EXPECTED_PINTEREST_USERNAME: ${{ inputs.expected_username }}
           REDIRECT_URI: https://analyzemyincome.com/pinterest-callback
           TOKEN_FILE: ${{ runner.temp }}/ami_pinterest_refresh_token
         shell: python
@@ -50,11 +55,14 @@ jobs:
           app_id = os.environ['PINTEREST_APP_ID']
           app_secret = os.environ['PINTEREST_APP_SECRET']
           code = os.environ['PINTEREST_AUTHORIZATION_CODE'].strip()
+          expected_username = os.environ['EXPECTED_PINTEREST_USERNAME'].strip().lstrip('@').lower()
           redirect_uri = os.environ['REDIRECT_URI']
           token_file = os.environ['TOKEN_FILE']
 
           if not code:
               raise SystemExit('Pinterest authorization code is empty.')
+          if not expected_username:
+              raise SystemExit('Expected Analyze My Income Pinterest username is empty.')
 
           credentials = base64.b64encode(f'{app_id}:{app_secret}'.encode()).decode()
           body = urllib.parse.urlencode({
@@ -79,10 +87,11 @@ jobs:
           except Exception as exc:
               raise SystemExit(f'Pinterest token exchange failed: {exc}')
 
+          access_token = payload.get('access_token')
           refresh_token = payload.get('refresh_token')
           granted_scope = payload.get('scope', '')
-          if not refresh_token:
-              raise SystemExit('Pinterest did not return a refresh token.')
+          if not access_token or not refresh_token:
+              raise SystemExit('Pinterest did not return the required OAuth tokens.')
 
           required = {'boards:read', 'boards:write', 'pins:read', 'pins:write'}
           normalized = set(str(granted_scope).replace(',', ' ').split())
@@ -90,11 +99,31 @@ jobs:
           if missing:
               raise SystemExit('Pinterest token is missing required scopes: ' + ', '.join(missing))
 
+          account_request = urllib.request.Request(
+              'https://api.pinterest.com/v5/user_account',
+              headers={'Authorization': f'Bearer {access_token}'},
+              method='GET',
+          )
+          try:
+              with urllib.request.urlopen(account_request, timeout=30) as response:
+                  account = json.loads(response.read().decode())
+          except Exception as exc:
+              raise SystemExit(f'Pinterest profile identity check failed: {exc}')
+
+          actual_username = str(account.get('username') or '').strip().lstrip('@').lower()
+          if not actual_username:
+              raise SystemExit('Pinterest did not return a username for the authorized profile.')
+          if actual_username != expected_username:
+              raise SystemExit(
+                  f'WRONG PINTEREST PROFILE: authorized @{actual_username}, expected @{expected_username}. '
+                  'AMI token was NOT saved.'
+              )
+
           fd = os.open(token_file, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
           with os.fdopen(fd, 'w', encoding='utf-8') as handle:
               handle.write(refresh_token)
 
-          print('Pinterest authorization code exchanged successfully.')
+          print(f'Pinterest profile verified: @{actual_username}')
           print('Required board/pin scopes verified.')
 
       - name: Save Analyze My Income refresh token as GitHub secret
@@ -104,9 +133,9 @@ jobs:
         run: |
           test -s "$TOKEN_FILE"
           gh secret set AMI_PINTEREST_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" < "$TOKEN_FILE"
-          echo "AMI_PINTEREST_REFRESH_TOKEN saved securely."
+          echo "AMI_PINTEREST_REFRESH_TOKEN saved securely after profile verification."
 
       - name: Connection complete
         run: |
           echo "Analyze My Income Pinterest OAuth connection completed."
-          echo "The scheduled publisher can now use AMI_PINTEREST_REFRESH_TOKEN."
+          echo "The publisher remains manual-only until creatives are approved and scheduling is intentionally restored."
