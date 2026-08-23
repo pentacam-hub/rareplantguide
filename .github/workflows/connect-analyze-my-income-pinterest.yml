@@ -7,10 +7,6 @@ on:
         description: 'Temporary Pinterest authorization code from analyzemyincome.com/pinterest-callback'
         required: true
         type: string
-      expected_username:
-        description: 'Exact Pinterest username for the Analyze My Income profile (without @)'
-        required: true
-        type: string
 
 permissions:
   contents: read
@@ -41,7 +37,7 @@ jobs:
           PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
           PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
           PINTEREST_AUTHORIZATION_CODE: ${{ inputs.authorization_code }}
-          EXPECTED_PINTEREST_USERNAME: ${{ inputs.expected_username }}
+          EXPECTED_PINTEREST_USERNAME: iserviceseood
           REDIRECT_URI: https://analyzemyincome.com/pinterest-callback
           TOKEN_FILE: ${{ runner.temp }}/ami_pinterest_refresh_token
         shell: python
@@ -61,8 +57,6 @@ jobs:
 
           if not code:
               raise SystemExit('Pinterest authorization code is empty.')
-          if not expected_username:
-              raise SystemExit('Expected Analyze My Income Pinterest username is empty.')
 
           credentials = base64.b64encode(f'{app_id}:{app_secret}'.encode()).decode()
           body = urllib.parse.urlencode({
@@ -137,5 +131,5 @@ jobs:
 
       - name: Connection complete
         run: |
-          echo "Analyze My Income Pinterest OAuth connection completed."
+          echo "Analyze My Income Pinterest OAuth connection completed for @iserviceseood."
           echo "The publisher remains manual-only until creatives are approved and scheduling is intentionally restored."
