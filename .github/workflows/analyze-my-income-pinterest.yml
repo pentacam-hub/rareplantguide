@@ -1,10 +1,10 @@
 name: Analyze My Income Pinterest Publisher
 
+# PAUSED 2026-08-23: the AMI OAuth token was authorized against the wrong
+# Pinterest profile and the current programmatic creatives are not approved.
+# Keep this workflow manual-only until the AMI Pinterest account identity and
+# replacement creative system are verified.
 on:
-  schedule:
-    # Two daily Pins. GitHub cron uses UTC.
-    - cron: '30 14 * * *'
-    - cron: '30 19 * * *'
   workflow_dispatch: {}
 
 permissions:
