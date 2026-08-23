@@ -1,7 +1,7 @@
 brand: Analyze My Income
 site_url: https://analyzemyincome.com
 cadence: 2 pins per day
-updated: '2026-08-22'
+updated: '2026-08-23'
 pins:
 - id: ami-001
   status: posted
@@ -44,7 +44,7 @@ pins:
   pinterest_pin_id: '879961214758071343'
   published_date: '2026-08-22'
 - id: ami-004
-  status: pending
+  status: posted
   title: '1099 Rate Calculator: What Contractor Rate Replaces Your Salary?'
   description: Turn a W-2 salary into an estimated 1099 contractor rate using 2026 taxes and contractor costs. Use the free
     calculator to find the annual and hourly contractor pay needed to replace employee compensation.
@@ -54,6 +54,8 @@ pins:
   kicker: 1099 RATE CALCULATOR
   graphic_title: What Rate Replaces Your Salary?
   destination: https://analyzemyincome.com/w2-to-1099/
+  pinterest_pin_id: '879961214758092251'
+  published_date: '2026-08-23'
 - id: ami-005
   status: pending
   title: Quarterly Tax Calculator 2026 for 1099 Contractors
