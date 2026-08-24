@@ -1,0 +1,49 @@
+name: Build Rare Plant Site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'layouts/**'
+      - 'hugo.toml'
+      - '.github/workflows/build-site.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rareplantguide-site-build
+  cancel-in-progress: true
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.148.2'
+          extended: true
+
+      - name: Build production site
+        run: hugo --minify
+
+      - name: Commit generated public site
+        run: |
+          git config user.name "rareplantguide-build-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add public/
+          if ! git diff --staged --quiet; then
+            git commit -m "Build: regenerate public site"
+            git pull --rebase origin main
+            git push
+          else
+            echo "public/ already up to date"
+          fi
