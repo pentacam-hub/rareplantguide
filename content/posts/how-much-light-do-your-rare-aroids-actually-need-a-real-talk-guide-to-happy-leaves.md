@@ -1,9 +1,9 @@
 ---
 title: "How Much Light Do Rare Aroids Need? Indoor Light Guide"
 date: 2026-08-04
-lastmod: 2026-08-21
+lastmod: 2026-08-25
 draft: false
-description: "How much light do Monstera, Philodendron, Anthurium and Alocasia need? Use practical indoor light ranges, grow-light timing and plant-response signs."
+description: "How much light do rare aroids need? Compare practical 100–800 FC indoor ranges for Monstera, Philodendron, Anthurium and Alocasia, plus grow-light timing."
 tags: ["rare plants", "aroid care", "grow lights", "plant styling"]
 categories: ["Plant Care"]
 cover:
@@ -70,7 +70,7 @@ White, cream or yellow sections contain less chlorophyll than green tissue. A he
 
 That does **not** mean maximum intensity is better. Variegated sections can show bleaching and scorch clearly, so broad, diffused coverage and gradual acclimation are safer than a sudden jump in light.
 
-Also, stronger light does not genetically restore a fully reverted growth point. If your Monstera is producing consecutive solid-green leaves, inspect the stem and node using [Variegated Monstera Turning Green? What to Do About Reversion](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/).
+Also, stronger light does not genetically restore a fully reverted growth point. If your Monstera is producing consecutive solid-green leaves, inspect the stem and node using [Variegated Monstera Turning Green? Can Reversion Be Reversed?](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/).
 
 {{< newsletter >}}
 
@@ -129,7 +129,7 @@ If these appear, increase distance, reduce intensity or shorten exposure, then l
 
 A plant in brighter conditions often uses water faster than the same plant in a dim room. That is why watering on a fixed calendar can fail when seasons or lighting change.
 
-Check the actual root zone and use an airy substrate. The [Best Soil for Variegated Monstera](/posts/best-soil-mix-variegated-monstera/) guide shows how bark, perlite and moisture-retentive material can be balanced for an aroid mix.
+Check the actual root zone and use an airy substrate. The [Best Soil for Variegated Monstera: 40/30/20/10 Aroid Mix](/posts/best-soil-mix-variegated-monstera/) guide shows how bark, perlite and moisture-retentive material can be balanced for an aroid mix.
 
 If the plant is wilting while the mix remains wet, inspect the roots rather than automatically adding water. The [Philodendron Root Rot guide](/posts/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late/) explains the warning signs.
 
@@ -146,5 +146,14 @@ Yes, a sufficiently sized artificial-light setup can support indoor plants witho
 ### Should I rotate my aroids?
 
 Rotation can help keep growth visually balanced when light comes mainly from one direction. Climbing plants attached to a support may naturally orient their leaves toward the strongest light source.
+
+## Variegated Monstera Next Steps
+
+If the plant you are lighting is a variegated Monstera, continue with the guides that match the problem:
+
+- [Turning green or reverting?](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/)
+- [Propagating a cutting](/posts/propagate-variegated-monstera/)
+- [Choosing an airy soil mix](/posts/best-soil-mix-variegated-monstera/)
+- [Choosing a grow light](/posts/best-grow-lights-rare-houseplants/)
 
 The best setup is the one you can keep consistent and adjust based on what the newest growth is telling you.
