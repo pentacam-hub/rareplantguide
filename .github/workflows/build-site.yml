@@ -4,7 +4,10 @@ on:
   push:
     branches: [main]
     paths:
+      - 'content/**'
       - 'layouts/**'
+      - 'assets/**'
+      - 'static/**'
       - 'hugo.toml'
       - 'scripts/inject_google_analytics.py'
       - '.github/workflows/build-site.yml'
