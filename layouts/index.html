@@ -14,13 +14,13 @@
       <strong>Diagnose a problem</strong>
       <span>Use the free symptom checker for yellow leaves, pests, rot, reversion and more.</span>
     </a>
-    <a class="home-path-card" href="/posts/how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves/">
-      <strong>How much light do rare aroids need?</strong>
-      <span>Compare practical 100–800 FC indoor ranges for Monstera, Philodendron, Anthurium and Alocasia.</span>
+    <a class="home-path-card" href="/tools/light-checker.html">
+      <strong>Check your light</strong>
+      <span>Enter lux or foot-candles measured at leaf height and compare the reading with practical indoor aroid ranges.</span>
     </a>
-    <a class="home-path-card" href="/posts/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late/">
+    <a class="home-path-card" href="/plant-problems/root-rot/">
       <strong>Rescue a struggling plant</strong>
-      <span>Confirm root rot from the roots and follow a practical step-by-step recovery plan.</span>
+      <span>Confirm root problems from the roots and root zone before making several care changes at once.</span>
     </a>
   </div>
 </section>
@@ -51,6 +51,10 @@
       <strong>Rare Plant Care</strong>
       <span>Build a stable routine for light, soil, humidity, roots, acclimation and healthy growth.</span>
     </a>
+    <a class="home-path-card" href="/tools/">
+      <strong>Interactive Tools</strong>
+      <span>Measure light, build a chunky aroid mix, assess a cutting or diagnose a visible plant problem.</span>
+    </a>
   </div>
 </section>
 
@@ -75,6 +79,31 @@
     <a class="home-path-card" href="/plant-profiles/">
       <strong>Browse all plant profiles</strong>
       <span>Open the full database, including Anthurium, Philodendron and Alocasia collector plants.</span>
+    </a>
+  </div>
+</section>
+
+<section class="home-paths" aria-labelledby="tools-home-title">
+  <div class="home-section-heading">
+    <span>Use a tool</span>
+    <h2 id="tools-home-title">Turn a care question into a practical check</h2>
+  </div>
+  <div class="home-path-grid hub-home-grid">
+    <a class="home-path-card" href="/tools/light-checker.html">
+      <strong>Light Checker</strong>
+      <span>Convert lux or foot-candles into a practical low, useful or bright indoor light assessment.</span>
+    </a>
+    <a class="home-path-card" href="/tools/soil-mix-builder.html">
+      <strong>Soil Mix Builder</strong>
+      <span>Adapt the site's 40/30/20/10 chunky aroid mix for humidity, pot type and batch size.</span>
+    </a>
+    <a class="home-path-card" href="/tools/propagation-readiness.html">
+      <strong>Propagation Readiness</strong>
+      <span>Check the node, axillary bud, stem health and rooting setup before using a valuable cutting.</span>
+    </a>
+    <a class="home-path-card" href="/tools/symptom-checker.html">
+      <strong>Symptom Checker</strong>
+      <span>Start from what you can see and open the matching diagnostic page before changing the care routine.</span>
     </a>
   </div>
 </section>
@@ -136,28 +165,18 @@
   {{- $isHidden := ($page.Param "cover.hiddenInList") | default ($page.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" $page "IsSingle" false "isHidden" $isHidden) }}
   <header class="entry-header">
-    <h2 class="entry-hint-parent">
-      {{- $page.Title }}
-    </h2>
+    <h2 class="entry-hint-parent">{{- $page.Title }}</h2>
   </header>
   {{- if (ne ($page.Param "hideSummary") true) }}
-  <div class="entry-content">
-    <p>{{ $page.Summary | plainify | htmlUnescape }}{{ if $page.Truncated }}...{{ end }}</p>
-  </div>
+  <div class="entry-content"><p>{{ $page.Summary | plainify | htmlUnescape }}{{ if $page.Truncated }}...{{ end }}</p></div>
   {{- end }}
   {{- if not ($page.Param "hideMeta") }}
-  <footer class="entry-footer">
-    {{- partial "post_meta.html" $page -}}
-  </footer>
+  <footer class="entry-footer">{{- partial "post_meta.html" $page -}}</footer>
   {{- end }}
   <a class="entry-link" aria-label="post link to {{ $page.Title | plainify }}" href="{{ $page.Permalink }}"></a>
 </article>
 {{- end }}
 
-<footer class="page-footer" style="text-align:center; margin-top:2rem;">
-  <a class="prev" href="{{ "/posts/" | absURL }}" style="display:inline-block;">
-    See All Rare Plant Care Guides &raquo;
-  </a>
-</footer>
+<footer class="page-footer" style="text-align:center; margin-top:2rem;"><a class="prev" href="{{ "/posts/" | absURL }}" style="display:inline-block;">See All Rare Plant Care Guides &raquo;</a></footer>
 
 {{- end }}{{- /* end main */ -}}
