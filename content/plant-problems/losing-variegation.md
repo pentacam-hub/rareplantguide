@@ -1,5 +1,6 @@
 ---
 title: "Why Is My Rare Plant Losing Variegation?"
+date: 2026-08-26T21:00:00Z
 description: "Diagnose fading or reduced variegation by comparing genetics, normal leaf variation, light, stress and the active growth point before changing care."
 type: "problem"
 eyebrow: "Variegation problem"
