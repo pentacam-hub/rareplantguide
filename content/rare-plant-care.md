@@ -4,9 +4,24 @@ description: "Build a reliable rare plant care routine with practical guides to 
 type: "hub"
 eyebrow: "Rare plant care hub"
 primary_cta:
-  label: "Read the complete care guide"
-  url: "/posts/rare-houseplant-care-guide/"
+  label: "Use the interactive plant tools"
+  url: "/tools/"
 hub_sections:
+  - title: "Use a practical tool before you guess"
+    intro: "Turn the most common care questions into a quick check, then open the detailed guide only when you need the deeper explanation."
+    links:
+      - kicker: "Light tool"
+        title: "Rare Plant Light Checker"
+        text: "Enter lux or foot-candles measured at leaf height and compare the reading with practical indoor aroid ranges."
+        url: "/tools/light-checker.html"
+      - kicker: "Soil tool"
+        title: "Chunky Aroid Soil Mix Builder"
+        text: "Adapt the site's 40/30/20/10 starting mix for room humidity, pot type and the amount of mix you need."
+        url: "/tools/soil-mix-builder.html"
+      - kicker: "Propagation tool"
+        title: "Propagation Readiness Checker"
+        text: "Confirm the node, growth point, stem health and rooting setup before using a valuable cutting."
+        url: "/tools/propagation-readiness.html"
   - title: "Get the core growing conditions right"
     intro: "Stable care matters more than chasing one perfect number. Start with light, root-zone aeration and a watering rhythm that matches how quickly the plant actually dries."
     links:
@@ -77,4 +92,4 @@ related_hubs:
 
 ## Use this hub as the care map
 
-The goal is not to make every rare plant follow the same schedule. Use the core guides to understand light, roots, substrate and humidity, then move into the more specific problem or propagation guide when the plant gives you a clear signal.
+The goal is not to make every rare plant follow the same schedule. Use the interactive tools for quick checks, then use the core guides to understand light, roots, substrate and humidity before moving into the more specific problem or propagation guide.
