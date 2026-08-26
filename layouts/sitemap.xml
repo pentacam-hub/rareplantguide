@@ -8,7 +8,9 @@
   </url>
   {{- end }}
   {{- end }}
-  <url>
-    <loc>{{ "tools/symptom-checker.html" | absURL }}</loc>
-  </url>
+  <url><loc>{{ "tools/" | absURL }}</loc></url>
+  <url><loc>{{ "tools/symptom-checker.html" | absURL }}</loc></url>
+  <url><loc>{{ "tools/light-checker.html" | absURL }}</loc></url>
+  <url><loc>{{ "tools/soil-mix-builder.html" | absURL }}</loc></url>
+  <url><loc>{{ "tools/propagation-readiness.html" | absURL }}</loc></url>
 </urlset>
