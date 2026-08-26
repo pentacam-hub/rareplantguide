@@ -69,8 +69,8 @@ theme = "PaperMod"
   url = "/rare-plant-care/"
   weight = 6
 [[menu.main]]
-  name = "Symptom Checker"
-  url = "/tools/symptom-checker.html"
+  name = "Tools"
+  url = "/tools/"
   weight = 7
 [[menu.main]]
   name = "About"
