@@ -1,5 +1,6 @@
 ---
 title: "Does Your Rare Aroid Need More or Less Light?"
+date: 2026-08-26T21:00:00Z
 description: "Diagnose rare aroid light problems from stretched growth, small leaves, bleaching, crisp patches and recent light changes before moving the plant."
 type: "problem"
 eyebrow: "Light problem"
