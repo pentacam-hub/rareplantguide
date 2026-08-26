@@ -1,5 +1,6 @@
 ---
 title: "Rare Houseplant Pests: Identify Thrips, Mites, Mealybugs & Scale"
+date: 2026-08-26T21:00:00Z
 description: "See webbing, sticky residue, scarring or visible bugs? Inspect leaves, stems and new growth to narrow the pest before treating a rare houseplant."
 type: "problem"
 eyebrow: "Pest problem"
