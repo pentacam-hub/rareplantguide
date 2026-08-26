@@ -1,0 +1,89 @@
+{{- define "main" }}
+<article class="problem-page">
+  <nav class="problem-breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>›</span><a href="/plant-problems/">Plant Problems</a><span>›</span><span>{{ .Title }}</span>
+  </nav>
+
+  <header class="problem-hero">
+    {{- with .Params.eyebrow }}<span class="problem-eyebrow">{{ . }}</span>{{ end }}
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p>{{ . }}</p>{{ end }}
+    <div class="problem-hero-actions">
+      <a class="problem-primary" href="/tools/symptom-checker.html">Use the Symptom Checker</a>
+      <a class="problem-secondary" href="/plant-problems/">Browse all plant problems</a>
+    </div>
+  </header>
+
+  {{- with .Params.quick_answer }}
+  <section class="problem-answer" aria-labelledby="quick-answer-title">
+    <span>Quick answer</span>
+    <h2 id="quick-answer-title">What this symptom can mean</h2>
+    <p>{{ . }}</p>
+  </section>
+  {{- end }}
+
+  <div class="problem-two-col">
+    {{- with .Params.check_first }}
+    <section class="problem-panel">
+      <span class="problem-panel-kicker">Check first</span>
+      <h2>Look for these clues</h2>
+      <ol class="problem-checklist">
+        {{- range . }}<li>{{ . }}</li>{{ end }}
+      </ol>
+    </section>
+    {{- end }}
+
+    {{- with .Params.possible_causes }}
+    <section class="problem-panel">
+      <span class="problem-panel-kicker">Possible causes</span>
+      <h2>Do not assume one cause</h2>
+      <ul class="problem-cause-list">
+        {{- range . }}
+        <li><strong>{{ .title }}</strong><span>{{ .text }}</span></li>
+        {{- end }}
+      </ul>
+    </section>
+    {{- end }}
+  </div>
+
+  {{- with .Params.next_steps }}
+  <section class="problem-steps">
+    <div class="problem-section-heading">
+      <span>What to do next</span>
+      <h2>Change one thing at a time</h2>
+    </div>
+    <div class="problem-step-grid">
+      {{- range $i, $step := . }}
+      <div class="problem-step-card"><span class="problem-step-number">{{ add $i 1 }}</span><strong>{{ $step.title }}</strong><p>{{ $step.text }}</p></div>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+
+  {{- with .Params.primary_guide }}
+  <section class="problem-primary-guide">
+    <div><span>Detailed guide</span><h2>{{ .title }}</h2><p>{{ .text }}</p></div>
+    <a href="{{ .url }}">Read the full guide →</a>
+  </section>
+  {{- end }}
+
+  {{- with .Params.related_guides }}
+  <section class="problem-related">
+    <div class="problem-section-heading"><span>Related checks</span><h2>Rule out nearby problems</h2></div>
+    <div class="problem-related-grid">
+      {{- range . }}
+      <a href="{{ .url }}"><strong>{{ .title }}</strong><span>{{ .text }}</span></a>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+
+  {{- with .Content }}<section class="problem-editorial post-content">{{ . }}</section>{{ end }}
+
+  <footer class="problem-footer-cta">
+    <strong>Still not sure what you are seeing?</strong>
+    <span>Use the symptom checker to start from the visible sign instead of guessing.</span>
+    <a href="/tools/symptom-checker.html">Check another symptom</a>
+  </footer>
+</article>
+{{- end }}
