@@ -1,0 +1,65 @@
+---
+title: "Rare Plant Propagation: Nodes, Cuttings, Rooting & Aftercare"
+description: "Learn rare plant propagation from cutting selection to rooting and potting: viable nodes, sphagnum, water propagation, root health, light and aftercare."
+type: "hub"
+eyebrow: "Propagation hub"
+primary_cta:
+  label: "Start with Variegated Monstera propagation"
+  url: "/posts/propagate-variegated-monstera/"
+hub_sections:
+  - title: "Choose a cutting that can actually grow"
+    intro: "The first decision matters more than the rooting medium. For climbing aroids, a viable stem node and growth point are the foundation of a successful cutting."
+    links:
+      - kicker: "Core guide"
+        title: "How to Propagate Variegated Monstera"
+        text: "Identify a viable node and axillary bud, make a clean cut, root it and know when to pot it up."
+        url: "/posts/propagate-variegated-monstera/"
+      - kicker: "Before cutting"
+        title: "Variegated Monstera Turning Green?"
+        text: "If the parent plant is reverting, choose the corrective cut and growth point before propagating."
+        url: "/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/"
+  - title: "Choose and manage the rooting environment"
+    intro: "Water, sphagnum and airy mineral media can all work when the node stays hydrated without losing oxygen."
+    links:
+      - kicker: "Sphagnum"
+        title: "Sphagnum Moss for Rare Plant Propagation"
+        text: "Use lightly damp, loose sphagnum and avoid the saturated conditions that encourage rot."
+        url: "/posts/is-sphagnum-moss-actually-the-holy-grail-for-rare-plant-propagation/"
+      - kicker: "Light"
+        title: "How Much Light Do Rare Aroids Need?"
+        text: "Give a cutting usable light without suddenly exposing stressed foliage to excessive intensity."
+        url: "/posts/how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves/"
+      - kicker: "Humidity"
+        title: "Humidity Tents vs Greenhouse Cabinets"
+        text: "Compare enclosed growing environments when a collection needs more controlled humidity and airflow."
+        url: "/posts/humidity-tents-vs-greenhouse-cabinets-for-rare-plants/"
+  - title: "Move rooted plants into normal care"
+    intro: "A cutting is not finished when the first root appears. Transition gradually and protect the new root system."
+    links:
+      - kicker: "Potting mix"
+        title: "Best Soil for Variegated Monstera"
+        text: "Use an airy mix once a Monstera cutting has developed a stronger root system."
+        url: "/posts/best-soil-mix-variegated-monstera/"
+      - kicker: "Root trouble"
+        title: "Root Rot: Signs and Rescue Steps"
+        text: "Learn what soft, dark or failing roots look like and how to respond without overcorrecting."
+        url: "/posts/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late/"
+      - kicker: "Shipping stress"
+        title: "How to Acclimate Imported Rare Plants"
+        text: "Stabilize stressed plants after shipping before stacking repotting, light and humidity changes."
+        url: "/posts/how-to-acclimate-imported-rare-plants/"
+related_hubs:
+  - title: "Variegated Monstera"
+    text: "Reversion, soil, light and Monstera-specific propagation."
+    url: "/variegated-monstera/"
+  - title: "Plant Problems"
+    text: "Diagnose rot, pests, discoloration and stalled growth."
+    url: "/plant-problems/"
+  - title: "Rare Plant Care"
+    text: "Build stable conditions after the cutting is established."
+    url: "/rare-plant-care/"
+---
+
+## Propagation is a sequence, not a single rooting trick
+
+A healthy propagation starts with the right plant material, continues with a clean and oxygenated rooting environment, and finishes with a gradual transition into normal care. Use the guides above in that order rather than switching media every time growth slows.
