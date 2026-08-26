@@ -1,14 +1,7 @@
-name: Pinterest + Content Agent
+name: Pinterest + Content Agent (manual fallback)
 
 on:
-  schedule:
-    # New article + its original Pin only on Monday and Thursday.
-    # 19:30 UTC covers afternoon US East and around midday US West.
-    - cron: '30 19 * * 1,4'
   workflow_dispatch: {}
-  push:
-    paths:
-      - '.github/pinterest-run-trigger'
 
 permissions:
   contents: write
@@ -32,157 +25,12 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
-        run: pip install -r scripts/requirements.txt
-
-      - name: Check Pinterest secrets
-        env:
-          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
-          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
-        run: |
-          missing=0
-          for name in PINTEREST_APP_ID PINTEREST_APP_SECRET; do
-            if [ -z "${!name}" ]; then
-              echo "::error::Missing GitHub Actions secret: $name"
-              missing=1
-            fi
-          done
-          exit "$missing"
-
-      - name: Check content secret
-        if: github.event_name != 'push'
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: |
-          if [ -z "$GEMINI_API_KEY" ]; then
-            echo "::error::Missing GitHub Actions secret: GEMINI_API_KEY"
-            exit 1
-          fi
-
-      - name: Validate agent code
-        run: |
-          set -o pipefail
-          python -m unittest scripts.test_generate_post scripts.test_post_pin scripts.test_wait_for_deploy 2>&1 | tee /tmp/pinterest_validate.log
-
-      - name: Generate article and fresh Pin creative
-        if: github.event_name != 'push'
+      - name: Run legacy fallback agent
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
-        run: python scripts/run_daily_article.py
-
-      - name: Set up Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: '0.148.2'
-          extended: true
-
-      - name: Build production site
-        run: |
-          set -o pipefail
-          hugo --minify 2>&1 | tee /tmp/pinterest_hugo.log
-
-      - name: Place Google Analytics immediately after head
-        run: python scripts/inject_google_analytics.py
-
-      - name: Commit and push site, post and Pin creative
-        run: |
-          git config user.name "rareplantguide-bot"
-          git config user.email "bot@users.noreply.github.com"
-          git add content/posts/ static/images/ content-queue.yaml public/
-          if ! git diff --staged --quiet; then
-            git commit -m "Auto: publish article, site and Pinterest creative"
-            git pull --rebase origin main
-            git push
-          else
-            echo "No content changes to commit; continuing with pending Pinterest retries."
-          fi
-
-      - name: Advisory article availability check
-        if: github.event_name != 'push'
-        continue-on-error: true
-        run: |
-          set -o pipefail
-          python -m scripts.wait_for_deploy --kind original --max-pins 1 --article-only --timeout 120 --interval 15 2>&1 | tee /tmp/pinterest_wait.log
-          status=${PIPESTATUS[0]}
-          if [ "$status" -ne 0 ]; then
-            echo "::warning::Cloudflare article readiness check did not pass. Continuing because the Pin image is uploaded directly to Pinterest and the generated HTML is already committed."
-          fi
-          exit 0
-
-      - name: Publish pending Pinterest pins
-        id: publish_pin
-        env:
           PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
           PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
           PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
-          PINTEREST_REFRESH_TOKEN_FILE: ${{ runner.temp }}/pinterest_refresh_token
-        run: |
-          set -o pipefail
-          python scripts/post_pin.py --max-pins 1 2>&1 | tee /tmp/pinterest_publish.log
-
-      - name: Rotate fallback Pinterest refresh token
-        if: always()
-        env:
-          GH_TOKEN: ${{ secrets.GH_SECRETS_PAT }}
-          TOKEN_FILE: ${{ runner.temp }}/pinterest_refresh_token
-        run: |
-          if [ ! -s "$TOKEN_FILE" ]; then
-            echo "Client Credentials used or no rotated refresh token returned."
-            exit 0
-          fi
-          if [ -z "$GH_TOKEN" ]; then
-            echo "::warning::A fallback refresh token rotated but GH_SECRETS_PAT is not configured. Client Credentials remains the preferred auth path."
-            exit 0
-          fi
-          gh secret set PINTEREST_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" < "$TOKEN_FILE"
-          echo "Fallback Pinterest refresh token updated securely."
-
-      - name: Commit pin status update
-        if: steps.publish_pin.outcome == 'success'
-        run: |
-          git config user.name "rareplantguide-bot"
-          git config user.email "bot@users.noreply.github.com"
-          git add content-queue.yaml
-          if ! git diff --staged --quiet; then
-            git commit -m "Auto: record published Pinterest Pin"
-            git pull --rebase origin main
-            git push
-          else
-            echo "No Pin status update to save."
-          fi
-
-      - name: Record safe failure diagnostic
-        if: failure()
-        run: |
-          git config user.name "rareplantguide-bot"
-          git config user.email "bot@users.noreply.github.com"
-          git pull --rebase origin main || true
-          {
-            echo "Pinterest publisher failure"
-            echo "run: $GITHUB_RUN_ID"
-            echo "sha: $GITHUB_SHA"
-            echo
-            for file in /tmp/pinterest_validate.log /tmp/pinterest_hugo.log /tmp/pinterest_wait.log /tmp/pinterest_publish.log; do
-              echo "===== $(basename "$file") ====="
-              if [ -f "$file" ]; then tail -n 40 "$file"; else echo "not reached"; fi
-              echo
-            done
-          } > .github/pinterest-last-failure.txt
-          git add .github/pinterest-last-failure.txt
-          if ! git diff --staged --quiet; then
-            git commit -m "Debug: record Pinterest publisher failure"
-            git push
-          fi
-
-      - name: Clear previous failure diagnostic
-        if: success()
-        run: |
-          if [ -f .github/pinterest-last-failure.txt ]; then
-            git config user.name "rareplantguide-bot"
-            git config user.email "bot@users.noreply.github.com"
-            git rm .github/pinterest-last-failure.txt
-            git commit -m "Debug: clear Pinterest publisher failure"
-            git pull --rebase origin main
-            git push
-          fi
+          GITHUB_CONTENT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/cloudflare-agent-build.sh
