@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "rareplant-content-scheduler",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-26",
+  "triggers": {
+    "crons": ["30 19 * * 1,4"]
+  },
+  "observability": {
+    "enabled": true
+  }
+}
