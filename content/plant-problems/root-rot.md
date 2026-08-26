@@ -1,5 +1,6 @@
 ---
 title: "Root Rot in Rare Houseplants: What to Check Before Repotting"
+date: 2026-08-26T21:00:00Z
 description: "Suspect root rot? Check moisture, root texture, color, smell and plant decline before cutting roots or changing the entire care routine."
 type: "problem"
 eyebrow: "Root health problem"
