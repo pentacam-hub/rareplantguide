@@ -1,0 +1,65 @@
+---
+title: "Variegated Monstera Care: Reversion, Light, Soil & Propagation"
+description: "Start here for Variegated Monstera care: diagnose reversion, choose the right light and soil, propagate a viable node, and troubleshoot common problems."
+type: "hub"
+eyebrow: "Variegated Monstera hub"
+primary_cta:
+  label: "Diagnose a Monstera problem"
+  url: "/tools/symptom-checker.html"
+hub_sections:
+  - title: "Protect the variegation"
+    intro: "Start with the stem and growth point when leaves become greener. These guides separate true reversion from normal variation and care-related stress."
+    links:
+      - kicker: "Top guide"
+        title: "Variegated Monstera Turning Green? Can Reversion Be Reversed?"
+        text: "Check the stem, node and axillary bud, then learn when pruning back can help."
+        url: "/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/"
+      - kicker: "Troubleshooting"
+        title: "Why Is My Rare Plant Losing Its Variegation?"
+        text: "Compare genetic reversion with light, stress and normal changes in new growth."
+        url: "/posts/rare-plant-losing-variegation/"
+      - kicker: "Variegation basics"
+        title: "Guide to Houseplant Variegation"
+        text: "Understand chimeric, pattern-gene and viral variegation before diagnosing a color change."
+        url: "/posts/guide-to-houseplant-variegation-chimeric-pattern-and-viral/"
+  - title: "Build the right growing conditions"
+    intro: "Variegated leaves have less chlorophyll-bearing tissue, so stable light and root-zone conditions matter."
+    links:
+      - kicker: "Soil"
+        title: "Best Soil for Variegated Monstera"
+        text: "Use the practical 40/30/20/10 chunky aroid mix as a starting point and adjust it to your environment."
+        url: "/posts/best-soil-mix-variegated-monstera/"
+      - kicker: "Light"
+        title: "How Much Light Do Rare Aroids Need?"
+        text: "Use practical indoor light ranges and plant-response signs instead of guessing from window direction alone."
+        url: "/posts/how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves/"
+      - kicker: "Grow lights"
+        title: "Best Grow Lights for Rare Houseplants"
+        text: "Compare coverage, intensity, distance and timing for rare and variegated aroids."
+        url: "/posts/best-grow-lights-rare-houseplants/"
+  - title: "Propagate without wasting a cutting"
+    intro: "A leaf is not enough. Successful Monstera propagation depends on a viable stem node and healthy growth point."
+    links:
+      - kicker: "Step by step"
+        title: "How to Propagate Variegated Monstera"
+        text: "Choose a cutting with a node, root it in water or sphagnum, avoid rot and know when it is ready to pot."
+        url: "/posts/propagate-variegated-monstera/"
+      - kicker: "Rooting medium"
+        title: "Sphagnum Moss for Rare Plant Propagation"
+        text: "Keep the node humid and airy without compressing or saturating the moss."
+        url: "/posts/is-sphagnum-moss-actually-the-holy-grail-for-rare-plant-propagation/"
+related_hubs:
+  - title: "Propagation"
+    text: "Cuttings, nodes, rooting media and transition to soil."
+    url: "/propagation/"
+  - title: "Plant Problems"
+    text: "Work from symptoms such as rot, pests, discoloration and weak growth."
+    url: "/plant-problems/"
+  - title: "Rare Plant Care"
+    text: "Light, soil, humidity, repotting and general aroid care."
+    url: "/rare-plant-care/"
+---
+
+## A practical starting point
+
+Variegated Monstera problems are easier to solve when you separate **genetics, root health and growing conditions**. Start with the symptom you can actually observe, then move to the guide that tests the most likely cause instead of changing several care variables at once.
