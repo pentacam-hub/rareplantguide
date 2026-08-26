@@ -1,5 +1,6 @@
 ---
 title: "Variegated Monstera Turning Green? Diagnose Reversion First"
+date: 2026-08-26T21:00:00Z
 description: "If a Variegated Monstera is turning green, check the stem, node, growth point and recent care changes before deciding whether it is true reversion."
 type: "problem"
 eyebrow: "Variegated Monstera problem"
