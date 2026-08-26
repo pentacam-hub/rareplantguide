@@ -1,5 +1,6 @@
 ---
 title: "Why Is My Monstera Cutting Not Growing? Check the Node First"
+date: 2026-08-26T21:00:00Z
 description: "If a Monstera or rare aroid cutting will not grow, check for a viable node, axillary bud, root health, moisture and stable light before changing media."
 type: "problem"
 eyebrow: "Propagation problem"
