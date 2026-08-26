@@ -1,0 +1,53 @@
+{{- define "main" }}
+<article class="hub-page">
+  <header class="hub-hero">
+    {{- with .Params.eyebrow }}<span class="hub-eyebrow">{{ . }}</span>{{ end }}
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p>{{ . }}</p>{{ end }}
+    {{- with .Params.primary_cta }}
+    <a class="hub-primary-cta" href="{{ .url }}">{{ .label }}</a>
+    {{- end }}
+  </header>
+
+  {{- with .Params.hub_sections }}
+    {{- range . }}
+    <section class="hub-section">
+      <div class="hub-section-heading">
+        <h2>{{ .title }}</h2>
+        {{- with .intro }}<p>{{ . }}</p>{{ end }}
+      </div>
+      <div class="hub-card-grid">
+        {{- range .links }}
+        <a class="hub-guide-card" href="{{ .url }}">
+          {{- with .kicker }}<span class="hub-guide-kicker">{{ . }}</span>{{ end }}
+          <strong>{{ .title }}</strong>
+          <span class="hub-guide-description">{{ .text }}</span>
+          <span class="hub-guide-cta">{{ with .cta }}{{ . }}{{ else }}Read guide →{{ end }}</span>
+        </a>
+        {{- end }}
+      </div>
+    </section>
+    {{- end }}
+  {{- end }}
+
+  {{- with .Content }}
+  <section class="hub-editorial post-content">
+    {{ . }}
+  </section>
+  {{- end }}
+
+  {{- with .Params.related_hubs }}
+  <section class="hub-related" aria-labelledby="related-hubs-title">
+    <div class="hub-section-heading">
+      <h2 id="related-hubs-title">Explore related topics</h2>
+      <p>Move between the main care paths without starting your search over.</p>
+    </div>
+    <div class="hub-related-grid">
+      {{- range . }}
+      <a href="{{ .url }}"><strong>{{ .title }}</strong><span>{{ .text }}</span></a>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+</article>
+{{- end }}
