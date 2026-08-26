@@ -53,22 +53,26 @@ theme = "PaperMod"
   url = "/variegated-monstera/"
   weight = 2
 [[menu.main]]
+  name = "Plants"
+  url = "/plant-profiles/"
+  weight = 3
+[[menu.main]]
   name = "Problems"
   url = "/plant-problems/"
-  weight = 3
+  weight = 4
 [[menu.main]]
   name = "Propagation"
   url = "/propagation/"
-  weight = 4
+  weight = 5
 [[menu.main]]
   name = "Care Guides"
   url = "/rare-plant-care/"
-  weight = 5
+  weight = 6
 [[menu.main]]
   name = "Symptom Checker"
   url = "/tools/symptom-checker.html"
-  weight = 6
+  weight = 7
 [[menu.main]]
   name = "About"
   url = "/about/"
-  weight = 7
+  weight = 8
