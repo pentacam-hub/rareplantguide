@@ -1,81 +1,91 @@
-# Daily Content Agent — The Rare Plant Guide
+# The Rare Plant Guide — Automation Setup
 
-L'agente vive nel repository e gira tramite GitHub Actions anche quando ChatGPT è chiuso.
+The production automation now uses Cloudflare rather than scheduled GitHub Actions.
 
-## Cosa fa ogni giorno
+## Current architecture
 
-Il workflow `.github/workflows/auto-post.yml` parte alle **00:15 UTC** e:
+- GitHub: source repository only
+- Cloudflare Pages production project: builds and serves the Hugo site from `main`
+- Cloudflare Pages agent project: runs the existing Python article/Pinterest automation when called by Deploy Hooks
+- Cloudflare Worker: owns the schedules and triggers the appropriate agent Deploy Hook
+- GitHub Actions: manual emergency fallbacks only
 
-1. controlla che tutte le credenziali siano configurate;
-2. esegue i test automatici del generatore e dell'integrazione Pinterest;
-3. se non esiste un Pin da ritentare, genera un articolo dalla prima voce `pending` di `content-queue.yaml`;
-4. genera la cover e un'immagine Pinterest verticale 1000×1500;
-5. compila l'intero sito con Hugo e interrompe tutto se il build fallisce;
-6. pubblica articolo e immagini su `main`, facendo partire Cloudflare;
-7. attende che articolo e immagine siano realmente online;
-8. pubblica **un solo Pin** sulla board `Rare Plant Care Tips`;
-9. salva nel repository l'ID restituito da Pinterest.
+Full setup and cutover instructions are in:
 
-Se Pinterest fallisce, il Pin resta `pending`. Il giorno successivo l'agente ritenta quel Pin e non genera un altro articolo: non crea arretrati e non pubblica più di un Pin al giorno. Prima di creare un Pin controlla anche se sul profilo esiste già un Pin con lo stesso link.
+`CLOUDFLARE_CONTENT_AGENT.md`
 
-## Configurazione una tantum
+## Production site build
 
-Aprire:
+Production branch: `main`
 
-`GitHub → pentacam-hub/rareplantguide → Settings → Secrets and variables → Actions`
+Build command:
 
-Aggiungere questi repository secrets:
+`bash scripts/cloudflare-build.sh`
 
-| Secret | Contenuto |
-|---|---|
-| `GEMINI_API_KEY` | Chiave API Google AI Studio usata per il testo |
-| `UNSPLASH_ACCESS_KEY` | Access Key dell'app Unsplash usata per le foto |
-| `PINTEREST_APP_ID` | App ID dell'app Pinterest |
-| `PINTEREST_APP_SECRET` | App secret Pinterest |
-| `PINTEREST_REFRESH_TOKEN` | Continuous refresh token Pinterest con gli scope richiesti |
-| `GH_SECRETS_PAT` | Fine-grained GitHub PAT limitato a questo repository, con `Secrets: Read and write` |
+Output directory:
 
-Non inserire mai questi valori nei file del repository.
+`public`
 
-In `Settings → Secrets and variables → Actions → Variables` aggiungere inoltre:
+Recommended environment variable:
 
-| Variable | Valore |
-|---|---|
-| `PINTEREST_STANDARD_APPROVED` | `true`, ma soltanto dopo che Pinterest mostra Standard access attivo |
+`HUGO_VERSION=0.148.2`
 
-Finché la richiesta Standard è pending, lasciare questa variabile assente: il job giornaliero viene saltato e non consuma la coda editoriale.
+Exclude `content-queue.yaml` from production Pages Build watch paths so Pinterest status-only commits do not cause redundant site builds.
 
-## Requisiti Pinterest
+## Content + Pinterest schedules
 
-L'app Pinterest deve essere collegata all'account corretto e il token deve includere gli scope minimi:
+Cloudflare Worker configuration lives in:
 
-- `boards:read`
-- `boards:write`
-- `pins:read`
-- `pins:write`
+`cloudflare/content-scheduler/`
 
-Perché i Pin siano distribuiti pubblicamente, verificare che l'app abbia l'access tier appropriato per la produzione; nel tier Trial i Pin creati via API sono visibili soltanto al loro autore.
+Current UTC schedules:
 
-Pinterest usa continuous refresh token con scadenza mobile. Ogni esecuzione salva il nuovo token in un file temporaneo del runner e aggiorna automaticamente `PINTEREST_REFRESH_TOKEN` tramite `GH_SECRETS_PAT`. Il PAT deve essere limitato al solo repository `pentacam-hub/rareplantguide`.
+- 14:30 daily → evergreen Pin
+- 19:30 Sun/Tue/Wed/Fri/Sat → second evergreen Pin
+- 19:30 Mon/Thu → new article + original Pin
 
-Documentazione ufficiale:
+## Agent runner
 
-- https://developers.pinterest.com/docs/getting-started/set-up-authentication-and-authorization/
-- https://developers.pinterest.com/docs/work-with-organic-content-and-users/create-boards-and-pins/
-- https://docs.github.com/rest/actions/secrets
+The dedicated Cloudflare agent Pages project runs:
 
-## Avvio e controllo
+`bash scripts/cloudflare-agent-entry.sh`
 
-Per un test manuale:
+Output directory:
 
-`GitHub → Actions → Daily Content Agent → Run workflow`
+`.agent-output`
 
-Un run è riuscito soltanto se termina verde e mostra:
+Marker branches:
 
-- test superati;
-- build Hugo completata;
-- deploy pubblico rilevato;
-- Pin creato oppure Pin preesistente riconosciuto;
-- stato `posted` e `pinterest_pin_id` salvati in `content-queue.yaml`.
+- `cf-agent-content`
+- `cf-agent-promo`
 
-Gli argomenti futuri si aggiungono a `content-queue.yaml` con `status: pending`. Quando la coda è vuota, il workflow termina senza inventare nuovi argomenti.
+The entry script always fetches the latest `main` before running, so marker branches do not need manual synchronization.
+
+Required Cloudflare agent secrets:
+
+- `GEMINI_API_KEY`
+- `PINTEREST_APP_ID`
+- `PINTEREST_APP_SECRET`
+- `GITHUB_CONTENT_TOKEN` — fine-grained GitHub token limited to this repository with Contents: Read and write
+
+Optional:
+
+- `UNSPLASH_ACCESS_KEY`
+- `PINTEREST_REFRESH_TOKEN`
+
+Never commit secret values to the repository.
+
+## GitHub Actions
+
+These workflows are retained only for manual emergency use and must have `workflow_dispatch` only:
+
+- `.github/workflows/build-site.yml`
+- `.github/workflows/auto-post.yml`
+- `.github/workflows/pinterest-promo.yml`
+- `.github/workflows/pinterest-ci.yml`
+
+The Analyze My Income Pinterest workflows in this repository are also manual-only.
+
+## Source queue
+
+Future article topics remain in `content-queue.yaml` with `status: pending`. Published history remains in the same file.
