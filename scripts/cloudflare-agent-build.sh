@@ -14,6 +14,16 @@ done
 
 export PYTHONUNBUFFERED=1
 
+git config user.name "rareplantguide-cloudflare-bot"
+git config user.email "bot@users.noreply.github.com"
+git remote set-url origin "https://x-access-token:${GITHUB_CONTENT_TOKEN}@github.com/pentacam-hub/rareplantguide.git"
+
+# Deploy Hooks build a fixed marker branch. Always synchronize that checkout with
+# the latest main before reading the editorial queue, otherwise a later run could
+# reuse stale queue state and regenerate an already-published topic.
+git fetch origin main
+git reset --hard origin/main
+
 python3 -m pip install --user -r scripts/requirements.txt
 python3 -m unittest \
   scripts.test_generate_post \
@@ -25,21 +35,18 @@ python3 -m unittest \
 # older Pinterest Pin still needs a retry.
 python3 scripts/run_daily_article.py
 
-git config user.name "rareplantguide-cloudflare-bot"
-git config user.email "bot@users.noreply.github.com"
-git remote set-url origin "https://x-access-token:${GITHUB_CONTENT_TOKEN}@github.com/pentacam-hub/rareplantguide.git"
-
-# Commit only source content/assets/state. public/ is now built by Cloudflare Pages.
+# Commit only source content/assets/state. public/ is built by Cloudflare.
 git add content/posts/ static/images/ content-queue.yaml
 if ! git diff --staged --quiet; then
   git commit -m "Auto: publish article and Pinterest creative"
-  git pull --rebase origin main
+  git fetch origin main
+  git rebase origin/main
   git push origin HEAD:main
 else
   echo "No new article changes; continuing with any pending Pinterest Pin."
 fi
 
-# Wait for the production Pages project to publish the oldest pending article
+# Wait for the production Worker build to publish the oldest pending article
 # and its image before asking Pinterest to create the Pin.
 python3 -m scripts.wait_for_deploy \
   --kind original \
@@ -49,19 +56,20 @@ python3 -m scripts.wait_for_deploy \
 
 python3 scripts/post_pin.py --max-pins 1
 
-# Persist only Pinterest delivery state. Configure the production Pages project
-# to exclude content-queue.yaml from build watch paths so this status-only push
-# does not cause a second site build.
+# Persist only Pinterest delivery state. The production Worker excludes
+# content-queue.yaml from build watch paths, so this status-only push does not
+# cause a redundant site build.
 git add content-queue.yaml
 if ! git diff --staged --quiet; then
   git commit -m "Auto: record published Pinterest Pin"
-  git pull --rebase origin main
+  git fetch origin main
+  git rebase origin/main
   git push origin HEAD:main
 else
   echo "No Pinterest status change to commit."
 fi
 
-# A dedicated Cloudflare agent-runner Pages project still needs an output dir.
+# Workers Builds still needs a deployable artifact after the automation step.
 mkdir -p .agent-output
 cat > .agent-output/index.html <<'EOF'
 <!doctype html><html><body><p>Rare Plant content agent completed.</p></body></html>
