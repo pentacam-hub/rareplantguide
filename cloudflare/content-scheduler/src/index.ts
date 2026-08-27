@@ -45,7 +45,15 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/health") {
-      return Response.json({ ok: true, service: "rareplant-content-scheduler" });
+      return Response.json({
+        ok: true,
+        service: "rareplant-content-scheduler",
+        runtimeSecrets: {
+          contentHook: Boolean(env.CONTENT_AGENT_DEPLOY_HOOK_URL),
+          promoHook: Boolean(env.PROMO_AGENT_DEPLOY_HOOK_URL),
+          manualToken: Boolean(env.MANUAL_TRIGGER_TOKEN),
+        },
+      });
     }
 
     if (request.method !== "POST") {
