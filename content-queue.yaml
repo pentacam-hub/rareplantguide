@@ -176,14 +176,6 @@ topics:
   pin_status: posted
   pinterest_pin_id: '879961214758128860'
   pinterest_board: Variegated Plant Care & Monstera Tips
-- title: What Determines the Price of a Rare Houseplant?
-  keywords:
-  - rare plant prices
-  - rare plant value
-  - collecting houseplants
-  image_query: rare houseplant collection shelf
-  cluster: buying-market
-  status: pending
 - title: How to Propagate Thai Constellation Monstera Successfully
   keywords:
   - thai constellation monstera
@@ -191,6 +183,21 @@ topics:
   - node propagation
   image_query: monstera cutting propagation water
   cluster: propagation
+  status: done
+  published_date: '2026-08-27'
+  slug: propagate-thai-constellation-monstera-step-by-step-guide
+  pin_title: 'Propagate Thai Constellation Monstera: Step-by-Step Guide'
+  pin_description: Learn how to successfully propagate your Thai Constellation Monstera
+    using proven stem cutting and node propagation methods for healthy root growth.
+  pin_image_path: /images/pins/propagate-thai-constellation-monstera-step-by-step-guide.jpg
+  pin_status: pending
+- title: Common Mistakes When Repotting Rare Aroids
+  keywords:
+  - repotting aroids
+  - transplant shock
+  - aroid roots
+  image_query: repotting plant hands soil
+  cluster: care-troubleshooting
   status: pending
 - title: Dealing With Thrips and Mites on Rare Plants Without Harming Variegation
   keywords:
@@ -199,6 +206,14 @@ topics:
   - pest control houseplants
   image_query: houseplant leaf pest closeup
   cluster: care-troubleshooting
+  status: pending
+- title: What Determines the Price of a Rare Houseplant?
+  keywords:
+  - rare plant prices
+  - rare plant value
+  - collecting houseplants
+  image_query: rare houseplant collection shelf
+  cluster: buying-market
   status: pending
 - title: 'Anthurium Care for Beginners: Warocqueanum, Veitchii, and More'
   keywords:
@@ -226,14 +241,6 @@ topics:
   cluster: buying-market
   status: pending
   featured_weight: 1
-- title: Common Mistakes When Repotting Rare Aroids
-  keywords:
-  - repotting aroids
-  - transplant shock
-  - aroid roots
-  image_query: repotting plant hands soil
-  cluster: care-troubleshooting
-  status: pending
 - title: How to Winter-Proof Your Rare Plant Collection
   keywords:
   - winter plant care
