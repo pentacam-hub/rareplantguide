@@ -198,7 +198,14 @@ topics:
   - aroid roots
   image_query: repotting plant hands soil
   cluster: care-troubleshooting
-  status: pending
+  status: done
+  published_date: '2026-08-27'
+  slug: common-mistakes-when-repotting-rare-aroids-how-to-protect-your-plants
+  pin_title: 'Common Mistakes When Repotting Rare Aroids: How to Protect Your Plants'
+  pin_description: Discover the most common mistakes made when repotting rare aroids
+    and learn practical, plant-safe steps to prevent transplant shock and root damage.
+  pin_image_path: /images/pins/common-mistakes-when-repotting-rare-aroids-how-to-protect-your-plants.jpg
+  pin_status: pending
 - title: Dealing With Thrips and Mites on Rare Plants Without Harming Variegation
   keywords:
   - thrips treatment
