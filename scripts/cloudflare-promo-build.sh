@@ -14,6 +14,15 @@ done
 
 export PYTHONUNBUFFERED=1
 
+git config user.name "rareplantguide-cloudflare-bot"
+git config user.email "bot@users.noreply.github.com"
+git remote set-url origin "https://x-access-token:${GITHUB_CONTENT_TOKEN}@github.com/pentacam-hub/rareplantguide.git"
+
+# Start from the latest source/queue state even though the Deploy Hook is tied to
+# a stable marker branch.
+git fetch origin main
+git reset --hard origin/main
+
 python3 -m pip install --user -r scripts/requirements.txt
 python3 -m unittest \
   scripts.test_post_pin \
@@ -22,14 +31,11 @@ python3 -m unittest \
 
 python3 scripts/post_promo_pin.py --prepare
 
-git config user.name "rareplantguide-cloudflare-bot"
-git config user.email "bot@users.noreply.github.com"
-git remote set-url origin "https://x-access-token:${GITHUB_CONTENT_TOKEN}@github.com/pentacam-hub/rareplantguide.git"
-
 git add static/images/pins/ content-queue.yaml
 if ! git diff --staged --quiet; then
   git commit -m "Auto: prepare evergreen Pinterest Pin"
-  git pull --rebase origin main
+  git fetch origin main
+  git rebase origin/main
   git push origin HEAD:main
 else
   echo "No new evergreen creative to commit."
@@ -47,7 +53,8 @@ python3 scripts/post_promo_pin.py --publish
 git add content-queue.yaml
 if ! git diff --staged --quiet; then
   git commit -m "Auto: record evergreen Pinterest Pin"
-  git pull --rebase origin main
+  git fetch origin main
+  git rebase origin/main
   git push origin HEAD:main
 else
   echo "No evergreen Pinterest status change to commit."
