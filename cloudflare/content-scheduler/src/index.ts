@@ -6,6 +6,8 @@ interface Env {
 
 type AgentKind = "content" | "promo";
 
+const CONTENT_CRON = "30 19 * * MON,THU";
+
 function hookFor(kind: AgentKind, env: Env): string {
   return kind === "content"
     ? env.CONTENT_AGENT_DEPLOY_HOOK_URL
@@ -34,7 +36,7 @@ async function triggerBuild(kind: AgentKind, env: Env): Promise<Response> {
 }
 
 function kindForCron(cron: string): AgentKind {
-  if (cron === "30 19 * * 1,4") return "content";
+  if (cron === CONTENT_CRON) return "content";
   return "promo";
 }
 
