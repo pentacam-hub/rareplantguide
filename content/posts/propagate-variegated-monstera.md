@@ -22,7 +22,7 @@ faq:
 
 **Quick answer:** choose a healthy cutting with at least one node and visible stem variegation, root the node in water or lightly damp sphagnum under bright indirect light, and move it to a chunky aroid mix after it has developed several healthy roots.
 
-If you are choosing a **variegated Monstera cutting**, inspect the stem and axillary bud before you cut. Variegation running through the node can improve the chance that new growth stays variegated, but it cannot guarantee the pattern of the next leaf.
+If you are choosing a **variegated Monstera cutting**, inspect the stem and axillary bud before you cut. Variegation running through the node can improve the chance that new growth stays variegated, but it cannot guarantee the pattern of the next leaf. For the structures to inspect before cutting, see [Monstera Node vs Axillary Bud](/posts/monstera-node-vs-axillary-bud-variegated-cutting/).
 
 ![Variegated Monstera cutting rooting in a glass jar of water](/images/propagation-water-rooting.jpg)
 
@@ -90,7 +90,7 @@ Pot the cutting when it has an established root system rather than one fragile n
 
 Use a small pot with drainage and an airy substrate. The [Best Soil Mix for Variegated Monstera: 40/30/20/10 Recipe](/posts/best-soil-mix-variegated-monstera/) guide gives a starting chunky-mix recipe.
 
-Keep the mix evenly moist during the first transition period, but do not keep it saturated. Roots formed in water or moss need time to adapt to the different air-and-moisture balance of a potting mix.
+Keep the mix evenly moist during the first transition period, but do not keep it saturated. Roots formed in water or moss need time to adapt to the different air-and-moisture balance of a potting mix. Once the cutting is established, use the root zone rather than a rigid calendar; see [How Often to Water Variegated Monstera](/posts/how-often-to-water-variegated-monstera/).
 
 ## Common Variegated Monstera Propagation Mistakes
 
@@ -127,9 +127,10 @@ Usually there is no need to add fertilizer before the cutting has developed func
 
 ## Continue the Variegated Monstera Care Series
 
+- [Monstera Node vs Axillary Bud](/posts/monstera-node-vs-axillary-bud-variegated-cutting/) — identify the growth point before cutting.
 - [Variegated Monstera Turning Green? How to Stop Reversion](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/) — check the stem and growth point before choosing a cutting.
 - [Best Soil Mix for Variegated Monstera](/posts/best-soil-mix-variegated-monstera/) — prepare an airy mix for a rooted cutting.
-- [How Much Light Do Rare Aroids Need?](/posts/how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves/) — use practical indoor light ranges.
-- [Best Grow Lights for Rare Houseplants](/posts/best-grow-lights-rare-houseplants/) — add supplemental lighting when window light is weak.
+- [How Often to Water Variegated Monstera](/posts/how-often-to-water-variegated-monstera/) — manage moisture after potting.
+- [When to Repot Variegated Monstera](/posts/when-to-repot-variegated-monstera/) — know when the established plant needs a larger pot.
 
 Once the cutting is established, keep the root zone airy and monitor new leaves for changes in variegation.
