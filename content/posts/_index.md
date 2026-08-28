@@ -1,6 +1,6 @@
 ---
 title: "Rare Houseplant Care Guides"
-description: "Practical rare houseplant care guides for Monstera, Philodendron, Anthurium and other aroids, covering variegation, light, soil, root rot, pests and propagation."
+description: "Practical rare houseplant care guides for Monstera, Philodendron, Anthurium and other aroids, covering variegation, light, soil, root rot, pests, propagation and buying guides."
 ---
 
 Use this library to solve a specific rare-plant problem or build a better care routine. The guides below focus on practical decisions you can make from observable symptoms, growing conditions and plant response.
@@ -15,6 +15,18 @@ Use this library to solve a specific rare-plant problem or build a better care r
 - **Want to make a cutting:** [How to Propagate Variegated Monstera](/posts/propagate-variegated-monstera/)
 
 Not sure which problem fits? Use the free [Plant Symptom Checker](/tools/symptom-checker.html) first, then follow the most relevant guide.
+
+## Buying guides: choose gear by the problem it solves
+
+Start with the [Best Rare Plant Supplies: What to Buy for Aroids](/posts/best-rare-plant-supplies/) hub, then use the focused guides:
+
+- [Best Grow Lights for Rare Houseplants](/posts/best-grow-lights-rare-houseplants/)
+- [Best Moss Poles for Monstera](/posts/best-moss-poles-for-monstera/)
+- [Best Pots for Variegated Monstera](/posts/best-pots-for-variegated-monstera/)
+- [Best Humidifiers for Rare Plants](/posts/best-humidifiers-for-rare-plants/)
+- [Best Propagation Supplies for Variegated Monstera](/posts/best-propagation-supplies-variegated-monstera/)
+
+These pages currently focus on selection criteria, setup and avoiding unnecessary purchases so the recommendation layer can stay useful even when specific products change.
 
 ## Core rare plant topics
 
