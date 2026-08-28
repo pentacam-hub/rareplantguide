@@ -24,6 +24,8 @@ If you are searching for the **best soil mix for a variegated Monstera**, the go
 
 **Quick answer:** start with roughly **40% orchid bark, 30% perlite or pumice, 20% sphagnum moss or coco coir, and 10% potting mix or worm castings**. Treat those percentages as a starting point and adjust for your pot, humidity, light and watering habits.
 
+Once the mix is right, watering frequency should follow the root zone rather than a calendar. Use [How Often to Water Variegated Monstera](/posts/how-often-to-water-variegated-monstera/) to match watering to this substrate.
+
 ![Chunky bark and perlite soil mix for variegated Monstera](/images/chunky-aroid-soil-mix.jpg)
 
 ## Best Soil Mix Recipe for Variegated Monstera
@@ -113,6 +115,8 @@ Yellow leaves by themselves do not prove root rot. Root inspection gives much st
 
 Repot when roots have clearly filled the container, drainage has slowed, the substrate has broken down, or you need to remove damaged roots. Choose a pot only modestly larger than the existing root mass and keep the stem at roughly the same depth.
 
+For the full decision process, pot sizing and aftercare, use [When to Repot Variegated Monstera: Signs, Pot Size & Aftercare](/posts/when-to-repot-variegated-monstera/).
+
 After repotting, keep the plant in stable bright, indirect light and avoid making several major care changes at once. If the plant is also producing greener leaves, read [Variegated Monstera Turning Green? How to Stop Reversion](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/).
 
 ## Frequently Asked Questions
@@ -135,9 +139,11 @@ Yes, but inspect the texture. If it is still fine and compact, use it as a base 
 
 ## Continue the Variegated Monstera Care Series
 
+- [How Often to Water Variegated Monstera](/posts/how-often-to-water-variegated-monstera/) — decide when this mix actually needs water.
+- [When to Repot Variegated Monstera](/posts/when-to-repot-variegated-monstera/) — choose pot size and reduce transplant stress.
 - [Variegated Monstera Turning Green? How to Stop Reversion](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/) — diagnose reversion from the stem and growth point.
 - [How to Propagate Variegated Monstera](/posts/propagate-variegated-monstera/) — choose a viable node and root the cutting.
+- [Monstera Node vs Axillary Bud](/posts/monstera-node-vs-axillary-bud-variegated-cutting/) — inspect a cutting or lower growth point before pruning.
 - [How Much Light Do Rare Aroids Need?](/posts/how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves/) — adjust light without guessing.
-- [Best Grow Lights for Rare Houseplants](/posts/best-grow-lights-rare-houseplants/) — choose supplemental lighting for indoor conditions.
 
 Once the roots are healthy, you will also have stronger material for propagation. See [How to Propagate a Variegated Monstera](/posts/propagate-variegated-monstera/) for the next step.
