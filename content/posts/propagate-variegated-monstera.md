@@ -1,7 +1,7 @@
 ---
 title: "How to Propagate Variegated Monstera: Cutting & Rooting Guide"
 date: 2026-07-31T00:00:00
-lastmod: 2026-08-25
+lastmod: 2026-08-28
 draft: false
 description: "Variegated Monstera cutting propagation guide: choose a node, root it in water or sphagnum, avoid rot, preserve variegation potential, and know when to pot it."
 tags: ["rare plants", "propagation", "monstera", "variegated monstera"]
@@ -37,7 +37,7 @@ Look for a section of stem with:
 
 A leaf-only cutting may stay attractive for a while, but without a viable stem node it cannot produce a new Monstera vine.
 
-If the parent plant has started producing all-green growth, first read [Variegated Monstera Turning Green? Can Reversion Be Reversed?](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/) before deciding where to cut.
+If the parent plant has started producing all-green growth, first read [Variegated Monstera Turning Green? How to Stop Reversion](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/) before deciding where to cut.
 
 ## Step 2: Make a Clean Cut
 
@@ -88,7 +88,7 @@ Do not judge success by the calendar alone. Look for:
 
 Pot the cutting when it has an established root system rather than one fragile new root. Several roots, especially roots beginning to branch, make the transition easier to manage.
 
-Use a small pot with drainage and an airy substrate. The [Best Soil for Variegated Monstera: 40/30/20/10 Aroid Mix](/posts/best-soil-mix-variegated-monstera/) guide gives a starting chunky-mix recipe.
+Use a small pot with drainage and an airy substrate. The [Best Soil Mix for Variegated Monstera: 40/30/20/10 Recipe](/posts/best-soil-mix-variegated-monstera/) guide gives a starting chunky-mix recipe.
 
 Keep the mix evenly moist during the first transition period, but do not keep it saturated. Roots formed in water or moss need time to adapt to the different air-and-moisture balance of a potting mix.
 
@@ -127,8 +127,8 @@ Usually there is no need to add fertilizer before the cutting has developed func
 
 ## Continue the Variegated Monstera Care Series
 
-- [Variegated Monstera Turning Green? Can Reversion Be Reversed?](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/) — check the stem and growth point before choosing a cutting.
-- [Best Soil for Variegated Monstera](/posts/best-soil-mix-variegated-monstera/) — prepare an airy mix for a rooted cutting.
+- [Variegated Monstera Turning Green? How to Stop Reversion](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/) — check the stem and growth point before choosing a cutting.
+- [Best Soil Mix for Variegated Monstera](/posts/best-soil-mix-variegated-monstera/) — prepare an airy mix for a rooted cutting.
 - [How Much Light Do Rare Aroids Need?](/posts/how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves/) — use practical indoor light ranges.
 - [Best Grow Lights for Rare Houseplants](/posts/best-grow-lights-rare-houseplants/) — add supplemental lighting when window light is weak.
 
