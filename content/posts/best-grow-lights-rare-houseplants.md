@@ -1,7 +1,7 @@
 ---
 title: "Best Grow Lights for Rare Houseplants: 2026 Setup Guide"
 date: 2026-07-31T00:00:00
-lastmod: 2026-08-25
+lastmod: 2026-08-28
 draft: false
 description: "Best grow lights for rare and variegated houseplants: compare full-spectrum LEDs, coverage, intensity, mounting distance and 10–14 hour timing for indoor aroids."
 tags: ["rare plants", "grow lights", "houseplant care", "variegated plants"]
@@ -72,7 +72,7 @@ Look for trends in new growth rather than one isolated leaf:
 - a plant leaning strongly toward a window or lamp;
 - potting mix staying wet much longer because the plant is using less water.
 
-A variegated plant producing greener leaves deserves closer inspection, but light alone does not determine genetic reversion. The stem and growth point matter. See [Variegated Monstera Turning Green? Can Reversion Be Reversed?](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/).
+A variegated plant producing greener leaves deserves closer inspection, but light alone does not determine genetic reversion. The stem and growth point matter. See [Variegated Monstera Turning Green? How to Stop Reversion](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/).
 
 ## Signs the Grow Light May Be Too Strong or Too Close
 
@@ -87,7 +87,7 @@ If these signs appear, increase the distance, reduce intensity or shorten the sc
 
 Brighter conditions usually increase how quickly a healthy plant uses water. A plant moved from a dim corner to a stronger grow light may therefore dry faster than before.
 
-Do not respond by watering on a fixed calendar. Check the root zone and adjust based on actual drying time. An airy substrate gives you more margin for error; see the [Best Soil for Variegated Monstera: 40/30/20/10 Aroid Mix](/posts/best-soil-mix-variegated-monstera/) guide for a chunky aroid mix.
+Do not respond by watering on a fixed calendar. Check the root zone and adjust based on actual drying time. An airy substrate gives you more margin for error; see the [Best Soil Mix for Variegated Monstera: 40/30/20/10 Recipe](/posts/best-soil-mix-variegated-monstera/) for a chunky aroid mix.
 
 ## A Simple Setup Checklist
 
@@ -116,9 +116,9 @@ A normal light-dark cycle is preferable. Use a timer rather than continuous ligh
 
 ## Variegated Monstera Next Steps
 
-- [Variegated Monstera Turning Green? Can Reversion Be Reversed?](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/)
+- [Variegated Monstera Turning Green? How to Stop Reversion](/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/)
 - [How to Propagate Variegated Monstera](/posts/propagate-variegated-monstera/)
-- [Best Soil for Variegated Monstera](/posts/best-soil-mix-variegated-monstera/)
+- [Best Soil Mix for Variegated Monstera](/posts/best-soil-mix-variegated-monstera/)
 - [How Much Light Do Rare Aroids Need?](/posts/how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves/)
 
 The goal is consistency: enough light to support compact, healthy growth without turning the setup into a heat or stress problem.
