@@ -5,12 +5,21 @@ topics:
   - aroid accessories
   - houseplant gear
   cluster: buying-market
-  status: pending
+  status: prepared
   published_date: '2026-08-28'
   slug: best-rare-plant-supplies
   pin_title: Best Rare Plant Supplies for Aroids
-  pin_description: Choose the rare plant supplies that actually solve light, drainage, support, humidity and propagation problems without wasting money on unnecessary gear.
+  pin_description: Choose the rare plant supplies that actually solve light, drainage,
+    support, humidity and propagation problems without wasting money on unnecessary
+    gear.
   pin_image_path: /images/monstera-variegated-hero.jpg
+  promo_pin_title: Best Rare Plant Supplies for Aroids
+  promo_pin_description: Save this practical rare plant supplies guide for later.
+    Choose the rare plant supplies that actually solve light, drainage, support, humidity
+    and propagation problems without wasting money on unnecessary gear. Also covers
+    aroid accessories, houseplant gear. Open the full guide for the step-by-step details.
+  promo_pin_image_path: /images/pins/best-rare-plant-supplies-save-guide.jpg
+  promo_pin_prepared_date: '2026-08-28'
 - title: Best Moss Poles for Monstera
   keywords:
   - moss pole for monstera
@@ -21,7 +30,8 @@ topics:
   published_date: '2026-08-28'
   slug: best-moss-poles-for-monstera
   pin_title: Best Moss Poles for Monstera
-  pin_description: Compare moss poles, coir poles and rigid supports for Monstera, including sizing, stability and when aerial roots need a moisture-holding surface.
+  pin_description: Compare moss poles, coir poles and rigid supports for Monstera,
+    including sizing, stability and when aerial roots need a moisture-holding surface.
   pin_image_path: /images/monstera-variegated-hero.jpg
 - title: Best Pots for Variegated Monstera
   keywords:
@@ -33,7 +43,8 @@ topics:
   published_date: '2026-08-28'
   slug: best-pots-for-variegated-monstera
   pin_title: Best Pots for Variegated Monstera
-  pin_description: Learn how to choose pot size, drainage and material for Monstera Albo and Thai Constellation without oversizing the root zone.
+  pin_description: Learn how to choose pot size, drainage and material for Monstera
+    Albo and Thai Constellation without oversizing the root zone.
   pin_image_path: /images/best-soil-mix-recipes-for-rare-aroid-collections.jpg
 - title: Best Humidifiers for Rare Plants
   keywords:
@@ -45,7 +56,8 @@ topics:
   published_date: '2026-08-28'
   slug: best-humidifiers-for-rare-plants
   pin_title: Best Humidifiers for Rare Plants
-  pin_description: Choose a plant humidifier by room size, runtime, cleaning access and humidity control instead of buying more output than your collection needs.
+  pin_description: Choose a plant humidifier by room size, runtime, cleaning access
+    and humidity control instead of buying more output than your collection needs.
   pin_image_path: /images/humidity-tents-vs-greenhouse-cabinets-for-rare-plants.jpg
 - title: Best Propagation Supplies for Variegated Monstera
   keywords:
@@ -57,7 +69,8 @@ topics:
   published_date: '2026-08-28'
   slug: best-propagation-supplies-variegated-monstera
   pin_title: Best Propagation Supplies for Variegated Monstera
-  pin_description: Build a simple Monstera propagation kit with clean cutting tools, rooting containers, airy media and stable light without overcomplicating the setup.
+  pin_description: Build a simple Monstera propagation kit with clean cutting tools,
+    rooting containers, airy media and stable light without overcomplicating the setup.
   pin_image_path: /images/propagation-water-rooting.jpg
 - title: Best Grow Lights for Rare Houseplants
   keywords:
@@ -69,5 +82,6 @@ topics:
   published_date: '2026-07-31'
   slug: best-grow-lights-rare-houseplants
   pin_title: Best Grow Lights for Rare Houseplants
-  pin_description: Compare full-spectrum grow lights by coverage, intensity, mounting distance and timer compatibility for rare and variegated houseplants.
+  pin_description: Compare full-spectrum grow lights by coverage, intensity, mounting
+    distance and timer compatibility for rare and variegated houseplants.
   pin_image_path: /images/grow-light-setup.jpg
