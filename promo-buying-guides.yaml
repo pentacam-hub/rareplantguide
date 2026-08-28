@@ -52,13 +52,20 @@ topics:
   - variegated monstera pot
   - monstera drainage
   cluster: care-troubleshooting
-  status: pending
+  status: prepared
   published_date: '2026-08-28'
   slug: best-pots-for-variegated-monstera
   pin_title: Best Pots for Variegated Monstera
   pin_description: Learn how to choose pot size, drainage and material for Monstera
     Albo and Thai Constellation without oversizing the root zone.
   pin_image_path: /images/best-soil-mix-recipes-for-rare-aroid-collections.jpg
+  promo_pin_title: Best Pots for Variegated Monstera
+  promo_pin_description: Save this practical pots for monstera guide for later. Learn
+    how to choose pot size, drainage and material for Monstera Albo and Thai Constellation
+    without oversizing the root zone. Also covers variegated monstera pot, monstera
+    drainage. Open the full guide for the step-by-step details.
+  promo_pin_image_path: /images/pins/best-pots-for-variegated-monstera-save-guide.jpg
+  promo_pin_prepared_date: '2026-08-28'
 - title: Best Humidifiers for Rare Plants
   keywords:
   - humidifier for plants
