@@ -29,18 +29,34 @@ python3 -m unittest \
   scripts.test_post_promo_pin \
   scripts.test_wait_for_deploy
 
-python3 scripts/post_promo_pin.py --prepare
+PROMO_KIND=""
+set +e
+python3 scripts/post_buying_guide_pin.py --prepare
+BUYING_PREPARE_STATUS=$?
+set -e
 
-git add static/images/pins/ content-queue.yaml
+if [ "$BUYING_PREPARE_STATUS" -eq 0 ]; then
+  PROMO_KIND="buying"
+elif [ "$BUYING_PREPARE_STATUS" -eq 3 ]; then
+  python3 scripts/post_promo_pin.py --prepare
+  PROMO_KIND="evergreen"
+else
+  echo "Buying-guide Pin preparation failed with exit code $BUYING_PREPARE_STATUS" >&2
+  exit "$BUYING_PREPARE_STATUS"
+fi
+
+git add static/images/pins/ content-queue.yaml promo-buying-guides.yaml
 if ! git diff --staged --quiet; then
-  git commit -m "Auto: prepare evergreen Pinterest Pin"
+  git commit -m "Auto: prepare Pinterest promo Pin"
   git fetch origin main
   git rebase origin/main
   git push origin HEAD:main
 else
-  echo "No new evergreen creative to commit."
+  echo "No new Pinterest promo creative to commit."
 fi
 
+# The generated Pin is uploaded to Pinterest as base64, but waiting here also
+# gives the linked article time to reach production before the Pin goes live.
 python3 -m scripts.wait_for_deploy \
   --kind promo \
   --max-pins 1 \
@@ -48,21 +64,25 @@ python3 -m scripts.wait_for_deploy \
   --timeout 180 \
   --interval 15 || true
 
-python3 scripts/post_promo_pin.py --publish
+if [ "$PROMO_KIND" = "buying" ]; then
+  python3 scripts/post_buying_guide_pin.py --publish
+else
+  python3 scripts/post_promo_pin.py --publish
+fi
 
-git add content-queue.yaml
+git add content-queue.yaml promo-buying-guides.yaml
 if ! git diff --staged --quiet; then
-  git commit -m "Auto: record evergreen Pinterest Pin"
+  git commit -m "Auto: record Pinterest promo Pin"
   git fetch origin main
   git rebase origin/main
   git push origin HEAD:main
 else
-  echo "No evergreen Pinterest status change to commit."
+  echo "No Pinterest promo status change to commit."
 fi
 
 mkdir -p .agent-output
 cat > .agent-output/index.html <<'EOF'
-<!doctype html><html><body><p>Rare Plant evergreen Pinterest agent completed.</p></body></html>
+<!doctype html><html><body><p>Rare Plant Pinterest promo agent completed.</p></body></html>
 EOF
 
-echo "Cloudflare evergreen Pinterest agent completed successfully."
+echo "Cloudflare Pinterest promo agent completed successfully ($PROMO_KIND)."
