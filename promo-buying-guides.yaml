@@ -29,13 +29,20 @@ topics:
   - monstera support
   - climbing aroid
   cluster: care-troubleshooting
-  status: pending
+  status: prepared
   published_date: '2026-08-28'
   slug: best-moss-poles-for-monstera
   pin_title: Best Moss Poles for Monstera
   pin_description: Compare moss poles, coir poles and rigid supports for Monstera,
     including sizing, stability and when aerial roots need a moisture-holding surface.
   pin_image_path: /images/monstera-variegated-hero.jpg
+  promo_pin_title: Best Moss Poles for Monstera
+  promo_pin_description: Save this practical moss pole for monstera guide for later.
+    Compare moss poles, coir poles and rigid supports for Monstera, including sizing,
+    stability and when aerial roots need a moisture-holding surface. Also covers monstera
+    support, climbing aroid. Open the full guide for the step-by-step details.
+  promo_pin_image_path: /images/pins/best-moss-poles-for-monstera-save-guide.jpg
+  promo_pin_prepared_date: '2026-08-28'
 - title: Best Pots for Variegated Monstera
   keywords:
   - pots for monstera
