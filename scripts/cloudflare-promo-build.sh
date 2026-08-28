@@ -31,14 +31,14 @@ python3 -m unittest \
 
 PROMO_KIND=""
 set +e
-python3 scripts/post_buying_guide_pin.py --prepare
+python3 -m scripts.post_buying_guide_pin --prepare
 BUYING_PREPARE_STATUS=$?
 set -e
 
 if [ "$BUYING_PREPARE_STATUS" -eq 0 ]; then
   PROMO_KIND="buying"
 elif [ "$BUYING_PREPARE_STATUS" -eq 3 ]; then
-  python3 scripts/post_promo_pin.py --prepare
+  python3 -m scripts.post_promo_pin --prepare
   PROMO_KIND="evergreen"
 else
   echo "Buying-guide Pin preparation failed with exit code $BUYING_PREPARE_STATUS" >&2
@@ -65,9 +65,9 @@ python3 -m scripts.wait_for_deploy \
   --interval 15 || true
 
 if [ "$PROMO_KIND" = "buying" ]; then
-  python3 scripts/post_buying_guide_pin.py --publish
+  python3 -m scripts.post_buying_guide_pin --publish
 else
-  python3 scripts/post_promo_pin.py --publish
+  python3 -m scripts.post_promo_pin --publish
 fi
 
 git add content-queue.yaml promo-buying-guides.yaml
