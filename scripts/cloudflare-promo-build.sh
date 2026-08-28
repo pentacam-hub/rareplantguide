@@ -85,4 +85,16 @@ cat > .agent-output/index.html <<'EOF'
 <!doctype html><html><body><p>Rare Plant Pinterest promo agent completed.</p></body></html>
 EOF
 
+# Workers Builds uses the preview deploy command for non-production branches.
+# The repository's normal wrangler.toml targets the public site, so replace it
+# only inside this ephemeral build workspace with the promo agent configuration.
+cat > wrangler.toml <<'EOF'
+name = "rareplant-content-agent"
+compatibility_date = "2026-08-01"
+
+[assets]
+directory = "./.agent-output"
+not_found_handling = "404-page"
+EOF
+
 echo "Cloudflare Pinterest promo agent completed successfully ($PROMO_KIND)."
