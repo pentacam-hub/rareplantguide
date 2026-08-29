@@ -16,6 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - name: Mask temporary Pinterest authorization code
+        env:
+          PINTEREST_AUTHORIZATION_CODE: ${{ inputs.authorization_code }}
+        run: echo "::add-mask::$PINTEREST_AUTHORIZATION_CODE"
+
       - name: Checkout repo
         uses: actions/checkout@v7
 
