@@ -33,8 +33,10 @@ jobs:
           import base64
           import datetime
           import os
+          import sys
           import requests
           import yaml
+          sys.path.insert(0, os.getcwd())
           import scripts.ami_pinterest as ami
 
           app_id = '1604082'
