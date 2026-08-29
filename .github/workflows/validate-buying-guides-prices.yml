@@ -1,0 +1,35 @@
+name: Validate Buying Guides + Prices
+
+on:
+  push:
+    paths:
+      - '.github/workflows/validate-buying-guides-prices.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.148.2'
+          extended: true
+      - name: Validate JavaScript syntax
+        run: |
+          node --check functions/api/amazon-prices.js
+          node --check static/js/amazon-prices.js
+      - name: Build site
+        run: bash scripts/cloudflare-build.sh
+      - name: Validate rendered buying guides
+        run: |
+          test -f public/buying-guides/best-selling-grow-lights/index.html
+          test -f public/buying-guides/best-plant-stands-with-grow-lights/index.html
+          grep -q 'data-amazon-price="B091DLFDL9"' public/buying-guides/best-selling-grow-lights/index.html
+          grep -q 'data-amazon-price="B0F5GTD4HN"' public/buying-guides/best-plant-stands-with-grow-lights/index.html
+          grep -q '/js/amazon-prices.js' public/buying-guides/best-selling-grow-lights/index.html
+          grep -q '/js/amazon-prices.js' public/buying-guides/best-plant-stands-with-grow-lights/index.html
