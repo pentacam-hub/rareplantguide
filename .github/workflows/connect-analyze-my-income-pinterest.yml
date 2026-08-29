@@ -16,14 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Check required Analyze My Income app secrets
+      - name: Check required Pinterest app secrets
         env:
-          AMI_PINTEREST_APP_ID: ${{ secrets.AMI_PINTEREST_APP_ID }}
-          AMI_PINTEREST_APP_SECRET: ${{ secrets.AMI_PINTEREST_APP_SECRET }}
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
           GH_SECRETS_PAT: ${{ secrets.GH_SECRETS_PAT }}
         run: |
           missing=0
-          for name in AMI_PINTEREST_APP_ID AMI_PINTEREST_APP_SECRET GH_SECRETS_PAT; do
+          for name in PINTEREST_APP_ID PINTEREST_APP_SECRET GH_SECRETS_PAT; do
             if [ -z "${!name}" ]; then
               echo "::error::Missing GitHub Actions secret: $name"
               missing=1
@@ -31,13 +31,12 @@ jobs:
           done
           exit "$missing"
 
-      - name: Exchange code and verify Pinterest profile identity
+      - name: Exchange code and verify Analyze My Income Pinterest account
         id: exchange
         env:
-          AMI_PINTEREST_APP_ID: ${{ secrets.AMI_PINTEREST_APP_ID }}
-          AMI_PINTEREST_APP_SECRET: ${{ secrets.AMI_PINTEREST_APP_SECRET }}
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
           PINTEREST_AUTHORIZATION_CODE: ${{ inputs.authorization_code }}
-          EXPECTED_PINTEREST_USERNAME: iserviceseood
           REDIRECT_URI: https://analyzemyincome.com/pinterest-callback
           TOKEN_FILE: ${{ runner.temp }}/ami_pinterest_refresh_token
         shell: python
@@ -48,10 +47,9 @@ jobs:
           import urllib.parse
           import urllib.request
 
-          app_id = os.environ['AMI_PINTEREST_APP_ID']
-          app_secret = os.environ['AMI_PINTEREST_APP_SECRET']
+          app_id = os.environ['PINTEREST_APP_ID']
+          app_secret = os.environ['PINTEREST_APP_SECRET']
           code = os.environ['PINTEREST_AUTHORIZATION_CODE'].strip()
-          expected_username = os.environ['EXPECTED_PINTEREST_USERNAME'].strip().lstrip('@').lower()
           redirect_uri = os.environ['REDIRECT_URI']
           token_file = os.environ['TOKEN_FILE']
 
@@ -93,23 +91,47 @@ jobs:
           if missing:
               raise SystemExit('Pinterest token is missing required scopes: ' + ', '.join(missing))
 
-          account_request = urllib.request.Request(
-              'https://api.pinterest.com/v5/user_account',
-              headers={'Authorization': f'Bearer {access_token}'},
-              method='GET',
-          )
-          try:
-              with urllib.request.urlopen(account_request, timeout=30) as response:
-                  account = json.loads(response.read().decode())
-          except Exception as exc:
-              raise SystemExit(f'Pinterest profile identity check failed: {exc}')
+          # Verify this is the Analyze My Income Pinterest account by confirming
+          # ownership visibility of Pins previously published for AMI. This avoids
+          # relying on user_account scope and prevents publishing to Rare Plant.
+          known_ami_pin_ids = {
+              '879961214758040904',
+              '879961214758062627',
+              '879961214758071343',
+              '879961214758092251',
+          }
+          headers = {'Authorization': f'Bearer {access_token}'}
+          bookmark = None
+          visible = set()
+          for _ in range(5):
+              params = {'page_size': 100}
+              if bookmark:
+                  params['bookmark'] = bookmark
+              query = urllib.parse.urlencode(params)
+              pins_request = urllib.request.Request(
+                  f'https://api.pinterest.com/v5/pins?{query}',
+                  headers=headers,
+                  method='GET',
+              )
+              try:
+                  with urllib.request.urlopen(pins_request, timeout=30) as response:
+                      pins_payload = json.loads(response.read().decode())
+              except Exception as exc:
+                  raise SystemExit(f'Pinterest Pin ownership verification failed: {exc}')
 
-          actual_username = str(account.get('username') or '').strip().lstrip('@').lower()
-          if not actual_username:
-              raise SystemExit('Pinterest did not return a username for the authorized profile.')
-          if actual_username != expected_username:
+              for item in pins_payload.get('items', []):
+                  pin_id = str(item.get('id') or '')
+                  if pin_id in known_ami_pin_ids:
+                      visible.add(pin_id)
+              if visible:
+                  break
+              bookmark = pins_payload.get('bookmark')
+              if not bookmark:
+                  break
+
+          if not visible:
               raise SystemExit(
-                  f'WRONG PINTEREST PROFILE: authorized @{actual_username}, expected @{expected_username}. '
+                  'WRONG PINTEREST PROFILE: the authorized account cannot see any known Analyze My Income Pin. '
                   'AMI token was NOT saved.'
               )
 
@@ -117,8 +139,8 @@ jobs:
           with os.fdopen(fd, 'w', encoding='utf-8') as handle:
               handle.write(refresh_token)
 
-          print(f'Pinterest profile verified: @{actual_username}')
-          print('Dedicated Analyze My Income Pinterest app credentials verified.')
+          print('Analyze My Income Pinterest account verified via existing Pin ownership.')
+          print('Matched known AMI Pin IDs: ' + ', '.join(sorted(visible)))
           print('Required board/pin scopes verified.')
 
       - name: Save Analyze My Income refresh token as GitHub secret
@@ -128,9 +150,9 @@ jobs:
         run: |
           test -s "$TOKEN_FILE"
           gh secret set AMI_PINTEREST_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" < "$TOKEN_FILE"
-          echo "AMI_PINTEREST_REFRESH_TOKEN saved securely after profile verification."
+          echo "AMI_PINTEREST_REFRESH_TOKEN saved securely after account verification."
 
       - name: Connection complete
         run: |
-          echo "Analyze My Income Pinterest OAuth connection completed for @iserviceseood."
-          echo "The publisher remains manual-only until one test Pin is visually verified."
+          echo "Analyze My Income Pinterest OAuth connection completed."
+          echo "The AMI publisher can now use the dedicated user refresh token."
