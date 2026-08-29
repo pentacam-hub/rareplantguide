@@ -73,6 +73,10 @@ theme = "PaperMod"
   url = "/tools/"
   weight = 7
 [[menu.main]]
+  name = "Gear"
+  url = "/buying-guides/"
+  weight = 8
+[[menu.main]]
   name = "About"
   url = "/about/"
-  weight = 8
+  weight = 9
