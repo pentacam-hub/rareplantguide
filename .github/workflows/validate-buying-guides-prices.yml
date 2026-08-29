@@ -29,7 +29,12 @@ jobs:
         run: |
           test -f public/buying-guides/best-selling-grow-lights/index.html
           test -f public/buying-guides/best-plant-stands-with-grow-lights/index.html
+          echo 'Checking Grow Lights price slots'
           grep -q 'data-amazon-price="B091DLFDL9"' public/buying-guides/best-selling-grow-lights/index.html
+          echo 'Checking Plant Stands price slots'
           grep -q 'data-amazon-price="B0F5GTD4HN"' public/buying-guides/best-plant-stands-with-grow-lights/index.html
+          echo 'Checking Grow Lights price loader'
           grep -q '/js/amazon-prices.js' public/buying-guides/best-selling-grow-lights/index.html
+          echo 'Checking Plant Stands price loader'
           grep -q '/js/amazon-prices.js' public/buying-guides/best-plant-stands-with-grow-lights/index.html
+          echo 'All buying guide checks passed'
