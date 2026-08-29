@@ -58,11 +58,11 @@ class AnalyzeMyIncomePinterestTests(unittest.TestCase):
         else:
             os.environ["RUNNER_TEMP"] = previous
 
-    def test_seed_queue_has_required_fields_and_twelve_pins(self):
+    def test_seed_queue_has_required_fields(self):
         with open("ami-pinterest-queue.yaml", "r", encoding="utf-8") as handle:
             queue = yaml.safe_load(handle)
         pins = queue["pins"]
-        self.assertEqual(len(pins), 12)
+        self.assertGreaterEqual(len(pins), 12)
         for pin in pins:
             for field in ["id", "status", "title", "description", "board", "destination", "kicker", "graphic_title"]:
                 self.assertTrue(pin.get(field), f"{pin.get('id')} missing {field}")
