@@ -1,9 +1,12 @@
 name: Analyze My Income Pinterest Publisher
 
-# PAUSED: keep manual-only until the dedicated Analyze My Income Pinterest app
-# is connected and a single test Pin is verified on @iserviceseood.
 on:
   workflow_dispatch: {}
+  push:
+    branches:
+      - main
+    paths:
+      - ami-pinterest-queue.yaml
 
 permissions:
   contents: write
