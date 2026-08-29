@@ -4,7 +4,10 @@
     <div class="buying-hero-copy">
       <span class="buying-eyebrow">TOP 3 • AMAZON US</span>
       <h1>{{ .Title }}</h1>
-      <p>{{ .Description }}</p>
+      {{- if .Params.amazon_associate_active }}
+      <p class="affiliate-disclosure"><em>{{ .Params.associate_disclosure }}</em></p>
+      {{- end }}
+      {{- with .Params.intro }}<p class="buying-intro">{{ . }}</p>{{ else }}<p class="buying-intro">{{ .Description }}</p>{{ end }}
       <div class="buying-meta-row">
         {{- with .Params.market_snapshot }}<span class="buying-snapshot">{{ . }}</span>{{ end }}
         <span class="buying-updated">Updated {{ $.Lastmod.Format "January 2, 2006" }}</span>
@@ -13,45 +16,30 @@
   </header>
 
   {{- $products := .Params.products }}
-  {{- range first 1 $products }}
-  <section class="winner-card" aria-label="Top selling product">
-    <div class="winner-media">
-      <span class="winner-badge">{{ .badge }}</span>
-      <img src="{{ .image }}" alt="{{ .image_alt }}" loading="eager" decoding="async" referrerpolicy="no-referrer">
-    </div>
-    <div class="winner-copy">
-      <p class="winner-kicker">MOST SOLD OF THE THREE</p>
-      <h2>{{ .name }}</h2>
-      <div class="trust-row">
-        <span class="sales-chip">{{ .monthly_sales }} estimated sales</span>
-        <span class="source-chip">Third-party marketplace estimate</span>
-      </div>
-      <p class="winner-bestfor"><strong>Best for:</strong> {{ .best_for }}</p>
-      <p>{{ .verdict }}</p>
-      <a class="buying-cta buying-cta-primary" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK CURRENT PRICE ON AMAZON →</a>
-      <small>ASIN {{ .asin }}</small>
-    </div>
-  </section>
-  {{- end }}
 
-  <section class="comparison-section">
+  <section class="comparison-section comparison-first">
     <div class="section-heading">
       <span>QUICK DECISION</span>
-      <h2>Compare the 3 best sellers</h2>
-      <p>Three products only. Compare the product, estimated sales and best use case at a glance, then check Amazon for live price, rating and availability.</p>
+      <h2>Pick the right one in under a minute</h2>
+      <p>Three products, three clear use cases. Live price, star rating, review count and availability stay on Amazon.</p>
     </div>
     <div class="comparison-table-wrap">
       <table class="comparison-table">
         <thead>
-          <tr><th>Product</th><th>Est. monthly sales</th><th>Best for</th><th></th></tr>
+          <tr><th>Pick</th><th>Product</th><th>Est. sales</th><th>Best for</th><th>Amazon rating</th><th></th></tr>
         </thead>
         <tbody>
           {{- range $products }}
-          <tr>
-            <td class="product-cell"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy" referrerpolicy="no-referrer"><div><strong>#{{ .rank }} {{ .short_name }}</strong><small>{{ .badge }}</small></div></td>
+          <tr{{ if .highlight }} class="comparison-winner"{{ end }}>
+            <td><span class="decision-medal">{{ .medal }}</span></td>
+            <td class="product-cell">
+              <a class="product-image-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
+              <div><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener"><strong>#{{ .rank }} {{ .short_name }}</strong></a><small>{{ .badge }}</small></div>
+            </td>
             <td><strong>{{ .monthly_sales }}</strong><small class="estimate-note">Third-party estimate</small></td>
             <td>{{ .best_for }}</td>
-            <td><a class="table-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK ON AMAZON →</a></td>
+            <td><a class="rating-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">★ View current rating</a></td>
+            <td><a class="table-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK ON AMAZON →</a>{{ if $.Params.amazon_associate_active }}<small class="paid-link-note">Paid link</small>{{ end }}</td>
           </tr>
           {{- end }}
         </tbody>
@@ -59,29 +47,56 @@
     </div>
   </section>
 
+  {{- range first 1 $products }}
+  <section class="winner-card" aria-label="Best overall pick">
+    <div class="winner-media">
+      <span class="winner-badge">{{ .medal }}</span>
+      <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="eager" decoding="async" referrerpolicy="no-referrer"></a>
+    </div>
+    <div class="winner-copy">
+      <p class="winner-kicker">OUR FASTEST RECOMMENDATION</p>
+      <h2><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">{{ .name }}</a></h2>
+      <div class="trust-row">
+        <span class="sales-chip">{{ .monthly_sales }} est. sales</span>
+        <a class="trust-rating" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">★ See current Amazon rating</a>
+      </div>
+      <p class="winner-bestfor"><strong>Perfect for:</strong> {{ .ideal_for }}</p>
+      <p>{{ .verdict }}</p>
+      <a class="buying-cta buying-cta-primary" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK CURRENT PRICE &amp; AVAILABILITY →</a>
+      {{ if $.Params.amazon_associate_active }}<small class="paid-link-note">Paid link</small>{{ end }}
+      <small class="asin-note">ASIN {{ .asin }}</small>
+    </div>
+  </section>
+  {{- end }}
+
   <section class="product-cards-section">
     <div class="section-heading">
       <span>THE SHORTLIST</span>
-      <h2>Why each one made the cut</h2>
+      <h2>Need one more reason before you click?</h2>
+      <p>Scan the strengths, the one main limitation and the ideal buyer for each model.</p>
     </div>
     <div class="product-card-grid">
       {{- range $products }}
       <article class="product-card{{ if .highlight }} product-card-featured{{ end }}">
         <div class="product-card-media">
           <span class="product-rank">#{{ .rank }}</span>
-          <span class="product-badge">{{ .badge }}</span>
-          <img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer">
+          <span class="product-badge">{{ .medal }}</span>
+          <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
         </div>
         <div class="product-card-body">
-          <h3>{{ .name }}</h3>
-          <div class="sales-proof">Estimated sales: <strong>{{ .monthly_sales }}</strong> <small>• third-party marketplace estimate</small></div>
-          <p class="bestfor"><strong>Best for:</strong> {{ .best_for }}</p>
+          <h3><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">{{ .name }}</a></h3>
+          <div class="card-trust">
+            <a class="rating-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">★ Current Amazon rating</a>
+            <span>{{ .monthly_sales }} est. sales</span>
+          </div>
+          <p class="bestfor"><strong>Perfect for:</strong> {{ .ideal_for }}</p>
           <p>{{ .verdict }}</p>
           <div class="pros-cons">
-            <div><strong>Why buy it</strong><ul>{{ range .pros }}<li>{{ . }}</li>{{ end }}</ul></div>
-            <div><strong>Know before buying</strong><ul>{{ range .cons }}<li>{{ . }}</li>{{ end }}</ul></div>
+            <div class="pros"><strong>Why buy it</strong><ul>{{ range .pros }}<li><span aria-hidden="true">✅</span>{{ . }}</li>{{ end }}</ul></div>
+            <div class="cons"><strong>Main limitation</strong><ul>{{ range .cons }}<li><span aria-hidden="true">❌</span>{{ . }}</li>{{ end }}</ul></div>
           </div>
-          <a class="buying-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK CURRENT PRICE ON AMAZON →</a>
+          <a class="buying-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK CURRENT PRICE &amp; AVAILABILITY →</a>
+          {{ if $.Params.amazon_associate_active }}<small class="paid-link-note">Paid link</small>{{ end }}
         </div>
       </article>
       {{- end }}
@@ -94,12 +109,9 @@
   </section>
   {{- end }}
 
-  {{- with .Params.browse_url }}
+  {{- with .Params.amazon_browse_url }}
   <section class="buying-browse">
-    <div>
-      <strong>Still comparing?</strong>
-      <span>Browse more rare-plant accessories on Amazon.</span>
-    </div>
+    <div><strong>Still comparing?</strong><span>Browse more rare-plant lighting options on Amazon.</span></div>
     <a class="buying-cta" href="{{ . }}" target="_blank" rel="sponsored nofollow noopener">BROWSE MORE ON AMAZON →</a>
   </section>
   {{- end }}
