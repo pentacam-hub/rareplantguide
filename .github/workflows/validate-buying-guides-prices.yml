@@ -1,9 +1,7 @@
-name: Validate Buying Guides + Prices
+name: Validate Buying Guides + Prices (manual)
 
 on:
-  push:
-    paths:
-      - '.github/workflows/validate-buying-guides-prices.yml'
+  workflow_dispatch: {}
 
 permissions:
   contents: read
@@ -37,4 +35,3 @@ jobs:
           grep -q 'data-amazon-price=B0CL4WHFVS' public/buying-guides/best-plant-stands-with-grow-lights/index.html
           grep -q '/js/amazon-prices.js' public/buying-guides/best-selling-grow-lights/index.html
           grep -q '/js/amazon-prices.js' public/buying-guides/best-plant-stands-with-grow-lights/index.html
-          echo 'All buying guide checks passed'
