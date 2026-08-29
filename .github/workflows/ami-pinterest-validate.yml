@@ -1,0 +1,22 @@
+name: Validate AMI Pinterest Publisher
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/ami-pinterest-validate.yml
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+      - run: pip install pyyaml==6.0.2 requests==2.32.3 Pillow==10.4.0
+      - run: python -m unittest scripts.test_ami_pinterest
