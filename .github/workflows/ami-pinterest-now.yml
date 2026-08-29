@@ -36,7 +36,9 @@ jobs:
           import base64
           import datetime
           import os
+          import sys
           import requests
+          sys.path.insert(0, os.getcwd())
           import scripts.ami_pinterest as ami
 
           app_id = os.environ.get('PINTEREST_APP_ID')
