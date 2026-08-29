@@ -1,9 +1,9 @@
 ---
-title: "How Much Light Do Rare Aroids Need? Indoor Light Guide"
+title: "How Much Light Do Rare Aroids Need? 100–800 FC Chart"
 date: 2026-08-04
-lastmod: 2026-08-25
+lastmod: 2026-08-29
 draft: false
-description: "How much light do rare aroids need? Compare practical 100–800 FC indoor ranges for Monstera, Philodendron, Anthurium and Alocasia, plus grow-light timing."
+description: "See a practical 100–800 FC light chart for Monstera, Philodendron, Anthurium and Alocasia, plus signs of too little light and grow-light timing."
 tags: ["rare plants", "aroid care", "grow lights", "plant styling"]
 categories: ["Plant Care"]
 cover:
@@ -102,6 +102,8 @@ For most home setups, look for:
 A **10-to-14-hour daily schedule** is a practical range to test for supplemental lighting. Duration and intensity work together: a strong fixture used for a shorter period can deliver more light than a weak fixture left on longer.
 
 For choosing and positioning a fixture, see [Best Grow Lights for Rare Houseplants](/posts/best-grow-lights-rare-houseplants/).
+
+**Need a fixture now?** Compare our [3 grow-light picks for 2026](/buying-guides/best-selling-grow-lights/) with product-by-product setup notes and recent tracked prices.
 
 ## Signs an Aroid Is Not Getting Enough Light
 

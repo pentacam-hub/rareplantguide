@@ -1,9 +1,9 @@
 ---
-title: "Best Soil Mix for Variegated Monstera: 40/30/20/10 Recipe"
+title: "Best Soil for Variegated Monstera: Exact 40/30/20/10 Mix"
 date: 2026-07-31T00:00:00
-lastmod: 2026-08-28
+lastmod: 2026-08-29
 draft: false
-description: "Best soil mix for variegated Monstera Albo and Thai Constellation: 40% bark, 30% perlite or pumice, 20% coco or sphagnum, and 10% potting mix or castings."
+description: "Use this exact 40/30/20/10 soil mix for Monstera Albo and Thai Constellation, plus simple adjustments for humidity, pot type and watering speed."
 tags: ["rare plants", "soil mix", "monstera", "variegated monstera"]
 cover:
     image: "/images/chunky-aroid-soil-mix.jpg"

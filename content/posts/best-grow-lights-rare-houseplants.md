@@ -1,9 +1,9 @@
 ---
-title: "Best Grow Lights for Rare Houseplants: 2026 Setup Guide"
+title: "Grow Lights for Rare Houseplants: Distance, Timing & Setup"
 date: 2026-07-31T00:00:00
-lastmod: 2026-08-28
+lastmod: 2026-08-29
 draft: false
-description: "Best grow lights for rare and variegated houseplants: compare full-spectrum LEDs, coverage, intensity, mounting distance and 10–14 hour timing for indoor aroids."
+description: "Set up grow lights for rare houseplants correctly: learn mounting distance, coverage, intensity, 10–14 hour timing and signs the light is too weak or strong."
 tags: ["rare plants", "grow lights", "houseplant care", "variegated plants"]
 cover:
     image: "/images/grow-light-setup.jpg"
@@ -25,6 +25,8 @@ For variegated Monstera, Philodendron, Anthurium and other collectible aroids, p
 **Quick answer:** choose a full-spectrum LED sized for the shelf or growing area, follow the manufacturer's recommended distance, start with a conservative schedule, and increase exposure gradually while watching new growth.
 
 For measured light ranges rather than product selection, use the companion guide: [How Much Light Do Rare Aroids Need?](/posts/how-much-light-do-your-rare-aroids-actually-need-a-real-talk-guide-to-happy-leaves/).
+
+**Shopping now?** Compare our [3 best grow-light picks for 2026](/buying-guides/best-selling-grow-lights/) with quick product comparisons and recent tracked prices.
 
 ## What to Look For in a Grow Light
 

@@ -1,9 +1,9 @@
 ---
-title: "Rare Houseplant Pests: Spider Mites, Thrips, Mealybugs & Scale"
+title: "Rare Houseplant Pests: Spider Mites, Thrips & More (ID Chart)"
 date: 2026-07-31T00:00:00
-lastmod: 2026-08-25
+lastmod: 2026-08-29
 draft: false
-description: "Identify rare houseplant pests fast: compare spider-mite webbing, thrips silver streaks, mealybug cottony clusters and scale bumps, plus treatment steps."
+description: "Use this quick rare-houseplant pest ID chart to spot spider mites, thrips, mealybugs and scale, then follow the right isolation and treatment steps."
 tags: ["rare plants", "pest control", "houseplant care"]
 cover:
     image: "/images/houseplant-pest-inspection.jpg"
