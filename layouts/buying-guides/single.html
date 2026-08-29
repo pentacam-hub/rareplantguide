@@ -23,27 +23,47 @@
       <h2 id="quick-decision-heading">Choose the right one in under a minute</h2>
       <p>Three products, three clear use cases. Our score is editorial — Amazon remains the source for current price, customer rating, reviews and availability.</p>
     </div>
-    <div class="comparison-table-wrap">
+
+    <div class="comparison-table-wrap comparison-desktop">
       <table class="comparison-table">
         <thead>
-          <tr><th>Pick</th><th>Product</th><th>Editor score</th><th>Best for</th><th>Why it wins</th><th></th></tr>
+          <tr><th>Product</th><th>Editor score</th><th>Best for</th><th>Check on Amazon</th></tr>
         </thead>
         <tbody>
           {{- range $products }}
           <tr{{ if .highlight }} class="comparison-winner"{{ end }}>
-            <td><span class="decision-medal">{{ .medal }}</span></td>
             <td class="product-cell">
               <a class="product-image-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
-              <div><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener"><strong>#{{ .rank }} {{ .short_name }}</strong></a><small>{{ .badge }}</small></div>
+              <div class="comparison-product-copy">
+                <span class="decision-medal">{{ .medal }}</span>
+                <a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener"><strong>#{{ .rank }} {{ .short_name }}</strong></a>
+                <small>{{ .key_reason }}</small>
+              </div>
             </td>
-            <td><span class="editor-score">{{ .editor_score }}</span><small class="score-note">Our editorial score</small></td>
-            <td>{{ .best_for }}</td>
-            <td>{{ .key_reason }}</td>
-            <td><a class="table-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK PRICE &amp; AVAILABILITY →</a>{{ if $.Params.amazon_associate_active }}<small class="paid-link-note">Paid link</small>{{ end }}</td>
+            <td><span class="editor-score">{{ .editor_score }}</span><small class="score-note">Our score</small></td>
+            <td class="best-for-cell"><strong>{{ .best_for }}</strong></td>
+            <td class="comparison-action-cell"><a class="table-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK PRICE &amp; AVAILABILITY →</a>{{ if $.Params.amazon_associate_active }}<small class="paid-link-note">Paid link</small>{{ end }}</td>
           </tr>
           {{- end }}
         </tbody>
       </table>
+    </div>
+
+    <div class="comparison-mobile-grid">
+      {{- range $products }}
+      <article class="comparison-mobile-card{{ if .highlight }} comparison-mobile-winner{{ end }}">
+        <div class="comparison-mobile-top">
+          <span class="decision-medal">{{ .medal }}</span>
+          <span class="editor-score">{{ .editor_score }}</span>
+        </div>
+        <a class="comparison-mobile-image" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
+        <h3><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">#{{ .rank }} {{ .short_name }}</a></h3>
+        <p class="comparison-mobile-best"><strong>Best for:</strong> {{ .best_for }}</p>
+        <p class="comparison-mobile-reason">{{ .key_reason }}</p>
+        <a class="table-cta mobile-table-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK PRICE &amp; AVAILABILITY →</a>
+        {{ if $.Params.amazon_associate_active }}<small class="paid-link-note">Paid link</small>{{ end }}
+      </article>
+      {{- end }}
     </div>
   </section>
 
