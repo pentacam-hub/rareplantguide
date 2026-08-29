@@ -45,32 +45,49 @@ jobs:
           app_secret = os.environ.get('PINTEREST_APP_SECRET')
           refresh_token = os.environ.get('PINTEREST_REFRESH_TOKEN')
           if not app_id or not app_secret:
-              raise SystemExit('Generic Pinterest app credentials are missing.')
+              raise SystemExit('Pinterest app credentials are missing.')
 
           basic = base64.b64encode(f'{app_id}:{app_secret}'.encode()).decode()
-          headers = {
+          basic_headers = {
               'Authorization': f'Basic {basic}',
               'Content-Type': 'application/x-www-form-urlencoded',
           }
 
+          def account_username(access_token):
+              response = requests.get(
+                  'https://api.pinterest.com/v5/user_account',
+                  headers={'Authorization': f'Bearer {access_token}'},
+                  timeout=20,
+              )
+              if not response.ok:
+                  return None
+              return str(response.json().get('username') or '').strip().lstrip('@').lower()
+
           token = None
+          username = None
           auth_mode = None
-          response = requests.post(
+
+          client_response = requests.post(
               'https://api.pinterest.com/v5/oauth/token',
-              headers=headers,
+              headers=basic_headers,
               data={
                   'grant_type': 'client_credentials',
                   'scope': 'boards:read,boards:write,pins:read,pins:write',
               },
               timeout=20,
           )
-          if response.ok:
-              token = response.json()['access_token']
-              auth_mode = 'client_credentials'
-          elif refresh_token:
-              response = requests.post(
+          if client_response.ok:
+              candidate = client_response.json()['access_token']
+              candidate_username = account_username(candidate)
+              if candidate_username == 'iserviceseood':
+                  token = candidate
+                  username = candidate_username
+                  auth_mode = 'client_credentials'
+
+          if token is None and refresh_token:
+              refresh_response = requests.post(
                   'https://api.pinterest.com/v5/oauth/token',
-                  headers=headers,
+                  headers=basic_headers,
                   data={
                       'grant_type': 'refresh_token',
                       'refresh_token': refresh_token,
@@ -78,22 +95,21 @@ jobs:
                   },
                   timeout=20,
               )
-              response.raise_for_status()
-              token = response.json()['access_token']
-              auth_mode = 'refresh_token'
-          else:
-              raise SystemExit('Pinterest authentication failed and no refresh-token fallback is configured.')
+              refresh_response.raise_for_status()
+              candidate = refresh_response.json()['access_token']
+              candidate_username = account_username(candidate)
+              if candidate_username == 'iserviceseood':
+                  token = candidate
+                  username = candidate_username
+                  auth_mode = 'refresh_token'
+              else:
+                  shown = candidate_username or 'unavailable'
+                  raise SystemExit(f'Refresh token belongs to @{shown}, not @iserviceseood. Nothing published.')
 
-          account = requests.get(
-              'https://api.pinterest.com/v5/user_account',
-              headers={'Authorization': f'Bearer {token}'},
-              timeout=20,
-          )
-          account.raise_for_status()
-          username = str(account.json().get('username') or '').strip().lstrip('@').lower()
+          if token is None:
+              raise SystemExit('Could not obtain a user-authorized Pinterest token for @iserviceseood. Nothing published.')
+
           print(f'Authenticated Pinterest profile: @{username} via {auth_mode}')
-          if username != 'iserviceseood':
-              raise SystemExit(f'Wrong Pinterest profile @{username}; expected @iserviceseood. Nothing published.')
 
           queue = ami.load_queue()
           wanted = ['ami-013', 'ami-014']
