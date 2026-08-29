@@ -5,7 +5,10 @@
       <span class="buying-eyebrow">TOP 3 • AMAZON US</span>
       <h1>{{ .Title }}</h1>
       <p>{{ .Description }}</p>
-      {{- with .Params.market_snapshot }}<div class="buying-snapshot">{{ . }}</div>{{ end }}
+      <div class="buying-meta-row">
+        {{- with .Params.market_snapshot }}<span class="buying-snapshot">{{ . }}</span>{{ end }}
+        <span class="buying-updated">Updated {{ $.Lastmod.Format "January 2, 2006" }}</span>
+      </div>
     </div>
   </header>
 
@@ -14,20 +17,18 @@
   <section class="winner-card" aria-label="Top selling product">
     <div class="winner-media">
       <span class="winner-badge">{{ .badge }}</span>
-      <img src="{{ .image }}" alt="{{ .image_alt }}" loading="eager" decoding="async">
+      <img src="{{ .image }}" alt="{{ .image_alt }}" loading="eager" decoding="async" referrerpolicy="no-referrer">
     </div>
     <div class="winner-copy">
       <p class="winner-kicker">MOST SOLD OF THE THREE</p>
       <h2>{{ .name }}</h2>
       <div class="trust-row">
-        <span class="trust-price">{{ .price }}</span>
-        <span class="trust-rating">★ {{ .rating }}</span>
-        <span>{{ .reviews }} reviews</span>
-        <span>{{ .monthly_sales }}</span>
+        <span class="sales-chip">{{ .monthly_sales }} estimated sales</span>
+        <span class="source-chip">Third-party marketplace estimate</span>
       </div>
       <p class="winner-bestfor"><strong>Best for:</strong> {{ .best_for }}</p>
       <p>{{ .verdict }}</p>
-      <a class="buying-cta buying-cta-primary" href="{{ .amazon_url }}" target="_blank" rel="nofollow noopener">CHECK PRICE ON AMAZON →</a>
+      <a class="buying-cta buying-cta-primary" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK CURRENT PRICE ON AMAZON →</a>
       <small>ASIN {{ .asin }}</small>
     </div>
   </section>
@@ -37,23 +38,20 @@
     <div class="section-heading">
       <span>QUICK DECISION</span>
       <h2>Compare the 3 best sellers</h2>
-      <p>Three products only. See the visual difference, current marketplace snapshot and best use case at a glance.</p>
+      <p>Three products only. Compare the product, estimated sales and best use case at a glance, then check Amazon for live price, rating and availability.</p>
     </div>
     <div class="comparison-table-wrap">
       <table class="comparison-table">
         <thead>
-          <tr><th>Product</th><th>Price</th><th>Rating</th><th>Reviews</th><th>Est. sales</th><th>Best for</th><th></th></tr>
+          <tr><th>Product</th><th>Est. monthly sales</th><th>Best for</th><th></th></tr>
         </thead>
         <tbody>
           {{- range $products }}
           <tr>
-            <td class="product-cell"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy"><div><strong>#{{ .rank }} {{ .short_name }}</strong><small>{{ .badge }}</small></div></td>
-            <td><strong>{{ .price }}</strong></td>
-            <td>★ {{ .rating }}</td>
-            <td>{{ .reviews }}</td>
-            <td>{{ .monthly_sales }}</td>
+            <td class="product-cell"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy" referrerpolicy="no-referrer"><div><strong>#{{ .rank }} {{ .short_name }}</strong><small>{{ .badge }}</small></div></td>
+            <td><strong>{{ .monthly_sales }}</strong><small class="estimate-note">Third-party estimate</small></td>
             <td>{{ .best_for }}</td>
-            <td><a class="table-cta" href="{{ .amazon_url }}" target="_blank" rel="nofollow noopener">VIEW →</a></td>
+            <td><a class="table-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK ON AMAZON →</a></td>
           </tr>
           {{- end }}
         </tbody>
@@ -72,23 +70,18 @@
         <div class="product-card-media">
           <span class="product-rank">#{{ .rank }}</span>
           <span class="product-badge">{{ .badge }}</span>
-          <img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy" decoding="async">
+          <img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer">
         </div>
         <div class="product-card-body">
           <h3>{{ .name }}</h3>
-          <div class="card-trust">
-            <strong>{{ .price }}</strong>
-            <span>★ {{ .rating }}</span>
-            <span>{{ .reviews }} reviews</span>
-          </div>
-          <div class="sales-proof">Estimated sales: <strong>{{ .monthly_sales }}</strong></div>
+          <div class="sales-proof">Estimated sales: <strong>{{ .monthly_sales }}</strong> <small>• third-party marketplace estimate</small></div>
           <p class="bestfor"><strong>Best for:</strong> {{ .best_for }}</p>
           <p>{{ .verdict }}</p>
           <div class="pros-cons">
             <div><strong>Why buy it</strong><ul>{{ range .pros }}<li>{{ . }}</li>{{ end }}</ul></div>
             <div><strong>Know before buying</strong><ul>{{ range .cons }}<li>{{ . }}</li>{{ end }}</ul></div>
           </div>
-          <a class="buying-cta" href="{{ .amazon_url }}" target="_blank" rel="nofollow noopener">CHECK PRICE ON AMAZON →</a>
+          <a class="buying-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK CURRENT PRICE ON AMAZON →</a>
         </div>
       </article>
       {{- end }}
@@ -101,9 +94,28 @@
   </section>
   {{- end }}
 
+  {{- with .Params.browse_url }}
+  <section class="buying-browse">
+    <div>
+      <strong>Still comparing?</strong>
+      <span>Browse more rare-plant accessories on Amazon.</span>
+    </div>
+    <a class="buying-cta" href="{{ . }}" target="_blank" rel="sponsored nofollow noopener">BROWSE MORE ON AMAZON →</a>
+  </section>
+  {{- end }}
+
   <aside class="buying-disclaimer">
     <strong>Marketplace note</strong>
     <p>{{ .Params.source_note }}</p>
   </aside>
 </article>
+
+{{- if .Params.sticky_cta }}
+  {{- range first 1 $products }}
+  <div class="buying-sticky-cta" aria-label="Top pick shortcut">
+    <span><strong>#1 pick:</strong> {{ .short_name }}</span>
+    <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">VIEW TOP PICK →</a>
+  </div>
+  {{- end }}
+{{- end }}
 {{- end }}
