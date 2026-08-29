@@ -1,0 +1,109 @@
+{{- define "main" }}
+<article class="buying-page">
+  <header class="buying-hero">
+    <div class="buying-hero-copy">
+      <span class="buying-eyebrow">TOP 3 • AMAZON US</span>
+      <h1>{{ .Title }}</h1>
+      <p>{{ .Description }}</p>
+      {{- with .Params.market_snapshot }}<div class="buying-snapshot">{{ . }}</div>{{ end }}
+    </div>
+  </header>
+
+  {{- $products := .Params.products }}
+  {{- range first 1 $products }}
+  <section class="winner-card" aria-label="Top selling product">
+    <div class="winner-media">
+      <span class="winner-badge">{{ .badge }}</span>
+      <img src="{{ .image }}" alt="{{ .image_alt }}" loading="eager" decoding="async">
+    </div>
+    <div class="winner-copy">
+      <p class="winner-kicker">MOST SOLD OF THE THREE</p>
+      <h2>{{ .name }}</h2>
+      <div class="trust-row">
+        <span class="trust-price">{{ .price }}</span>
+        <span class="trust-rating">★ {{ .rating }}</span>
+        <span>{{ .reviews }} reviews</span>
+        <span>{{ .monthly_sales }}</span>
+      </div>
+      <p class="winner-bestfor"><strong>Best for:</strong> {{ .best_for }}</p>
+      <p>{{ .verdict }}</p>
+      <a class="buying-cta buying-cta-primary" href="{{ .amazon_url }}" target="_blank" rel="nofollow noopener">CHECK PRICE ON AMAZON →</a>
+      <small>ASIN {{ .asin }}</small>
+    </div>
+  </section>
+  {{- end }}
+
+  <section class="comparison-section">
+    <div class="section-heading">
+      <span>QUICK DECISION</span>
+      <h2>Compare the 3 best sellers</h2>
+      <p>Three products only. See the visual difference, current marketplace snapshot and best use case at a glance.</p>
+    </div>
+    <div class="comparison-table-wrap">
+      <table class="comparison-table">
+        <thead>
+          <tr><th>Product</th><th>Price</th><th>Rating</th><th>Reviews</th><th>Est. sales</th><th>Best for</th><th></th></tr>
+        </thead>
+        <tbody>
+          {{- range $products }}
+          <tr>
+            <td class="product-cell"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy"><div><strong>#{{ .rank }} {{ .short_name }}</strong><small>{{ .badge }}</small></div></td>
+            <td><strong>{{ .price }}</strong></td>
+            <td>★ {{ .rating }}</td>
+            <td>{{ .reviews }}</td>
+            <td>{{ .monthly_sales }}</td>
+            <td>{{ .best_for }}</td>
+            <td><a class="table-cta" href="{{ .amazon_url }}" target="_blank" rel="nofollow noopener">VIEW →</a></td>
+          </tr>
+          {{- end }}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="product-cards-section">
+    <div class="section-heading">
+      <span>THE SHORTLIST</span>
+      <h2>Why each one made the cut</h2>
+    </div>
+    <div class="product-card-grid">
+      {{- range $products }}
+      <article class="product-card{{ if .highlight }} product-card-featured{{ end }}">
+        <div class="product-card-media">
+          <span class="product-rank">#{{ .rank }}</span>
+          <span class="product-badge">{{ .badge }}</span>
+          <img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy" decoding="async">
+        </div>
+        <div class="product-card-body">
+          <h3>{{ .name }}</h3>
+          <div class="card-trust">
+            <strong>{{ .price }}</strong>
+            <span>★ {{ .rating }}</span>
+            <span>{{ .reviews }} reviews</span>
+          </div>
+          <div class="sales-proof">Estimated sales: <strong>{{ .monthly_sales }}</strong></div>
+          <p class="bestfor"><strong>Best for:</strong> {{ .best_for }}</p>
+          <p>{{ .verdict }}</p>
+          <div class="pros-cons">
+            <div><strong>Why buy it</strong><ul>{{ range .pros }}<li>{{ . }}</li>{{ end }}</ul></div>
+            <div><strong>Know before buying</strong><ul>{{ range .cons }}<li>{{ . }}</li>{{ end }}</ul></div>
+          </div>
+          <a class="buying-cta" href="{{ .amazon_url }}" target="_blank" rel="nofollow noopener">CHECK PRICE ON AMAZON →</a>
+        </div>
+      </article>
+      {{- end }}
+    </div>
+  </section>
+
+  {{- with .Content }}
+  <section class="buying-editorial post-content">
+    {{ . }}
+  </section>
+  {{- end }}
+
+  <aside class="buying-disclaimer">
+    <strong>Marketplace note</strong>
+    <p>{{ .Params.source_note }}</p>
+  </aside>
+</article>
+{{- end }}
