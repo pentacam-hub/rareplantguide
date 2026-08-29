@@ -8,6 +8,61 @@
   gtag('config', 'G-2XPYDX7QRW');
 </script>
 
+<style>
+/* Buying-guide criteria cards: shared hard override for Grow Lights + Plant Stands. */
+.buying-page .criteria-grid{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr))!important;
+  gap:16px!important;
+}
+.buying-page .criterion-card{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  column-gap:12px!important;
+  row-gap:10px!important;
+  align-items:start!important;
+  min-width:0!important;
+  padding:18px!important;
+  position:relative!important;
+}
+.buying-page .criterion-card strong{
+  grid-column:1!important;
+  display:block!important;
+  min-width:0!important;
+  padding-right:0!important;
+  margin:0!important;
+  font-size:1.05rem!important;
+  line-height:1.28!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+}
+.buying-page .criterion-card>span{
+  grid-column:2!important;
+  position:static!important;
+  inset:auto!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:max-content!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:6px 9px!important;
+  white-space:nowrap!important;
+  flex:0 0 auto!important;
+}
+.buying-page .criterion-card p{
+  grid-column:1/-1!important;
+  margin:0!important;
+  font-size:.96rem!important;
+  line-height:1.55!important;
+}
+@media(max-width:600px){
+  .buying-page .criteria-grid{grid-template-columns:1fr!important;gap:12px!important;}
+  .buying-page .criterion-card{padding:16px!important;}
+}
+</style>
+
 {{- if .IsHome }}
 <script type="application/ld+json">
 {
