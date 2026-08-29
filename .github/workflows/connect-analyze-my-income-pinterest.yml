@@ -105,9 +105,6 @@ jobs:
           if missing:
               raise SystemExit('Pinterest token is missing required scopes: ' + ', '.join(missing))
 
-          # Identity guard without user_accounts:read. Pinterest is currently not
-          # granting that scope to this app, so verify the authorized account by
-          # board names already created and used by Analyze My Income.
           expected_boards = {
               '1099 tax tips',
               'w-2 vs 1099',
@@ -155,8 +152,16 @@ jobs:
           print('Analyze My Income Pinterest account verified by existing board ownership.')
           print('Matched AMI boards: ' + ', '.join(sorted(found)))
           print('Required board/pin scopes verified.')
-          if payload.get('refresh_token_expires_at') or payload.get('refresh_token_expires_in'):
-              print('Refresh token returned successfully.')
+          print('Refresh token returned successfully.')
+
+      - name: Persist verified Analyze My Income refresh token immediately
+        env:
+          GH_TOKEN: ${{ secrets.GH_SECRETS_PAT }}
+          TOKEN_FILE: ${{ runner.temp }}/ami_pinterest_refresh_token
+        run: |
+          test -s "$TOKEN_FILE"
+          gh secret set AMI_PINTEREST_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" < "$TOKEN_FILE"
+          echo "Verified AMI_PINTEREST_REFRESH_TOKEN saved before validation/publication."
 
       - name: Validate Analyze My Income Pinterest publisher
         run: python -m unittest scripts.test_ami_pinterest
@@ -174,14 +179,14 @@ jobs:
             python scripts/ami_pinterest.py
           done
 
-      - name: Save final Analyze My Income refresh token as GitHub secret
+      - name: Save final rotated Analyze My Income refresh token
         env:
           GH_TOKEN: ${{ secrets.GH_SECRETS_PAT }}
           TOKEN_FILE: ${{ runner.temp }}/ami_pinterest_refresh_token
         run: |
           test -s "$TOKEN_FILE"
           gh secret set AMI_PINTEREST_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" < "$TOKEN_FILE"
-          echo "AMI_PINTEREST_REFRESH_TOKEN saved securely after publication."
+          echo "Final AMI_PINTEREST_REFRESH_TOKEN saved securely after publication."
 
       - name: Commit Analyze My Income Pin IDs
         run: |
