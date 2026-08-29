@@ -1,8 +1,8 @@
 {{- define "main" }}
-<article class="buying-page">
+<article class="buying-page{{ if .Params.lifestyle_images }} buying-page-lifestyle{{ end }}">
   <header class="buying-hero">
     <div class="buying-hero-copy">
-      <span class="buying-eyebrow">TOP 3 • 2026 BUYING GUIDE</span>
+      <span class="buying-eyebrow">{{- with .Params.eyebrow }}{{ . }}{{ else }}TOP 3 • 2026 BUYING GUIDE{{ end }}</span>
       <h1>{{ .Title }}</h1>
       {{- if .Params.amazon_associate_active }}
       <p class="affiliate-disclosure"><em>{{ .Params.associate_disclosure }}</em></p>
@@ -19,9 +19,9 @@
 
   <section class="comparison-section comparison-first" aria-labelledby="quick-decision-heading">
     <div class="section-heading">
-      <span>QUICK DECISION</span>
-      <h2 id="quick-decision-heading">Choose the right one in under a minute</h2>
-      <p>Three products, three clear use cases. Our score is editorial — Amazon remains the source for current price, customer rating, reviews and availability.</p>
+      <span>{{- with .Params.comparison_kicker }}{{ . }}{{ else }}QUICK DECISION{{ end }}</span>
+      <h2 id="quick-decision-heading">{{- with .Params.comparison_title }}{{ . }}{{ else }}Choose the right one in under a minute{{ end }}</h2>
+      <p>{{- with .Params.comparison_intro }}{{ . }}{{ else }}Three products, three clear use cases. Our score is editorial — Amazon remains the source for current price, customer rating, reviews and availability.{{ end }}</p>
     </div>
 
     <div class="comparison-table-wrap comparison-desktop">
@@ -41,8 +41,8 @@
               </div>
             </td>
             <td><span class="editor-score">{{ .editor_score }}</span><small class="score-note">Our score</small></td>
-            <td class="best-for-cell"><strong>{{ .best_for }}</strong></td>
-            <td class="comparison-action-cell"><a class="table-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK PRICE &amp; AVAILABILITY →</a>{{ if $.Params.amazon_associate_active }}<small class="paid-link-note">Paid link</small>{{ end }}</td>
+            <td class="best-for-cell"><strong>{{ .best_for }}</strong>{{ with .dimensions }}<small class="comparison-dimensions">📏 {{ . }}</small>{{ end }}</td>
+            <td class="comparison-action-cell"><a class="table-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">{{ if .dimensions }}VERIFY SIZE &amp; PRICE →{{ else }}CHECK PRICE &amp; AVAILABILITY →{{ end }}</a>{{ if $.Params.amazon_associate_active }}<small class="paid-link-note">Paid link</small>{{ end }}</td>
           </tr>
           {{- end }}
         </tbody>
@@ -59,8 +59,9 @@
         <a class="comparison-mobile-image" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
         <h3><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">#{{ .rank }} {{ .short_name }}</a></h3>
         <p class="comparison-mobile-best"><strong>Best for:</strong> {{ .best_for }}</p>
+        {{ with .dimensions }}<p class="comparison-mobile-dimension"><strong>📏 Size:</strong> {{ . }}</p>{{ end }}
         <p class="comparison-mobile-reason">{{ .key_reason }}</p>
-        <a class="table-cta mobile-table-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK PRICE &amp; AVAILABILITY →</a>
+        <a class="table-cta mobile-table-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">{{ if .dimensions }}VERIFY DIMENSIONS &amp; PRICE →{{ else }}CHECK PRICE &amp; AVAILABILITY →{{ end }}</a>
         {{ if $.Params.amazon_associate_active }}<small class="paid-link-note">Paid link</small>{{ end }}
       </article>
       {{- end }}
@@ -68,21 +69,32 @@
   </section>
 
   {{- range first 1 $products }}
-  <section class="winner-card" aria-label="Best overall pick">
+  <section class="winner-card" aria-label="Featured pick">
     <div class="winner-media">
       <span class="winner-badge">{{ .medal }}</span>
       <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="eager" decoding="async" referrerpolicy="no-referrer"></a>
     </div>
     <div class="winner-copy">
-      <p class="winner-kicker">OUR #1 RECOMMENDATION</p>
+      <p class="winner-kicker">{{- with $.Params.featured_kicker }}{{ . }}{{ else }}OUR #1 RECOMMENDATION{{ end }}</p>
       <h2><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">{{ .name }}</a></h2>
       <div class="trust-row">
         <span class="sales-chip">Editor score {{ .editor_score }}</span>
         <span class="source-chip">{{ .badge }}</span>
       </div>
       <p class="winner-bestfor"><strong>Perfect for:</strong> {{ .ideal_for }}</p>
+      {{- if or .dimensions .capacity .material .lights .cable_management .assembly }}
+      <div class="product-spec-box" aria-label="Key product details">
+        {{ with .dimensions }}<div class="product-spec-item"><span class="spec-label">📏 Dimensions</span><p>{{ . }}</p></div>{{ end }}
+        {{ with .capacity }}<div class="product-spec-item"><span class="spec-label">🌿 Capacity</span><p>{{ . }}</p></div>{{ end }}
+        {{ with .material }}<div class="product-spec-item"><span class="spec-label">🪵 Material</span><p>{{ . }}</p></div>{{ end }}
+        {{ with .lights }}<div class="product-spec-item"><span class="spec-label">💡 Grow lights</span><p>{{ . }}</p></div>{{ end }}
+        {{ with .cable_management }}<div class="product-spec-item spec-wide"><span class="spec-label">🔌 Cable management</span><p>{{ . }}</p></div>{{ end }}
+        {{ with .assembly }}<div class="product-spec-item spec-wide"><span class="spec-label">🛠️ Assembly</span><p>{{ . }}</p></div>{{ end }}
+      </div>
+      {{- end }}
       <p>{{ .verdict }}</p>
-      <a class="buying-cta buying-cta-primary" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK CURRENT PRICE &amp; AVAILABILITY →</a>
+      <a class="buying-cta buying-cta-primary" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">{{ if .dimensions }}VERIFY DIMENSIONS &amp; PRICE ON AMAZON →{{ else }}CHECK CURRENT PRICE &amp; AVAILABILITY →{{ end }}</a>
+      {{ with .customer_photos_url }}<a class="buying-secondary-link" href="{{ . }}" target="_blank" rel="sponsored nofollow noopener">SEE CUSTOMER PHOTOS ON AMAZON →</a>{{ end }}
       {{ if $.Params.amazon_associate_active }}<small class="paid-link-note">Paid link</small>{{ end }}
       <small class="asin-note">ASIN {{ .asin }}</small>
     </div>
@@ -92,8 +104,8 @@
   <section class="product-cards-section">
     <div class="section-heading">
       <span>THE SHORTLIST</span>
-      <h2>Need more detail before you choose?</h2>
-      <p>Scan the strengths, the main limitation and the ideal buyer for each model.</p>
+      <h2>Compare the details that decide whether it fits</h2>
+      <p>Dimensions, capacity, material, lighting and visible wiring are shown before the buy button so you can rule out the wrong stand quickly.</p>
     </div>
     <div class="product-card-grid">
       {{- range $products }}
@@ -110,12 +122,23 @@
             <span>{{ .badge }}</span>
           </div>
           <p class="bestfor"><strong>Perfect for:</strong> {{ .ideal_for }}</p>
+          {{- if or .dimensions .capacity .material .lights .cable_management .assembly }}
+          <div class="product-spec-box" aria-label="Key product details">
+            {{ with .dimensions }}<div class="product-spec-item"><span class="spec-label">📏 Dimensions</span><p>{{ . }}</p></div>{{ end }}
+            {{ with .capacity }}<div class="product-spec-item"><span class="spec-label">🌿 Capacity</span><p>{{ . }}</p></div>{{ end }}
+            {{ with .material }}<div class="product-spec-item"><span class="spec-label">🪵 Material</span><p>{{ . }}</p></div>{{ end }}
+            {{ with .lights }}<div class="product-spec-item"><span class="spec-label">💡 Grow lights</span><p>{{ . }}</p></div>{{ end }}
+            {{ with .cable_management }}<div class="product-spec-item spec-wide"><span class="spec-label">🔌 Cable management</span><p>{{ . }}</p></div>{{ end }}
+            {{ with .assembly }}<div class="product-spec-item spec-wide"><span class="spec-label">🛠️ Assembly</span><p>{{ . }}</p></div>{{ end }}
+          </div>
+          {{- end }}
           <p>{{ .verdict }}</p>
           <div class="pros-cons">
             <div class="pros"><strong>Why buy it</strong><ul>{{ range .pros }}<li><span aria-hidden="true">✅</span>{{ . }}</li>{{ end }}</ul></div>
             <div class="cons"><strong>Main limitation</strong><ul>{{ range .cons }}<li><span aria-hidden="true">❌</span>{{ . }}</li>{{ end }}</ul></div>
           </div>
-          <a class="buying-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK CURRENT PRICE &amp; AVAILABILITY →</a>
+          <a class="buying-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">{{ if .dimensions }}VERIFY DIMENSIONS &amp; PRICE ON AMAZON →{{ else }}CHECK CURRENT PRICE &amp; AVAILABILITY →{{ end }}</a>
+          {{ with .customer_photos_url }}<a class="buying-secondary-link" href="{{ . }}" target="_blank" rel="sponsored nofollow noopener">SEE CUSTOMER PHOTOS ON AMAZON →</a>{{ end }}
           {{ if $.Params.amazon_associate_active }}<small class="paid-link-note">Paid link</small>{{ end }}
         </div>
       </article>
@@ -147,7 +170,7 @@
 
   {{- with .Params.amazon_browse_url }}
   <section class="buying-browse">
-    <div><strong>Still comparing?</strong><span>Browse more rare-plant lighting options on Amazon.</span></div>
+    <div><strong>Still comparing?</strong><span>Browse more matching options on Amazon.</span></div>
     <a class="buying-cta" href="{{ . }}" target="_blank" rel="sponsored nofollow noopener">BROWSE MORE ON AMAZON →</a>
   </section>
   {{- end }}
@@ -161,8 +184,8 @@
 {{- if .Params.sticky_cta }}
   {{- range first 1 $products }}
   <div class="buying-sticky-cta" aria-label="Top pick shortcut">
-    <span><strong>#1 pick:</strong> {{ .short_name }}</span>
-    <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK ON AMAZON →</a>
+    <span><strong>{{ .medal }}:</strong> {{ .short_name }}</span>
+    <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">{{ if .dimensions }}VERIFY SIZE →{{ else }}CHECK ON AMAZON →{{ end }}</a>
   </div>
   {{- end }}
 {{- end }}
