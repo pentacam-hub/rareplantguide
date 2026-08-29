@@ -18,12 +18,11 @@ jobs:
     steps:
       - name: Check required Pinterest app secrets
         env:
-          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
-          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          AMI_PINTEREST_APP_SECRET: ${{ secrets.AMI_PINTEREST_APP_SECRET }}
           GH_SECRETS_PAT: ${{ secrets.GH_SECRETS_PAT }}
         run: |
           missing=0
-          for name in PINTEREST_APP_ID PINTEREST_APP_SECRET GH_SECRETS_PAT; do
+          for name in AMI_PINTEREST_APP_SECRET GH_SECRETS_PAT; do
             if [ -z "${!name}" ]; then
               echo "::error::Missing GitHub Actions secret: $name"
               missing=1
@@ -34,8 +33,8 @@ jobs:
       - name: Exchange code and verify Analyze My Income Pinterest account
         id: exchange
         env:
-          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
-          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          PINTEREST_APP_ID: '1604082'
+          PINTEREST_APP_SECRET: ${{ secrets.AMI_PINTEREST_APP_SECRET }}
           PINTEREST_AUTHORIZATION_CODE: ${{ inputs.authorization_code }}
           REDIRECT_URI: https://analyzemyincome.com/pinterest-callback
           TOKEN_FILE: ${{ runner.temp }}/ami_pinterest_refresh_token
@@ -61,6 +60,7 @@ jobs:
               'grant_type': 'authorization_code',
               'code': code,
               'redirect_uri': redirect_uri,
+              'continuous_refresh': 'true',
           }).encode()
 
           request = urllib.request.Request(
@@ -91,9 +91,6 @@ jobs:
           if missing:
               raise SystemExit('Pinterest token is missing required scopes: ' + ', '.join(missing))
 
-          # Verify this is the Analyze My Income Pinterest account by confirming
-          # ownership visibility of Pins previously published for AMI. This avoids
-          # relying on user_account scope and prevents publishing to Rare Plant.
           known_ami_pin_ids = {
               '879961214758040904',
               '879961214758062627',
@@ -142,6 +139,8 @@ jobs:
           print('Analyze My Income Pinterest account verified via existing Pin ownership.')
           print('Matched known AMI Pin IDs: ' + ', '.join(sorted(visible)))
           print('Required board/pin scopes verified.')
+          if payload.get('refresh_token_expires_at'):
+              print('Continuous refresh token enabled.')
 
       - name: Save Analyze My Income refresh token as GitHub secret
         env:
