@@ -2,7 +2,7 @@
 <article class="buying-page">
   <header class="buying-hero">
     <div class="buying-hero-copy">
-      <span class="buying-eyebrow">TOP 3 • AMAZON US</span>
+      <span class="buying-eyebrow">TOP 3 • 2026 BUYING GUIDE</span>
       <h1>{{ .Title }}</h1>
       {{- if .Params.amazon_associate_active }}
       <p class="affiliate-disclosure"><em>{{ .Params.associate_disclosure }}</em></p>
@@ -17,16 +17,16 @@
 
   {{- $products := .Params.products }}
 
-  <section class="comparison-section comparison-first">
+  <section class="comparison-section comparison-first" aria-labelledby="quick-decision-heading">
     <div class="section-heading">
       <span>QUICK DECISION</span>
-      <h2>Pick the right one in under a minute</h2>
-      <p>Three products, three clear use cases. Live price, star rating, review count and availability stay on Amazon.</p>
+      <h2 id="quick-decision-heading">Choose the right one in under a minute</h2>
+      <p>Three products, three clear use cases. Our score is editorial — Amazon remains the source for current price, customer rating, reviews and availability.</p>
     </div>
     <div class="comparison-table-wrap">
       <table class="comparison-table">
         <thead>
-          <tr><th>Pick</th><th>Product</th><th>Est. sales</th><th>Best for</th><th>Amazon rating</th><th></th></tr>
+          <tr><th>Pick</th><th>Product</th><th>Editor score</th><th>Best for</th><th>Why it wins</th><th></th></tr>
         </thead>
         <tbody>
           {{- range $products }}
@@ -36,10 +36,10 @@
               <a class="product-image-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
               <div><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener"><strong>#{{ .rank }} {{ .short_name }}</strong></a><small>{{ .badge }}</small></div>
             </td>
-            <td><strong>{{ .monthly_sales }}</strong><small class="estimate-note">Third-party estimate</small></td>
+            <td><span class="editor-score">{{ .editor_score }}</span><small class="score-note">Our editorial score</small></td>
             <td>{{ .best_for }}</td>
-            <td><a class="rating-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">★ View current rating</a></td>
-            <td><a class="table-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK ON AMAZON →</a>{{ if $.Params.amazon_associate_active }}<small class="paid-link-note">Paid link</small>{{ end }}</td>
+            <td>{{ .key_reason }}</td>
+            <td><a class="table-cta" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK PRICE &amp; AVAILABILITY →</a>{{ if $.Params.amazon_associate_active }}<small class="paid-link-note">Paid link</small>{{ end }}</td>
           </tr>
           {{- end }}
         </tbody>
@@ -54,11 +54,11 @@
       <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="eager" decoding="async" referrerpolicy="no-referrer"></a>
     </div>
     <div class="winner-copy">
-      <p class="winner-kicker">OUR FASTEST RECOMMENDATION</p>
+      <p class="winner-kicker">OUR #1 RECOMMENDATION</p>
       <h2><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">{{ .name }}</a></h2>
       <div class="trust-row">
-        <span class="sales-chip">{{ .monthly_sales }} est. sales</span>
-        <a class="trust-rating" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">★ See current Amazon rating</a>
+        <span class="sales-chip">Editor score {{ .editor_score }}</span>
+        <span class="source-chip">{{ .badge }}</span>
       </div>
       <p class="winner-bestfor"><strong>Perfect for:</strong> {{ .ideal_for }}</p>
       <p>{{ .verdict }}</p>
@@ -72,8 +72,8 @@
   <section class="product-cards-section">
     <div class="section-heading">
       <span>THE SHORTLIST</span>
-      <h2>Need one more reason before you click?</h2>
-      <p>Scan the strengths, the one main limitation and the ideal buyer for each model.</p>
+      <h2>Need more detail before you choose?</h2>
+      <p>Scan the strengths, the main limitation and the ideal buyer for each model.</p>
     </div>
     <div class="product-card-grid">
       {{- range $products }}
@@ -86,8 +86,8 @@
         <div class="product-card-body">
           <h3><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">{{ .name }}</a></h3>
           <div class="card-trust">
-            <a class="rating-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">★ Current Amazon rating</a>
-            <span>{{ .monthly_sales }} est. sales</span>
+            <span class="card-editor-score">Editor score <strong>{{ .editor_score }}</strong></span>
+            <span>{{ .badge }}</span>
           </div>
           <p class="bestfor"><strong>Perfect for:</strong> {{ .ideal_for }}</p>
           <p>{{ .verdict }}</p>
@@ -102,6 +102,22 @@
       {{- end }}
     </div>
   </section>
+
+  {{- with .Params.selection_criteria }}
+  <section class="selection-method" aria-labelledby="selection-method-heading">
+    <div class="section-heading">
+      <span>HOW WE CHOSE</span>
+      <h2 id="selection-method-heading">How we picked the three winners</h2>
+      {{- with $.Params.selection_note }}<p>{{ . }}</p>{{ end }}
+    </div>
+    <div class="criteria-grid">
+      {{- range . }}
+      <div class="criterion-card"><strong>{{ .name }}</strong><span>{{ .weight }}</span><p>{{ .description }}</p></div>
+      {{- end }}
+    </div>
+    <p class="score-explainer"><strong>Important:</strong> the Editor Score is our own comparative score based on the criteria above. It is not an Amazon customer rating.</p>
+  </section>
+  {{- end }}
 
   {{- with .Content }}
   <section class="buying-editorial post-content">
@@ -126,7 +142,7 @@
   {{- range first 1 $products }}
   <div class="buying-sticky-cta" aria-label="Top pick shortcut">
     <span><strong>#1 pick:</strong> {{ .short_name }}</span>
-    <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">VIEW TOP PICK →</a>
+    <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">CHECK ON AMAZON →</a>
   </div>
   {{- end }}
 {{- end }}
