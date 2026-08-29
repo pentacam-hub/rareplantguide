@@ -25,16 +25,21 @@ jobs:
           node --check static/js/amazon-prices.js
       - name: Build site
         run: bash scripts/cloudflare-build.sh
+      - name: Inspect rendered Grow Lights page
+        run: |
+          echo '--- BUYING CLASSES ---'
+          grep -oE 'class=[^ >]*buying[^ >]*' public/buying-guides/best-selling-grow-lights/index.html | head -20 || true
+          echo '--- PRODUCT TOKEN ---'
+          grep -oE '.{0,100}Briignite.{0,160}' public/buying-guides/best-selling-grow-lights/index.html | head -5 || true
+          echo '--- AMAZON PRICE TOKEN ---'
+          grep -oE '.{0,100}amazon-price.{0,160}' public/buying-guides/best-selling-grow-lights/index.html | head -10 || true
+          echo '--- HTML SIZE ---'
+          wc -c public/buying-guides/best-selling-grow-lights/index.html
       - name: Validate rendered buying guides
         run: |
           test -f public/buying-guides/best-selling-grow-lights/index.html
           test -f public/buying-guides/best-plant-stands-with-grow-lights/index.html
-          echo 'Checking Grow Lights price slots'
           grep -q 'data-amazon-price="B091DLFDL9"' public/buying-guides/best-selling-grow-lights/index.html
-          echo 'Checking Plant Stands price slots'
           grep -q 'data-amazon-price="B0F5GTD4HN"' public/buying-guides/best-plant-stands-with-grow-lights/index.html
-          echo 'Checking Grow Lights price loader'
           grep -q '/js/amazon-prices.js' public/buying-guides/best-selling-grow-lights/index.html
-          echo 'Checking Plant Stands price loader'
           grep -q '/js/amazon-prices.js' public/buying-guides/best-plant-stands-with-grow-lights/index.html
-          echo 'All buying guide checks passed'
