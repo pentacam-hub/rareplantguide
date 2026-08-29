@@ -30,12 +30,11 @@ jobs:
 
       - name: Check Analyze My Income Pinterest credentials
         env:
-          AMI_PINTEREST_APP_ID: ${{ secrets.AMI_PINTEREST_APP_ID }}
           AMI_PINTEREST_APP_SECRET: ${{ secrets.AMI_PINTEREST_APP_SECRET }}
           AMI_PINTEREST_REFRESH_TOKEN: ${{ secrets.AMI_PINTEREST_REFRESH_TOKEN }}
         run: |
           missing=0
-          for name in AMI_PINTEREST_APP_ID AMI_PINTEREST_APP_SECRET AMI_PINTEREST_REFRESH_TOKEN; do
+          for name in AMI_PINTEREST_APP_SECRET AMI_PINTEREST_REFRESH_TOKEN; do
             if [ -z "${!name}" ]; then
               echo "::error::Missing GitHub Actions secret: $name"
               missing=1
@@ -49,7 +48,7 @@ jobs:
       - name: Publish next Analyze My Income Pin
         id: publish_pin
         env:
-          AMI_PINTEREST_APP_ID: ${{ secrets.AMI_PINTEREST_APP_ID }}
+          AMI_PINTEREST_APP_ID: '1604082'
           AMI_PINTEREST_APP_SECRET: ${{ secrets.AMI_PINTEREST_APP_SECRET }}
           AMI_PINTEREST_REFRESH_TOKEN: ${{ secrets.AMI_PINTEREST_REFRESH_TOKEN }}
           AMI_PINTEREST_REFRESH_TOKEN_FILE: ${{ runner.temp }}/ami_pinterest_refresh_token
