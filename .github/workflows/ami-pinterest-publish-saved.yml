@@ -1,0 +1,160 @@
+name: Publish AMI Pins With Saved Token
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/ami-pinterest-publish-saved.yml
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      - run: pip install pyyaml==6.0.2 requests==2.32.3 Pillow==10.4.0
+
+      - name: Publish exactly two pending AMI Pins
+        env:
+          AMI_PINTEREST_APP_SECRET: ${{ secrets.AMI_PINTEREST_APP_SECRET }}
+          AMI_PINTEREST_REFRESH_TOKEN: ${{ secrets.AMI_PINTEREST_REFRESH_TOKEN }}
+          TOKEN_FILE: ${{ runner.temp }}/ami_pinterest_refresh_token
+        shell: python
+        run: |
+          import base64
+          import datetime
+          import os
+          import requests
+          import yaml
+          import scripts.ami_pinterest as ami
+
+          app_id = '1604082'
+          app_secret = os.environ['AMI_PINTEREST_APP_SECRET']
+          refresh_token = os.environ['AMI_PINTEREST_REFRESH_TOKEN']
+          token_file = os.environ['TOKEN_FILE']
+
+          basic = base64.b64encode(f'{app_id}:{app_secret}'.encode()).decode()
+          token_response = requests.post(
+              'https://api.pinterest.com/v5/oauth/token',
+              headers={
+                  'Authorization': f'Basic {basic}',
+                  'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              data={
+                  'grant_type': 'refresh_token',
+                  'refresh_token': refresh_token,
+                  'scope': 'boards:read,boards:write,pins:read,pins:write',
+              },
+              timeout=30,
+          )
+          print('Refresh status:', token_response.status_code)
+          if not token_response.ok:
+              print('Refresh response:', token_response.text[:2000])
+              token_response.raise_for_status()
+          token_payload = token_response.json()
+          access_token = token_payload['access_token']
+          rotated = token_payload.get('refresh_token') or refresh_token
+          with open(token_file, 'w', encoding='utf-8') as handle:
+              handle.write(rotated)
+
+          queue = ami.load_queue()
+          pending = [pin for pin in queue.get('pins', []) if pin.get('status') == 'pending'][:2]
+          if len(pending) < 2:
+              raise SystemExit(f'Expected at least 2 pending AMI Pins, found {len(pending)}')
+
+          headers = {'Authorization': f'Bearer {access_token}'}
+          boards_response = requests.get(
+              'https://api.pinterest.com/v5/boards',
+              headers=headers,
+              params={'page_size': 100},
+              timeout=30,
+          )
+          print('Boards status:', boards_response.status_code)
+          if not boards_response.ok:
+              print('Boards response:', boards_response.text[:2000])
+              boards_response.raise_for_status()
+          boards = boards_response.json().get('items', [])
+          board_map = {(b.get('name') or '').strip().lower(): b for b in boards}
+
+          published = []
+          for pin in pending:
+              board_name = pin['board'].strip().lower()
+              board = board_map.get(board_name)
+              if not board:
+                  create_board = requests.post(
+                      'https://api.pinterest.com/v5/boards',
+                      headers={**headers, 'Content-Type': 'application/json'},
+                      json={
+                          'name': pin['board'],
+                          'description': (pin.get('board_description') or '')[:500],
+                      },
+                      timeout=30,
+                  )
+                  print(f'Create board {pin["board"]} status:', create_board.status_code)
+                  if not create_board.ok:
+                      print('Create board response:', create_board.text[:2000])
+                      create_board.raise_for_status()
+                  board = create_board.json()
+                  board_map[board_name] = board
+
+              image_path = ami.build_pin_image(pin)
+              payload = {
+                  'board_id': board['id'],
+                  'media_source': ami.build_media_source(image_path),
+                  'link': pin['destination'],
+                  'title': pin['title'][:100],
+                  'description': pin['description'][:800],
+                  'alt_text': ami.build_alt_text(pin),
+              }
+              response = requests.post(
+                  'https://api.pinterest.com/v5/pins',
+                  headers={**headers, 'Content-Type': 'application/json'},
+                  json=payload,
+                  timeout=60,
+              )
+              print(f'Create Pin {pin["id"]} status:', response.status_code)
+              if not response.ok:
+                  print('Pinterest Create Pin response:', response.text[:4000])
+                  response.raise_for_status()
+              result = response.json()
+              pin['status'] = 'posted'
+              pin['pinterest_pin_id'] = result.get('id')
+              pin['published_date'] = datetime.date.today().isoformat()
+              published.append((pin['id'], str(result.get('id'))))
+
+          ami.save_queue(queue)
+          print('Published:', published)
+
+      - name: Persist rotated refresh token
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GH_SECRETS_PAT }}
+          TOKEN_FILE: ${{ runner.temp }}/ami_pinterest_refresh_token
+        run: |
+          if [ -s "$TOKEN_FILE" ]; then
+            gh secret set AMI_PINTEREST_REFRESH_TOKEN --repo "$GITHUB_REPOSITORY" < "$TOKEN_FILE"
+            echo "AMI refresh token persisted."
+          else
+            echo "No rotated token file present."
+          fi
+
+      - name: Commit published Pin IDs
+        if: success()
+        run: |
+          git config user.name "analyzemyincome-pinterest-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add ami-pinterest-queue.yaml
+          if ! git diff --staged --quiet; then
+            git commit -m "Auto: publish two Analyze My Income Pinterest Pins"
+            git pull --rebase origin main
+            git push
+          fi
