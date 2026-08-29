@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: pip install pyyaml==6.0.2 requests==2.32.3 Pillow==10.4.0
 
-      - name: Verify Pinterest identity and publish exactly two AMI Pins
+      - name: Verify AMI account by existing Pins and publish exactly two
         env:
           PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
           PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
@@ -47,25 +47,48 @@ jobs:
           if not app_id or not app_secret:
               raise SystemExit('Pinterest app credentials are missing.')
 
+          known_ami_ids = {
+              '879961214758040904',
+              '879961214758062627',
+              '879961214758071343',
+              '879961214758092251',
+          }
+
+          def visible_ami_ids(access_token):
+              headers = {'Authorization': f'Bearer {access_token}'}
+              bookmark = None
+              found = set()
+              for _ in range(5):
+                  params = {'page_size': 100}
+                  if bookmark:
+                      params['bookmark'] = bookmark
+                  response = requests.get(
+                      'https://api.pinterest.com/v5/pins',
+                      headers=headers,
+                      params=params,
+                      timeout=20,
+                  )
+                  if not response.ok:
+                      return set()
+                  payload = response.json()
+                  for item in payload.get('items', []):
+                      pin_id = str(item.get('id') or '')
+                      if pin_id in known_ami_ids:
+                          found.add(pin_id)
+                  bookmark = payload.get('bookmark')
+                  if not bookmark or found:
+                      break
+              return found
+
           basic = base64.b64encode(f'{app_id}:{app_secret}'.encode()).decode()
           basic_headers = {
               'Authorization': f'Basic {basic}',
               'Content-Type': 'application/x-www-form-urlencoded',
           }
 
-          def account_username(access_token):
-              response = requests.get(
-                  'https://api.pinterest.com/v5/user_account',
-                  headers={'Authorization': f'Bearer {access_token}'},
-                  timeout=20,
-              )
-              if not response.ok:
-                  return None
-              return str(response.json().get('username') or '').strip().lstrip('@').lower()
-
           token = None
-          username = None
           auth_mode = None
+          verified_ids = set()
 
           client_response = requests.post(
               'https://api.pinterest.com/v5/oauth/token',
@@ -78,11 +101,11 @@ jobs:
           )
           if client_response.ok:
               candidate = client_response.json()['access_token']
-              candidate_username = account_username(candidate)
-              if candidate_username == 'iserviceseood':
+              visible = visible_ami_ids(candidate)
+              if visible:
                   token = candidate
-                  username = candidate_username
                   auth_mode = 'client_credentials'
+                  verified_ids = visible
 
           if token is None and refresh_token:
               refresh_response = requests.post(
@@ -97,19 +120,16 @@ jobs:
               )
               refresh_response.raise_for_status()
               candidate = refresh_response.json()['access_token']
-              candidate_username = account_username(candidate)
-              if candidate_username == 'iserviceseood':
+              visible = visible_ami_ids(candidate)
+              if visible:
                   token = candidate
-                  username = candidate_username
                   auth_mode = 'refresh_token'
-              else:
-                  shown = candidate_username or 'unavailable'
-                  raise SystemExit(f'Refresh token belongs to @{shown}, not @iserviceseood. Nothing published.')
+                  verified_ids = visible
 
           if token is None:
-              raise SystemExit('Could not obtain a user-authorized Pinterest token for @iserviceseood. Nothing published.')
+              raise SystemExit('Available Pinterest credentials cannot see any known Analyze My Income Pin. Nothing published.')
 
-          print(f'Authenticated Pinterest profile: @{username} via {auth_mode}')
+          print(f'AMI Pinterest ownership verified via {auth_mode}; matched existing Pin IDs: {sorted(verified_ids)}')
 
           queue = ami.load_queue()
           wanted = ['ami-013', 'ami-014']
