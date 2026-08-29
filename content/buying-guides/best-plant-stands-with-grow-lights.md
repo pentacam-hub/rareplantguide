@@ -11,6 +11,7 @@ comparison_title: "Which setup fits your room?"
 comparison_intro: "Start with the constraint that matters most: a narrow footprint, room for a large collection, or a stand that looks like real furniture in your living space."
 featured_kicker: "TOP PICK FOR NARROW SPACES"
 lifestyle_images: true
+amazon_price_api: true
 intro: "A plant stand is furniture first and plant equipment second. We compared three integrated grow-light setups by the questions buyers actually ask before ordering: Will it fit my corner? How many pots can it hold? Will the wiring look messy? And will it still look good in a living room?"
 source_note: "We do not hard-code Amazon prices, customer star ratings, review counts, sales estimates or stock claims. Product dimensions and features can vary by selected Amazon variation, so verify the exact configuration before ordering. Product fit and Editor Scores are our own editorial assessment."
 amazon_associate_active: false
