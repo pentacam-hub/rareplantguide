@@ -1,0 +1,31 @@
+name: Validate Buying Guide Build
+
+on:
+  push:
+    paths:
+      - '.github/workflows/validate-buying-guide.yml'
+      - 'content/buying-guides/**'
+      - 'layouts/buying-guides/**'
+      - 'assets/css/extended/buying-guides-intent.css'
+      - 'layouts/index.html'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.148.2'
+          extended: true
+
+      - name: Build site
+        run: hugo --gc --minify --destination /tmp/rareplant-public
