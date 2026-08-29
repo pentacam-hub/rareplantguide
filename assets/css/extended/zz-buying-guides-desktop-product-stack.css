@@ -1,0 +1,78 @@
+/* Desktop-only layout correction for lifestyle buying guides.
+   Load last so legacy two-column rules cannot reintroduce large empty media columns. */
+@media (min-width: 981px) {
+  /* Featured / Top Pick card: image above, copy below. */
+  .buying-page-lifestyle .winner-card {
+    display: block !important;
+    grid-template-columns: none !important;
+  }
+
+  .buying-page-lifestyle .winner-media {
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 22px !important;
+    box-sizing: border-box !important;
+    background: #eef2ee !important;
+  }
+
+  .buying-page-lifestyle .winner-media > a {
+    display: flex !important;
+    width: 100% !important;
+    height: auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .buying-page-lifestyle .winner-media img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 620px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    border-radius: 14px !important;
+  }
+
+  .buying-page-lifestyle .winner-copy {
+    padding-top: 28px !important;
+  }
+
+  /* Detailed shortlist cards: image above, copy below. */
+  .buying-page-lifestyle .product-card {
+    display: block !important;
+    grid-template-columns: none !important;
+  }
+
+  .buying-page-lifestyle .product-card-media {
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 22px !important;
+    box-sizing: border-box !important;
+    background: #eef2ee !important;
+  }
+
+  .buying-page-lifestyle .product-card-media > a {
+    display: flex !important;
+    width: 100% !important;
+    height: auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .buying-page-lifestyle .product-card-media img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: 620px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    border-radius: 14px !important;
+  }
+
+  .buying-page-lifestyle .product-card-body {
+    padding: 30px 32px 34px !important;
+  }
+}
