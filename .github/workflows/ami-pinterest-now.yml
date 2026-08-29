@@ -1,0 +1,149 @@
+name: Publish AMI Pins Now
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/ami-pinterest-now.yml
+
+permissions:
+  contents: write
+
+jobs:
+  publish-two:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pyyaml==6.0.2 requests==2.32.3 Pillow==10.4.0
+
+      - name: Verify Pinterest identity and publish exactly two AMI Pins
+        env:
+          PINTEREST_APP_ID: ${{ secrets.PINTEREST_APP_ID }}
+          PINTEREST_APP_SECRET: ${{ secrets.PINTEREST_APP_SECRET }}
+          PINTEREST_REFRESH_TOKEN: ${{ secrets.PINTEREST_REFRESH_TOKEN }}
+        shell: python
+        run: |
+          import base64
+          import datetime
+          import os
+          import requests
+          import scripts.ami_pinterest as ami
+
+          app_id = os.environ.get('PINTEREST_APP_ID')
+          app_secret = os.environ.get('PINTEREST_APP_SECRET')
+          refresh_token = os.environ.get('PINTEREST_REFRESH_TOKEN')
+          if not app_id or not app_secret:
+              raise SystemExit('Generic Pinterest app credentials are missing.')
+
+          basic = base64.b64encode(f'{app_id}:{app_secret}'.encode()).decode()
+          headers = {
+              'Authorization': f'Basic {basic}',
+              'Content-Type': 'application/x-www-form-urlencoded',
+          }
+
+          token = None
+          auth_mode = None
+          response = requests.post(
+              'https://api.pinterest.com/v5/oauth/token',
+              headers=headers,
+              data={
+                  'grant_type': 'client_credentials',
+                  'scope': 'boards:read,boards:write,pins:read,pins:write',
+              },
+              timeout=20,
+          )
+          if response.ok:
+              token = response.json()['access_token']
+              auth_mode = 'client_credentials'
+          elif refresh_token:
+              response = requests.post(
+                  'https://api.pinterest.com/v5/oauth/token',
+                  headers=headers,
+                  data={
+                      'grant_type': 'refresh_token',
+                      'refresh_token': refresh_token,
+                      'scope': 'boards:read,boards:write,pins:read,pins:write',
+                  },
+                  timeout=20,
+              )
+              response.raise_for_status()
+              token = response.json()['access_token']
+              auth_mode = 'refresh_token'
+          else:
+              raise SystemExit('Pinterest authentication failed and no refresh-token fallback is configured.')
+
+          account = requests.get(
+              'https://api.pinterest.com/v5/user_account',
+              headers={'Authorization': f'Bearer {token}'},
+              timeout=20,
+          )
+          account.raise_for_status()
+          username = str(account.json().get('username') or '').strip().lstrip('@').lower()
+          print(f'Authenticated Pinterest profile: @{username} via {auth_mode}')
+          if username != 'iserviceseood':
+              raise SystemExit(f'Wrong Pinterest profile @{username}; expected @iserviceseood. Nothing published.')
+
+          queue = ami.load_queue()
+          wanted = ['ami-013', 'ami-014']
+          pins = {pin.get('id'): pin for pin in queue.get('pins', [])}
+          published = []
+
+          for pin_id in wanted:
+              pin = pins.get(pin_id)
+              if not pin:
+                  raise SystemExit(f'Missing queue item {pin_id}')
+              if pin.get('status') == 'posted' and pin.get('pinterest_pin_id'):
+                  published.append((pin_id, str(pin['pinterest_pin_id'])))
+                  continue
+
+              board_id = ami.get_or_create_board(
+                  token,
+                  pin['board'],
+                  pin.get('board_description') or 'Analyze My Income calculators and money planning tools.',
+              )
+              existing = ami.find_existing_pin(token, pin['destination'], pin['title'])
+              if existing:
+                  result = existing
+                  print(f'Existing Pinterest Pin found for {pin_id}: {result.get("id")}')
+              else:
+                  image_path = ami.build_pin_image(pin)
+                  result = ami.create_pin(token, board_id, pin, image_path)
+                  print(f'Published {pin_id}: {result.get("id")}')
+
+              pin['status'] = 'posted'
+              pin['pinterest_pin_id'] = result.get('id')
+              pin['published_date'] = datetime.date.today().isoformat()
+              published.append((pin_id, str(result.get('id'))))
+
+          ami.save_queue(queue)
+          print('PUBLISHED_IDS=' + ','.join(f'{pid}:{pinid}' for pid, pinid in published))
+
+      - name: Restore normal AMI queue and commit Pin IDs
+        run: |
+          python - <<'PY'
+          import yaml
+          path = 'ami-pinterest-queue.yaml'
+          with open(path, encoding='utf-8') as f:
+              data = yaml.safe_load(f)
+          for pin in data.get('pins', []):
+              if pin.get('id') in {'ami-005','ami-006','ami-007','ami-008','ami-009','ami-010','ami-011','ami-012'} and pin.get('status') == 'hold':
+                  pin['status'] = 'pending'
+          with open(path, 'w', encoding='utf-8') as f:
+              yaml.safe_dump(data, f, allow_unicode=True, sort_keys=False, width=120)
+          PY
+          git config user.name "analyzemyincome-pinterest-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add ami-pinterest-queue.yaml
+          git commit -m "Auto: record two Analyze My Income Pinterest Pins"
+          git pull --rebase origin main
+          git push
