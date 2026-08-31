@@ -28,6 +28,7 @@ python3 -m unittest \
   scripts.test_post_pin \
   scripts.test_post_promo_pin \
   scripts.test_post_buying_guide_pin \
+  scripts.test_commercial_pin_copy \
   scripts.test_promo_strategy \
   scripts.test_wait_for_deploy
 
