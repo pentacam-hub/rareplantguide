@@ -11,6 +11,12 @@ rm -rf public
 python3 scripts/optimize_search_winners.py
 
 hugo --minify
+
+# Commercial pages must never show an empty "Check current price" placeholder.
+# Inject a recent US price snapshot as the visible fallback; any live Amazon
+# pricing layer may still replace it when available.
+python3 scripts/inject_buying_price_snapshots.py
+
 python3 scripts/inject_google_analytics.py
 
 test -s public/index.html
