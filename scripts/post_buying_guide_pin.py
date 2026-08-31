@@ -22,13 +22,13 @@ from scripts.post_pin import (
 )
 from scripts.post_promo_pin import (
     FONT_PATH,
-    build_promo_description,
     build_promo_image,
     find_existing_promo_pin,
 )
 
 QUEUE_PATH = "promo-buying-guides.yaml"
 NO_CANDIDATE_EXIT = 3
+COMMERCIAL_MIN_GAP_DAYS = 2
 
 
 def load_queue():
@@ -41,11 +41,54 @@ def save_queue(data):
         yaml.safe_dump(data, handle, allow_unicode=True, sort_keys=False)
 
 
+def parse_date(value):
+    if not value:
+        return None
+    if isinstance(value, datetime.date):
+        return value
+    try:
+        return datetime.date.fromisoformat(str(value))
+    except ValueError:
+        return None
+
+
 def pick_topic(queue, statuses):
+    """Pick the highest-priority topic while preserving queue order for ties."""
+    candidates = [
+        (index, topic)
+        for index, topic in enumerate(queue.get("topics", []))
+        if topic.get("status") in statuses
+    ]
+    if not candidates:
+        return None
+
+    def sort_key(item):
+        index, topic = item
+        try:
+            priority = int(topic.get("priority", 999))
+        except (TypeError, ValueError):
+            priority = 999
+        return priority, index
+
+    return min(candidates, key=sort_key)[1]
+
+
+def latest_commercial_pin_date(queue):
+    dates = []
     for topic in queue.get("topics", []):
-        if topic.get("status") in statuses:
-            return topic
-    return None
+        if topic.get("status") != "posted":
+            continue
+        published = parse_date(topic.get("published_pin_date"))
+        if published:
+            dates.append(published)
+    return max(dates) if dates else None
+
+
+def commercial_slot_open(queue, today=None):
+    """Limit buying-guide Pins so evergreen content still fills most promo slots."""
+    today = today or datetime.date.today()
+    latest = latest_commercial_pin_date(queue)
+    return latest is None or (today - latest).days >= COMMERCIAL_MIN_GAP_DAYS
 
 
 def destination_url(topic):
@@ -84,15 +127,7 @@ def build_commercial_description(topic):
 
 
 def add_commercial_cta(image_path, topic):
-    """Replace the generic save CTA with a high-contrast lower-funnel CTA.
-
-    Commercial Pin standard:
-    - one image-led 2:3 creative (created by build_promo_image)
-    - short bold hook
-    - high contrast
-    - direct CTA at the bottom
-    - arrow cue when configured
-    """
+    """Replace the generic save CTA with a high-contrast lower-funnel CTA."""
     local_path = os.path.join("static", str(image_path).lstrip("/"))
     image = Image.open(local_path).convert("RGB")
     draw = ImageDraw.Draw(image)
@@ -105,7 +140,6 @@ def add_commercial_cta(image_path, topic):
         font_size -= 2
         font = ImageFont.truetype(FONT_PATH, font_size)
 
-    # Cover the generic CTA with a clean, dark, high-contrast lower CTA block.
     x1, y1, x2, y2 = 72, 1260, 928, 1365
     draw.rounded_rectangle((x1, y1, x2, y2), radius=24, fill=(12, 12, 12))
     bbox = draw.textbbox((0, 0), cta, font=font)
@@ -150,20 +184,28 @@ def create_buying_pin(access_token, board_id, topic):
     return response.json()
 
 
-def prepare(queue):
-    topic = pick_topic(queue, {"prepared", "pending"})
+def prepare(queue, today=None):
+    # A previously prepared Pin must always finish, regardless of the cooldown.
+    prepared = pick_topic(queue, {"prepared"})
+    if prepared:
+        if prepared.get("promo_pin_image_path"):
+            print(f"Buying-guide Pin already prepared for '{prepared.get('title')}'.")
+            return True
+        topic = prepared
+    else:
+        if not commercial_slot_open(queue, today=today):
+            print("Commercial Pin cooldown active; use the evergreen promo fallback.")
+            return False
+        topic = pick_topic(queue, {"pending"})
+
     if not topic:
         print("No buying-guide Pinterest Pin is pending.")
         return False
 
-    if topic.get("status") == "prepared" and topic.get("promo_pin_image_path"):
-        print(f"Buying-guide Pin already prepared for '{topic.get('title')}'.")
-        return True
-
     topic["promo_pin_title"] = build_commercial_title(topic)
     topic["promo_pin_description"] = build_commercial_description(topic)
     topic["promo_pin_image_path"] = build_commercial_image(topic)
-    topic["promo_pin_prepared_date"] = datetime.date.today().isoformat()
+    topic["promo_pin_prepared_date"] = (today or datetime.date.today()).isoformat()
     topic["status"] = "prepared"
     save_queue(queue)
     print(f"Prepared buying-guide Pinterest creative for '{topic['promo_pin_title']}'.")
