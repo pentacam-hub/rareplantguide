@@ -27,6 +27,7 @@ python3 -m pip install --user -r scripts/requirements.txt
 python3 -m unittest \
   scripts.test_post_pin \
   scripts.test_post_promo_pin \
+  scripts.test_post_buying_guide_pin \
   scripts.test_promo_strategy \
   scripts.test_wait_for_deploy
 
@@ -39,8 +40,8 @@ set -e
 if [ "$BUYING_PREPARE_STATUS" -eq 0 ]; then
   PROMO_KIND="buying"
 elif [ "$BUYING_PREPARE_STATUS" -eq 3 ]; then
-  # Evergreen fallback is now ordered by current GSC/Pinterest evidence rather
-  # than simply choosing the oldest eligible article every time.
+  # No commercial Pin is due (including cooldown periods), so use the
+  # data-driven evergreen queue instead of wasting the promo slot.
   python3 -m scripts.post_promo_pin_strategic --prepare
   PROMO_KIND="evergreen"
 else
@@ -58,14 +59,23 @@ else
   echo "No new Pinterest promo creative to commit."
 fi
 
-# The generated Pin is uploaded to Pinterest as base64, but waiting here also
-# gives the linked article time to reach production before the Pin goes live.
-python3 -m scripts.wait_for_deploy \
-  --kind promo \
-  --max-pins 1 \
-  --article-only \
-  --timeout 180 \
-  --interval 15 || true
+# A buying Pin must not go live before its dedicated buying-guide landing page.
+# Evergreen Pins keep the existing best-effort deploy wait behavior.
+if [ "$PROMO_KIND" = "buying" ]; then
+  python3 -m scripts.wait_for_deploy \
+    --kind buying \
+    --max-pins 1 \
+    --article-only \
+    --timeout 300 \
+    --interval 15
+else
+  python3 -m scripts.wait_for_deploy \
+    --kind promo \
+    --max-pins 1 \
+    --article-only \
+    --timeout 180 \
+    --interval 15 || true
+fi
 
 if [ "$PROMO_KIND" = "buying" ]; then
   python3 -m scripts.post_buying_guide_pin --publish
