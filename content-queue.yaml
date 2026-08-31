@@ -272,7 +272,14 @@ topics:
   - pest control houseplants
   image_query: houseplant leaf pest closeup
   cluster: care-troubleshooting
-  status: pending
+  status: done
+  published_date: '2026-08-31'
+  slug: treating-thrips-and-mites-on-variegated-plants-safely
+  pin_title: Treating Thrips and Mites on Variegated Plants Safely
+  pin_description: Learn how to eliminate thrips and spider mites from rare variegated
+    plants without causing chemical burns, leaf browning, or tissue damage.
+  pin_image_path: /images/pins/treating-thrips-and-mites-on-variegated-plants-safely.jpg
+  pin_status: pending
 - title: What Determines the Price of a Rare Houseplant?
   keywords:
   - rare plant prices
