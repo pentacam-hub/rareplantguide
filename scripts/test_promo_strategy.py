@@ -3,6 +3,7 @@ import unittest
 
 from scripts.post_pin import DEFAULT_BOARD
 from scripts.post_promo_pin_strategic import (
+    build_promo_description,
     build_promo_title,
     get_board_config,
     pick_promo_candidate,
@@ -58,11 +59,25 @@ class PinterestPromoStrategyTests(unittest.TestCase):
         board_name, _ = get_board_config(buying)
         self.assertEqual(board_name, "Rare Plant Buying, Prices & Collecting")
 
-    def test_priority_title_override_is_short_and_problem_led(self):
+    def test_syngonium_hook_matches_search_language(self):
         syngonium = self.topic("why-your-variegated-syngonium-is-losing-its-color")
         title = build_promo_title(syngonium)
-        self.assertEqual(title, "Variegated Syngonium Losing Color? Causes & Fixes")
+        self.assertEqual(title, "Why Is My Variegated Syngonium Turning Green?")
         self.assertLessEqual(len(title), 100)
+
+    def test_variegation_hook_is_accessible(self):
+        topic = self.topic("guide-to-houseplant-variegation-chimeric-pattern-and-viral")
+        self.assertEqual(
+            build_promo_title(topic),
+            "Why Do Houseplants Have Variegated Leaves? 3 Types Explained",
+        )
+
+    def test_syngonium_description_does_not_promise_green_leaf_reversal(self):
+        syngonium = self.topic("why-your-variegated-syngonium-is-losing-its-color")
+        description = build_promo_description(syngonium)
+        self.assertIn("Check light, stem color", description)
+        self.assertNotIn("restore its beautiful variegation", description.lower())
+        self.assertLessEqual(len(description), 500)
 
 
 if __name__ == "__main__":
