@@ -23,7 +23,7 @@ jobs:
         run: pip install -r scripts/requirements.txt
 
       - name: Compile Pinterest scripts
-        run: python -m py_compile scripts/post_pin.py scripts/post_promo_pin.py scripts/ami_pinterest.py
+        run: python -m py_compile scripts/post_pin.py scripts/post_promo_pin.py scripts/post_promo_pin_strategic.py scripts/ami_pinterest.py
 
       - name: Run Pinterest unit tests
-        run: python -m unittest scripts.test_post_pin scripts.test_post_promo_pin scripts.test_ami_pinterest scripts.test_wait_for_deploy
+        run: python -m unittest scripts.test_post_pin scripts.test_post_promo_pin scripts.test_promo_strategy scripts.test_ami_pinterest scripts.test_wait_for_deploy
