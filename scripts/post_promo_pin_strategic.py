@@ -1,9 +1,9 @@
 """Data-driven wrapper around the evergreen Pinterest publisher.
 
-The base publisher remains generic and well-tested. This wrapper changes only three
-things based on the 2026-08-31 Google/Pinterest review:
+The base publisher remains generic and well-tested. This wrapper changes only a
+small set of decisions based on the 2026-08-31 Google/Pinterest review:
 1) which eligible older article gets the next fresh creative;
-2) the headline used on a few proven topics;
+2) the headline/description used on a few proven topics;
 3) where selected care/setup promos are published.
 
 Buying-market content keeps its dedicated board because that board currently has the
@@ -16,6 +16,7 @@ from scripts.post_pin import DEFAULT_BOARD
 
 ORIGINAL_PICK = base.pick_promo_candidate
 ORIGINAL_TITLE = base.build_promo_title
+ORIGINAL_DESCRIPTION = base.build_promo_description
 ORIGINAL_BOARD = base.get_board_config
 
 PRIORITY_SLUGS = (
@@ -34,11 +35,24 @@ CARE_TIPS_PROMO_SLUGS = {
 }
 
 TITLE_OVERRIDES = {
-    "why-your-variegated-syngonium-is-losing-its-color": "Variegated Syngonium Losing Color? Causes & Fixes",
-    "guide-to-houseplant-variegation-chimeric-pattern-and-viral": "Plant Variegation Explained: Chimeric, Pattern & Viral",
+    "why-your-variegated-syngonium-is-losing-its-color": "Why Is My Variegated Syngonium Turning Green?",
+    "guide-to-houseplant-variegation-chimeric-pattern-and-viral": "Why Do Houseplants Have Variegated Leaves? 3 Types Explained",
     "spotting-rare-plant-scams-online-a-houseplant-buyer-s-guide": "Rare Plant Scams: Red Flags Before You Buy Online",
     "best-soil-mix-recipes-for-rare-aroid-collections": "Best Soil Mix for Rare Aroids: Chunky Recipes That Drain",
     "humidity-tents-vs-greenhouse-cabinets-for-rare-plants": "Rare Plant Cabinet or Humidity Tent? What Works Better?",
+}
+
+DESCRIPTION_OVERRIDES = {
+    "why-your-variegated-syngonium-is-losing-its-color": (
+        "Variegated Syngonium turning green? Check light, stem color and the newest "
+        "growth before assuming the variegation is gone. See when better light can "
+        "help and when pruning back to a variegated node may be the better move."
+    ),
+    "guide-to-houseplant-variegation-chimeric-pattern-and-viral": (
+        "Why do some houseplants grow white, pink or patterned leaves? Learn the "
+        "difference between chimeric, genetic and viral variegation, how to identify "
+        "each type and what it means for growth and propagation."
+    ),
 }
 
 
@@ -66,6 +80,13 @@ def build_promo_title(topic):
     return (override or ORIGINAL_TITLE(topic))[:100]
 
 
+def build_promo_description(topic):
+    override = DESCRIPTION_OVERRIDES.get(topic.get("slug"))
+    if override:
+        return override[:500]
+    return ORIGINAL_DESCRIPTION(topic)
+
+
 def get_board_config(topic):
     if topic.get("slug") in CARE_TIPS_PROMO_SLUGS:
         return DEFAULT_BOARD
@@ -76,6 +97,7 @@ def get_board_config(topic):
 # implementation unchanged while making the production promo run data-driven.
 base.pick_promo_candidate = pick_promo_candidate
 base.build_promo_title = build_promo_title
+base.build_promo_description = build_promo_description
 base.get_board_config = get_board_config
 
 
