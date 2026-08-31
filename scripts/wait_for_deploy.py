@@ -1,14 +1,46 @@
-"""Wait until pending Pinterest article and, when needed, creative assets are public."""
+"""Wait until pending Pinterest destinations and, when needed, creative assets are public."""
 
 import argparse
 import time
 
 import requests
+import yaml
 
 from scripts.post_pin import POST_URL_PREFIX, SITE_BASE_URL, load_queue, pick_pending_pins
 
+BUYING_QUEUE_PATH = "promo-buying-guides.yaml"
+
+
+def load_buying_queue():
+    with open(BUYING_QUEUE_PATH, "r", encoding="utf-8") as handle:
+        return yaml.safe_load(handle) or {"topics": []}
+
+
+def buying_destination_url(topic):
+    destination = str(topic.get("destination_path") or "").strip()
+    if destination:
+        if destination.startswith("https://") or destination.startswith("http://"):
+            return destination.rstrip("/") + "/"
+        return f"{SITE_BASE_URL}/{destination.lstrip('/').rstrip('/')}/"
+    return f"{SITE_BASE_URL}{POST_URL_PREFIX}/{topic['slug']}/"
+
 
 def pending_urls(queue, kind="original", limit=1):
+    if kind == "buying":
+        topics = [
+            topic
+            for topic in queue.get("topics", [])
+            if topic.get("status") == "prepared"
+            and topic.get("promo_pin_image_path")
+        ][: max(0, limit)]
+        return [
+            {
+                "article": buying_destination_url(topic),
+                "image": f"{SITE_BASE_URL}{topic['promo_pin_image_path']}",
+            }
+            for topic in topics
+        ]
+
     if kind == "promo":
         topics = [
             topic
@@ -65,12 +97,13 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--timeout", type=int, default=600)
     parser.add_argument("--interval", type=int, default=15)
-    parser.add_argument("--kind", choices=("original", "promo"), default="original")
+    parser.add_argument("--kind", choices=("original", "promo", "buying"), default="original")
     parser.add_argument("--max-pins", type=int, default=1)
     parser.add_argument("--article-only", action="store_true")
     args = parser.parse_args()
 
-    urls = pending_urls(load_queue(), kind=args.kind, limit=max(1, args.max_pins))
+    queue = load_buying_queue() if args.kind == "buying" else load_queue()
+    urls = pending_urls(queue, kind=args.kind, limit=max(1, args.max_pins))
     if not urls:
         print(f"Nessun Pin {args.kind} pending: controllo deploy non necessario.")
         return
