@@ -5,12 +5,16 @@ import datetime
 import os
 import sys
 
+import requests
 import yaml
 from PIL import Image, ImageDraw, ImageFont
 
 from scripts.post_pin import (
+    PINTEREST_API_BASE,
     POST_URL_PREFIX,
     SITE_BASE_URL,
+    build_alt_text,
+    build_image_media_source,
     get_access_token,
     get_board_config,
     get_or_create_board,
@@ -20,7 +24,6 @@ from scripts.post_promo_pin import (
     FONT_PATH,
     build_promo_description,
     build_promo_image,
-    create_promo_pin,
     find_existing_promo_pin,
 )
 
@@ -45,6 +48,16 @@ def pick_topic(queue, statuses):
     return None
 
 
+def destination_url(topic):
+    """Return the real commercial landing URL when the queue provides one."""
+    destination = str(topic.get("destination_path") or "").strip()
+    if destination:
+        if destination.startswith("https://") or destination.startswith("http://"):
+            return destination.rstrip("/") + "/"
+        return f"{SITE_BASE_URL}/{destination.lstrip('/').rstrip('/')}/"
+    return f"{SITE_BASE_URL}{POST_URL_PREFIX}/{topic['slug']}/"
+
+
 def build_commercial_title(topic):
     """Use a short conversion hook when one is supplied, otherwise keep the SEO title."""
     title = (
@@ -66,7 +79,7 @@ def build_commercial_description(topic):
         parts.append(base + ".")
     if keywords:
         parts.append("Compare options for " + ", ".join(keywords[:3]) + ".")
-    parts.append("Open the guide to see the recommended picks and choose the right setup.")
+    parts.append("Open the buying guide to compare the recommended picks and choose the right setup.")
     return " ".join(parts)[:500].rstrip()
 
 
@@ -115,6 +128,28 @@ def build_commercial_image(topic):
     return add_commercial_cta(image_path, topic)
 
 
+def create_buying_pin(access_token, board_id, topic):
+    """Create a commercial Pin that links to the queue's real buying-guide destination."""
+    promo_topic = dict(topic)
+    promo_topic["pin_title"] = topic["promo_pin_title"]
+    payload = {
+        "board_id": board_id,
+        "media_source": build_image_media_source(topic["promo_pin_image_path"]),
+        "link": destination_url(topic),
+        "title": topic["promo_pin_title"][:100],
+        "description": topic["promo_pin_description"][:500],
+        "alt_text": build_alt_text(promo_topic),
+    }
+    response = requests.post(
+        f"{PINTEREST_API_BASE}/pins",
+        headers={"Authorization": f"Bearer {access_token}", "Content-Type": "application/json"},
+        json=payload,
+        timeout=45,
+    )
+    response.raise_for_status()
+    return response.json()
+
+
 def prepare(queue):
     topic = pick_topic(queue, {"prepared", "pending"})
     if not topic:
@@ -152,17 +187,17 @@ def publish(queue):
 
     board_name, board_description = get_board_config(topic)
     board_id = get_or_create_board(access_token, board_name, board_description)
-    article_url = f"{SITE_BASE_URL}{POST_URL_PREFIX}/{topic['slug']}/"
+    landing_url = destination_url(topic)
 
-    existing = find_existing_promo_pin(access_token, article_url, topic["promo_pin_title"])
+    existing = find_existing_promo_pin(access_token, landing_url, topic["promo_pin_title"])
     if existing:
         result = existing
         print(f"Buying-guide Pin already exists for '{topic['promo_pin_title']}'.")
     else:
-        result = create_promo_pin(access_token, board_id, topic)
+        result = create_buying_pin(access_token, board_id, topic)
         print(
             f"Buying-guide Pinterest Pin published for '{topic['promo_pin_title']}' "
-            f"to '{board_name}' (id: {result.get('id')})."
+            f"to '{board_name}' (id: {result.get('id')}) -> {landing_url}"
         )
 
     topic["status"] = "posted"
