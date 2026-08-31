@@ -27,6 +27,7 @@ python3 -m pip install --user -r scripts/requirements.txt
 python3 -m unittest \
   scripts.test_post_pin \
   scripts.test_post_promo_pin \
+  scripts.test_promo_strategy \
   scripts.test_wait_for_deploy
 
 PROMO_KIND=""
@@ -38,7 +39,9 @@ set -e
 if [ "$BUYING_PREPARE_STATUS" -eq 0 ]; then
   PROMO_KIND="buying"
 elif [ "$BUYING_PREPARE_STATUS" -eq 3 ]; then
-  python3 -m scripts.post_promo_pin --prepare
+  # Evergreen fallback is now ordered by current GSC/Pinterest evidence rather
+  # than simply choosing the oldest eligible article every time.
+  python3 -m scripts.post_promo_pin_strategic --prepare
   PROMO_KIND="evergreen"
 else
   echo "Buying-guide Pin preparation failed with exit code $BUYING_PREPARE_STATUS" >&2
@@ -67,7 +70,7 @@ python3 -m scripts.wait_for_deploy \
 if [ "$PROMO_KIND" = "buying" ]; then
   python3 -m scripts.post_buying_guide_pin --publish
 else
-  python3 -m scripts.post_promo_pin --publish
+  python3 -m scripts.post_promo_pin_strategic --publish
 fi
 
 git add content-queue.yaml promo-buying-guides.yaml
