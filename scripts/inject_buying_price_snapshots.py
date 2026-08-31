@@ -28,6 +28,10 @@ PRICE_SNAPSHOTS = {
     "B01MU8CP1W": "$14.99",
     "B004Z71IHS": "$5.98",
     "B000BX1HGC": "$5.99",
+    # Plant stands with grow lights
+    "B0F5GTD4HN": "$42.99",
+    "B0DGXF9B8S": "$35.99",
+    "B0CL4WHFVS": "$137.99",
 }
 
 SNAPSHOT_NOTE = "Recent Amazon US price snapshot · verify current price"
