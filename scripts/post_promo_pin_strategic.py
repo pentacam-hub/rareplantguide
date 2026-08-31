@@ -36,7 +36,7 @@ CARE_TIPS_PROMO_SLUGS = {
 TITLE_OVERRIDES = {
     "why-your-variegated-syngonium-is-losing-its-color": "Variegated Syngonium Losing Color? Causes & Fixes",
     "guide-to-houseplant-variegation-chimeric-pattern-and-viral": "Plant Variegation Explained: Chimeric, Pattern & Viral",
-    "spotting-rare-plant-scams-online-a-houseplant-buyer-s-guide": "Rare Plant Scams: 7 Red Flags Before You Buy Online",
+    "spotting-rare-plant-scams-online-a-houseplant-buyer-s-guide": "Rare Plant Scams: Red Flags Before You Buy Online",
     "best-soil-mix-recipes-for-rare-aroid-collections": "Best Soil Mix for Rare Aroids: Chunky Recipes That Drain",
     "humidity-tents-vs-greenhouse-cabinets-for-rare-plants": "Rare Plant Cabinet or Humidity Tent? What Works Better?",
 }
