@@ -16,7 +16,6 @@ from scripts.post_pin import (
     build_alt_text,
     build_image_media_source,
     get_access_token,
-    get_board_config,
     get_or_create_board,
     save_rotated_refresh_token,
 )
@@ -29,6 +28,10 @@ from scripts.post_promo_pin import (
 QUEUE_PATH = "promo-buying-guides.yaml"
 NO_CANDIDATE_EXIT = 3
 COMMERCIAL_MIN_GAP_DAYS = 2
+COMMERCIAL_BOARD = (
+    "Rare Plant Buying, Prices & Collecting",
+    "Buying guides, product comparisons, rare plant prices, collecting advice and practical gear for rare plant growers.",
+)
 
 
 def load_queue():
@@ -227,7 +230,7 @@ def publish(queue):
     access_token, rotated_refresh_token = get_access_token(app_id, app_secret, refresh_token)
     save_rotated_refresh_token(rotated_refresh_token)
 
-    board_name, board_description = get_board_config(topic)
+    board_name, board_description = COMMERCIAL_BOARD
     board_id = get_or_create_board(access_token, board_name, board_description)
     landing_url = destination_url(topic)
 
