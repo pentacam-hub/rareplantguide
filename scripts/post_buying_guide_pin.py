@@ -105,7 +105,7 @@ def destination_url(topic):
 
 
 def build_commercial_title(topic):
-    """Use a short conversion hook when one is supplied, otherwise keep the SEO title."""
+    """Pinterest title should create tension, not repeat the image overlay."""
     title = (
         topic.get("commercial_hook")
         or topic.get("pin_title")
@@ -116,17 +116,15 @@ def build_commercial_title(topic):
 
 
 def build_commercial_description(topic):
-    """Keep Pinterest copy clear, commercial and aligned with the destination page."""
+    """Use the queue's curiosity gap, then append a small set of discovery hashtags."""
     base = (topic.get("pin_description") or "").strip().rstrip(" .")
-    keywords = [str(k).strip() for k in topic.get("keywords", []) if str(k).strip()]
-
-    parts = []
-    if base:
-        parts.append(base + ".")
-    if keywords:
-        parts.append("Compare options for " + ", ".join(keywords[:3]) + ".")
-    parts.append("Open the buying guide to compare the recommended picks and choose the right setup.")
-    return " ".join(parts)[:500].rstrip()
+    hashtags = [str(tag).strip() for tag in topic.get("hashtags", []) if str(tag).strip()]
+    if not base:
+        base = "Open the buying guide to see which option fits your setup and which trade-offs matter before you buy"
+    text = base + "."
+    if hashtags:
+        text += " " + " ".join(hashtags[:5])
+    return text[:500].rstrip()
 
 
 def add_commercial_cta(image_path, topic):
@@ -157,10 +155,11 @@ def add_commercial_cta(image_path, topic):
 
 
 def build_commercial_image(topic):
-    """Create a single-image commercial Pin using the short hook and direct CTA."""
+    """Image overlay states the problem; Pinterest title carries the tension separately."""
     creative_topic = dict(topic)
-    creative_topic["title"] = build_commercial_title(topic)
-    creative_topic["pin_title"] = build_commercial_title(topic)
+    image_hook = str(topic.get("image_hook") or topic.get("pin_title") or topic.get("title") or "Rare Plant Buying Guide").strip()
+    creative_topic["title"] = image_hook
+    creative_topic["pin_title"] = image_hook
     image_path = build_promo_image(creative_topic)
     return add_commercial_cta(image_path, topic)
 
