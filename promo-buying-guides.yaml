@@ -75,42 +75,49 @@ topics:
   - rare plant humidity
   - houseplant humidifier
   cluster: care-troubleshooting
-  status: hold
-  hold_reason: Rebuild from current Amazon demand before publishing a commercial Pin.
-  published_date: '2026-08-28'
+  status: pending
+  priority: 2
+  published_date: '2026-08-31'
   slug: best-humidifiers-for-rare-plants
-  pin_title: Best Humidifiers for Rare Plants
-  pin_description: Choose a plant humidifier by room size, runtime, cleaning access
-    and humidity control instead of buying more output than your collection needs.
+  destination_path: /buying-guides/best-humidifiers-for-rare-plants/
+  pin_title: 3 Best Humidifiers for Rare Plants in 2026
+  pin_description: Compare a large smart humidifier, a compact smart option and a simple
+    tabletop model by tank size, room coverage, humidity control and cleaning access.
   pin_image_path: /images/humidity-tents-vs-greenhouse-cabinets-for-rare-plants.jpg
+  commercial_hook: Which Plant Humidifier Fits Your Room?
+  commercial_cta: COMPARE HUMIDIFIERS >
 - title: Best Propagation Supplies for Variegated Monstera
   keywords:
   - monstera propagation supplies
   - propagation tools
   - variegated monstera cutting
   cluster: propagation
-  status: hold
-  hold_reason: Rebuild from current Amazon demand before publishing a commercial Pin.
-  published_date: '2026-08-28'
+  status: pending
+  priority: 3
+  published_date: '2026-08-31'
   slug: best-propagation-supplies-variegated-monstera
-  pin_title: Best Propagation Supplies for Variegated Monstera
-  pin_description: Build a simple Monstera propagation kit with clean cutting tools,
-    rooting containers, airy media and stable light without overcomplicating the setup.
+  destination_path: /buying-guides/best-propagation-supplies-variegated-monstera/
+  pin_title: 3 Essential Propagation Supplies for Variegated Monstera
+  pin_description: Build a simple Monstera propagation kit around a clean precision
+    cut, an airy rooting medium and an optional rooting aid without buying unnecessary
+    gadgets.
   pin_image_path: /images/propagation-water-rooting.jpg
+  commercial_hook: Build a Better Monstera Propagation Kit
+  commercial_cta: SEE PROPAGATION PICKS >
 - title: Best Grow Lights for Monstera & Rare Houseplants
   keywords:
   - grow lights for monstera
   - variegated monstera grow light
   - grow lights for indoor plants
   cluster: variegation-care
-  status: hold
-  hold_reason: Build a separate conversion-focused sales page instead of modifying the editorial article.
-  published_date: '2026-07-31'
+  status: pending
+  priority: 1
+  published_date: '2026-08-31'
   slug: best-grow-lights-rare-houseplants
-  pin_title: Best Grow Lights for Monstera & Rare Houseplants
-  pin_description: Compare six specific grow-light setups for Monstera Albo, Thai
-    Constellation and rare houseplants, including focused bulbs, clip lights, shelf
-    bars and floor lights.
+  destination_path: /buying-guides/best-selling-grow-lights/
+  pin_title: 3 Best Grow Lights for Rare Plants in 2026
+  pin_description: Compare three grow-light formats for rare plants, including an E26
+    bulb, an all-in-one clip light and compact halo lights for smaller pots.
   pin_image_path: /images/grow-light-setup.jpg
   commercial_hook: Your Monstera Needs More Light?
   commercial_cta: COMPARE GROW LIGHTS >
