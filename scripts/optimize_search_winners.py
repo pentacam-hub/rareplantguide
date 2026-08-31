@@ -15,17 +15,17 @@ REVIEW_DATE = "2026-08-31"
 OVERRIDES = {
     "posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it.md": {
         "title": "Variegated Monstera Turning Green? How to Stop Reversion",
-        "description": "Variegated Monstera turning green? Learn how to confirm reversion from the stem and node, when to prune, and whether variegation can return.",
+        "description": "Is your Monstera Albo producing greener leaves? Learn how to check the stem and nodes, when pruning can restore variegated growth, and when light can help.",
     },
     "posts/why-your-variegated-syngonium-is-losing-its-color.md": {
-        "title": "Variegated Syngonium Losing Color? Causes & Fixes",
-        "description": "Variegated Syngonium losing color or growing green leaves? Learn how to check light, stress and stem variegation, and when pruning a green vine can help.",
+        "title": "Why Is My Variegated Syngonium Turning Green? How to Fix It",
+        "description": "If your Syngonium is losing pink or white variegation, check light, stem color and new growth. Learn when better light helps and when pruning is needed.",
         "intro_old": "When a variegated syngonium suddenly begins producing plain, solid green leaves, the cause is typically a shift in environmental conditions or a natural genetic response to stress. Variegated plants contain less chlorophyll than their solid green counterparts, which means they must work harder to photosynthesize. If the growing environment does not support this extra effort, or if the plant undergoes a genetic shift, the vibrant cream, white, or yellow patches will begin to fade or disappear entirely in new growth. Understanding why this happens and taking prompt action can help encourage the plant to produce those highly sought-after patterns once again.",
         "intro_new": "If your **variegated Syngonium is losing color**, do not diagnose reversion from one green leaf. Look at the newest leaves together with the **stem and active growth point**.\n\n**Quick answer:** several solid-green leaves plus an increasingly green stem are stronger signs of reversion. Better light can support healthy growth, but it cannot recreate variegated tissue in a growth point that has become fully green. If a lower node still crosses variegated stem tissue, pruning back to that node may give the next growth point a better chance of producing variegation.",
     },
     "posts/guide-to-houseplant-variegation-chimeric-pattern-and-viral.md": {
-        "title": "Plant Variegation Explained: Chimeric, Pattern & Viral",
-        "description": "Understand chimeric, pattern-gene and viral variegation in houseplants, how each type behaves, whether it is stable, and what it means for propagation and care.",
+        "title": "Why Do Houseplants Have Variegated Leaves? 3 Types Explained",
+        "description": "Learn the difference between chimeric, genetic and viral variegation, how to identify each type, and what it means for growth and propagation.",
     },
     "posts/is-sphagnum-moss-actually-the-holy-grail-for-rare-plant-propagation.md": {
         "title": "Sphagnum Moss for Rare Plant Propagation: Pros, Rot Risks & Transfer",
