@@ -41,6 +41,25 @@ class DeployWaitTests(unittest.TestCase):
         self.assertEqual(len(urls), 1)
         self.assertTrue(urls[0]["image"].endswith("root-rot-guide-save-guide.jpg"))
 
+    def test_builds_real_landing_url_for_prepared_buying_pin(self):
+        queue = {
+            "topics": [
+                {
+                    "status": "prepared",
+                    "slug": "best-grow-lights-rare-houseplants",
+                    "destination_path": "/buying-guides/best-selling-grow-lights/",
+                    "promo_pin_image_path": "/images/pins/grow-lights-commercial.jpg",
+                }
+            ]
+        }
+        urls = pending_urls(queue, kind="buying", limit=1)
+        self.assertEqual(len(urls), 1)
+        self.assertEqual(
+            urls[0]["article"],
+            "https://therareplantguide.com/buying-guides/best-selling-grow-lights/",
+        )
+        self.assertTrue(urls[0]["image"].endswith("grow-lights-commercial.jpg"))
+
     def test_returns_empty_without_pending_pin(self):
         self.assertEqual(pending_urls({"topics": []}), [])
 
