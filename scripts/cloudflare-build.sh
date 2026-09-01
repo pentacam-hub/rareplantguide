@@ -10,6 +10,10 @@ rm -rf public
 # present in the rendered HTML that search engines receive.
 python3 scripts/optimize_search_winners.py
 
+# Turn the proven Reversion / Variegation cluster into a decision path instead
+# of creating near-duplicate informational pages that could cannibalize ranking.
+python3 scripts/inject_reversion_decision_cluster.py
+
 hugo --minify
 
 # Commercial pages must never show an empty "Check current price" placeholder.
