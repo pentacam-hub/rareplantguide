@@ -22,9 +22,9 @@
     <div class="profile-section-heading"><span>Find your plant</span><h2>Rare houseplant profiles</h2></div>
     <div class="profile-index-grid">
       {{- range .RegularPages.ByTitle }}
-        {{- $img := .Params.hero_image | default (partial "topic-image.html" .Title) -}}
+        {{- $img := partial "profile-image.html" . -}}
         <a class="profile-index-card" href="{{ .RelPermalink }}">
-          <img src="{{ $img | relURL }}" alt="{{ .Params.hero_alt | default .Title }}" loading="lazy" decoding="async">
+          <img src="{{ $img | relURL }}" alt="{{ .Params.hero_alt | default (printf "%s care profile visual" (.Params.display_name | default .Title)) }}" loading="lazy" decoding="async">
           <div class="profile-index-card-copy">
             <span>{{ .Params.genus | default "Rare plant" }}</span>
             <h2>{{ .Params.display_name | default .Title }}</h2>
