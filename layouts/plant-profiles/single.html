@@ -2,19 +2,24 @@
 <article class="plant-profile-page">
   <nav class="profile-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/plant-profiles/">Plant Profiles</a><span>›</span><span>{{ .Params.display_name | default .Title }}</span></nav>
 
-  <header class="plant-profile-hero">
-    <span class="profile-eyebrow">{{ .Params.genus }} plant profile</span>
-    <h1>{{ .Params.display_name | default .Title }}</h1>
-    {{ with .Params.botanical_name }}<p class="profile-botanical"><em>{{ . }}</em></p>{{ end }}
-    <p class="profile-summary">{{ .Description }}</p>
-    <div class="profile-badges">
-      {{ with .Params.difficulty }}<span>Difficulty: <strong>{{ . }}</strong></span>{{ end }}
-      {{ with .Params.habit }}<span>Habit: <strong>{{ . }}</strong></span>{{ end }}
+  {{- $hero := .Params.hero_image | default "/images/og-cover.jpg" -}}
+  {{- $heroAlt := .Params.hero_alt | default (printf "%s plant profile" (.Params.display_name | default .Title)) -}}
+  <header class="plant-profile-hero profile-hero-visual">
+    <div class="profile-hero-copy">
+      <span class="profile-eyebrow">{{ .Params.genus }} plant profile</span>
+      <h1>{{ .Params.display_name | default .Title }}</h1>
+      {{ with .Params.botanical_name }}<p class="profile-botanical"><em>{{ . }}</em></p>{{ end }}
+      <p class="profile-summary">{{ .Description }}</p>
+      <div class="profile-badges">
+        {{ with .Params.difficulty }}<span>Difficulty: <strong>{{ . }}</strong></span>{{ end }}
+        {{ with .Params.habit }}<span>Habit: <strong>{{ . }}</strong></span>{{ end }}
+      </div>
     </div>
+    <div class="profile-hero-media"><img src="{{ $hero | relURL }}" alt="{{ $heroAlt }}" loading="eager" decoding="async"></div>
   </header>
 
   <section class="profile-care-section" aria-labelledby="quick-care-title">
-    <div class="profile-section-heading"><span>Quick care</span><h2 id="quick-care-title">At a glance</h2></div>
+    <div class="profile-section-heading"><span>Care snapshot</span><h2 id="quick-care-title">The essentials at a glance</h2></div>
     <div class="profile-care-grid">
       <div><span>Light</span><strong>{{ .Params.light }}</strong></div>
       <div><span>Water</span><strong>{{ .Params.water }}</strong></div>
@@ -25,20 +30,30 @@
     </div>
   </section>
 
+  {{- with .Params.care_cards }}
+  <section class="editorial-visual-section" aria-labelledby="profile-care-visuals-title">
+    <div class="editorial-section-heading"><span>Care in practice</span><h2 id="profile-care-visuals-title">What good care looks like</h2></div>
+    <div class="editorial-visual-grid">
+      {{- range . }}
+      <figure class="editorial-visual-card">
+        <img src="{{ .image | relURL }}" alt="{{ .alt | default .title }}" loading="lazy" decoding="async">
+        <figcaption><strong>{{ .title }}</strong><span>{{ .text }}</span>{{ with .url }}<a href="{{ . }}">Learn more →</a>{{ end }}</figcaption>
+      </figure>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+
   <div class="profile-two-col">
     <section class="profile-panel">
       <span class="profile-panel-kicker">Care priorities</span>
       <h2>What matters most</h2>
-      <ul>
-        {{- range .Params.care_priorities }}<li>{{ . }}</li>{{ end }}
-      </ul>
+      <ul>{{- range .Params.care_priorities }}<li>{{ . }}</li>{{ end }}</ul>
     </section>
     <section class="profile-panel">
       <span class="profile-panel-kicker">Watch for</span>
       <h2>Common trouble</h2>
-      <ul>
-        {{- range .Params.watch_for }}<li>{{ . }}</li>{{ end }}
-      </ul>
+      <ul>{{- range .Params.watch_for }}<li>{{ . }}</li>{{ end }}</ul>
     </section>
   </div>
 
@@ -46,11 +61,21 @@
   <section class="profile-note"><span>Variegation note</span><p>{{ . }}</p></section>
   {{ end }}
 
+  {{- with .Params.propagation_visual }}
+  <section class="profile-propagation-visual">
+    <div><span class="profile-panel-kicker">Propagation basics</span><h2>{{ .title }}</h2><p>{{ .text }}</p>{{ with .url }}<a href="{{ . }}">Open propagation guide →</a>{{ end }}</div>
+    <img src="{{ .image | relURL }}" alt="{{ .alt | default .title }}" loading="lazy" decoding="async">
+  </section>
+  {{- end }}
+
   <section class="profile-deep-links">
     <div class="profile-section-heading"><span>Go deeper</span><h2>Use the right guide for the next step</h2></div>
     <div class="profile-link-grid">
       {{- range .Params.related_links }}
-      <a href="{{ .url }}"><strong>{{ .title }}</strong><span>{{ .text }}</span></a>
+      <a href="{{ .url }}">
+        {{- with .image }}<img src="{{ . | relURL }}" alt="" loading="lazy" decoding="async">{{ end }}
+        <strong>{{ .title }}</strong><span>{{ .text }}</span>
+      </a>
       {{- end }}
     </div>
   </section>
