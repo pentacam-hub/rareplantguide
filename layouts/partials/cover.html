@@ -1,0 +1,15 @@
+{{- with .cxt -}}
+{{- if not $.isHidden -}}
+  {{- $image := .Params.cover.image -}}
+  {{- if not $image -}}
+    {{- $image = "/images/monstera-variegated-hero.jpg" -}}
+  {{- end -}}
+  {{- $alt := .Params.cover.alt | default (printf "%s — rare plant guide" .Title) -}}
+  <figure class="entry-cover">
+    {{- if and site.Params.cover.linkFullImages (not $.IsSingle) }}<a href="{{ $image | relURL }}" target="_blank" rel="noopener noreferrer">{{ end -}}
+    <img loading="{{ if $.IsSingle }}eager{{ else }}lazy{{ end }}" src="{{ $image | relURL }}" alt="{{ $alt | plainify }}">
+    {{- if and site.Params.cover.linkFullImages (not $.IsSingle) }}</a>{{ end -}}
+    {{- with .Params.cover.caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end -}}
+  </figure>
+{{- end -}}
+{{- end -}}
