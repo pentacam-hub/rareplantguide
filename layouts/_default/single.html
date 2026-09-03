@@ -1,4 +1,17 @@
 {{- define "main" }}
+{{- $visual := dict -}}
+{{- with .File -}}
+  {{- with (index site.Data.article_visuals .ContentBaseName) -}}{{ $visual = . }}{{- end -}}
+{{- end -}}
+{{- $quickAnswer := .Params.quick_answer | default $visual.quick_answer -}}
+{{- $quickPoints := .Params.quick_points | default $visual.quick_points -}}
+{{- $visualCards := .Params.visual_cards | default $visual.visual_cards -}}
+{{- $visualCardsTitle := .Params.visual_cards_title | default $visual.visual_cards_title -}}
+{{- $actionSteps := .Params.action_steps | default $visual.action_steps -}}
+{{- $actionTitle := .Params.action_title | default $visual.action_title -}}
+{{- $mistakes := .Params.mistakes | default $visual.mistakes -}}
+{{- $visualLinks := .Params.visual_links | default $visual.visual_links -}}
+
 <article class="editorial-article">
   <nav class="editorial-breadcrumb" aria-label="Breadcrumb">
     <a href="/">Home</a><span>›</span>
@@ -11,6 +24,7 @@
       {{- $eyebrow := "Rare Plant Guide" -}}
       {{- with .Params.categories }}{{ $eyebrow = index . 0 }}{{ end -}}
       {{- with .Params.eyebrow }}{{ $eyebrow = . }}{{ end -}}
+      {{- with $visual.eyebrow }}{{ $eyebrow = . }}{{ end -}}
       <span class="editorial-eyebrow">{{ $eyebrow }}</span>
       <h1>{{ .Title }}</h1>
       {{- with .Description }}<p class="editorial-dek">{{ . }}</p>{{ end }}
@@ -20,92 +34,56 @@
         <span>The Rare Plant Guide</span>
       </div>
     </div>
-    <div class="editorial-hero-media">
-      {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" false) }}
-    </div>
+    <div class="editorial-hero-media">{{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" false) }}</div>
   </header>
 
   <section class="editorial-overview" aria-label="Article overview">
     <div class="editorial-quick-answer">
       <span class="editorial-label">Quick answer</span>
-      {{- with .Params.quick_answer }}
-        <p class="editorial-answer-lead">{{ . }}</p>
-      {{- else }}
-        <p class="editorial-answer-lead">{{ .Description }}</p>
-      {{- end }}
-      {{- with .Params.quick_points }}
-      <ul class="editorial-checks">
-        {{- range . }}<li>{{ . }}</li>{{ end }}
-      </ul>
-      {{- end }}
+      {{- with $quickAnswer }}<p class="editorial-answer-lead">{{ . }}</p>{{ else }}<p class="editorial-answer-lead">{{ .Description }}</p>{{ end }}
+      {{- with $quickPoints }}<ul class="editorial-checks">{{- range . }}<li>{{ . }}</li>{{ end }}</ul>{{- end }}
     </div>
 
     {{- if .TableOfContents }}
-    <aside class="editorial-toc">
-      <span class="editorial-label">On this page</span>
-      {{ .TableOfContents }}
-    </aside>
+    <aside class="editorial-toc"><span class="editorial-label">On this page</span>{{ .TableOfContents }}</aside>
     {{- end }}
   </section>
 
-  {{- with .Params.visual_cards }}
+  {{- with $visualCards }}
   <section class="editorial-visual-section" aria-labelledby="visual-summary-title">
-    <div class="editorial-section-heading">
-      <span>See it first</span>
-      <h2 id="visual-summary-title">{{ with $.Params.visual_cards_title }}{{ . }}{{ else }}What to look for{{ end }}</h2>
-    </div>
+    <div class="editorial-section-heading"><span>See it first</span><h2 id="visual-summary-title">{{ $visualCardsTitle | default "What to look for" }}</h2></div>
     <div class="editorial-visual-grid">
       {{- range . }}
-      <figure class="editorial-visual-card">
-        <img src="{{ .image | relURL }}" alt="{{ .alt | default .title }}" loading="lazy" decoding="async">
-        <figcaption><strong>{{ .title }}</strong>{{ with .text }}<span>{{ . }}</span>{{ end }}</figcaption>
-      </figure>
+      <figure class="editorial-visual-card"><img src="{{ .image | relURL }}" alt="{{ .alt | default .title }}" loading="lazy" decoding="async"><figcaption><strong>{{ .title }}</strong>{{ with .text }}<span>{{ . }}</span>{{ end }}</figcaption></figure>
       {{- end }}
     </div>
   </section>
   {{- end }}
 
-  {{- with .Params.action_steps }}
+  {{- with $actionSteps }}
   <section class="editorial-action-strip" aria-labelledby="action-strip-title">
-    <div class="editorial-section-heading">
-      <span>What to do</span>
-      <h2 id="action-strip-title">{{ with $.Params.action_title }}{{ . }}{{ else }}Follow the decision in order{{ end }}</h2>
-    </div>
+    <div class="editorial-section-heading"><span>What to do</span><h2 id="action-strip-title">{{ $actionTitle | default "Follow the decision in order" }}</h2></div>
     <div class="editorial-action-grid">
       {{- range $i, $step := . }}
-      <div class="editorial-action-card">
-        <span class="editorial-step-number">{{ add $i 1 }}</span>
-        {{- with $step.image }}<img src="{{ . | relURL }}" alt="{{ $step.title }}" loading="lazy" decoding="async">{{ end }}
-        <strong>{{ $step.title }}</strong>
-        <p>{{ $step.text }}</p>
-      </div>
+      <div class="editorial-action-card">{{- with $step.image }}<img src="{{ . | relURL }}" alt="{{ $step.title }}" loading="lazy" decoding="async">{{ end }}<span class="editorial-step-number">{{ add $i 1 }}</span><strong>{{ $step.title }}</strong><p>{{ $step.text }}</p></div>
       {{- end }}
     </div>
   </section>
   {{- end }}
 
-  <section class="editorial-content post-content">
-    {{ .Content }}
-  </section>
+  <section class="editorial-content post-content">{{ .Content }}</section>
 
-  {{- with .Params.mistakes }}
-  <section class="editorial-warning" aria-labelledby="mistakes-title">
-    <div class="editorial-section-heading"><span>Avoid this</span><h2 id="mistakes-title">Common mistakes</h2></div>
-    <div class="editorial-warning-grid">
-      {{- range . }}<div><strong>{{ .title }}</strong><p>{{ .text }}</p></div>{{ end }}
-    </div>
-  </section>
+  {{- with $mistakes }}
+  <section class="editorial-warning" aria-labelledby="mistakes-title"><div class="editorial-section-heading"><span>Avoid this</span><h2 id="mistakes-title">Common mistakes</h2></div><div class="editorial-warning-grid">{{- range . }}<div><strong>{{ .title }}</strong><p>{{ .text }}</p></div>{{ end }}</div></section>
   {{- end }}
 
-  {{- with .Params.visual_links }}
+  {{- with $visualLinks }}
   <section class="editorial-related" aria-labelledby="related-guides-title">
     <div class="editorial-section-heading"><span>Next step</span><h2 id="related-guides-title">Related guides</h2></div>
     <div class="editorial-related-grid">
       {{- range . }}
-      <a href="{{ .url }}">
-        {{- with .image }}<img src="{{ . | relURL }}" alt="" loading="lazy" decoding="async">{{ end }}
-        <div><strong>{{ .title }}</strong>{{ with .text }}<span>{{ . }}</span>{{ end }}<b>Read guide →</b></div>
-      </a>
+      {{- $img := .image | default (partial "topic-image.html" .title) -}}
+      <a href="{{ .url }}"><img src="{{ $img | relURL }}" alt="" loading="lazy" decoding="async"><div><strong>{{ .title }}</strong>{{ with .text }}<span>{{ . }}</span>{{ end }}<b>Read guide →</b></div></a>
       {{- end }}
     </div>
   </section>
