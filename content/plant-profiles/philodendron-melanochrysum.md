@@ -5,6 +5,7 @@ botanical_name: "Philodendron melanochrysum"
 genus: "Philodendron"
 description: "A practical Philodendron melanochrysum profile for bright filtered light, high humidity, well-drained soil, climbing support and velvet-leaf care."
 date: 2026-08-26T21:10:00Z
+lastmod: 2026-09-03T20:57:00Z
 difficulty: "Intermediate to advanced"
 habit: "Climbing"
 light: "Bright, filtered light"
@@ -25,12 +26,15 @@ related_links:
   - title: "Light Problems"
     text: "Check stretching and small leaves before changing placement."
     url: "/plant-problems/light-problems/"
+    image: "/images/plant-bright-window-light.jpg"
   - title: "Pests"
     text: "Inspect velvet leaves carefully for mites and other common houseplant pests."
     url: "/plant-problems/pests/"
+    image: "/images/houseplant-pest-inspection.jpg"
   - title: "Rare Plant Care"
     text: "Review root-zone, humidity and general aroid care."
     url: "/rare-plant-care/"
+    image: "/images/humidity-tents-vs-greenhouse-cabinets-for-rare-plants.jpg"
 source_name: "Royal Horticultural Society — Philodendron melanochrysum"
 source_url: "https://www.rhs.org.uk/plants/47836/philodendron-melanochrysum/details"
 ---
