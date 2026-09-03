@@ -1,0 +1,20 @@
+{{- $page := . -}}
+{{- with $page.Params.hero_image -}}
+  {{- return . -}}
+{{- end -}}
+
+{{- $title := lower (printf "%v" ($page.Params.display_name | default $page.Title)) -}}
+{{- $genus := lower (printf "%v" $page.Params.genus) -}}
+{{- $image := "/images/og-cover.jpg" -}}
+
+{{- if in $title "pink princess" -}}
+  {{- $image = "/images/guide-to-houseplant-variegation-chimeric-pattern-and-viral.jpg" -}}
+{{- else if or (in $title "warocqueanum") (eq $genus "anthurium") -}}
+  {{- $image = "/images/humidity-tents-vs-greenhouse-cabinets-for-rare-plants.jpg" -}}
+{{- else if in $title "melanochrysum" -}}
+  {{- $image = "/images/plant-bright-window-light.jpg" -}}
+{{- else if or (in $title "frydek") (eq $genus "alocasia") -}}
+  {{- $image = "/images/best-soil-mix-recipes-for-rare-aroid-collections.jpg" -}}
+{{- end -}}
+
+{{- return $image -}}
