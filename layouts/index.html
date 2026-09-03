@@ -1,178 +1,76 @@
 {{- define "main" }}
 
-{{- if site.Params.homeInfoParams }}
-{{- partial "home_info.html" . }}
-{{- end }}
+<section class="home-visual-hero">
+  <div class="home-visual-copy">
+    <span class="home-visual-eyebrow">The Rare Plant Guide</span>
+    <h1>Rare plant care without the guesswork.</h1>
+    <p>Diagnose problems, understand variegation, propagate valuable cuttings and choose the gear that actually fits your setup.</p>
+    <div class="home-visual-actions">
+      <a class="home-visual-primary" href="/tools/symptom-checker.html">Diagnose a plant problem</a>
+      <a class="home-visual-secondary" href="/variegated-monstera/">Explore Variegated Monstera</a>
+    </div>
+  </div>
+  <div class="home-visual-media"><img src="/images/monstera-variegated-hero.jpg" alt="Healthy variegated Monstera foliage" loading="eager" decoding="async"></div>
+</section>
 
 <section class="home-paths" aria-labelledby="start-here-title">
-  <div class="home-section-heading">
-    <span>Start here</span>
-    <h2 id="start-here-title">What does your plant need?</h2>
-  </div>
+  <div class="home-section-heading"><span>Start here</span><h2 id="start-here-title">What does your plant need right now?</h2></div>
   <div class="home-path-grid">
-    <a class="home-path-card" href="/tools/symptom-checker.html">
-      <strong>Diagnose a problem</strong>
-      <span>Use the free symptom checker for yellow leaves, pests, rot, reversion and more.</span>
-    </a>
-    <a class="home-path-card" href="/tools/light-checker.html">
-      <strong>Check your light</strong>
-      <span>Enter lux or foot-candles measured at leaf height and compare the reading with practical indoor aroid ranges.</span>
-    </a>
-    <a class="home-path-card" href="/plant-problems/root-rot/">
-      <strong>Rescue a struggling plant</strong>
-      <span>Confirm root problems from the roots and root zone before making several care changes at once.</span>
-    </a>
-  </div>
-</section>
-
-<section class="home-paths" aria-labelledby="gear-home-title">
-  <div class="home-section-heading">
-    <span>Best gear for rare plants</span>
-    <h2 id="gear-home-title">Shop smarter for your indoor plant setup</h2>
-  </div>
-  <div class="home-path-grid">
-    <a class="home-path-card" href="/buying-guides/best-plant-stands-with-grow-lights/">
-      <strong>Best Plant Stands With Grow Lights</strong>
-      <span>Compare our apartment picks for narrow spaces, maximum plant capacity and design-first living rooms.</span>
-    </a>
-    <a class="home-path-card" href="/buying-guides/best-selling-grow-lights/">
-      <strong>Best Grow Lights for Rare Plants</strong>
-      <span>Compare our top grow-light picks for single plants, shelves and small indoor collections.</span>
-    </a>
-    <a class="home-path-card" href="/buying-guides/">
-      <strong>Rare Plant Buying Guides</strong>
-      <span>Browse focused product comparisons for lighting, plant setups and the gear worth considering.</span>
-    </a>
-  </div>
-</section>
-
-<section class="home-paths" aria-labelledby="topic-hubs-title">
-  <div class="home-section-heading">
-    <span>Explore by topic</span>
-    <h2 id="topic-hubs-title">Choose a complete care path</h2>
-  </div>
-  <div class="home-path-grid hub-home-grid">
-    <a class="home-path-card" href="/variegated-monstera/">
-      <strong>Variegated Monstera</strong>
-      <span>Reversion, light, soil, nodes and propagation in one focused care hub.</span>
-    </a>
-    <a class="home-path-card" href="/plant-profiles/">
-      <strong>Plant Profiles</strong>
-      <span>Quick care references for Monstera, Philodendron, Anthurium and Alocasia collector plants.</span>
-    </a>
-    <a class="home-path-card" href="/plant-problems/">
-      <strong>Plant Problems</strong>
-      <span>Work from symptoms such as pests, rot, discoloration, weak growth and lost variegation.</span>
-    </a>
-    <a class="home-path-card" href="/propagation/">
-      <strong>Propagation</strong>
-      <span>Choose viable cuttings, manage nodes and rooting media, then transition safely to soil.</span>
-    </a>
-    <a class="home-path-card" href="/rare-plant-care/">
-      <strong>Rare Plant Care</strong>
-      <span>Build a stable routine for light, soil, humidity, roots, acclimation and healthy growth.</span>
-    </a>
-    <a class="home-path-card" href="/tools/">
-      <strong>Interactive Tools</strong>
-      <span>Measure light, build a chunky aroid mix, assess a cutting or diagnose a visible plant problem.</span>
-    </a>
-  </div>
-</section>
-
-<section class="home-paths" aria-labelledby="plant-profiles-home-title">
-  <div class="home-section-heading">
-    <span>Find your plant</span>
-    <h2 id="plant-profiles-home-title">Start with a plant profile</h2>
-  </div>
-  <div class="home-path-grid hub-home-grid">
-    <a class="home-path-card" href="/plant-profiles/monstera-albo/">
-      <strong>Monstera Albo</strong>
-      <span>Light, watering, airy soil, reversion and node-based propagation.</span>
-    </a>
-    <a class="home-path-card" href="/plant-profiles/thai-constellation/">
-      <strong>Thai Constellation</strong>
-      <span>Stable variegated Monstera care with bright filtered light and controlled watering.</span>
-    </a>
-    <a class="home-path-card" href="/plant-profiles/pink-princess-philodendron/">
-      <strong>Pink Princess Philodendron</strong>
-      <span>Filtered light, loose soil, climbing support and pink variegation care.</span>
-    </a>
-    <a class="home-path-card" href="/plant-profiles/">
-      <strong>Browse all plant profiles</strong>
-      <span>Open the full database, including Anthurium, Philodendron and Alocasia collector plants.</span>
-    </a>
-  </div>
-</section>
-
-<section class="home-paths" aria-labelledby="tools-home-title">
-  <div class="home-section-heading">
-    <span>Use a tool</span>
-    <h2 id="tools-home-title">Turn a care question into a practical check</h2>
-  </div>
-  <div class="home-path-grid hub-home-grid">
-    <a class="home-path-card" href="/tools/light-checker.html">
-      <strong>Light Checker</strong>
-      <span>Convert lux or foot-candles into a practical low, useful or bright indoor light assessment.</span>
-    </a>
-    <a class="home-path-card" href="/tools/soil-mix-builder.html">
-      <strong>Soil Mix Builder</strong>
-      <span>Adapt the site's 40/30/20/10 chunky aroid mix for humidity, pot type and batch size.</span>
-    </a>
-    <a class="home-path-card" href="/tools/propagation-readiness.html">
-      <strong>Propagation Readiness</strong>
-      <span>Check the node, axillary bud, stem health and rooting setup before using a valuable cutting.</span>
-    </a>
-    <a class="home-path-card" href="/tools/symptom-checker.html">
-      <strong>Symptom Checker</strong>
-      <span>Start from what you can see and open the matching diagnostic page before changing the care routine.</span>
-    </a>
+    <a class="home-path-card" href="/tools/symptom-checker.html"><img src="/images/houseplant-pest-inspection.jpg" alt="" loading="lazy"><strong>Diagnose a problem</strong><span>Start from what you can actually see: yellowing, pests, rot, reversion or weak growth.</span></a>
+    <a class="home-path-card" href="/tools/light-checker.html"><img src="/images/plant-bright-window-light.jpg" alt="" loading="lazy"><strong>Check your light</strong><span>Turn a lux or foot-candle reading into a practical indoor-light decision.</span></a>
+    <a class="home-path-card" href="/plant-problems/root-rot/"><img src="/images/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late.jpg" alt="" loading="lazy"><strong>Rescue a struggling plant</strong><span>Confirm what is happening in the root zone before changing everything at once.</span></a>
   </div>
 </section>
 
 <section class="home-paths" aria-labelledby="popular-guides-title">
-  <div class="home-section-heading">
-    <span>Popular problems</span>
-    <h2 id="popular-guides-title">Rare plant guides to start with</h2>
-  </div>
-  <div class="home-path-grid">
-    <a class="home-path-card" href="/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/">
-      <strong>Variegated Monstera turning green?</strong>
-      <span>Can reversion be reversed? Check the stem and growth point and learn when pruning can help.</span>
-    </a>
-    <a class="home-path-card" href="/posts/best-soil-mix-variegated-monstera/">
-      <strong>Best soil for Variegated Monstera</strong>
-      <span>Start with a 40/30/20/10 chunky aroid mix and adjust it for your light, pot and humidity.</span>
-    </a>
-    <a class="home-path-card" href="/posts/propagate-variegated-monstera/">
-      <strong>Propagate a Variegated Monstera cutting</strong>
-      <span>Choose a viable node, root it in water or sphagnum and know when it is ready to pot.</span>
-    </a>
-    <a class="home-path-card" href="/posts/best-grow-lights-rare-houseplants/">
-      <strong>Best grow lights for rare houseplants</strong>
-      <span>Compare full-spectrum LEDs, coverage, intensity, timers and safe placement.</span>
-    </a>
-    <a class="home-path-card" href="/posts/is-sphagnum-moss-actually-the-holy-grail-for-rare-plant-propagation/">
-      <strong>Root cuttings in sphagnum</strong>
-      <span>Use sphagnum without keeping nodes saturated and reduce propagation rot risk.</span>
-    </a>
-    <a class="home-path-card" href="/posts/">
-      <strong>Browse every care guide</strong>
-      <span>Explore the complete library by problem: variegation, roots, light, soil, pests and propagation.</span>
-    </a>
+  <div class="home-section-heading"><span>Popular guides</span><h2 id="popular-guides-title">The questions plant collectors are solving now</h2></div>
+  <div class="home-path-grid home-path-grid-visual">
+    <a class="home-path-card" href="/posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/"><img src="/images/monstera-reverted-green.jpg" alt="" loading="lazy"><strong>Monstera turning green?</strong><span>Confirm true reversion from the stem and growth point, then decide whether to prune.</span></a>
+    <a class="home-path-card" href="/posts/monstera-node-vs-axillary-bud-variegated-cutting/"><img src="/images/monstera-node-vs-axillary-bud-comparison.webp" alt="" loading="lazy"><strong>Node vs axillary bud</strong><span>See exactly which structure can produce the next vine before you buy or cut.</span></a>
+    <a class="home-path-card" href="/posts/best-soil-mix-variegated-monstera/"><img src="/images/chunky-aroid-soil-mix.jpg" alt="" loading="lazy"><strong>Best soil for Variegated Monstera</strong><span>Build the 40/30/20/10 chunky mix and adjust it to your room and pot.</span></a>
+    <a class="home-path-card" href="/posts/propagate-variegated-monstera/"><img src="/images/propagation-water-rooting.jpg" alt="" loading="lazy"><strong>Propagate Variegated Monstera</strong><span>Choose a viable node, root it safely and know when the cutting is ready to pot.</span></a>
+    <a class="home-path-card" href="/posts/is-sphagnum-moss-actually-the-holy-grail-for-rare-plant-propagation/"><img src="/images/is-sphagnum-moss-actually-the-holy-grail-for-rare-plant-propagation.jpg" alt="" loading="lazy"><strong>Root cuttings in sphagnum</strong><span>Keep the node moist without turning the moss into a saturated rot trap.</span></a>
+    <a class="home-path-card" href="/posts/best-grow-lights-rare-houseplants/"><img src="/images/grow-light-setup.jpg" alt="" loading="lazy"><strong>Grow lights for rare plants</strong><span>Compare intensity, coverage and placement instead of shopping by wattage alone.</span></a>
   </div>
 </section>
 
-<div class="home-section-heading latest-guides">
-  <span>Fresh from the guide</span>
-  <h2>Latest rare plant articles</h2>
-</div>
+<section class="home-paths" aria-labelledby="topic-hubs-title">
+  <div class="home-section-heading"><span>Explore by path</span><h2 id="topic-hubs-title">Choose the care path that matches your problem</h2></div>
+  <div class="home-path-grid hub-home-grid">
+    <a class="home-path-card" href="/variegated-monstera/"><img src="/images/variegation-pattern-close.jpg" alt="" loading="lazy"><strong>Variegated Monstera</strong><span>Reversion, light, soil, nodes and propagation in one focused care path.</span></a>
+    <a class="home-path-card" href="/plant-problems/"><img src="/images/houseplant-pest-inspection.jpg" alt="" loading="lazy"><strong>Plant Problems</strong><span>Work from symptoms such as pests, root decline, discoloration and lost variegation.</span></a>
+    <a class="home-path-card" href="/propagation/"><img src="/images/plant-propagation-cutting.jpg" alt="" loading="lazy"><strong>Propagation</strong><span>Choose viable cuttings, manage nodes and rooting media, then transition safely to soil.</span></a>
+    <a class="home-path-card" href="/rare-plant-care/"><img src="/images/plant-bright-window-light.jpg" alt="" loading="lazy"><strong>Rare Plant Care</strong><span>Build a stable routine for light, soil, humidity, roots and acclimation.</span></a>
+    <a class="home-path-card" href="/plant-profiles/"><img src="/images/monstera-variegated-hero.jpg" alt="" loading="lazy"><strong>Plant Profiles</strong><span>Quick-reference care pages for collector Monstera, Philodendron, Anthurium and Alocasia.</span></a>
+    <a class="home-path-card" href="/tools/"><img src="/images/chunky-aroid-soil-mix1.jpg" alt="" loading="lazy"><strong>Interactive Tools</strong><span>Measure light, build a soil mix, assess a cutting or diagnose a visible plant problem.</span></a>
+  </div>
+</section>
+
+<section class="home-paths" aria-labelledby="gear-home-title">
+  <div class="home-section-heading"><span>Best gear for rare plants</span><h2 id="gear-home-title">Shop by the decision you need to make</h2></div>
+  <div class="home-path-grid">
+    <a class="home-path-card" href="/buying-guides/best-selling-grow-lights/"><img src="/images/grow-light-setup.jpg" alt="" loading="lazy"><strong>Best Grow Lights</strong><span>Compare picks for a single plant, a shelf and a small indoor collection.</span></a>
+    <a class="home-path-card" href="/buying-guides/best-humidifiers-for-rare-plants/"><img src="/images/humidity-tents-vs-greenhouse-cabinets-for-rare-plants.jpg" alt="" loading="lazy"><strong>Best Humidifiers</strong><span>Decide when humidity control is useful and when a bigger machine is unnecessary.</span></a>
+    <a class="home-path-card" href="/buying-guides/"><img src="/images/spotting-rare-plant-scams-online-a-houseplant-buyer-s-guide.jpg" alt="" loading="lazy"><strong>All Buying Guides</strong><span>Browse focused comparisons for lighting, support, propagation and plant-room gear.</span></a>
+  </div>
+</section>
+
+<section class="home-paths" aria-labelledby="plant-profiles-home-title">
+  <div class="home-section-heading"><span>Find your plant</span><h2 id="plant-profiles-home-title">Start with a plant profile</h2></div>
+  <div class="home-path-grid hub-home-grid">
+    <a class="home-path-card" href="/plant-profiles/monstera-albo/"><img src="/images/monstera-variegated-hero.jpg" alt="" loading="lazy"><strong>Monstera Albo</strong><span>Light, watering, airy soil, reversion and node-based propagation.</span></a>
+    <a class="home-path-card" href="/plant-profiles/thai-constellation/"><img src="/images/variegation-pattern-close.jpg" alt="" loading="lazy"><strong>Thai Constellation</strong><span>Stable variegated Monstera care with bright filtered light and controlled watering.</span></a>
+    <a class="home-path-card" href="/plant-profiles/pink-princess-philodendron/"><img src="/images/guide-to-houseplant-variegation-chimeric-pattern-and-viral.jpg" alt="" loading="lazy"><strong>Pink Princess Philodendron</strong><span>Filtered light, loose soil, climbing support and variegation care.</span></a>
+    <a class="home-path-card" href="/plant-profiles/"><img src="/images/og-cover.jpg" alt="" loading="lazy"><strong>Browse all plant profiles</strong><span>Open the full collector-plant reference library.</span></a>
+  </div>
+</section>
+
+<div class="home-section-heading latest-guides"><span>Fresh from the guide</span><h2>Latest rare plant articles</h2></div>
 
 {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
 {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
-
 {{- $featured := where $pages "Params.featured" "eq" true }}
 {{- $featured = $featured.ByDate.Reverse }}
-
 {{- $remaining := sub 4 (len $featured) }}
 {{- if gt $remaining 0 }}
   {{- $nonFeatured := where $pages "Params.featured" "ne" true }}
@@ -181,23 +79,19 @@
 {{- end }}
 {{- $featured = first 4 $featured }}
 
+<div class="home-latest-grid">
 {{- range $index, $page := $featured }}
 <article class="post-entry">
   {{- $isHidden := ($page.Param "cover.hiddenInList") | default ($page.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" $page "IsSingle" false "isHidden" $isHidden) }}
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">{{- $page.Title }}</h2>
-  </header>
-  {{- if (ne ($page.Param "hideSummary") true) }}
-  <div class="entry-content"><p>{{ $page.Summary | plainify | htmlUnescape }}{{ if $page.Truncated }}...{{ end }}</p></div>
-  {{- end }}
-  {{- if not ($page.Param "hideMeta") }}
-  <footer class="entry-footer">{{- partial "post_meta.html" $page -}}</footer>
-  {{- end }}
+  <header class="entry-header"><h2 class="entry-hint-parent">{{- $page.Title }}</h2></header>
+  {{- if (ne ($page.Param "hideSummary") true) }}<div class="entry-content"><p>{{ $page.Summary | plainify | htmlUnescape }}{{ if $page.Truncated }}...{{ end }}</p></div>{{- end }}
+  {{- if not ($page.Param "hideMeta") }}<footer class="entry-footer">{{- partial "post_meta.html" $page -}}</footer>{{- end }}
   <a class="entry-link" aria-label="post link to {{ $page.Title | plainify }}" href="{{ $page.Permalink }}"></a>
 </article>
 {{- end }}
+</div>
 
 <footer class="page-footer" style="text-align:center; margin-top:2rem;"><a class="prev" href="{{ "/posts/" | absURL }}" style="display:inline-block;">See All Rare Plant Care Guides &raquo;</a></footer>
 
-{{- end }}{{- /* end main */ -}}
+{{- end }}
