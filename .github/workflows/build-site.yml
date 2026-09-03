@@ -1,7 +1,12 @@
-name: Build Rare Plant Site (manual fallback)
+name: Build Rare Plant Site
 
 on:
   workflow_dispatch: {}
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'public/**'
 
 permissions:
   contents: write
