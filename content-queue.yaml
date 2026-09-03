@@ -287,7 +287,14 @@ topics:
   - collecting houseplants
   image_query: rare houseplant collection shelf
   cluster: buying-market
-  status: pending
+  status: done
+  published_date: '2026-09-03'
+  slug: why-are-rare-houseplants-so-expensive-pricing-explained
+  pin_title: Why Are Rare Houseplants So Expensive? Pricing Explained
+  pin_description: Understand the factors behind rare plant prices, from propagation
+    difficulty and variegation stability to shipping risks and market demand.
+  pin_image_path: /images/pins/why-are-rare-houseplants-so-expensive-pricing-explained.jpg
+  pin_status: pending
 - title: 'Anthurium Care for Beginners: Warocqueanum, Veitchii, and More'
   keywords:
   - anthurium care
