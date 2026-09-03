@@ -1,7 +1,7 @@
 ---
 title: "Variegated Monstera Turning Green? Diagnose Reversion First"
 date: 2026-08-26T21:00:00Z
-lastmod: 2026-09-03T19:57:00Z
+lastmod: 2026-09-03T20:57:00Z
 description: "If a Variegated Monstera is turning green, check the stem, node, growth point and recent care changes before deciding whether it is true reversion."
 type: "problem"
 eyebrow: "Variegated Monstera problem"
@@ -23,8 +23,8 @@ symptom_visuals:
     alt: "Close view of green and cream variegation pattern"
   - title: "Find the growth point"
     text: "If pruning becomes necessary, the node and axillary bud determine where the next vine can emerge."
-    image: "/images/monstera-node-vs-axillary-bud-comparison.webp"
-    alt: "Monstera node and axillary bud labeled for pruning decisions"
+    image: "/images/plant-propagation-cutting.jpg"
+    alt: "Monstera stem cutting used to inspect the node and growth point"
 check_first:
   - "Compare several consecutive leaves instead of judging one greener leaf by itself."
   - "Inspect the stem around the active growth point for visible variegation."
@@ -46,7 +46,7 @@ next_steps:
     image: "/images/variegation-pattern-close.jpg"
   - title: "Inspect the node"
     text: "If you may prune, identify the lower bud you actually want to preserve."
-    image: "/images/monstera-node-vs-axillary-bud-comparison.webp"
+    image: "/images/plant-propagation-cutting.jpg"
   - title: "Stabilize care"
     text: "Keep light and root-zone care consistent while observing the next growth."
     image: "/images/plant-bright-window-light.jpg"
@@ -76,6 +76,10 @@ related_guides:
     text: "Understand chimeric, pattern-gene and viral variegation."
     url: "/posts/guide-to-houseplant-variegation-chimeric-pattern-and-viral/"
     image: "/images/guide-to-houseplant-variegation-chimeric-pattern-and-viral.jpg"
+  - title: "Where to Cut a Reverting Variegated Monstera"
+    text: "If reversion is confirmed, choose the lower node and protect the axillary bud before making the corrective cut."
+    url: "/posts/where-to-cut-reverting-variegated-monstera/"
+    image: "/images/plant-propagation-cutting.jpg"
 ---
 
 ## Do not judge reversion from one leaf
