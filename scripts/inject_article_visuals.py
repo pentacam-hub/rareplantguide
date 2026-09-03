@@ -12,11 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 POSTS = ROOT / "content" / "posts"
 STATIC = ROOT / "static"
 
+# Specific task/diagnostic intent must win over broad words such as "variegated".
 RULES = [
     (("node", "axillary bud"), "/images/monstera-node-vs-axillary-bud-comparison.webp", "Monstera node and axillary bud comparison"),
-    (("reversion", "turning green", "reverting"), "/images/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it.jpg", "Variegated Monstera showing green and white variegation"),
-    (("syngonium",), "/images/why-your-variegated-syngonium-is-losing-its-color.jpg", "Variegated Syngonium foliage"),
-    (("variegation", "variegated"), "/images/guide-to-houseplant-variegation-chimeric-pattern-and-viral.jpg", "Variegated houseplant foliage pattern"),
     (("root rot", "root-rot"), "/images/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late.jpg", "Philodendron roots being inspected for root rot"),
     (("thrips", "mites", "pest"), "/images/houseplant-pest-inspection.jpg", "Houseplant leaf being inspected for pests"),
     (("sphagnum",), "/images/is-sphagnum-moss-actually-the-holy-grail-for-rare-plant-propagation.jpg", "Sphagnum moss used for rare plant propagation"),
@@ -26,6 +24,9 @@ RULES = [
     (("humidity", "humidifier", "greenhouse cabinet"), "/images/humidity-tents-vs-greenhouse-cabinets-for-rare-plants.jpg", "Rare plants growing in a controlled humidity setup"),
     (("tissue culture", "tissue-cultur"), "/images/is-it-worth-buying-tissue-cultured-rare-plants-a-honest-guide-for-hobbyists.jpg", "Young tissue-cultured rare plants"),
     (("scam", "buying rare plants"), "/images/spotting-rare-plant-scams-online-a-houseplant-buyer-s-guide.jpg", "Buying rare houseplants online"),
+    (("reversion", "turning green", "reverting"), "/images/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it.jpg", "Variegated Monstera showing green and white variegation"),
+    (("syngonium",), "/images/why-your-variegated-syngonium-is-losing-its-color.jpg", "Variegated Syngonium foliage"),
+    (("variegation", "variegated"), "/images/guide-to-houseplant-variegation-chimeric-pattern-and-viral.jpg", "Variegated houseplant foliage pattern"),
 ]
 
 DEFAULT = (
@@ -80,7 +81,6 @@ def main():
         checked += 1
         changed += int(add_cover(path))
 
-    # Verify the rendered editorial set can never silently return to text-only posts.
     missing = []
     for path in sorted(POSTS.glob("*.md")):
         if path.name == "_index.md":
