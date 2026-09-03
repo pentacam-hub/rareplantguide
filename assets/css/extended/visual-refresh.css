@@ -1,6 +1,9 @@
-/* Visual refresh: make the site image-led instead of text-only. */
+/* Visual refresh: article-image polish only.
+   Homepage cards now render real <img> elements in layouts/index.html.
+   The old ::before thumbnail system was removed because it duplicated every
+   card image and repeatedly injected the same Monstera photo. */
 
-/* Strong editorial hero image on every standard post. */
+/* Strong editorial hero image on legacy standard-post layouts. */
 .post-single > .entry-cover {
   margin: 28px 0 34px;
 }
@@ -23,66 +26,17 @@
   box-shadow: 0 10px 26px rgba(30, 38, 28, .09);
 }
 
-/* Add real visual thumbnails to the most important homepage decision cards. */
-.home-paths:nth-of-type(1) .home-path-card,
-.home-paths:nth-of-type(2) .home-path-card,
-.home-paths:nth-of-type(4) .home-path-card,
-.home-paths:nth-of-type(6) .home-path-card {
-  overflow: hidden;
-  padding: 0;
-  gap: 0;
+/* Defensive reset: a cached/older rule must never add a second image layer
+   to homepage decision cards. */
+.home-path-card::before {
+  content: none !important;
+  display: none !important;
+  background-image: none !important;
 }
-.home-paths:nth-of-type(1) .home-path-card::before,
-.home-paths:nth-of-type(2) .home-path-card::before,
-.home-paths:nth-of-type(4) .home-path-card::before,
-.home-paths:nth-of-type(6) .home-path-card::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 145px;
-  flex: 0 0 145px;
-  background-image: url('/images/monstera-variegated-hero.jpg');
-  background-size: cover;
-  background-position: center;
-  transition: transform .25s ease;
-}
-.home-paths:nth-of-type(1) .home-path-card:hover::before,
-.home-paths:nth-of-type(2) .home-path-card:hover::before,
-.home-paths:nth-of-type(4) .home-path-card:hover::before,
-.home-paths:nth-of-type(6) .home-path-card:hover::before {
-  transform: scale(1.035);
-}
-.home-paths:nth-of-type(1) .home-path-card strong,
-.home-paths:nth-of-type(2) .home-path-card strong,
-.home-paths:nth-of-type(4) .home-path-card strong,
-.home-paths:nth-of-type(6) .home-path-card strong {
-  padding: 18px 20px 0;
-}
-.home-paths:nth-of-type(1) .home-path-card span,
-.home-paths:nth-of-type(2) .home-path-card span,
-.home-paths:nth-of-type(4) .home-path-card span,
-.home-paths:nth-of-type(6) .home-path-card span {
-  padding: 8px 20px 20px;
-}
-
-.home-path-card[href*="light-checker"]::before,
-.home-path-card[href*="best-selling-grow-lights"]::before,
-.home-path-card[href*="best-grow-lights"]::before { background-image: url('/images/grow-light-setup.jpg') !important; }
-.home-path-card[href*="root-rot"]::before { background-image: url('/images/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late.jpg') !important; }
-.home-path-card[href*="symptom-checker"]::before { background-image: url('/images/houseplant-pest-inspection.jpg') !important; }
-.home-path-card[href*="the-heartbreak-of-reversion"]::before { background-image: url('/images/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it.jpg') !important; }
-.home-path-card[href*="best-soil-mix"]::before { background-image: url('/images/chunky-aroid-soil-mix.jpg') !important; }
-.home-path-card[href*="propagate-variegated"]::before { background-image: url('/images/propagation-water-rooting.jpg') !important; }
-.home-path-card[href*="sphagnum"]::before { background-image: url('/images/is-sphagnum-moss-actually-the-holy-grail-for-rare-plant-propagation.jpg') !important; }
-.home-path-card[href*="plant-stands-with-grow-lights"]::before { background-image: url('/images/grow-light-setup.jpg') !important; }
 
 @media (max-width: 720px) {
-  .post-single > .entry-cover img { max-height: 360px; border-radius: 13px; }
-  .home-paths:nth-of-type(1) .home-path-card::before,
-  .home-paths:nth-of-type(2) .home-path-card::before,
-  .home-paths:nth-of-type(4) .home-path-card::before,
-  .home-paths:nth-of-type(6) .home-path-card::before {
-    height: 180px;
-    flex-basis: 180px;
+  .post-single > .entry-cover img {
+    max-height: 360px;
+    border-radius: 13px;
   }
 }
