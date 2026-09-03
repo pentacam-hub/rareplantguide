@@ -1,12 +1,14 @@
 {{- define "main" }}
 <article class="hub-page">
-  <header class="hub-hero">
-    {{- with .Params.eyebrow }}<span class="hub-eyebrow">{{ . }}</span>{{ end }}
-    <h1>{{ .Title }}</h1>
-    {{- with .Description }}<p>{{ . }}</p>{{ end }}
-    {{- with .Params.primary_cta }}
-    <a class="hub-primary-cta" href="{{ .url }}">{{ .label }}</a>
-    {{- end }}
+  {{- $hero := .Params.hero_image | default (partial "topic-image.html" .Title) -}}
+  <header class="hub-hero hub-hero-visual">
+    <div class="hub-hero-copy">
+      {{- with .Params.eyebrow }}<span class="hub-eyebrow">{{ . }}</span>{{ else }}<span class="hub-eyebrow">Explore the guide</span>{{ end }}
+      <h1>{{ .Title }}</h1>
+      {{- with .Description }}<p>{{ . }}</p>{{ end }}
+      {{- with .Params.primary_cta }}<a class="hub-primary-cta" href="{{ .url }}">{{ .label }}</a>{{ end }}
+    </div>
+    <div class="hub-hero-media"><img src="{{ $hero | relURL }}" alt="{{ .Params.hero_alt | default .Title }}" loading="eager" decoding="async"></div>
   </header>
 
   {{- with .Params.hub_sections }}
@@ -18,11 +20,15 @@
       </div>
       <div class="hub-card-grid">
         {{- range .links }}
+        {{- $img := .image | default (partial "topic-image.html" .title) -}}
         <a class="hub-guide-card" href="{{ .url }}">
-          {{- with .kicker }}<span class="hub-guide-kicker">{{ . }}</span>{{ end }}
-          <strong>{{ .title }}</strong>
-          <span class="hub-guide-description">{{ .text }}</span>
-          <span class="hub-guide-cta">{{ with .cta }}{{ . }}{{ else }}Open guide →{{ end }}</span>
+          <img src="{{ $img | relURL }}" alt="{{ .title }}" loading="lazy" decoding="async">
+          <span class="hub-guide-card-copy">
+            {{- with .kicker }}<span class="hub-guide-kicker">{{ . }}</span>{{ end }}
+            <strong>{{ .title }}</strong>
+            <span class="hub-guide-description">{{ .text }}</span>
+            <span class="hub-guide-cta">{{ with .cta }}{{ . }}{{ else }}Open guide →{{ end }}</span>
+          </span>
         </a>
         {{- end }}
       </div>
@@ -30,9 +36,7 @@
     {{- end }}
   {{- end }}
 
-  {{- with .Content }}
-  <section class="hub-editorial post-content">{{ . }}</section>
-  {{- end }}
+  {{- with .Content }}<section class="hub-editorial post-content">{{ . }}</section>{{ end }}
 
   {{- with .Params.related_hubs }}
   <section class="hub-related" aria-labelledby="related-hubs-title">
@@ -42,7 +46,8 @@
     </div>
     <div class="hub-related-grid">
       {{- range . }}
-      <a href="{{ .url }}"><strong>{{ .title }}</strong><span>{{ .text }}</span></a>
+      {{- $img := .image | default (partial "topic-image.html" .title) -}}
+      <a href="{{ .url }}"><img src="{{ $img | relURL }}" alt="{{ .title }}" loading="lazy" decoding="async"><span class="hub-related-copy"><strong>{{ .title }}</strong><span>{{ .text }}</span></span></a>
       {{- end }}
     </div>
   </section>
