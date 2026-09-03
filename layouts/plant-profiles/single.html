@@ -30,19 +30,24 @@
     </div>
   </section>
 
-  {{- with .Params.care_cards }}
   <section class="editorial-visual-section" aria-labelledby="profile-care-visuals-title">
     <div class="editorial-section-heading"><span>Care in practice</span><h2 id="profile-care-visuals-title">What good care looks like</h2></div>
     <div class="editorial-visual-grid">
-      {{- range . }}
-      <figure class="editorial-visual-card">
-        <img src="{{ .image | relURL }}" alt="{{ .alt | default .title }}" loading="lazy" decoding="async">
-        <figcaption><strong>{{ .title }}</strong><span>{{ .text }}</span>{{ with .url }}<a href="{{ . }}">Learn more →</a>{{ end }}</figcaption>
-      </figure>
+      {{- with .Params.care_cards }}
+        {{- range . }}
+        {{- $img := .image | default (partial "topic-image.html" .title) -}}
+        <figure class="editorial-visual-card">
+          <img src="{{ $img | relURL }}" alt="{{ .alt | default .title }}" loading="lazy" decoding="async">
+          <figcaption><strong>{{ .title }}</strong><span>{{ .text }}</span>{{ with .url }}<a href="{{ . }}">Learn more →</a>{{ end }}</figcaption>
+        </figure>
+        {{- end }}
+      {{- else }}
+        <figure class="editorial-visual-card"><img src="/images/plant-bright-window-light.jpg" alt="Bright filtered indoor light for rare houseplants" loading="lazy" decoding="async"><figcaption><strong>Bright filtered light</strong><span>Judge usable light where the foliage sits and acclimate gradually when increasing intensity.</span></figcaption></figure>
+        <figure class="editorial-visual-card"><img src="/images/chunky-aroid-soil-mix.jpg" alt="Airy chunky root-zone mix for rare houseplants" loading="lazy" decoding="async"><figcaption><strong>Airy root zone</strong><span>Keep enough coarse structure around the roots that watering does not leave the pot stagnant.</span></figcaption></figure>
+        <figure class="editorial-visual-card"><img src="/images/houseplant-pest-inspection.jpg" alt="Rare houseplant foliage being inspected closely" loading="lazy" decoding="async"><figcaption><strong>Inspect the plant closely</strong><span>Use leaves, stems, petioles and roots as evidence before changing several care variables at once.</span></figcaption></figure>
       {{- end }}
     </div>
   </section>
-  {{- end }}
 
   <div class="profile-two-col">
     <section class="profile-panel">
@@ -57,28 +62,27 @@
     </section>
   </div>
 
-  {{ with .Params.variegation_note }}
-  <section class="profile-note"><span>Variegation note</span><p>{{ . }}</p></section>
-  {{ end }}
+  {{ with .Params.variegation_note }}<section class="profile-note"><span>Variegation note</span><p>{{ . }}</p></section>{{ end }}
 
   {{- with .Params.propagation_visual }}
   <section class="profile-propagation-visual">
     <div><span class="profile-panel-kicker">Propagation basics</span><h2>{{ .title }}</h2><p>{{ .text }}</p>{{ with .url }}<a href="{{ . }}">Open propagation guide →</a>{{ end }}</div>
-    <img src="{{ .image | relURL }}" alt="{{ .alt | default .title }}" loading="lazy" decoding="async">
+    {{- $img := .image | default (partial "topic-image.html" .title) -}}
+    <img src="{{ $img | relURL }}" alt="{{ .alt | default .title }}" loading="lazy" decoding="async">
   </section>
   {{- end }}
 
+  {{- with .Params.related_links }}
   <section class="profile-deep-links">
     <div class="profile-section-heading"><span>Go deeper</span><h2>Use the right guide for the next step</h2></div>
     <div class="profile-link-grid">
-      {{- range .Params.related_links }}
-      <a href="{{ .url }}">
-        {{- with .image }}<img src="{{ . | relURL }}" alt="" loading="lazy" decoding="async">{{ end }}
-        <strong>{{ .title }}</strong><span>{{ .text }}</span>
-      </a>
+      {{- range . }}
+      {{- $img := .image | default (partial "topic-image.html" .title) -}}
+      <a href="{{ .url }}"><img src="{{ $img | relURL }}" alt="{{ .title }}" loading="lazy" decoding="async"><strong>{{ .title }}</strong><span>{{ .text }}</span></a>
       {{- end }}
     </div>
   </section>
+  {{- end }}
 
   {{ with .Content }}<section class="profile-editorial post-content">{{ . }}</section>{{ end }}
 
