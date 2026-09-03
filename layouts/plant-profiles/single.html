@@ -2,7 +2,7 @@
 <article class="plant-profile-page">
   <nav class="profile-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/plant-profiles/">Plant Profiles</a><span>›</span><span>{{ .Params.display_name | default .Title }}</span></nav>
 
-  {{- $hero := .Params.hero_image | default "/images/og-cover.jpg" -}}
+  {{- $hero := partial "profile-image.html" . -}}
   {{- $heroAlt := .Params.hero_alt | default (printf "%s plant profile" (.Params.display_name | default .Title)) -}}
   <header class="plant-profile-hero profile-hero-visual">
     <div class="profile-hero-copy">
