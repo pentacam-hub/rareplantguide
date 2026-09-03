@@ -1,0 +1,45 @@
+{{- define "main" }}
+<section class="article-library-page">
+  <header class="article-library-hero">
+    <div>
+      <span class="editorial-eyebrow">Care guide library</span>
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p>{{ . }}</p>{{ else }}<p>Browse the full rare-plant guide library by problem, care decision and propagation step.</p>{{ end }}
+    </div>
+    <img src="/images/variegation-pattern-close.jpg" alt="Variegated foliage detail" loading="eager" decoding="async">
+  </header>
+
+  <nav class="article-library-shortcuts" aria-label="Guide shortcuts">
+    <a href="/plant-problems/">Problems & fixes</a>
+    <a href="/variegated-monstera/">Variegated Monstera</a>
+    <a href="/propagation/">Propagation</a>
+    <a href="/rare-plant-care/">Care basics</a>
+    <a href="/buying-guides/">Buying guides</a>
+  </nav>
+
+  <div class="article-library-grid">
+    {{- range .Paginator.Pages }}
+      {{- $img := "" -}}
+      {{- with .Params.cover }}{{ with .image }}{{ $img = . }}{{ end }}{{ end -}}
+      {{- if not $img }}{{ $img = partial "topic-image.html" .Title }}{{ end -}}
+      <article class="article-library-card">
+        <a class="article-library-image" href="{{ .RelPermalink }}"><img src="{{ $img | relURL }}" alt="{{ .Title }}" loading="lazy" decoding="async"></a>
+        <div class="article-library-copy">
+          <span>{{ with .Params.categories }}{{ index . 0 }}{{ else }}Rare plant guide{{ end }}</span>
+          <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <p>{{ .Description | default (.Summary | plainify) }}</p>
+          <div class="article-library-meta"><b>{{ .ReadingTime }} min read</b><a href="{{ .RelPermalink }}">Open guide →</a></div>
+        </div>
+      </article>
+    {{- end }}
+  </div>
+
+  {{- if gt .Paginator.TotalPages 1 }}
+  <nav class="article-library-pagination" aria-label="Pagination">
+    {{- with .Paginator.Prev }}<a href="{{ .URL }}">← Newer guides</a>{{ end }}
+    <span>Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}</span>
+    {{- with .Paginator.Next }}<a href="{{ .URL }}">Older guides →</a>{{ end }}
+  </nav>
+  {{- end }}
+</section>
+{{- end }}
