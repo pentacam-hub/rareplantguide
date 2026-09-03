@@ -38,14 +38,16 @@ SNAPSHOT_NOTE = "Recent Amazon US price snapshot · verify current price"
 
 
 def patch_price_block(block: str, price: str) -> str:
+    # Hugo --minify may remove quotes from simple class attributes, so support
+    # both class="amazon-price-value" and class=amazon-price-value forms.
     block = re.sub(
-        r'(<strong class="amazon-price-value">)(?:Check current price|[^<]*)(</strong>)',
+        r'(<strong\s+class=(?:"amazon-price-value"|amazon-price-value)>)(?:Check current price|[^<]*)(</strong>)',
         rf"\g<1>{price}\g<2>",
         block,
         count=1,
     )
     block = re.sub(
-        r'(<small class="amazon-price-updated">)(?:Current price opens on Amazon|On Amazon|[^<]*)(</small>)',
+        r'(<small\s+class=(?:"amazon-price-updated"|amazon-price-updated)>)(?:Current price opens on Amazon|On Amazon|[^<]*)(</small>)',
         rf"\g<1>{SNAPSHOT_NOTE}\g<2>",
         block,
         count=1,
@@ -56,8 +58,10 @@ def patch_price_block(block: str, price: str) -> str:
 def patch_html(html: str) -> tuple[str, int]:
     replacements = 0
     for asin, price in PRICE_SNAPSHOTS.items():
+        # Match the price container by ASIN regardless of whether Hugo minified
+        # data-amazon-price="ASIN" to data-amazon-price=ASIN.
         pattern = re.compile(
-            rf'(<div class="amazon-live-price[^\"]*"[^>]*data-amazon-price="{re.escape(asin)}"[^>]*>.*?</div>)',
+            rf'(<div\b[^>]*data-amazon-price=(?:"{re.escape(asin)}"|{re.escape(asin)})[^>]*>.*?</div>)',
             re.DOTALL,
         )
 
@@ -88,8 +92,7 @@ def main() -> None:
             path.write_text(patched, encoding="utf-8")
             files_changed += 1
             replacements += count
-        final_html = patched
-        if "Check current price" in final_html:
+        if "Check current price" in patched:
             unresolved_placeholders.append(str(path.relative_to(ROOT)))
 
     if unresolved_placeholders:
