@@ -1,0 +1,30 @@
+{{- $title := lower (printf "%v" .) -}}
+{{- $image := "/images/monstera-variegated-hero.jpg" -}}
+{{- if or (in $title "node") (in $title "axillary") -}}
+  {{- $image = "/images/monstera-node-vs-axillary-bud-comparison.webp" -}}
+{{- else if or (in $title "root rot") (in $title "roots") -}}
+  {{- $image = "/images/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late.jpg" -}}
+{{- else if or (in $title "soil") (in $title "mix") (in $title "repot") -}}
+  {{- $image = "/images/chunky-aroid-soil-mix.jpg" -}}
+{{- else if in $title "sphagnum" -}}
+  {{- $image = "/images/is-sphagnum-moss-actually-the-holy-grail-for-rare-plant-propagation.jpg" -}}
+{{- else if or (in $title "propagat") (in $title "cutting") -}}
+  {{- $image = "/images/propagation-water-rooting.jpg" -}}
+{{- else if or (in $title "grow light") (in $title "lighting") -}}
+  {{- $image = "/images/grow-light-setup.jpg" -}}
+{{- else if in $title "light" -}}
+  {{- $image = "/images/plant-bright-window-light.jpg" -}}
+{{- else if or (in $title "pest") (in $title "thrips") (in $title "mite") (in $title "scale") -}}
+  {{- $image = "/images/houseplant-pest-inspection.jpg" -}}
+{{- else if or (in $title "reversion") (in $title "turning green") (in $title "losing color") -}}
+  {{- $image = "/images/monstera-reverted-green.jpg" -}}
+{{- else if in $title "humidity" -}}
+  {{- $image = "/images/humidity-tents-vs-greenhouse-cabinets-for-rare-plants.jpg" -}}
+{{- else if in $title "variegation" -}}
+  {{- $image = "/images/variegation-pattern-close.jpg" -}}
+{{- else if or (in $title "monstera") (in $title "albo") -}}
+  {{- $image = "/images/monstera-variegated-hero.jpg" -}}
+{{- else if or (in $title "buy") (in $title "price") (in $title "shop") -}}
+  {{- $image = "/images/spotting-rare-plant-scams-online-a-houseplant-buyer-s-guide.jpg" -}}
+{{- end -}}
+{{- return $image -}}
