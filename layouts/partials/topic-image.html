@@ -1,7 +1,7 @@
 {{- $title := lower (printf "%v" .) -}}
 {{- $image := "/images/og-cover.jpg" -}}
 {{- if or (in $title "node") (in $title "axillary") -}}
-  {{- $image = "/images/monstera-node-vs-axillary-bud-comparison.webp" -}}
+  {{- $image = "/images/plant-propagation-cutting.jpg" -}}
 {{- else if or (in $title "root rot") (in $title "roots") -}}
   {{- $image = "/images/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late.jpg" -}}
 {{- else if or (in $title "soil") (in $title "mix") (in $title "repot") -}}
@@ -16,15 +16,27 @@
   {{- $image = "/images/plant-bright-window-light.jpg" -}}
 {{- else if or (in $title "pest") (in $title "thrips") (in $title "mite") (in $title "scale") -}}
   {{- $image = "/images/houseplant-pest-inspection.jpg" -}}
-{{- else if or (in $title "reversion") (in $title "turning green") (in $title "losing color") (in $title "losing variegation") -}}
+{{- else if or (in $title "losing variegation") (in $title "losing color") -}}
+  {{- $image = "/images/guide-to-houseplant-variegation-chimeric-pattern-and-viral.jpg" -}}
+{{- else if or (in $title "reversion") (in $title "turning green") (in $title "reverting") -}}
   {{- $image = "/images/monstera-reverted-green.jpg" -}}
+{{- else if or (in $title "chimeric") (in $title "guide to houseplant variegation") -}}
+  {{- $image = "/images/variegation-pattern-close.jpg" -}}
 {{- else if in $title "humidity" -}}
   {{- $image = "/images/humidity-tents-vs-greenhouse-cabinets-for-rare-plants.jpg" -}}
 {{- else if in $title "variegation" -}}
   {{- $image = "/images/variegation-pattern-close.jpg" -}}
+{{- else if or (in $title "plant problems") (in $title "diagnose") (in $title "symptom") -}}
+  {{- $image = "/images/houseplant-pest-inspection.jpg" -}}
+{{- else if or (in $title "rare plant care") (in $title "care guide") -}}
+  {{- $image = "/images/plant-bright-window-light.jpg" -}}
+{{- else if or (in $title "plant profile") (in $title "plant library") -}}
+  {{- $image = "/images/monstera-variegated-hero.jpg" -}}
+{{- else if or (in $title "tool") (in $title "checker") -}}
+  {{- $image = "/images/light-requirements-aroids.jpg" -}}
 {{- else if or (in $title "monstera") (in $title "albo") (in $title "thai constellation") -}}
   {{- $image = "/images/monstera-variegated-hero.jpg" -}}
-{{- else if or (in $title "buy") (in $title "price") (in $title "shop") -}}
+{{- else if or (in $title "buy") (in $title "price") (in $title "shop") (in $title "gear") -}}
   {{- $image = "/images/spotting-rare-plant-scams-online-a-houseplant-buyer-s-guide.jpg" -}}
 {{- end -}}
 {{- return $image -}}
