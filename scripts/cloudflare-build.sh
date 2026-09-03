@@ -18,7 +18,15 @@ python3 scripts/optimize_search_winners.py
 # of creating near-duplicate informational pages that could cannibalize ranking.
 python3 scripts/inject_reversion_decision_cluster.py
 
+# Never let the legacy Node/Axillary WebP reach production. It has rendered as
+# an empty rectangle in real browsers even though the source file exists.
+python3 scripts/normalize_visual_assets.py
+
 hugo --minify
+
+# Audit the HTML users actually receive. Empty visual cards, missing local files,
+# repeated images within one visual grid and banned legacy assets fail the build.
+python3 scripts/validate_visual_integrity.py
 
 # Commercial pages must never show an empty "Check current price" placeholder.
 # Inject a recent US price snapshot as the visible fallback; any live Amazon
@@ -29,4 +37,4 @@ python3 scripts/inject_google_analytics.py
 
 test -s public/index.html
 
-echo "Cloudflare Pages build complete: article visuals verified and public/index.html generated."
+echo "Cloudflare Pages build complete: visual integrity, article imagery and public/index.html verified."
