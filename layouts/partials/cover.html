@@ -1,13 +1,54 @@
 {{- with .cxt -}}
 {{- if not $.isHidden -}}
-  {{- $image := .Params.cover.image -}}
-  {{- if not $image -}}
-    {{- $image = "/images/monstera-variegated-hero.jpg" -}}
+  {{- $image := "" -}}
+  {{- $alt := "" -}}
+  {{- with .Params.cover -}}
+    {{- with .image }}{{ $image = . }}{{ end -}}
+    {{- with .alt }}{{ $alt = . }}{{ end -}}
   {{- end -}}
-  {{- $alt := .Params.cover.alt | default (printf "%s — rare plant guide" .Title) -}}
+
+  {{- if not $image -}}
+    {{- $title := lower .Title -}}
+    {{- if or (in $title "node") (in $title "axillary") -}}
+      {{- $image = "/images/monstera-node-vs-axillary-bud-comparison.webp" -}}
+      {{- $alt = "Monstera stem showing the node and axillary bud" -}}
+    {{- else if or (in $title "root rot") (in $title "rotting roots") -}}
+      {{- $image = "/images/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late.jpg" -}}
+      {{- $alt = "Aroid roots being inspected for root rot" -}}
+    {{- else if or (in $title "soil") (in $title "potting mix") (in $title "repot") -}}
+      {{- $image = "/images/chunky-aroid-soil-mix.jpg" -}}
+      {{- $alt = "Chunky aroid soil mix with bark and mineral aeration" -}}
+    {{- else if in $title "sphagnum" -}}
+      {{- $image = "/images/is-sphagnum-moss-actually-the-holy-grail-for-rare-plant-propagation.jpg" -}}
+      {{- $alt = "Sphagnum moss used for rare plant propagation" -}}
+    {{- else if or (in $title "propagat") (in $title "cutting") (in $title "wet stick") -}}
+      {{- $image = "/images/propagation-water-rooting.jpg" -}}
+      {{- $alt = "Rare plant cutting developing roots during propagation" -}}
+    {{- else if or (in $title "grow light") (in $title "light requirement") -}}
+      {{- $image = "/images/grow-light-setup.jpg" -}}
+      {{- $alt = "Indoor rare plants growing under a supplemental grow light" -}}
+    {{- else if or (in $title "light") (in $title "window") -}}
+      {{- $image = "/images/plant-bright-window-light.jpg" -}}
+      {{- $alt = "Indoor plant receiving bright window light" -}}
+    {{- else if or (in $title "pest") (in $title "thrips") (in $title "mite") (in $title "scale") -}}
+      {{- $image = "/images/houseplant-pest-inspection.jpg" -}}
+      {{- $alt = "Houseplant leaf being inspected for pests" -}}
+    {{- else if or (in $title "reversion") (in $title "turning green") (in $title "losing variegation") -}}
+      {{- $image = "/images/monstera-reverted-green.jpg" -}}
+      {{- $alt = "Variegated Monstera showing greener reverted growth" -}}
+    {{- else if or (in $title "variegat") (in $title "monstera") (in $title "albo") -}}
+      {{- $image = "/images/monstera-variegated-hero.jpg" -}}
+      {{- $alt = "Healthy variegated Monstera foliage" -}}
+    {{- else -}}
+      {{- $image = "/images/og-cover.jpg" -}}
+      {{- $alt = printf "%s — The Rare Plant Guide" .Title -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- if not $alt }}{{ $alt = printf "%s — The Rare Plant Guide" .Title }}{{ end -}}
   <figure class="entry-cover">
     {{- if and site.Params.cover.linkFullImages (not $.IsSingle) }}<a href="{{ $image | relURL }}" target="_blank" rel="noopener noreferrer">{{ end -}}
-    <img loading="{{ if $.IsSingle }}eager{{ else }}lazy{{ end }}" src="{{ $image | relURL }}" alt="{{ $alt | plainify }}">
+    <img loading="{{ if $.IsSingle }}eager{{ else }}lazy{{ end }}" src="{{ $image | relURL }}" alt="{{ $alt | plainify }}" decoding="async">
     {{- if and site.Params.cover.linkFullImages (not $.IsSingle) }}</a>{{ end -}}
     {{- with .Params.cover.caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end -}}
   </figure>
