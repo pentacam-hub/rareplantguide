@@ -1,38 +1,46 @@
 {{- define "main" }}
-<article class="profile-index">
-  <header class="profile-index-hero">
-    <span class="profile-eyebrow">Plant profile library</span>
-    <h1>{{ .Title }}</h1>
-    {{ with .Description }}<p>{{ . }}</p>{{ end }}
-    <div class="profile-index-actions">
-      <a class="profile-primary" href="/plant-problems/">Diagnose a plant problem</a>
-      <a class="profile-secondary" href="/rare-plant-care/">Browse care guides</a>
+<section class="profile-index-page">
+  <header class="profile-index-hero profile-index-hero-visual">
+    <div class="profile-index-hero-copy">
+      <span class="editorial-eyebrow">Plant library</span>
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+      <div class="profile-index-actions">
+        <a class="profile-primary" href="/plant-problems/">Diagnose a plant problem</a>
+        <a class="profile-secondary" href="/rare-plant-care/">Browse care guides</a>
+      </div>
     </div>
+    <img src="/images/monstera-variegated-hero.jpg" alt="Variegated rare plant foliage" loading="eager" decoding="async">
   </header>
 
+  <div class="profile-index-intro">
+    <strong>Start with the plant, then move to the exact care problem.</strong>
+    <span>Each profile gives the care snapshot first, followed by the most relevant light, root, variegation and propagation guides.</span>
+  </div>
+
   <section class="profile-index-section">
-    <div class="profile-section-heading">
-      <span>Start with a plant</span>
-      <h2>Rare houseplant profiles</h2>
-      <p>Open a profile for a fast care reference, then jump into the deeper troubleshooting and propagation guides when you need them.</p>
-    </div>
-    <div class="profile-card-grid">
+    <div class="profile-section-heading"><span>Find your plant</span><h2>Rare houseplant profiles</h2></div>
+    <div class="profile-index-grid">
       {{- range .RegularPages.ByTitle }}
-      <a class="profile-card" href="{{ .RelPermalink }}">
-        <span class="profile-card-genus">{{ .Params.genus }}</span>
-        <strong>{{ .Params.display_name | default .Title }}</strong>
-        {{ with .Params.botanical_name }}<em>{{ . }}</em>{{ end }}
-        <span>{{ .Description }}</span>
-        <span class="profile-card-cta">Open plant profile →</span>
-      </a>
+        {{- $img := .Params.hero_image | default (partial "topic-image.html" .Title) -}}
+        <a class="profile-index-card" href="{{ .RelPermalink }}">
+          <img src="{{ $img | relURL }}" alt="{{ .Params.hero_alt | default .Title }}" loading="lazy" decoding="async">
+          <div class="profile-index-card-copy">
+            <span>{{ .Params.genus | default "Rare plant" }}</span>
+            <h2>{{ .Params.display_name | default .Title }}</h2>
+            {{- with .Params.botanical_name }}<em>{{ . }}</em>{{ end }}
+            <p>{{ .Description }}</p>
+            <b>Open care profile →</b>
+          </div>
+        </a>
       {{- end }}
     </div>
   </section>
 
   <section class="profile-index-links">
-    <a href="/variegated-monstera/"><strong>Variegated Monstera hub</strong><span>Reversion, soil, light and propagation.</span></a>
-    <a href="/plant-problems/"><strong>Plant Problems</strong><span>Start from the symptom you can see.</span></a>
-    <a href="/propagation/"><strong>Propagation</strong><span>Nodes, cuttings, rooting media and aftercare.</span></a>
+    <a href="/variegated-monstera/"><img src="/images/variegation-pattern-close.jpg" alt="" loading="lazy"><div><strong>Variegated Monstera hub</strong><span>Reversion, soil, light and propagation.</span></div></a>
+    <a href="/plant-problems/"><img src="/images/houseplant-pest-inspection.jpg" alt="" loading="lazy"><div><strong>Plant Problems</strong><span>Start from the symptom you can see.</span></div></a>
+    <a href="/propagation/"><img src="/images/propagation-water-rooting.jpg" alt="" loading="lazy"><div><strong>Propagation</strong><span>Nodes, cuttings, rooting media and aftercare.</span></div></a>
   </section>
-</article>
+</section>
 {{- end }}
