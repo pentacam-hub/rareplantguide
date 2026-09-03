@@ -1,0 +1,42 @@
+{{- define "main" }}
+<section class="buying-index-page">
+  <header class="buying-index-hero">
+    <div class="buying-index-copy">
+      <span class="editorial-eyebrow">Buying guides</span>
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+      <a href="#buying-guides-grid">Compare the guides ↓</a>
+    </div>
+    <img src="/images/grow-light-setup.jpg" alt="Rare plant indoor setup with supplemental lighting" loading="eager" decoding="async">
+  </header>
+
+  <section class="buying-index-principles">
+    <div><strong>Start from the setup</strong><span>One plant, a shelf and a whole room need different equipment.</span></div>
+    <div><strong>Compare the trade-offs</strong><span>Coverage, maintenance, space and control matter more than a headline feature.</span></div>
+    <div><strong>Buy after the diagnosis</strong><span>Gear should solve a measured problem, not replace stable care.</span></div>
+  </section>
+
+  <section id="buying-guides-grid" class="buying-index-grid-section">
+    <div class="editorial-section-heading"><span>Shop by decision</span><h2>Choose the problem you are trying to solve</h2></div>
+    <div class="buying-index-grid">
+      {{- range .RegularPages.ByTitle }}
+        {{- $img := partial "topic-image.html" .Title -}}
+        <a class="buying-index-card" href="{{ .RelPermalink }}">
+          <img src="{{ $img | relURL }}" alt="" loading="lazy" decoding="async">
+          <div>
+            <span>Buying guide</span>
+            <h2>{{ .Title }}</h2>
+            <p>{{ .Description }}</p>
+            <b>Compare options →</b>
+          </div>
+        </a>
+      {{- end }}
+    </div>
+  </section>
+
+  <section class="buying-index-footer">
+    <img src="/images/monstera-variegated-hero.jpg" alt="Variegated Monstera foliage" loading="lazy">
+    <div><span class="editorial-eyebrow">Before you buy</span><h2>Use the care guides to define the problem first.</h2><p>Check light, roots, humidity or propagation conditions before assuming equipment is the fix.</p><a href="/rare-plant-care/">Open Rare Plant Care →</a></div>
+  </section>
+</section>
+{{- end }}
