@@ -1,7 +1,7 @@
 ---
 title: "Monstera Node vs Axillary Bud: Choose a Variegated Cutting"
 date: 2026-08-28
-lastmod: 2026-08-28
+lastmod: 2026-09-03
 draft: false
 description: "Monstera node vs axillary bud explained: learn where new growth comes from, how to inspect variegation on a cutting, and which node to keep before pruning."
 tags: ["monstera node", "axillary bud", "variegated monstera", "monstera propagation"]
@@ -18,6 +18,10 @@ faq:
 Understanding the difference between a **Monstera node and an axillary bud** makes propagation and reversion pruning much easier. They are related, but they are not the same thing.
 
 **Quick answer:** the **node** is the section of stem where a leaf and other structures attach. The **axillary bud** is the small growth point associated with that node that can activate and produce a new vine. For a variegated Monstera cutting, you want a healthy node with a viable bud and, ideally, visible variegation running through the stem near that growth point.
+
+![Monstera node and axillary bud labeled on a cutting, with the petiole and aerial root shown for comparison](/images/monstera-node-vs-axillary-bud-comparison.webp)
+
+*Monstera node vs axillary bud: the node is the section of stem where structures attach, while the axillary bud is the growth point that can activate into a new shoot.*
 
 ## What Is a Monstera Node?
 
