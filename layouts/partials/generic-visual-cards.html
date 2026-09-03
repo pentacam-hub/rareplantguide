@@ -1,0 +1,38 @@
+{{- $title := lower (printf "%v" .) -}}
+{{- $cards := slice -}}
+
+{{- if or (in $title "root") (in $title "rot") -}}
+  {{- $cards = $cards | append (dict "title" "Inspect the root zone" "text" "Use root texture, moisture and structure as evidence rather than judging leaves alone." "image" "/images/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Keep air in the mix" "text" "A coarse substrate helps thick aroid roots retain oxygen after watering." "image" "/images/chunky-aroid-soil-mix.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Stabilize recovery" "text" "Use stable light and moisture while the root system rebuilds." "image" "/images/plant-bright-window-light.jpg") -}}
+{{- else if or (in $title "soil") (in $title "pot") (in $title "repot") -}}
+  {{- $cards = $cards | append (dict "title" "Build coarse structure" "text" "Large particles keep the mix open instead of turning into a dense wet block." "image" "/images/chunky-aroid-soil-mix.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Balance air and moisture" "text" "The best mix drains freely while retaining enough water for the room and pot." "image" "/images/chunky-aroid-soil-mix1.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Read the roots" "text" "Root condition tells you whether the substrate is actually working for the plant." "image" "/images/propagation-water-rooting.jpg") -}}
+{{- else if or (in $title "propagat") (in $title "cutting") (in $title "node") -}}
+  {{- $cards = $cards | append (dict "title" "Start with viable stem" "text" "Confirm the node and living growth tissue before choosing a rooting method." "image" "/images/monstera-node-vs-axillary-bud-comparison.webp") -}}
+  {{- $cards = $cards | append (dict "title" "Keep the root zone airy" "text" "Water or damp media should hydrate the cutting without smothering living stem tissue." "image" "/images/propagation-water-rooting.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Move to soil after roots establish" "text" "Use a small container and chunky mix when the cutting has a stronger root system." "image" "/images/chunky-aroid-soil-mix.jpg") -}}
+{{- else if or (in $title "light") (in $title "window") -}}
+  {{- $cards = $cards | append (dict "title" "Judge light at the leaves" "text" "The useful light level is where the foliage sits, not where the window begins." "image" "/images/plant-bright-window-light.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Measure when possible" "text" "A lux or foot-candle reading gives you a repeatable reference point." "image" "/images/light-requirements-aroids.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Supplement a real gap" "text" "Use a grow light when natural light cannot provide enough usable coverage." "image" "/images/grow-light-setup.jpg") -}}
+{{- else if or (in $title "variegat") (in $title "reversion") (in $title "turning green") -}}
+  {{- $cards = $cards | append (dict "title" "Compare recent growth" "text" "One leaf can vary; repeated changes across new growth provide stronger evidence." "image" "/images/monstera-variegated-hero.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Read the pattern" "text" "Stem and growth-point tissue can matter more than the current leaf blade." "image" "/images/variegation-pattern-close.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Check the growth point" "text" "For climbing aroids, identify the node and bud before making a corrective cut." "image" "/images/monstera-node-vs-axillary-bud-comparison.webp") -}}
+{{- else if or (in $title "pest") (in $title "thrip") (in $title "mite") -}}
+  {{- $cards = $cards | append (dict "title" "Inspect closely" "text" "Look at leaf undersides, petioles, stems and new growth for actual pest evidence." "image" "/images/houseplant-pest-inspection.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Compare damage patterns" "text" "Scarring, stippling, webbing and residue point to different likely causes." "image" "/images/why-your-variegated-syngonium-is-losing-its-color.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Check the collection" "text" "Inspect nearby plants before assuming the problem is isolated." "image" "/images/grow-light-setup.jpg") -}}
+{{- else if in $title "humidity" -}}
+  {{- $cards = $cards | append (dict "title" "Read room conditions" "text" "Humidity works together with temperature, airflow and watering." "image" "/images/humidity-tents-vs-greenhouse-cabinets-for-rare-plants.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Protect the root zone" "text" "Higher humidity does not mean the pot should remain constantly wet." "image" "/images/chunky-aroid-soil-mix.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Keep usable light" "text" "Stable environmental conditions matter more than chasing one perfect humidity number." "image" "/images/plant-bright-window-light.jpg") -}}
+{{- else -}}
+  {{- $cards = $cards | append (dict "title" "Start with the plant" "text" "Use visible plant response as evidence before changing several care variables at once." "image" "/images/og-cover.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Check usable light" "text" "Light at leaf height is one of the first environmental conditions worth verifying." "image" "/images/plant-bright-window-light.jpg") -}}
+  {{- $cards = $cards | append (dict "title" "Protect root health" "text" "An airy root zone and controlled moisture support most indoor aroids." "image" "/images/chunky-aroid-soil-mix.jpg") -}}
+{{- end -}}
+
+{{- return $cards -}}
