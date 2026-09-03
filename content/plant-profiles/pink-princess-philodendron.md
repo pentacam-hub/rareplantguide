@@ -5,6 +5,7 @@ botanical_name: "Philodendron 'Pink Princess'"
 genus: "Philodendron"
 description: "A practical Pink Princess Philodendron profile for bright filtered light, loose soil, careful watering, climbing support and pink variegation management."
 date: 2026-08-26T21:10:00Z
+lastmod: 2026-09-03T20:57:00Z
 difficulty: "Intermediate"
 habit: "Climbing / trailing"
 light: "Bright, filtered or indirect light"
@@ -26,12 +27,15 @@ related_links:
   - title: "Plant Losing Variegation"
     text: "Use the diagnostic framework before assuming a pattern change is permanent."
     url: "/plant-problems/losing-variegation/"
+    image: "/images/guide-to-houseplant-variegation-chimeric-pattern-and-viral.jpg"
   - title: "Light Problems"
     text: "Check stretched growth or bleaching before moving the plant."
     url: "/plant-problems/light-problems/"
+    image: "/images/plant-bright-window-light.jpg"
   - title: "Rare Plant Care"
     text: "Review soil, humidity, roots and general aroid care."
     url: "/rare-plant-care/"
+    image: "/images/chunky-aroid-soil-mix.jpg"
 source_name: "Royal Horticultural Society — Philodendron 'Pink Princess'"
 source_url: "https://www.rhs.org.uk/plants/272080/philodendron-pink-princess-v/details"
 ---
