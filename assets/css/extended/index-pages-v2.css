@@ -1,0 +1,83 @@
+/* Visual index pages: article library + buying guide catalogue */
+
+.article-library-page,
+.buying-index-page {
+  width:min(1180px,calc(100vw - 32px));
+  margin:18px 50% 70px;
+  transform:translateX(-50%);
+}
+.article-library-hero,
+.buying-index-hero {
+  display:grid;
+  grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);
+  overflow:hidden;
+  min-height:420px;
+  border:1px solid var(--editorial-line);
+  border-radius:24px;
+  background:var(--editorial-paper);
+  box-shadow:0 18px 44px rgba(30,50,34,.08);
+}
+.article-library-hero > div,
+.buying-index-copy { display:flex; flex-direction:column; justify-content:center; padding:clamp(34px,5vw,62px); }
+.article-library-hero h1,
+.buying-index-hero h1 { margin:8px 0 16px; color:var(--editorial-green); font-size:clamp(44px,5.4vw,68px); line-height:1.03; }
+.article-library-hero p,
+.buying-index-hero p { max-width:570px; color:var(--secondary); font-size:18px; line-height:1.65; }
+.article-library-hero > img,
+.buying-index-hero > img { width:100%; height:100%; min-height:420px; object-fit:cover; }
+.buying-index-copy > a { align-self:flex-start; margin-top:20px; padding:12px 16px; border-radius:10px; background:var(--editorial-green); color:#fff !important; font-weight:800; text-decoration:none; }
+
+.article-library-shortcuts { display:flex; flex-wrap:wrap; gap:10px; margin:24px 0 44px; }
+.article-library-shortcuts a { padding:10px 14px; border:1px solid var(--editorial-line); border-radius:999px; background:var(--editorial-paper); color:var(--editorial-green); font-size:13px; font-weight:750; text-decoration:none; }
+.article-library-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+.article-library-card { overflow:hidden; border:1px solid var(--editorial-line); border-radius:18px; background:var(--editorial-paper); box-shadow:0 8px 22px rgba(30,50,34,.045); transition:transform .2s ease,box-shadow .2s ease; }
+.article-library-card:hover { transform:translateY(-4px); box-shadow:0 15px 30px rgba(30,50,34,.09); }
+.article-library-image { display:block; }
+.article-library-image img { display:block; width:100%; aspect-ratio:16/10; object-fit:cover; }
+.article-library-copy { display:flex; min-height:260px; flex-direction:column; padding:20px; }
+.article-library-copy > span { color:var(--editorial-green-2); font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+.article-library-copy h2 { margin:8px 0 10px; font-size:24px; line-height:1.18; }
+.article-library-copy h2 a { color:var(--editorial-green); text-decoration:none; }
+.article-library-copy p { margin:0; color:var(--secondary); font-size:14px; line-height:1.55; }
+.article-library-meta { display:flex; justify-content:space-between; gap:12px; align-items:center; margin-top:auto; padding-top:18px; color:var(--secondary); font-size:12px; }
+.article-library-meta a { color:var(--editorial-green-2); font-weight:800; text-decoration:none; }
+.article-library-pagination { display:flex; justify-content:center; gap:18px; align-items:center; margin-top:42px; }
+.article-library-pagination a { padding:10px 14px; border:1px solid var(--editorial-line); border-radius:10px; color:var(--editorial-green); font-weight:750; text-decoration:none; }
+.article-library-pagination span { color:var(--secondary); font-size:13px; }
+
+.buying-index-principles { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin:26px 0 52px; overflow:hidden; border:1px solid var(--editorial-line); border-radius:16px; background:var(--editorial-line); }
+.buying-index-principles > div { padding:24px; background:var(--editorial-paper); }
+.buying-index-principles strong { display:block; color:var(--editorial-green); font-size:17px; }
+.buying-index-principles span { display:block; margin-top:7px; color:var(--secondary); font-size:14px; line-height:1.5; }
+.buying-index-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+.buying-index-card { display:grid; grid-template-columns:42% 58%; overflow:hidden; min-height:300px; border:1px solid var(--editorial-line); border-radius:18px; background:var(--editorial-paper); color:var(--primary); text-decoration:none; box-shadow:0 8px 22px rgba(30,50,34,.045); transition:transform .2s ease,box-shadow .2s ease; }
+.buying-index-card:hover { transform:translateY(-4px); box-shadow:0 15px 30px rgba(30,50,34,.09); }
+.buying-index-card > img { width:100%; height:100%; object-fit:cover; }
+.buying-index-card > div { display:flex; flex-direction:column; padding:24px; }
+.buying-index-card > div > span { color:var(--editorial-green-2); font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+.buying-index-card h2 { margin:9px 0 11px; color:var(--editorial-green); font-size:27px; line-height:1.12; }
+.buying-index-card p { margin:0; color:var(--secondary); font-size:14px; line-height:1.55; }
+.buying-index-card b { margin-top:auto; padding-top:18px; color:var(--editorial-green-2); font-size:13px; }
+.buying-index-footer { display:grid; grid-template-columns:38% 62%; overflow:hidden; margin-top:52px; border:1px solid var(--editorial-line); border-radius:20px; background:var(--editorial-soft); }
+.buying-index-footer img { width:100%; height:100%; min-height:330px; object-fit:cover; }
+.buying-index-footer > div { display:flex; flex-direction:column; justify-content:center; padding:38px; }
+.buying-index-footer h2 { margin:7px 0 12px; color:var(--editorial-green); font-size:34px; line-height:1.15; }
+.buying-index-footer p { color:var(--secondary); line-height:1.6; }
+.buying-index-footer a { color:var(--editorial-green-2); font-weight:800; }
+
+@media (max-width:980px) {
+  .article-library-hero,.buying-index-hero { grid-template-columns:1fr; }
+  .article-library-hero > img,.buying-index-hero > img { min-height:0; aspect-ratio:16/9; }
+  .article-library-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .buying-index-grid { grid-template-columns:1fr; }
+}
+@media (max-width:680px) {
+  .article-library-page,.buying-index-page { width:min(100%,calc(100vw - 20px)); }
+  .article-library-hero > div,.buying-index-copy { padding:28px 22px 32px; }
+  .article-library-hero h1,.buying-index-hero h1 { font-size:42px; }
+  .article-library-grid,.buying-index-principles { grid-template-columns:1fr; }
+  .buying-index-card,.buying-index-footer { grid-template-columns:1fr; }
+  .buying-index-card > img { aspect-ratio:16/9; }
+  .buying-index-footer img { min-height:0; aspect-ratio:16/9; }
+  .article-library-pagination { flex-wrap:wrap; }
+}
