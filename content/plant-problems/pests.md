@@ -1,7 +1,7 @@
 ---
 title: "Rare Houseplant Pests: Identify Thrips, Mites, Mealybugs & Scale"
 date: 2026-08-26T21:00:00Z
-lastmod: 2026-09-03T19:59:00Z
+lastmod: 2026-09-03T20:57:00Z
 description: "See webbing, sticky residue, scarring or visible bugs? Inspect leaves, stems and new growth to narrow the pest before treating a rare houseplant."
 type: "problem"
 eyebrow: "Pest problem"
@@ -46,7 +46,7 @@ next_steps:
     image: "/images/plant-propagation-cutting.jpg"
   - title: "Match the treatment"
     text: "Use the detailed pest guide to identify the likely pest before choosing a control method."
-    image: "/images/houseplant-pest-inspection.jpg"
+    image: "/images/why-your-variegated-syngonium-is-losing-its-color.jpg"
   - title: "Repeat checks"
     text: "Continue inspections on the affected plant and nearby collection until evidence is gone."
     image: "/images/grow-light-setup.jpg"
