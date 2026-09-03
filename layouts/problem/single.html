@@ -1,116 +1,57 @@
 {{- define "main" }}
 <article class="problem-page">
-  <nav class="problem-breadcrumb" aria-label="Breadcrumb">
-    <a href="/">Home</a><span>›</span><a href="/plant-problems/">Plant Problems</a><span>›</span><span>{{ .Title }}</span>
-  </nav>
+  <nav class="problem-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span><a href="/plant-problems/">Plant Problems</a><span>›</span><span>{{ .Title }}</span></nav>
 
-  {{- $hero := .Params.hero_image | default "" -}}
+  {{- $hero := .Params.hero_image | default (partial "topic-image.html" .Title) -}}
   {{- $heroAlt := .Params.hero_alt | default .Title -}}
-  {{- if not $hero -}}
-    {{- $t := lower .Title -}}
-    {{- if in $t "root rot" }}{{ $hero = "/images/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late.jpg" }}
-    {{- else if or (in $t "pest") (in $t "thrips") (in $t "mite") }}{{ $hero = "/images/houseplant-pest-inspection.jpg" }}
-    {{- else if or (in $t "reversion") (in $t "turning green") (in $t "variegation") }}{{ $hero = "/images/monstera-reverted-green.jpg" }}
-    {{- else }}{{ $hero = "/images/monstera-variegated-hero.jpg" }}{{ end -}}
-  {{- end -}}
-
   <header class="problem-hero problem-hero-visual">
     <div class="problem-hero-copy">
       {{- with .Params.eyebrow }}<span class="problem-eyebrow">{{ . }}</span>{{ else }}<span class="problem-eyebrow">Problems &amp; fixes</span>{{ end }}
       <h1>{{ .Title }}</h1>
       {{- with .Description }}<p>{{ . }}</p>{{ end }}
-      <div class="problem-hero-actions">
-        <a class="problem-primary" href="/tools/symptom-checker.html">Use the Symptom Checker</a>
-        <a class="problem-secondary" href="/plant-problems/">Browse all problems</a>
-      </div>
+      <div class="problem-hero-actions"><a class="problem-primary" href="/tools/symptom-checker.html">Use the Symptom Checker</a><a class="problem-secondary" href="/plant-problems/">Browse all problems</a></div>
     </div>
     <div class="problem-hero-media"><img src="{{ $hero | relURL }}" alt="{{ $heroAlt }}" loading="eager" decoding="async"></div>
   </header>
 
-  {{- with .Params.quick_answer }}
-  <section class="problem-answer" aria-labelledby="quick-answer-title">
-    <span class="editorial-label">Quick answer</span>
-    <h2 id="quick-answer-title">What this symptom can mean</h2>
-    <p>{{ . }}</p>
-  </section>
-  {{- end }}
+  {{- with .Params.quick_answer }}<section class="problem-answer" aria-labelledby="quick-answer-title"><span class="editorial-label">Quick answer</span><h2 id="quick-answer-title">What this symptom can mean</h2><p>{{ . }}</p></section>{{- end }}
 
   {{- with .Params.symptom_visuals }}
   <section class="editorial-visual-section" aria-labelledby="symptoms-at-glance-title">
     <div class="editorial-section-heading"><span>Symptoms at a glance</span><h2 id="symptoms-at-glance-title">Compare what you see</h2></div>
     <div class="editorial-visual-grid">
-      {{- range . }}
-      <figure class="editorial-visual-card"><img src="{{ .image | relURL }}" alt="{{ .alt | default .title }}" loading="lazy" decoding="async"><figcaption><strong>{{ .title }}</strong><span>{{ .text }}</span></figcaption></figure>
-      {{- end }}
+      {{- range . }}{{- $img := .image | default (partial "topic-image.html" .title) -}}<figure class="editorial-visual-card"><img src="{{ $img | relURL }}" alt="{{ .alt | default .title }}" loading="lazy" decoding="async"><figcaption><strong>{{ .title }}</strong><span>{{ .text }}</span></figcaption></figure>{{- end }}
     </div>
   </section>
   {{- end }}
 
   <div class="problem-two-col">
-    {{- with .Params.check_first }}
-    <section class="problem-panel">
-      <span class="problem-panel-kicker">How to confirm</span>
-      <h2>Look for these clues</h2>
-      <ol class="problem-checklist">{{- range . }}<li>{{ . }}</li>{{ end }}</ol>
-    </section>
-    {{- end }}
-
-    {{- with .Params.possible_causes }}
-    <section class="problem-panel">
-      <span class="problem-panel-kicker">Possible causes</span>
-      <h2>Do not assume one cause</h2>
-      <ul class="problem-cause-list">
-        {{- range . }}<li><strong>{{ .title }}</strong><span>{{ .text }}</span></li>{{ end }}
-      </ul>
-    </section>
-    {{- end }}
+    {{- with .Params.check_first }}<section class="problem-panel"><span class="problem-panel-kicker">How to confirm</span><h2>Look for these clues</h2><ol class="problem-checklist">{{- range . }}<li>{{ . }}</li>{{ end }}</ol></section>{{- end }}
+    {{- with .Params.possible_causes }}<section class="problem-panel"><span class="problem-panel-kicker">Possible causes</span><h2>Do not assume one cause</h2><ul class="problem-cause-list">{{- range . }}<li><strong>{{ .title }}</strong><span>{{ .text }}</span></li>{{ end }}</ul></section>{{- end }}
   </div>
 
   {{- with .Params.next_steps }}
   <section class="problem-steps">
     <div class="problem-section-heading"><span>What to do now</span><h2>Work through the fix in order</h2></div>
     <div class="problem-step-grid">
-      {{- range $i, $step := . }}
-      <div class="problem-step-card">
-        {{- with $step.image }}<img src="{{ . | relURL }}" alt="{{ $step.title }}" loading="lazy" decoding="async">{{ end }}
-        <span class="problem-step-number">{{ add $i 1 }}</span><strong>{{ $step.title }}</strong><p>{{ $step.text }}</p>
-      </div>
-      {{- end }}
+      {{- range $i, $step := . }}{{- $img := $step.image | default (partial "topic-image.html" $step.title) -}}<div class="problem-step-card"><img src="{{ $img | relURL }}" alt="{{ $step.title }}" loading="lazy" decoding="async"><span class="problem-step-number">{{ add $i 1 }}</span><strong>{{ $step.title }}</strong><p>{{ $step.text }}</p></div>{{- end }}
     </div>
   </section>
   {{- end }}
 
-  {{- with .Params.mistakes }}
-  <section class="editorial-warning" aria-labelledby="problem-mistakes-title">
-    <div class="editorial-section-heading"><span>Common mistakes</span><h2 id="problem-mistakes-title">What makes the problem worse</h2></div>
-    <div class="editorial-warning-grid">{{- range . }}<div><strong>{{ .title }}</strong><p>{{ .text }}</p></div>{{ end }}</div>
-  </section>
-  {{- end }}
+  {{- with .Params.mistakes }}<section class="editorial-warning" aria-labelledby="problem-mistakes-title"><div class="editorial-section-heading"><span>Common mistakes</span><h2 id="problem-mistakes-title">What makes the problem worse</h2></div><div class="editorial-warning-grid">{{- range . }}<div><strong>{{ .title }}</strong><p>{{ .text }}</p></div>{{ end }}</div></section>{{- end }}
 
-  {{- with .Params.primary_guide }}
-  <section class="problem-primary-guide">
-    <div><span>Detailed guide</span><h2>{{ .title }}</h2><p>{{ .text }}</p></div>
-    <a href="{{ .url }}">Read the full guide →</a>
-  </section>
-  {{- end }}
+  {{- with .Params.primary_guide }}<section class="problem-primary-guide"><div><span>Detailed guide</span><h2>{{ .title }}</h2><p>{{ .text }}</p></div><a href="{{ .url }}">Read the full guide →</a></section>{{- end }}
 
   {{- with .Params.related_guides }}
   <section class="problem-related">
     <div class="problem-section-heading"><span>Related checks</span><h2>Rule out nearby problems</h2></div>
-    <div class="problem-related-grid">
-      {{- range . }}
-      <a href="{{ .url }}">{{ with .image }}<img src="{{ . | relURL }}" alt="" loading="lazy" decoding="async">{{ end }}<strong>{{ .title }}</strong><span>{{ .text }}</span></a>
-      {{- end }}
-    </div>
+    <div class="problem-related-grid">{{- range . }}{{- $img := .image | default (partial "topic-image.html" .title) -}}<a href="{{ .url }}"><img src="{{ $img | relURL }}" alt="{{ .title }}" loading="lazy" decoding="async"><strong>{{ .title }}</strong><span>{{ .text }}</span></a>{{- end }}</div>
   </section>
   {{- end }}
 
   {{- with .Content }}<section class="problem-editorial post-content">{{ . }}</section>{{ end }}
 
-  <footer class="problem-footer-cta">
-    <strong>Still not sure what you are seeing?</strong>
-    <span>Use the symptom checker to start from the visible sign instead of guessing.</span>
-    <a href="/tools/symptom-checker.html">Check another symptom</a>
-  </footer>
+  <footer class="problem-footer-cta"><strong>Still not sure what you are seeing?</strong><span>Use the symptom checker to start from the visible sign instead of guessing.</span><a href="/tools/symptom-checker.html">Check another symptom</a></footer>
 </article>
 {{- end }}
