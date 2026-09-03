@@ -79,6 +79,8 @@ def main() -> None:
 
     files_changed = 0
     replacements = 0
+    unresolved_placeholders: list[str] = []
+
     for path in BUYING_DIR.rglob("*.html"):
         original = path.read_text(encoding="utf-8")
         patched, count = patch_html(original)
@@ -86,9 +88,23 @@ def main() -> None:
             path.write_text(patched, encoding="utf-8")
             files_changed += 1
             replacements += count
+        final_html = patched
+        if "Check current price" in final_html:
+            unresolved_placeholders.append(str(path.relative_to(ROOT)))
+
+    if unresolved_placeholders:
+        joined = ", ".join(unresolved_placeholders[:8])
+        raise RuntimeError(
+            "Buying-guide price validation failed: unresolved 'Check current price' "
+            f"placeholder remains in {joined}"
+        )
 
     if replacements == 0:
-        raise RuntimeError("No buying-guide price placeholders were replaced.")
+        print(
+            "Buying-guide price snapshots PASS: no unresolved placeholders; "
+            "rendered pages already contain usable price/CTA output."
+        )
+        return
 
     print(
         f"Buying-guide price snapshots PASS: {replacements} visible price blocks "
