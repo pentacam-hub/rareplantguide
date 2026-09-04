@@ -1,0 +1,242 @@
+/* =========================================================
+   Responsive safety layer — loaded last on purpose.
+   Prevents narrow multi-column cards, horizontal clipping and
+   transformed full-width containers on desktop/mobile.
+   ========================================================= */
+
+/* Every visual component must be allowed to shrink inside its grid/flex cell. */
+.plant-profile-page *,
+.profile-index-page *,
+.editorial-article *,
+.problem-page *,
+.hub-page *,
+.buying-page *,
+.home-paths * {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+/* Stop the older 50% margin + translate centering trick from creating
+   edge clipping when the parent .main width changes. */
+.editorial-article,
+.plant-profile-page,
+.problem-page,
+.hub-page,
+.buying-page,
+.profile-index-page,
+.home-visual-hero {
+  width: 100% !important;
+  max-width: var(--editorial-wide, 1180px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  transform: none !important;
+}
+
+/* Give full editorial page types a predictable desktop canvas. */
+body:has(.plant-profile-page) .main,
+body:has(.profile-index-page) .main,
+body:has(.editorial-article) .main,
+body:has(.problem-page) .main,
+body:has(.hub-page) .main,
+body:has(.buying-page) .main {
+  width: 100%;
+  max-width: 1228px !important;
+  padding-left: 24px;
+  padding-right: 24px;
+  box-sizing: border-box;
+}
+
+/* Images must never force a card or section wider than its container. */
+.plant-profile-page img,
+.profile-index-page img,
+.editorial-article img,
+.problem-page img,
+.hub-page img,
+.buying-page img {
+  max-width: 100%;
+}
+
+/* Adaptive card grids: keep useful card widths instead of squeezing three
+   columns into phone-sized viewports. */
+.editorial-visual-grid,
+.editorial-action-grid,
+.editorial-related-grid,
+.profile-link-grid,
+.problem-related-grid,
+.problem-step-grid,
+.hub-card-grid,
+.hub-related-grid,
+.profile-index-grid,
+.profile-index-links,
+.home-path-grid,
+.home-path-grid-visual,
+.home-latest-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)) !important;
+}
+
+/* Two-column content panels should collapse naturally before they become narrow. */
+.profile-two-col,
+.problem-two-col {
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)) !important;
+}
+
+/* Never split normal words letter-by-letter in cards/headings. */
+.editorial-visual-card,
+.editorial-action-card,
+.editorial-related-grid a,
+.profile-link-grid a,
+.problem-related-grid a,
+.problem-step-card,
+.hub-guide-card,
+.hub-related-grid a,
+.profile-index-card,
+.profile-index-links a,
+.home-path-card,
+.editorial-visual-card strong,
+.editorial-action-card strong,
+.editorial-related-grid strong,
+.profile-link-grid strong,
+.problem-related-grid strong,
+.hub-guide-card strong,
+.profile-index-card h2,
+.profile-index-links strong,
+.home-path-card strong,
+.editorial-visual-card span,
+.editorial-action-card p,
+.editorial-related-grid span,
+.profile-link-grid span,
+.problem-related-grid span,
+.hub-guide-description,
+.profile-index-card p,
+.profile-index-links span,
+.home-path-card span {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: auto;
+}
+
+/* Long raw URLs are the exception: they may wrap instead of widening the page. */
+.post-content a,
+.profile-editorial a,
+.problem-editorial a {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 980px) {
+  body:has(.plant-profile-page) .main,
+  body:has(.profile-index-page) .main,
+  body:has(.editorial-article) .main,
+  body:has(.problem-page) .main,
+  body:has(.hub-page) .main,
+  body:has(.buying-page) .main {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .editorial-hero,
+  .plant-profile-hero.profile-hero-visual,
+  .problem-hero.problem-hero-visual,
+  .hub-hero.hub-hero-visual,
+  .buying-hero.buying-hero-visual,
+  .profile-index-hero-visual,
+  .profile-propagation-visual {
+    grid-template-columns: 1fr !important;
+  }
+
+  .profile-care-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 720px) {
+  body:has(.plant-profile-page) .main,
+  body:has(.profile-index-page) .main,
+  body:has(.editorial-article) .main,
+  body:has(.problem-page) .main,
+  body:has(.hub-page) .main,
+  body:has(.buying-page) .main {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .editorial-article,
+  .plant-profile-page,
+  .problem-page,
+  .hub-page,
+  .buying-page,
+  .profile-index-page,
+  .home-visual-hero {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* On a phone, content cards are one per row. No exceptions. */
+  .editorial-visual-grid,
+  .editorial-action-grid,
+  .editorial-related-grid,
+  .profile-link-grid,
+  .problem-related-grid,
+  .problem-step-grid,
+  .hub-card-grid,
+  .hub-related-grid,
+  .profile-index-grid,
+  .profile-index-links,
+  .home-path-grid,
+  .home-path-grid-visual,
+  .home-latest-grid,
+  .profile-two-col,
+  .problem-two-col,
+  .profile-care-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .profile-care-grid > div {
+    border-left: 0 !important;
+    border-top: 1px solid var(--editorial-line, var(--border));
+  }
+  .profile-care-grid > div:first-child {
+    border-top: 0;
+  }
+
+  .editorial-visual-card,
+  .editorial-action-card,
+  .editorial-related-grid a,
+  .profile-link-grid a,
+  .problem-related-grid a,
+  .problem-step-card,
+  .hub-guide-card,
+  .hub-related-grid a,
+  .profile-index-card,
+  .profile-index-links a,
+  .home-path-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .profile-hero-copy,
+  .problem-hero-copy,
+  .hub-hero-copy,
+  .editorial-hero-copy,
+  .buying-hero-visual .buying-hero-copy,
+  .profile-index-hero-copy {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .profile-hero-visual h1,
+  .problem-hero-visual h1,
+  .hub-hero-visual h1,
+  .editorial-hero h1,
+  .buying-hero h1,
+  .profile-index-hero-copy h1 {
+    font-size: clamp(34px, 10vw, 42px) !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  .profile-section-heading h2,
+  .editorial-section-heading h2,
+  .hub-section-heading h2 {
+    font-size: clamp(27px, 8vw, 34px) !important;
+  }
+}
