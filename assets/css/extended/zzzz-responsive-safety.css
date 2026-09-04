@@ -32,6 +32,20 @@
   transform: none !important;
 }
 
+/* Older full-bleed article media used 50% margins plus translateX(-50%).
+   That can place an otherwise correctly sized image partly outside the viewport.
+   Keep article media inside the readable column instead. */
+.editorial-content img,
+.editorial-content table,
+.profile-editorial img,
+.problem-editorial img {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  transform: none !important;
+}
+
 /* Give full editorial page types a predictable desktop canvas. */
 body:has(.plant-profile-page) .main,
 body:has(.profile-index-page) .main,
