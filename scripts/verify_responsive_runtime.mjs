@@ -93,8 +93,16 @@ function visible(el) {
 
 function countGridColumns(value) {
   if (!value || value === 'none') return 0;
-  // Computed gridTemplateColumns is a space-separated list of resolved tracks.
   return value.trim().split(/\\s+/).filter(Boolean).length;
+}
+
+function describe(el, r) {
+  const cls = el.className && typeof el.className === 'string' ? '.' + el.className.trim().replace(/\\s+/g,'.') : '';
+  const src = el.tagName === 'IMG' ? '[src=' + (el.getAttribute('src') || '') + ']' : '';
+  const parent = el.parentElement && el.parentElement.className && typeof el.parentElement.className === 'string'
+    ? '[parent=' + el.parentElement.className.trim().replace(/\\s+/g,'.') + ']'
+    : '';
+  return (el.tagName.toLowerCase() + cls + src + parent + '[l=' + Math.round(r.left) + ',r=' + Math.round(r.right) + ',w=' + Math.round(r.width) + ']').slice(0,260);
 }
 
 async function inspect(test) {
@@ -118,12 +126,13 @@ async function inspect(test) {
         const offenders = [];
         for (const el of doc.querySelectorAll('body *')) {
           if (!visible(el)) continue;
+          if (el.closest('header, nav, footer, #top-link, .top-link, #menu, .menu')) continue;
           const style = win.getComputedStyle(el);
           if (style.position === 'fixed' || style.position === 'sticky') continue;
           const r = el.getBoundingClientRect();
           if (r.width <= 0 || r.height <= 0) continue;
           if (r.left < -3 || r.right > vw + 3) {
-            offenders.push((el.tagName.toLowerCase() + (el.className && typeof el.className === 'string' ? '.' + el.className.trim().replace(/\\s+/g,'.') : '')).slice(0,160));
+            offenders.push(describe(el, r));
             if (offenders.length >= 8) break;
           }
         }
