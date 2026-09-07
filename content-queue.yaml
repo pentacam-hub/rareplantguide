@@ -304,7 +304,14 @@ topics:
   - veitchii
   image_query: anthurium plant leaf
   cluster: variegation-care
-  status: pending
+  status: done
+  published_date: '2026-09-07'
+  slug: anthurium-care-for-beginners-how-to-grow-rare-species
+  pin_title: 'Anthurium Care for Beginners: How to Grow Rare Species'
+  pin_description: Master beginner-friendly anthurium care for prized species like
+    warocqueanum and veitchii with this guide to soil, light, water, and humidity.
+  pin_image_path: /images/pins/anthurium-care-for-beginners-how-to-grow-rare-species.jpg
+  pin_status: pending
 - title: How to Build a Rare Plant Collection on a Tight Budget
   keywords:
   - budget plant collecting
