@@ -1,6 +1,6 @@
 """Build-time SEO refinements for pages already earning Google impressions.
 
-These are deliberately narrow, data-driven edits based on the 2026-09-05 Search
+These are deliberately narrow, data-driven edits based on the 2026-09-07 Search
 Console + Generative AI review. They improve existing URLs rather than creating
 competing pages. The script is idempotent and fails if a targeted page disappears.
 """
@@ -10,20 +10,24 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT = ROOT / "content"
-REVIEW_DATE = "2026-09-05"
+REVIEW_DATE = "2026-09-07"
 
 OVERRIDES = {
     "posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it.md": {
-        "title": "Variegated Monstera Reversion: Why It Turns Green & What to Do",
-        "description": "Is your Monstera Albo turning green? Learn how to confirm true reversion, where to cut back, and whether a variegated node can produce variegation again.",
+        "title": "Variegated Monstera Turning Green? Can You Still Save It?",
+        "description": "Watching your Monstera Albo turn green? Here's how to tell true reversion from normal growth, exactly where to cut, and your real odds of getting the variegation back.",
+    },
+    "posts/propagate-variegated-monstera.md": {
+        "title": "How to Propagate Variegated Monstera Without Losing the Variegation",
+        "description": "Step-by-step variegated Monstera propagation: which node to cut, water vs. sphagnum rooting, avoiding rot, and how to keep the cutting variegated instead of green.",
     },
     "posts/monstera-node-vs-axillary-bud-variegated-cutting.md": {
         "title": "Monstera Node vs Axillary Bud: How to Tell the Difference",
         "description": "See the difference between a Monstera node and axillary bud, where new growth comes from, and how to choose a viable variegated cutting or pruning point.",
     },
     "posts/best-soil-mix-variegated-monstera.md": {
-        "title": "Best Soil Mix for Variegated Monstera: 40/30/20/10 Recipe",
-        "description": "Use a 40/30/20/10 chunky soil mix for Monstera Albo and Thai Constellation, with simple adjustments for humidity, pot type, light and watering.",
+        "title": "Best Soil Mix for Variegated Monstera (Exact 40/30/20/10 Recipe)",
+        "description": "The exact 40/30/20/10 soil recipe for Monstera Albo and Thai Constellation, plus how to adjust it for humidity, pot type and watering speed.",
     },
     "posts/why-your-variegated-syngonium-is-losing-its-color.md": {
         "title": "Variegated Syngonium Turning Green? Causes & What to Do",
@@ -42,8 +46,8 @@ OVERRIDES = {
         "intro_new": "Long-fiber sphagnum moss can work very well for Monstera, Philodendron and other rare-plant cuttings, but only when the node gets **moisture and oxygen at the same time**.\n\n**Quick answer:** use sphagnum loose and evenly damp—not dripping wet or tightly packed. Saturated, airless moss is the main rot risk. Transfer a cutting after it has several healthy roots, preferably with some secondary branching, and keep the new potting mix consistently but not excessively moist during acclimation.",
     },
     "posts/how-to-spot-and-treat-philodendron-root-rot-before-it-s-too-late.md": {
-        "title": "Philodendron Root Rot: Signs, Treatment & Rescue Steps",
-        "description": "Philodendron root rot: identify soft or decayed roots, treat the damage step by step, repot safely, and learn when a rootless plant can still be rescued.",
+        "title": "Philodendron Root Rot: How to Spot It in Time and Save the Plant",
+        "description": "Yellow leaves alone don't confirm root rot. Here's how to check the roots properly, the exact treatment steps, and how to stop it coming back.",
     },
     "posts/best-grow-lights-rare-houseplants.md": {
         "title": "Best Grow Lights for Rare Houseplants: Distance, Timing & Setup",
