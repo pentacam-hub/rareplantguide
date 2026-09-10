@@ -17,7 +17,7 @@ TAG = '''<!-- Google tag (gtag.js) -->
   // for links rendered by Hugo as well as links inserted later by JavaScript.
   (function () {
     function shortText(value) {
-      return String(value || '').replace(/\\s+/g, ' ').trim().slice(0, 100);
+      return String(value || '').replace(/\s+/g, ' ').trim().slice(0, 100);
     }
 
     function eventParams(link, url) {
@@ -30,7 +30,7 @@ TAG = '''<!-- Google tag (gtag.js) -->
     }
 
     function isAmazonHost(hostname) {
-      return hostname === 'amzn.to' || hostname === 'amazon.com' || /(^|\\.)amazon\\.[a-z.]+$/i.test(hostname);
+      return hostname === 'amzn.to' || hostname === 'amazon.com' || /(^|\.)amazon\.[a-z.]+$/i.test(hostname);
     }
 
     document.addEventListener('click', function (event) {
@@ -50,8 +50,8 @@ TAG = '''<!-- Google tag (gtag.js) -->
 
       if (
         url.origin === window.location.origin &&
-        /^\\/buying-guides(?:\\/|$)/.test(url.pathname) &&
-        !/^\\/buying-guides(?:\\/|$)/.test(window.location.pathname)
+        /^\/buying-guides(?:\/|$)/.test(url.pathname) &&
+        !/^\/buying-guides(?:\/|$)/.test(window.location.pathname)
       ) {
         gtag('event', 'buying_guide_click', eventParams(link, url));
       }
@@ -62,15 +62,15 @@ TAG = '''<!-- Google tag (gtag.js) -->
 # Remove an existing gtag loader plus the immediately following config block
 # for this exact GA4 property before inserting the canonical copy.
 EXISTING_TAG = re.compile(
-    r'<script[^>]*src=["\\']https://www\\.googletagmanager\\.com/gtag/js\\?id='
+    r"<script[^>]*src=[\"']https://www\.googletagmanager\.com/gtag/js\?id="
     + re.escape(MEASUREMENT_ID)
-    + r'["\\'][^>]*></script>\\s*<script[^>]*>[\\s\\S]*?'
+    + r"[\"'][^>]*></script>\s*<script[^>]*>[\s\S]*?"
     + re.escape(MEASUREMENT_ID)
-    + r'[\\s\\S]*?</script>',
+    + r"[\s\S]*?</script>",
     re.IGNORECASE,
 )
 
-HEAD = re.compile(r'<head\\b[^>]*>', re.IGNORECASE)
+HEAD = re.compile(r"<head\b[^>]*>", re.IGNORECASE)
 
 if not PUBLIC_DIR.exists():
     raise SystemExit(f"Missing public directory: {PUBLIC_DIR}")
