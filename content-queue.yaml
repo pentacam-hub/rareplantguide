@@ -321,8 +321,15 @@ topics:
   - plant swaps
   image_query: small houseplant collection windowsill
   cluster: buying-market
-  status: pending
+  status: done
   featured_weight: 2
+  published_date: '2026-09-10'
+  slug: building-a-rare-plant-collection-on-a-tight-budget
+  pin_title: Building a Rare Plant Collection on a Tight Budget
+  pin_description: Discover practical, budget-friendly ways to grow a beautiful rare
+    houseplant collection through propagation, smart shopping, and local plant swaps.
+  pin_image_path: /images/pins/building-a-rare-plant-collection-on-a-tight-budget.jpg
+  pin_status: pending
 - title: Why Some Rare Plants Cost Hundreds of Dollars (Explained)
   keywords:
   - expensive houseplants
