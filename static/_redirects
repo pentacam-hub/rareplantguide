@@ -1,3 +1,7 @@
 # Consolidate legacy variegation pages into the strongest current reversion guide.
+# Cloudflare Pages matches these literally, so keep both slash variants to avoid
+# leaving the no-trailing-slash URLs as 404s while Google still has impressions.
+/posts/rare-plant-losing-variegation /posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/ 301
 /posts/rare-plant-losing-variegation/ /posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/ 301
+/posts/variegated-plant-turning-green /posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/ 301
 /posts/variegated-plant-turning-green/ /posts/the-heartbreak-of-reversion-why-your-variegated-monstera-is-turning-green-and-how-to-save-it/ 301
