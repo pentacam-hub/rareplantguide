@@ -10,6 +10,7 @@
 {{- $actionTitle := .Params.action_title | default $visual.action_title -}}
 {{- $mistakes := .Params.mistakes | default $visual.mistakes -}}
 {{- $visualLinks := .Params.visual_links | default $visual.visual_links -}}
+{{- $commercialCta := .Params.commercial_cta -}}
 
 <article class="editorial-article">
   <nav class="editorial-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span>›</span>{{- with .CurrentSection }}{{ if ne .RelPermalink "/" }}<a href="{{ .RelPermalink }}">{{ .Title }}</a><span>›</span>{{ end }}{{ end -}}<span>{{ .Title }}</span></nav>
@@ -27,6 +28,17 @@
     <div class="editorial-quick-answer"><span class="editorial-label">Quick answer</span>{{- with $quickAnswer }}<p class="editorial-answer-lead">{{ . }}</p>{{ else }}<p class="editorial-answer-lead">{{ .Description }}</p>{{ end }}{{- with $quickPoints }}<ul class="editorial-checks">{{- range . }}<li>{{ . }}</li>{{ end }}</ul>{{- end }}</div>
     {{- if .TableOfContents }}<aside class="editorial-toc"><span class="editorial-label">On this page</span>{{ .TableOfContents }}</aside>{{- end }}
   </section>
+
+  {{- with $commercialCta }}
+  <section class="editorial-commerce-cta" aria-label="Recommended gear">
+    <div class="editorial-commerce-copy">
+      <span class="editorial-label">{{ .label | default "Recommended gear" }}</span>
+      <strong>{{ .title }}</strong>
+      {{- with .text }}<p>{{ . }}</p>{{ end }}
+    </div>
+    <a class="editorial-commerce-button" href="{{ .url }}">{{ .button | default "Compare our picks →" }}</a>
+  </section>
+  {{- end }}
 
   {{- with $visualCards }}
   <section class="editorial-visual-section" aria-labelledby="visual-summary-title">
