@@ -6,6 +6,12 @@ draft: false
 description: "Discover the honest truth about using sphagnum moss for rare plant propagation, including how to avoid rot and transition roots safely."
 tags: ["houseplants", "plant care", "propagation", "rare plants"]
 categories: ["Plant Care"]
+commercial_cta:
+  label: "Setting up a propagation station?"
+  title: "Compare the propagation supplies that matter most"
+  text: "See our shortlist for containers, rooting media and practical setup gear before you assemble your propagation station."
+  url: "/buying-guides/best-propagation-supplies-variegated-monstera/"
+  button: "COMPARE PROPAGATION SUPPLIES →"
 cover:
     image: "/images/is-sphagnum-moss-actually-the-holy-grail-for-rare-plant-propagation.jpg"
     alt: "sphagnum moss plant propagation"
