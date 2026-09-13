@@ -1,0 +1,27 @@
+/* Mobile conversion layer: keep search/Pinterest visitors oriented and expose the next useful action early. */
+.editorial-commerce-cta{display:flex;align-items:center;justify-content:space-between;gap:22px;margin:22px 0 34px;padding:20px 22px;border:2px solid #173b29;border-radius:18px;background:#f2f8f4;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.editorial-commerce-copy{min-width:0}.editorial-commerce-copy .editorial-label{display:block;margin-bottom:5px;color:#337348;font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:.76rem}.editorial-commerce-copy>strong{display:block;font-size:1.22rem;line-height:1.25;color:#10231a}.editorial-commerce-copy p{margin:7px 0 0;color:#4a5650;line-height:1.45;max-width:760px}.editorial-commerce-button{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;background:#173b29;color:#fff!important;text-decoration:none!important;font-weight:900;padding:13px 17px;border-radius:11px;line-height:1.2;text-align:center}.editorial-commerce-button:hover{background:#0f2c1e}
+
+@media(max-width:600px){
+  .editorial-commerce-cta{align-items:stretch;flex-direction:column;gap:14px;margin:16px 0 26px;padding:17px 16px;border-radius:15px}
+  .editorial-commerce-copy>strong{font-size:1.15rem}
+  .editorial-commerce-copy p{font-size:.96rem}
+  .editorial-commerce-button{width:100%;box-sizing:border-box;min-height:48px;font-size:.98rem}
+
+  /* Most current Rare Plant traffic is mobile. Keep the decision area close to the first screen. */
+  .buying-page{padding-bottom:112px}
+  .buying-hero{padding:24px 18px;border-radius:16px;margin-bottom:20px}
+  .buying-hero h1{font-size:2rem;line-height:1.08;margin-bottom:14px}
+  .buying-hero p{font-size:1rem;line-height:1.5}
+  .buying-meta-row{margin-top:14px;gap:7px}
+  .buying-snapshot,.buying-updated{padding:8px 10px;font-size:.82rem}
+  .comparison-first .section-heading{margin-bottom:12px}
+  .comparison-first .section-heading h2{font-size:1.65rem;line-height:1.15}
+  .comparison-mobile-grid{gap:12px}
+  .comparison-mobile-card{padding:13px}
+
+  /* Keep the proven top-pick shortcut accessible without covering the last lines of content. */
+  .buying-sticky-cta{left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom));padding:10px 11px;border-radius:13px;gap:8px}
+  .buying-sticky-cta span{font-size:.8rem;max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .buying-sticky-cta a{min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:9px 12px;font-size:.8rem}
+}
