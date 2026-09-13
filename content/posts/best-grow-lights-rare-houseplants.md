@@ -5,6 +5,12 @@ lastmod: 2026-08-29
 draft: false
 description: "Set up grow lights for rare houseplants correctly: learn mounting distance, coverage, intensity, 10–14 hour timing and signs the light is too weak or strong."
 tags: ["rare plants", "grow lights", "houseplant care", "variegated plants"]
+commercial_cta:
+  label: "Shopping for a grow light?"
+  title: "Compare our 3 grow-light picks before you buy"
+  text: "See the shortlist, best-use cases and direct Amazon checks without leaving the decision until the end of this guide."
+  url: "/buying-guides/best-selling-grow-lights/"
+  button: "COMPARE GROW LIGHTS →"
 cover:
     image: "/images/grow-light-setup.jpg"
     alt: "Grow light positioned above rare and variegated houseplants"
