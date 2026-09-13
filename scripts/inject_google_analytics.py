@@ -20,12 +20,24 @@ TAG = '''<!-- Google tag (gtag.js) -->
       return String(value || '').replace(/\s+/g, ' ').trim().slice(0, 100);
     }
 
+    function ctaLocation(link) {
+      if (link.closest('.buying-sticky-cta')) return 'sticky_mobile';
+      if (link.classList.contains('mobile-table-cta')) return 'comparison_mobile';
+      if (link.classList.contains('intent-cta')) return 'comparison_intent';
+      if (link.classList.contains('buying-cta-primary')) return 'featured_pick';
+      if (link.classList.contains('table-cta')) return 'comparison';
+      if (link.classList.contains('buying-cta')) return 'product_card';
+      if (link.classList.contains('editorial-commerce-button')) return 'editorial_early_cta';
+      return 'text_or_image_link';
+    }
+
     function eventParams(link, url) {
       return {
         link_url: url.href,
         link_domain: url.hostname,
         link_text: shortText(link.textContent || link.getAttribute('aria-label')),
-        source_path: window.location.pathname
+        source_path: window.location.pathname,
+        cta_location: ctaLocation(link)
       };
     }
 
