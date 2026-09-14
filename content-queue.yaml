@@ -339,8 +339,15 @@ topics:
   - plant rarity
   image_query: rare exotic houseplant
   cluster: buying-market
-  status: pending
+  status: done
   featured_weight: 1
+  published_date: '2026-09-14'
+  slug: why-do-rare-houseplants-cost-hundreds-of-dollars
+  pin_title: Why Do Rare Houseplants Cost Hundreds of Dollars?
+  pin_description: Discover the real reasons behind the high price tags of rare houseplants,
+    from slow growth rates and mutation instability to market demand.
+  pin_image_path: /images/pins/why-do-rare-houseplants-cost-hundreds-of-dollars.jpg
+  pin_status: pending
 - title: How to Winter-Proof Your Rare Plant Collection
   keywords:
   - winter plant care
