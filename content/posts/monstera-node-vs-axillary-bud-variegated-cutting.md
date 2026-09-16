@@ -1,9 +1,9 @@
 ---
-title: "Monstera Node vs Axillary Bud: Choose a Variegated Cutting"
+title: "Monstera Node vs Axillary Bud: Which Cutting Is Better?"
 date: 2026-08-28
-lastmod: 2026-09-03
+lastmod: 2026-09-16
 draft: false
-description: "Monstera node vs axillary bud explained: learn where new growth comes from, how to inspect variegation on a cutting, and which node to keep before pruning."
+description: "Monstera node vs axillary bud explained: learn the difference, how to identify a viable growth point, and how to choose a healthier variegated Monstera cutting."
 tags: ["monstera node", "axillary bud", "variegated monstera", "monstera propagation"]
 categories: ["Propagation"]
 faq:
