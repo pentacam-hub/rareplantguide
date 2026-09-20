@@ -2,7 +2,7 @@
 title: "Why Are Rare Houseplants So Expensive? Pricing Explained"
 date: 2026-09-03
 draft: false
-description: "Understand the factors behind rare plant prices, from propagation difficulty and variegation stability to shipping risks and market demand."
+description: "From tissue-culture labs to import risk — here's what actually drives rare plant prices sky-high, and how to tell when you're paying too much."
 tags: ["Houseplant Care", "Rare Plants", "Buying Guide"]
 categories: ["Plant Care"]
 faq:
