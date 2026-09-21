@@ -20,8 +20,7 @@
   function classifyLink(el, url) {
     var host = (url && url.hostname || '').toLowerCase();
     var href = (el.getAttribute('href') || '').toLowerCase();
-    var text = cleanText(el.innerText || el.textContent).toLowerCase();
-    var network = '';
+        var network = '';
 
     if (host.indexOf('amazon.') !== -1 || href.indexOf('amzn.to') !== -1) {
       network = 'amazon';
