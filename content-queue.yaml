@@ -357,7 +357,14 @@ topics:
   - indoor plants winter
   image_query: indoor plants winter window
   cluster: care-troubleshooting
-  status: pending
+  status: done
+  published_date: '2026-09-21'
+  slug: winter-proofing-rare-plants-a-cold-weather-care-guide
+  pin_title: 'Winter-Proofing Rare Plants: A Cold Weather Care Guide'
+  pin_description: Protect rare houseplants from cold damage and drafts this winter
+    with practical tips on watering, lighting, and humidity adjustments.
+  pin_image_path: /images/pins/winter-proofing-rare-plants-a-cold-weather-care-guide.jpg
+  pin_status: pending
 - title: 'Philodendron Pink Princess: Keeping the Pink Variegation Stable'
   keywords:
   - pink princess philodendron
