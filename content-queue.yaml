@@ -349,7 +349,9 @@ topics:
   pin_description: Discover the real reasons behind the high price tags of rare houseplants,
     from slow growth rates and mutation instability to market demand.
   pin_image_path: /images/pins/why-do-rare-houseplants-cost-hundreds-of-dollars.jpg
-  pin_status: pending
+  pin_status: posted
+  pinterest_pin_id: '879961214758944913'
+  pinterest_board: Rare Plant Buying, Prices & Collecting
 - title: How to Winter-Proof Your Rare Plant Collection
   keywords:
   - winter plant care
