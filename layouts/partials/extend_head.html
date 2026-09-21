@@ -8,6 +8,107 @@
   gtag('config', 'G-2XPYDX7QRW');
 </script>
 
+<!-- Universal click tracking: automatically records important link/button interactions. -->
+<script>
+(function () {
+  'use strict';
+
+  function cleanText(value) {
+    return (value || '').replace(/\s+/g, ' ').trim().slice(0, 150);
+  }
+
+  function classifyLink(el, url) {
+    var host = (url && url.hostname || '').toLowerCase();
+    var href = (el.getAttribute('href') || '').toLowerCase();
+    var text = cleanText(el.innerText || el.textContent).toLowerCase();
+    var network = '';
+
+    if (host.indexOf('amazon.') !== -1 || href.indexOf('amzn.to') !== -1) {
+      network = 'amazon';
+    } else if (host.indexOf('impact.com') !== -1) {
+      network = 'impact';
+    } else if (host.indexOf('shareasale') !== -1 || host.indexOf('awin') !== -1) {
+      network = 'affiliate';
+    }
+
+    var type = 'internal';
+    if (!url) type = 'button';
+    else if (href.indexOf('mailto:') === 0) type = 'email';
+    else if (href.indexOf('tel:') === 0) type = 'phone';
+    else if (host && host !== location.hostname) type = network ? 'affiliate' : 'outbound';
+    else if (/\\.(pdf|zip|csv|xlsx?|docx?|pptx?)($|\\?)/i.test(url.pathname)) type = 'download';
+    else if (el.closest('nav')) type = 'navigation';
+    else if (el.closest('article, .post-entry, .entry-content, .card, .visual-card')) type = 'content';
+    else if (el.matches('button, [role="button"]')) type = 'button';
+
+    return { type: type, network: network };
+  }
+
+  document.addEventListener('click', function (event) {
+    var el = event.target.closest('a, button, [role="button"]');
+    if (!el || typeof gtag !== 'function') return;
+
+    var rawHref = el.getAttribute('href') || '';
+    var url = null;
+    try {
+      if (rawHref && !/^javascript:/i.test(rawHref) && !/^mailto:|^tel:/i.test(rawHref)) {
+        url = new URL(rawHref, location.href);
+      }
+    } catch (e) {}
+
+    var classification = classifyLink(el, url);
+    var linkText = cleanText(el.innerText || el.textContent || el.getAttribute('aria-label'));
+    var linkId = cleanText(el.id);
+    var productName = cleanText(
+      el.getAttribute('data-product-name') ||
+      el.closest('[data-product-name]')?.getAttribute('data-product-name') ||
+      ''
+    );
+    var productCategory = cleanText(
+      el.getAttribute('data-product-category') ||
+      el.closest('[data-product-category]')?.getAttribute('data-product-category') ||
+      ''
+    );
+    var affiliateId = cleanText(
+      el.getAttribute('data-affiliate-id') ||
+      el.closest('[data-affiliate-id]')?.getAttribute('data-affiliate-id') ||
+      ''
+    );
+    var position = '';
+    var container = el.closest('article, .post-entry, .entry-content, .card, .visual-card, .buying-page');
+    if (container) {
+      var links = container.querySelectorAll('a, button, [role="button"]');
+      for (var i = 0; i < links.length; i++) {
+        if (links[i] === el) { position = String(i + 1); break; }
+      }
+    }
+
+    var params = {
+      link_url: url ? url.href : (rawHref || ''),
+      link_domain: url ? url.hostname : '',
+      link_text: linkText,
+      link_id: linkId,
+      link_type: classification.type,
+      product_name: productName,
+      product_category: productCategory,
+      position: position,
+      affiliate_network: classification.network,
+      affiliate_id: affiliateId,
+      page_location: location.href,
+      page_title: document.title,
+      page_path: location.pathname
+    };
+
+    gtag('event', 'universal_link_click', params);
+
+    // Keep the existing affiliate_click event for continuity with the current GA4 reports.
+    if (classification.network) {
+      gtag('event', 'affiliate_click', params);
+    }
+  }, true);
+})();
+</script>
+
 <!-- Search/browser identity: one stable, crawlable site icon and consistent site name. -->
 <link rel="icon" type="image/png" sizes="256x256" href="/images/leaf-icon.png">
 <link rel="shortcut icon" type="image/png" href="/images/leaf-icon.png">
