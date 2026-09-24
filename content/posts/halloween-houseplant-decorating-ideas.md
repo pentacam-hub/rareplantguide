@@ -123,3 +123,8 @@ Low-heat LED lights are a practical choice for seasonal displays. Keep electrica
 The best Halloween plant display does not require expensive decorations or a complete redesign of your indoor jungle. A few carefully chosen accents, atmospheric lighting, and the natural shapes of your plants can create a dramatic seasonal scene.
 
 Let the plants remain the stars of the display, keep decorations away from delicate foliage, and use Halloween as an opportunity to photograph your collection from a completely different perspective.
+
+
+## Shop Halloween Plant Decor
+
+If you want to recreate the look with seasonal decorations, see our [Halloween Plant Decor shopping guide](/buying-guides/halloween-plant-decor-amazon/) with current Amazon search options.
