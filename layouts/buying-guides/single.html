@@ -81,7 +81,7 @@
     {{- end }}
   </section>
 
-  {{- range first 1 $products }}
+  {{- if $products }}{{- range first 1 $products }}
   <section class="winner-card" aria-label="Featured pick">
     <div class="winner-media">
       <span class="winner-badge">{{ .medal }}</span>
@@ -116,7 +116,7 @@
       <small class="asin-note">ASIN {{ .asin }}</small>
     </div>
   </section>
-  {{- end }}
+  {{- end }}{{- end }}
 
   <section class="product-cards-section">
     <div class="section-heading"><span>THE SHORTLIST</span><h2>{{- with .Params.shortlist_title }}{{ . }}{{ else }}Compare the details that decide whether it fits{{ end }}</h2><p>{{- with .Params.shortlist_intro }}{{ . }}{{ else }}Dimensions, capacity, material, lighting and visible wiring are shown before the buy button so you can rule out the wrong option quickly.{{ end }}</p></div>
@@ -176,7 +176,7 @@
   <aside class="buying-disclaimer"><strong>Marketplace note</strong><p>{{ .Params.source_note }}</p></aside>
 </article>
 
-{{- if .Params.sticky_cta }}{{- range first 1 $products }}
+{{- if and .Params.sticky_cta $products }}{{- range first 1 $products }}
 <div class="buying-sticky-cta" aria-label="Top pick shortcut"><span><strong>{{ .medal }}:</strong> {{ .short_name }}</span><a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">{{ if .dimensions }}VERIFY SIZE →{{ else }}CHECK ON AMAZON →{{ end }}</a></div>
 {{- end }}{{- end }}
 {{- if .Params.amazon_price_api }}<script src="/js/amazon-prices.js" defer></script>{{- end }}
