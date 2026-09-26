@@ -27,7 +27,7 @@
       {{- range $products }}
       <article class="intent-card{{ if .highlight }} intent-card-featured{{ end }}">
         <div class="intent-card-label">{{ .medal }}</div>
-        <a class="intent-card-image" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" data-fallback="{{ .amazon_image_fallback }}" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.removeAttribute(\'data-fallback\');this.onerror=null}"></a>
+        <a class="intent-card-image" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" data-fallback="https://images-na.ssl-images-amazon.com/images/P/{{ .asin }}.01._SL1000_.jpg" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.removeAttribute(\'data-fallback\');this.onerror=null}"></a>
         <div class="intent-card-body">
           <div class="intent-score">Editor score {{ .editor_score }}</div>
           <h3><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">{{ .short_name }}</a></h3>
@@ -52,7 +52,7 @@
           {{- range $products }}
           <tr{{ if .highlight }} class="comparison-winner"{{ end }}>
             <td class="product-cell">
-              <a class="product-image-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" data-fallback="{{ .amazon_image_fallback }}" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.removeAttribute(\'data-fallback\');this.onerror=null}"></a>
+              <a class="product-image-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" data-fallback="https://images-na.ssl-images-amazon.com/images/P/{{ .asin }}.01._SL1000_.jpg" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.removeAttribute(\'data-fallback\');this.onerror=null}"></a>
               <div class="comparison-product-copy"><span class="decision-medal">{{ .medal }}</span><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener"><strong>#{{ .rank }} {{ .short_name }}</strong></a><small>{{ .key_reason }}</small></div>
             </td>
             <td><span class="editor-score">{{ .editor_score }}</span><small class="score-note">Our score</small></td>
@@ -68,7 +68,7 @@
       {{- range $products }}
       <article class="comparison-mobile-card{{ if .highlight }} comparison-mobile-winner{{ end }}">
         <div class="comparison-mobile-top"><span class="decision-medal">{{ .medal }}</span><span class="editor-score">{{ .editor_score }}</span></div>
-        <a class="comparison-mobile-image" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" data-fallback="{{ .amazon_image_fallback }}" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.removeAttribute(\'data-fallback\');this.onerror=null}"></a>
+        <a class="comparison-mobile-image" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" data-fallback="https://images-na.ssl-images-amazon.com/images/P/{{ .asin }}.01._SL1000_.jpg" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.removeAttribute(\'data-fallback\');this.onerror=null}"></a>
         <h3><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">#{{ .rank }} {{ .short_name }}</a></h3>
         <p class="comparison-mobile-best"><strong>Best for:</strong> {{ .best_for }}</p>
         {{ with .dimensions }}<p class="comparison-mobile-dimension"><strong>📏 Size:</strong> {{ . }}</p>{{ end }}
@@ -85,7 +85,7 @@
   <section class="winner-card" aria-label="Featured pick">
     <div class="winner-media">
       <span class="winner-badge">{{ .medal }}</span>
-      <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" data-fallback="{{ .amazon_image_fallback }}" alt="{{ .image_alt }}" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.removeAttribute(\'data-fallback\');this.onerror=null}"></a>
+      <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" data-fallback="https://images-na.ssl-images-amazon.com/images/P/{{ .asin }}.01._SL1000_.jpg" alt="{{ .image_alt }}" loading="eager" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.removeAttribute(\'data-fallback\');this.onerror=null}"></a>
     </div>
     <div class="winner-copy">
       <p class="winner-kicker">{{- with $.Params.featured_kicker }}{{ . }}{{ else }}OUR #1 RECOMMENDATION{{ end }}</p>
@@ -125,7 +125,7 @@
       <article class="product-card{{ if .highlight }} product-card-featured{{ end }}">
         <div class="product-card-media">
           <span class="product-rank">#{{ .rank }}</span><span class="product-badge">{{ .medal }}</span>
-          <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" data-fallback="{{ .amazon_image_fallback }}" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.removeAttribute(\'data-fallback\');this.onerror=null}"></a>
+          <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" data-fallback="https://images-na.ssl-images-amazon.com/images/P/{{ .asin }}.01._SL1000_.jpg" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.removeAttribute(\'data-fallback\');this.onerror=null}"></a>
         </div>
         <div class="product-card-body">
           <h3><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener">{{ .name }}</a></h3>
