@@ -8,7 +8,9 @@
     B0CL4WHFVS: { displayAmount: '$137.99', checked: 'Aug 29, 2026' },
     B091DLFDL9: { displayAmount: '$8.99', checked: 'Aug 29, 2026' },
     B085CDPSMR: { displayAmount: '$21.45', checked: 'Aug 29, 2026' },
-    B0C36WZBWC: { displayAmount: '$25.99', checked: 'Aug 29, 2026' }
+    B0C36WZBWC: { displayAmount: '$25.99', checked: 'Aug 29, 2026' },
+    B09ZDP7BTN: { displayAmount: '$8.99', checked: 'Sep 26, 2026' },
+    B07YCSNLDG: { displayAmount: '$5.93', checked: 'Sep 26, 2026' }
   };
 
   const formatUpdated = (iso) => {
