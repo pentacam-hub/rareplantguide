@@ -25,6 +25,21 @@ Halloween is a perfect excuse to give your indoor jungle a completely different 
 
 The best Halloween plant displays work with the natural shape of the plants rather than against it. Large Monstera leaves, dark Anthurium foliage, climbing Philodendrons, and variegated tropical plants already have dramatic shapes that look striking under warm or colored lighting.
 
+## Halloween Plant Decor: What to Buy
+
+If you want to recreate this look, you can keep the shopping list simple. The easiest approach is to decorate the **space around your plants**, rather than attaching decorations to the foliage.
+
+Here are some useful product categories to consider:
+
+- 🎃 [Mini Halloween pumpkins on Amazon](https://www.amazon.com/s?k=mini+halloween+pumpkins+decorations) — place them around pots, shelves, or plant stands.
+- 💡 [Halloween LED string lights on Amazon](https://www.amazon.com/s?k=halloween+led+string+lights) — useful for adding orange, purple, or warm light to a plant corner.
+- 🕯️ [Battery-powered LED candles on Amazon](https://www.amazon.com/s?k=battery+operated+led+candles+halloween) — create a candle-like glow without an open flame.
+- 🦇 [Black bat decorations on Amazon](https://www.amazon.com/s?k=halloween+bat+decorations) — use them on a wall or background rather than on leaves.
+- 🕸️ [Halloween spider web decorations on Amazon](https://www.amazon.com/s?k=halloween+spider+web+decorations) — add a small amount around the display without covering delicate foliage.
+- 🪴 [Black indoor plant pots on Amazon](https://www.amazon.com/s?k=black+plant+pots+indoor) — a reusable way to give a plant corner a darker Halloween look.
+
+For a larger selection, see our full [Halloween Plant Decor shopping guide](/buying-guides/halloween-plant-decor-amazon/).
+
 ## Create a Spooky Indoor Jungle
 
 Start with the plants you already own. Group plants at different heights to create depth: place taller plants such as Monstera or large Philodendrons behind smaller plants, then add a few trailing plants around the edges.
@@ -42,6 +57,8 @@ Warm amber lighting creates a cozy autumn atmosphere, while carefully positioned
 Low-heat LED lighting is a practical option for seasonal decoration. Keep electrical connections away from water, misting, humidifiers, and wet soil.
 
 If your plants need additional light during shorter fall days, choosing an appropriate grow light can also help maintain healthy growth while keeping the Halloween display looking intentional.
+
+[See grow lights for houseplants on Amazon](https://www.amazon.com/s?k=led+grow+lights+for+indoor+plants) if your display area also needs supplemental plant lighting.
 
 ## Halloween Plants That Create the Right Look
 
@@ -70,6 +87,8 @@ Pumpkins are one of the easiest ways to introduce Halloween color.
 Instead of placing large pumpkins directly on plant pots or soil, position smaller pumpkins around the base of the display. This gives you the orange color associated with Halloween while leaving the plants themselves undisturbed.
 
 Mini pumpkins can also work particularly well on shelves beside smaller plants.
+
+[Browse mini Halloween pumpkins on Amazon](https://www.amazon.com/s?k=mini+halloween+pumpkins+decorations) if you want to compare different sizes and styles.
 
 ## Keep Decorations Plant-Safe
 
@@ -131,7 +150,8 @@ The best Halloween plant display does not require expensive decorations or a com
 
 Let the plants remain the stars of the display, keep decorations away from delicate foliage, and use Halloween as an opportunity to photograph your collection from a completely different perspective.
 
+## More Halloween Plant Decor to Shop
 
-## Shop Halloween Plant Decor
+Ready to build the display? Our [Halloween Plant Decor shopping guide](/buying-guides/halloween-plant-decor-amazon/) covers more options including pumpkins, bats, spider webs, LED candles, string lights, black pots, plant stands, lanterns, and grow lights.
 
-If you want to recreate the look with seasonal decorations, see our [Halloween Plant Decor shopping guide](/buying-guides/halloween-plant-decor-amazon/) with current Amazon search options.
+You can also browse the individual categories above to compare current Amazon options.
