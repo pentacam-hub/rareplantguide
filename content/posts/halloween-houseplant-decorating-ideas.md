@@ -14,6 +14,10 @@ faq:
     answer: "Low-heat LED lights are generally a practical choice for seasonal displays. Keep lights and electrical connections away from water, misting, and wet soil, and follow the manufacturer's safety instructions."
 ---
 
+![Halloween pumpkins and seasonal plant decor](https://cdn.pixabay.com/photo/2012/03/03/23/02/halloween-21498_1280.jpg)
+
+*Halloween seasonal decor inspiration for your indoor jungle.*
+
 Halloween is a perfect excuse to give your indoor jungle a completely different mood. You do not need to turn your rare plants into props or cover them with heavy decorations. With the right combination of foliage, lighting, pumpkins, and a few simple accents, your plant collection can become the centerpiece of a spooky seasonal display.
 
 The best Halloween plant displays work with the natural shape of the plants rather than against it. Large Monstera leaves, dark Anthurium foliage, climbing Philodendrons, and variegated tropical plants already have dramatic shapes that look striking under warm or colored lighting.
