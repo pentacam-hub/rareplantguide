@@ -5,6 +5,9 @@ draft: false
 description: "Turn your indoor jungle into a spooky Halloween display with safe decorating ideas for Monstera, rare houseplants, moody lighting, pumpkins, and plant-friendly seasonal decor."
 tags: ["Halloween", "Houseplants", "Plant Decor", "Rare Plants", "Monstera"]
 categories: ["Plant Care"]
+cover:
+  image: "/images/halloween-houseplants-hero.png"
+  alt: "Halloween houseplants with pumpkins and spooky seasonal decorations"
 faq:
   - question: "Can I decorate my houseplants for Halloween?"
     answer: "Yes. The safest approach is to keep decorations light and loose, avoid damaging leaves and stems, and keep candles, heat sources, adhesives, and electrical cords away from foliage and soil."
