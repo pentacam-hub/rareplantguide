@@ -93,7 +93,7 @@ You can also read **[the best grow lights for rare houseplants](/buying-guides/b
 
 ## 🖤 9. Black Plant Stands
 
-![Black Plant Stands](/images/black-plant-pots.svg)
+![Black Plant Stands](/images/black-plant-stands.svg)
 
 **Best for:** creating different heights and a layered indoor-jungle effect.
 
