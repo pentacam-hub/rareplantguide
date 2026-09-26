@@ -39,6 +39,9 @@
     {{- else if or (in $title "variegat") (in $title "monstera") (in $title "albo") -}}
       {{- $image = "/images/monstera-variegated-hero.jpg" -}}
       {{- $alt = "Healthy variegated Monstera foliage" -}}
+    {{- else if in $title "halloween" -}}
+      {{- $image = "/images/halloween-houseplants-hero.png" -}}
+      {{- $alt = "Halloween houseplants with pumpkins and spooky seasonal decorations" -}}
     {{- else -}}
       {{- $image = "/images/og-cover.jpg" -}}
       {{- $alt = printf "%s — The Rare Plant Guide" .Title -}}
@@ -54,3 +57,4 @@
   </figure>
 {{- end -}}
 {{- end -}}
+```
