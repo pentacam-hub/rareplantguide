@@ -20,6 +20,10 @@ PRICE_SNAPSHOTS = {
     "B091DLFDL9": "$8.99",
     "B085CDPSMR": "$21.45",
     "B0C36WZBWC": "$25.99",
+    # Halloween plant decor
+    "B09ZDP7BTN": "$8.99",
+    "B07YCSNLDG": "$5.93",
+    "B0FF44NFCP": "$12.99",
     # Humidifiers
     "B08HS45N13": "$63.96",
     "B0CCVX6FSD": "$44.98",
