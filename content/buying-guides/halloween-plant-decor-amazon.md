@@ -12,7 +12,6 @@ comparison_intro: "Start with the effect you actually want: a spooky background,
 featured_kicker: "BEST OVERALL"
 shortlist_title: "Compare the details before you buy"
 shortlist_intro: "Material, size, setup and power are shown before the Amazon button so you can choose the right decoration for your indoor jungle."
-lifestyle_images: true
 amazon_price_api: true
 intro: "You do not need to cover your houseplants with Halloween decorations. These three Amazon picks add a strong seasonal effect around the plants while keeping the foliage itself clear."
 source_note: "Amazon prices, availability and product variations can change. Verify the current offer on Amazon before buying. Product fit and editorial scores are our own assessment."
