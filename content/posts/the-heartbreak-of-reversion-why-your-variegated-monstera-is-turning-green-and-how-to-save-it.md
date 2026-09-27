@@ -1,9 +1,9 @@
 ---
-title: "Variegated Monstera Turning Green? Can Reversion Be Reversed?"
+title: "Variegated Monstera Turning Green? How to Stop Reversion"
 date: 2026-08-04
-lastmod: 2026-08-29
+lastmod: 2026-09-27
 draft: false
-description: "Is your Monstera Albo turning green? Learn the signs of true reversion, when to prune, which node to keep, and whether variegation can return."
+description: "Is your Monstera Albo turning green? Learn the real signs of reversion, exactly which node to prune back to, and whether the variegation can still come back."
 tags: ["variegated monstera", "houseplant care", "plant propagation", "variegation reversion"]
 categories: ["Plant Care"]
 cover:
@@ -21,7 +21,7 @@ faq:
 
 If your **variegated Monstera is turning green**, do not judge the plant from one leaf alone. The most useful evidence is on the **stem, node and active growth point**.
 
-**Quick answer:** one greener leaf can be normal variation. Several solid-green leaves combined with an all-green section of stem are much stronger signs of **Monstera reversion**. If the newest growth point is fully green, the usual corrective option is to prune back to a node that still crosses visible variegated stem tissue.
+**Quick answer:** one greener leaf can be normal. Reversion is more likely when several new leaves are solid green *and* the newest stem section has lost its striping. Pruning back to a node that still crosses variegated tissue can help — light and fertilizer alone cannot bring variegation back.
 
 **Can Monstera reversion be reversed?** Sometimes—but only if a lower node or axillary bud still intersects variegated stem tissue. A fully green active growth point will not turn variegated again simply because you add more light or fertilizer.
 
@@ -51,6 +51,8 @@ Green tissue performs most of the photosynthesis. White tissue contributes littl
 Follow the cream or white striping along the main vine and inspect where it crosses each node and dormant axillary bud.
 
 A bud that overlaps both green and variegated tissue has a better chance of producing mixed growth than a bud sitting in an entirely green section. That visual check is useful, but it is not a guarantee: the pattern inside the growth point cannot be predicted perfectly from the outside.
+
+If you're not yet sure how to tell a node from an axillary bud on the stem, see [Monstera Node vs Axillary Bud: What's the Difference?](/posts/monstera-node-vs-axillary-bud-variegated-cutting/) before you cut.
 
 If you need better supplemental lighting after pruning, use the [grow light setup guide](/posts/best-grow-lights-rare-houseplants/) and acclimate the plant gradually.
 
