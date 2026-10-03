@@ -16,7 +16,7 @@ lifestyle_images: true
 amazon_price_api: true
 intro: "The best grow light is not automatically the biggest or most complicated. We narrowed the field to three formats that solve three different real-world problems: a bulb that disappears into a lamp you already own, an all-in-one clip light for one plant, and compact halo lights for several smaller pots."
 source_note: "When Amazon Creators API access is configured, this page loads current Amazon US offer pricing server-side and refreshes it through a one-hour edge cache. Amazon prices, availability and product variations can change and may differ by shopper location. If a live price cannot be displayed, open Amazon to verify the current offer. Product fit and Editor Scores are our own editorial assessment."
-amazon_associate_active: false
+amazon_associate_active: true
 associate_disclosure: "As an Amazon Associate I earn from qualifying purchases."
 sticky_cta: true
 selection_note: "We scored the products for practical rare-plant use rather than simply copying marketplace popularity. The weighting favors plant-light fit and ease of setup, then coverage, controls and space efficiency."
@@ -72,8 +72,8 @@ products:
     cons:
       - "Requires a separate compatible lamp fixture"
       - "No built-in timer or dimming controls"
-    amazon_url: "https://www.amazon.com/dp/B091DLFDL9"
-    customer_photos_url: "https://www.amazon.com/dp/B091DLFDL9#customerReviews"
+    amazon_url: "https://www.amazon.com/dp/B091DLFDL9?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B091DLFDL9?tag=therareplantg-20#customerReviews"
     cta_text: "CHECK CURRENT PRICE →"
     cta_text_long: "CHECK CURRENT PRICE ON AMAZON →"
   - rank: 2
@@ -109,8 +109,8 @@ products:
       - "Easy to reposition around one plant"
     cons:
       - "Useful coverage is more limited than a broader multi-light setup"
-    amazon_url: "https://www.amazon.com/dp/B085CDPSMR"
-    customer_photos_url: "https://www.amazon.com/dp/B085CDPSMR#customerReviews"
+    amazon_url: "https://www.amazon.com/dp/B085CDPSMR?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B085CDPSMR?tag=therareplantg-20#customerReviews"
     cta_text: "CHECK CURRENT PRICE →"
     cta_text_long: "CHECK CURRENT PRICE ON AMAZON →"
   - rank: 3
@@ -147,11 +147,11 @@ products:
     cons:
       - "Better for focused pots than one broad mature canopy"
       - "Keep the electrical components protected from watering"
-    amazon_url: "https://www.amazon.com/dp/B0C36WZBWC"
-    customer_photos_url: "https://www.amazon.com/dp/B0C36WZBWC#customerReviews"
+    amazon_url: "https://www.amazon.com/dp/B0C36WZBWC?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B0C36WZBWC?tag=therareplantg-20#customerReviews"
     cta_text: "CHECK CURRENT PRICE →"
     cta_text_long: "CHECK CURRENT PRICE ON AMAZON →"
-amazon_browse_url: "https://www.amazon.com/s?k=grow+lights+for+indoor+plants"
+amazon_browse_url: "https://www.amazon.com/s?k=grow+lights+for+indoor+plants&tag=therareplantg-20"
 ---
 
 ## The 20-second answer
