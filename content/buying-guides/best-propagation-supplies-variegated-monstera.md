@@ -16,7 +16,7 @@ lifestyle_images: true
 amazon_price_api: true
 intro: "A valuable Variegated Monstera cutting is easier to lose through a bad cut or waterlogged setup than through a lack of gadgets. We chose three practical supplies around the actual propagation sequence: make a clean cut, keep the node moist but oxygenated, and only then consider an optional rooting aid if it suits the cutting and label directions."
 source_note: "Product details were checked against current manufacturer information and current Amazon listings in August 2026. Amazon prices, availability and pack sizes can change. Always verify the current product label and selected listing before use. Editor Scores reflect our own assessment for rare-houseplant propagation."
-amazon_associate_active: false
+amazon_associate_active: true
 associate_disclosure: "As an Amazon Associate I earn from qualifying purchases."
 sticky_cta: true
 selection_note: "We weighted control and plant safety above novelty. A propagation supply earns points only if it solves a real step in the process without encouraging saturated media, rough cuts or unnecessary chemical use."
@@ -72,8 +72,8 @@ products:
     cons:
       - "Not a heavy-duty pruner"
       - "Still needs cleaning between plants"
-    amazon_url: "https://www.amazon.com/dp/B01MU8CP1W"
-    customer_photos_url: "https://www.amazon.com/dp/B01MU8CP1W#customerReviews"
+    amazon_url: "https://www.amazon.com/dp/B01MU8CP1W?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B01MU8CP1W?tag=therareplantg-20#customerReviews"
     cta_text: "CHECK CURRENT PRICE →"
     cta_text_long: "CHECK CURRENT PRICE ON AMAZON →"
   - rank: 2
@@ -110,8 +110,8 @@ products:
     cons:
       - "Easy to over-saturate"
       - "Roots can weave tightly through fibers before transfer"
-    amazon_url: "https://www.amazon.com/dp/B004Z71IHS"
-    customer_photos_url: "https://www.amazon.com/dp/B004Z71IHS#customerReviews"
+    amazon_url: "https://www.amazon.com/dp/B004Z71IHS?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B004Z71IHS?tag=therareplantg-20#customerReviews"
     cta_text: "CHECK CURRENT PRICE →"
     cta_text_long: "CHECK CURRENT PRICE ON AMAZON →"
   - rank: 3
@@ -147,11 +147,11 @@ products:
     cons:
       - "Not necessary for every Monstera cutting"
       - "Cannot compensate for a bad node or waterlogged medium"
-    amazon_url: "https://www.amazon.com/dp/B000BX1HGC"
-    customer_photos_url: "https://www.amazon.com/dp/B000BX1HGC#customerReviews"
+    amazon_url: "https://www.amazon.com/dp/B000BX1HGC?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B000BX1HGC?tag=therareplantg-20#customerReviews"
     cta_text: "CHECK CURRENT PRICE →"
     cta_text_long: "CHECK CURRENT PRICE ON AMAZON →"
-amazon_browse_url: "https://www.amazon.com/s?k=monstera+propagation+supplies"
+amazon_browse_url: "https://www.amazon.com/s?k=monstera+propagation+supplies&tag=therareplantg-20"
 ---
 
 ## The 20-second answer
