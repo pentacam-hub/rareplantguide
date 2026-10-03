@@ -16,7 +16,7 @@ shortlist_intro: "Material, size, setup and power are shown before the Amazon bu
 amazon_price_api: true
 intro: "You do not need to cover your houseplants with Halloween decorations. These three Amazon picks add a strong seasonal effect around the plants while keeping the foliage itself clear."
 source_note: "Amazon prices, availability and product variations can change. Verify the current offer on Amazon before buying. Product fit and editorial scores are our own assessment."
-amazon_associate_active: false
+amazon_associate_active: true
 associate_disclosure: "As an Amazon Associate I earn from qualifying purchases."
 sticky_cta: true
 selection_note: "We selected these formats for practical indoor plant displays: visual impact, easy setup, reusability and how well the decoration works around plants without attaching heavy items to foliage."
@@ -72,8 +72,8 @@ products:
     cons:
       - "Adhesive mounting may not suit every wall"
       - "Keep attachments away from leaves and growing points"
-    amazon_url: "https://www.amazon.com/dp/B09ZDP7BTN"
-    customer_photos_url: "https://www.amazon.com/dp/B09ZDP7BTN#customerReviews"
+    amazon_url: "https://www.amazon.com/dp/B09ZDP7BTN?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B09ZDP7BTN?tag=therareplantg-20#customerReviews"
     cta_text: "CHECK CURRENT PRICE →"
     cta_text_long: "CHECK CURRENT PRICE ON AMAZON →"
   - rank: 2
@@ -110,8 +110,8 @@ products:
     cons:
       - "Can tangle with delicate foliage"
       - "Remove before watering or misting"
-    amazon_url: "https://www.amazon.com/dp/B07YCSNLDG"
-    customer_photos_url: "https://www.amazon.com/dp/B07YCSNLDG#customerReviews"
+    amazon_url: "https://www.amazon.com/dp/B07YCSNLDG?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B07YCSNLDG?tag=therareplantg-20#customerReviews"
     cta_text: "CHECK CURRENT PRICE →"
     cta_text_long: "CHECK CURRENT PRICE ON AMAZON →"
   - rank: 3
@@ -148,11 +148,11 @@ products:
     cons:
       - "Requires 3 AA batteries"
       - "Keep electrical components away from watering"
-    amazon_url: "https://www.amazon.com/dp/B0FF44NFCP"
-    customer_photos_url: "https://www.amazon.com/dp/B0FF44NFCP#customerReviews"
+    amazon_url: "https://www.amazon.com/dp/B0FF44NFCP?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B0FF44NFCP?tag=therareplantg-20#customerReviews"
     cta_text: "CHECK CURRENT PRICE →"
     cta_text_long: "CHECK CURRENT PRICE ON AMAZON →"
-amazon_browse_url: "https://www.amazon.com/s?k=halloween+decorations+for+houseplants"
+amazon_browse_url: "https://www.amazon.com/s?k=halloween+decorations+for+houseplants&tag=therareplantg-20"
 ---
 
 ## The 20-second answer
