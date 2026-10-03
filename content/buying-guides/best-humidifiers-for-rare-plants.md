@@ -16,7 +16,7 @@ lifestyle_images: true
 amazon_price_api: true
 intro: "Rare plants do not need a rainforest in your living room. The goal is stable humidity without wet leaves, stagnant air or a tank that becomes a cleaning chore. We narrowed the field to three practical formats: a 6L smart humidifier for a larger plant room, a compact 4L smart model for a smaller collection, and a simple tabletop option for one room or shelf area."
 source_note: "Specifications were checked against current manufacturer pages in August 2026. Amazon prices, availability and exact variants can change. Open Amazon to verify the current listing and selected model before buying. Editor Scores are our own assessment for rare-plant use."
-amazon_associate_active: false
+amazon_associate_active: true
 associate_disclosure: "As an Amazon Associate I earn from qualifying purchases."
 sticky_cta: true
 selection_note: "We weighted stable humidity control and easy maintenance above maximum mist output. Rare-plant collections benefit from consistent room humidity, but excessive local mist and poor airflow can create new problems."
@@ -72,8 +72,8 @@ products:
     cons:
       - "Larger footprint than a compact tabletop unit"
       - "More features than a one-shelf setup may need"
-    amazon_url: "https://www.amazon.com/dp/B08HS45N13"
-    customer_photos_url: "https://www.amazon.com/dp/B08HS45N13#customerReviews"
+    amazon_url: "https://www.amazon.com/dp/B08HS45N13?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B08HS45N13?tag=therareplantg-20#customerReviews"
     cta_text: "CHECK CURRENT PRICE →"
     cta_text_long: "CHECK CURRENT PRICE ON AMAZON →"
   - rank: 2
@@ -110,8 +110,8 @@ products:
     cons:
       - "Smaller coverage and tank than the Levoit"
       - "Smart features are unnecessary if you only need basic mist"
-    amazon_url: "https://www.amazon.com/dp/B0CCVX6FSD"
-    customer_photos_url: "https://www.amazon.com/dp/B0CCVX6FSD#customerReviews"
+    amazon_url: "https://www.amazon.com/dp/B0CCVX6FSD?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B0CCVX6FSD?tag=therareplantg-20#customerReviews"
     cta_text: "CHECK CURRENT PRICE →"
     cta_text_long: "CHECK CURRENT PRICE ON AMAZON →"
   - rank: 3
@@ -148,11 +148,11 @@ products:
     cons:
       - "No automatic target-humidity control"
       - "Smaller tank means more frequent refilling"
-    amazon_url: "https://www.amazon.com/dp/B013IJPTFK"
-    customer_photos_url: "https://www.amazon.com/dp/B013IJPTFK#customerReviews"
+    amazon_url: "https://www.amazon.com/dp/B013IJPTFK?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B013IJPTFK?tag=therareplantg-20#customerReviews"
     cta_text: "CHECK CURRENT PRICE →"
     cta_text_long: "CHECK CURRENT PRICE ON AMAZON →"
-amazon_browse_url: "https://www.amazon.com/s?k=humidifier+for+plants"
+amazon_browse_url: "https://www.amazon.com/s?k=humidifier+for+plants&tag=therareplantg-20"
 ---
 
 ## The 20-second answer
