@@ -14,7 +14,7 @@ lifestyle_images: true
 amazon_price_api: true
 intro: "A plant stand is furniture first and plant equipment second. We compared three integrated grow-light setups by the questions buyers actually ask before ordering: Will it fit my corner? How many pots can it hold? Will the wiring look messy? And will it still look good in a living room?"
 source_note: "We do not hard-code Amazon prices, customer star ratings, review counts, sales estimates or stock claims. Product dimensions and features can vary by selected Amazon variation, so verify the exact configuration before ordering. Product fit and Editor Scores are our own editorial assessment."
-amazon_associate_active: false
+amazon_associate_active: true
 associate_disclosure: "As an Amazon Associate I earn from qualifying purchases."
 sticky_cta: true
 selection_note: "We selected products with integrated lighting and clearly different purchase intents, then weighted the score toward usable footprint, plant capacity, home-decor fit and practical day-to-day setup."
@@ -63,8 +63,8 @@ products:
     cons:
       - "Narrow shelves are better for small and medium pots than very wide mature specimens"
       - "No enclosed cable-concealment channel documented"
-    amazon_url: "https://www.amazon.com/dp/B0F5GTD4HN"
-    customer_photos_url: "https://www.amazon.com/dp/B0F5GTD4HN#customerReviews"
+    amazon_url: "https://www.amazon.com/dp/B0F5GTD4HN?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B0F5GTD4HN?tag=therareplantg-20#customerReviews"
   - rank: 2
     badge: "TOP CAPACITY PICK"
     medal: "MOST CAPACITY"
@@ -92,8 +92,8 @@ products:
     cons:
       - "Takes more horizontal room than the corner model"
       - "Dimensions vary by marketplace configuration, so the selected Amazon variation must be checked"
-    amazon_url: "https://www.amazon.com/dp/B0DGXF9B8S"
-    customer_photos_url: "https://www.amazon.com/dp/B0DGXF9B8S#customerReviews"
+    amazon_url: "https://www.amazon.com/dp/B0DGXF9B8S?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B0DGXF9B8S?tag=therareplantg-20#customerReviews"
   - rank: 3
     badge: "TOP DESIGN PICK"
     medal: "BEST DESIGN"
@@ -121,9 +121,9 @@ products:
     cons:
       - "Needs considerably more total room when both stands are used together"
       - "Particleboard still benefits from saucers and prompt cleanup after watering"
-    amazon_url: "https://www.amazon.com/dp/B0CL4WHFVS"
-    customer_photos_url: "https://www.amazon.com/dp/B0CL4WHFVS#customerReviews"
-amazon_browse_url: "https://www.amazon.com/s?k=plant+stand+with+grow+lights"
+    amazon_url: "https://www.amazon.com/dp/B0CL4WHFVS?tag=therareplantg-20"
+    customer_photos_url: "https://www.amazon.com/dp/B0CL4WHFVS?tag=therareplantg-20#customerReviews"
+amazon_browse_url: "https://www.amazon.com/s?k=plant+stand+with+grow+lights&tag=therareplantg-20"
 ---
 
 ## The 20-second answer
