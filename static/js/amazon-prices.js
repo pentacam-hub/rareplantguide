@@ -33,7 +33,7 @@
       node.classList.add('is-fallback');
       if (label) label.textContent = 'Recent tracked price';
       if (value) value.textContent = item.displayAmount;
-      if (updated) updated.textContent = `Checked ${item.checked} • verify current price on Amazon`;
+      if (updated) updated.textContent = 'Price snapshot • verify current price on Amazon';
     });
   };
 
