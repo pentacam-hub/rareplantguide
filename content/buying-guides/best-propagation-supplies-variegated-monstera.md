@@ -14,6 +14,8 @@ shortlist_title: "Three useful supplies — and what each one actually does"
 shortlist_intro: "This is not a shopping list for every possible propagation gadget. It is a stripped-down kit: a precision cutting tool, an airy rooting medium and one optional rooting aid."
 lifestyle_images: true
 amazon_price_api: true
+show_featured_image: false
+show_shortlist_images: false
 intro: "A valuable Variegated Monstera cutting is easier to lose through a bad cut or waterlogged setup than through a lack of gadgets. We chose three practical supplies around the actual propagation sequence: make a clean cut, keep the node moist but oxygenated, and only then consider an optional rooting aid if it suits the cutting and label directions."
 source_note: "Product details were checked against current manufacturer information and current Amazon listings in August 2026. Amazon prices, availability and pack sizes can change. Always verify the current product label and selected listing before use. Editor Scores reflect our own assessment for rare-houseplant propagation."
 amazon_associate_active: true
@@ -45,8 +47,8 @@ products:
     name: "Fiskars Micro-Tip Pruning Snips"
     short_name: "Fiskars Micro-Tip Snips"
     asin: "B01MU8CP1W"
-    image: "/images/propagation-water-rooting.jpg"
-    image_alt: "Houseplant cutting and propagation setup illustrating where precision snips are used"
+    image: "https://m.media-amazon.com/images/I/61INIkAFcwL._AC_SL1500_.jpg"
+    image_alt: "Fiskars Micro-Tip Pruning Snips product image from Amazon"
     best_for: "Making a clean, controlled stem cut"
     key_reason: "A precise cutting tool solves the first irreversible step. The narrow blades are easier to position around a node than bulky garden pruners."
     ideal_for: "Collectors taking stem cuttings from Monstera, Philodendron and other indoor plants where a clean, controlled cut matters more than heavy cutting capacity."
@@ -83,8 +85,8 @@ products:
     name: "Better-Gro Premium Grade Orchid Moss"
     short_name: "Better-Gro Sphagnum Moss"
     asin: "B004Z71IHS"
-    image: "https://www.better-gro.com/uploads/1/0/3/0/103066208/editor/moss_1.png?250="
-    image_alt: "Better-Gro Premium Grade Orchid Moss sphagnum product"
+    image: "https://m.media-amazon.com/images/I/91o84WhWB+L._AC_SL1500_.jpg"
+    image_alt: "Better-Gro Premium Grade Orchid Moss product image from Amazon"
     best_for: "A lightly damp, airy rooting medium"
     key_reason: "Long-fiber sphagnum can hold moisture around a node while still leaving air space when it is kept loose instead of compressed."
     ideal_for: "Monstera and aroid cuttings where you want a visible, moisture-retentive rooting medium and can monitor the moss so it never stays saturated."
@@ -121,8 +123,8 @@ products:
     name: "Bonide Bontone II Rooting Powder"
     short_name: "Bonide Bontone II"
     asin: "B000BX1HGC"
-    image: "/images/propagation-water-rooting.jpg"
-    image_alt: "Plant cutting propagation setup illustrating an optional rooting-aid step"
+    image: "https://m.media-amazon.com/images/I/71sqAqTAtSS._SL1500_.jpg"
+    image_alt: "Bonide Bontone II Rooting Powder product image from Amazon"
     best_for: "Growers who specifically want a labeled IBA rooting powder"
     key_reason: "Bontone II is a ready-to-use IBA rooting product, but a Monstera cutting with a viable node does not require hormone in order to be propagatable."
     ideal_for: "Plant propagators who already understand their cutting and rooting medium and want an optional rooting aid used strictly according to the product label."
