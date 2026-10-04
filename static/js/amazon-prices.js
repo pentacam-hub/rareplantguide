@@ -2,16 +2,9 @@
   const priceNodes = Array.from(document.querySelectorAll('[data-amazon-price]'));
   if (!priceNodes.length) return;
 
-  const fallbackPrices = {
-    B0F5GTD4HN: { displayAmount: '$42.99', checked: 'Aug 29, 2026' },
-    B0DGXF9B8S: { displayAmount: '$35.98', checked: 'Aug 29, 2026' },
-    B0CL4WHFVS: { displayAmount: '$137.99', checked: 'Aug 29, 2026' },
-    B091DLFDL9: { displayAmount: '$8.99', checked: 'Aug 29, 2026' },
-    B085CDPSMR: { displayAmount: '$21.45', checked: 'Aug 29, 2026' },
-    B0C36WZBWC: { displayAmount: '$25.99', checked: 'Aug 29, 2026' },
-    B09ZDP7BTN: { displayAmount: '$8.99', checked: 'Sep 26, 2026' },
-    B07YCSNLDG: { displayAmount: '$5.93', checked: 'Sep 26, 2026' }
-  };
+  // Do not hard-code old Amazon prices. Until the live price endpoint is configured,
+  // the page keeps the neutral "Check current price" state and sends shoppers to Amazon.
+  const fallbackPrices = {};
 
   const formatUpdated = (iso) => {
     if (!iso) return 'Live Amazon price';
@@ -78,6 +71,6 @@
       });
     })
     .catch(() => {
-      // Keep the verified dated fallback until Amazon Creators API credentials are enabled.
+      // Keep the neutral "Check current price" state when live pricing is unavailable.
     });
 })();
