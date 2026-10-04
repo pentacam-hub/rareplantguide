@@ -2,7 +2,7 @@
 title: "3 Essential Propagation Supplies for Variegated Monstera in 2026"
 description: "Build a simple Monstera propagation kit with clean precision snips, airy sphagnum moss and an optional rooting powder for suitable cuttings."
 date: 2026-08-31
-lastmod: 2026-08-31
+lastmod: 2026-10-04
 keywords: ["monstera propagation supplies", "variegated monstera propagation kit", "sphagnum moss propagation", "plant cutting tools"]
 market_snapshot: "2026 buying guide • Amazon US"
 eyebrow: "MONSTERA PROPAGATION • 2026 BUYING GUIDE"
