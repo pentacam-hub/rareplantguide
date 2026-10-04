@@ -170,6 +170,10 @@ A Monstera cutting must include stem tissue with a node. A leaf and petiole with
 
 Before cutting, identify the node and axillary bud. If you are working with a valuable variegated plant, use the [Propagation Readiness Checker](/tools/propagation-readiness.html) before making the cut.
 
+![Monstera propagation cutting showing the stem and node area](/images/plant-propagation-cutting.jpg)
+
+*The node is the part that matters most: no propagation supply can replace viable stem tissue.*
+
 ## Clean cut first, medium second
 
 Disinfect the cutting tool before you start and make a controlled cut through healthy stem tissue. Do not repeatedly crush or saw through the stem with a dull blade.
@@ -177,6 +181,10 @@ Disinfect the cutting tool before you start and make a controlled cut through he
 After cutting, choose a rooting method you can monitor. Sphagnum works well when it stays moist and airy. Water propagation can also work, but the setup should make it easy to inspect the node and developing roots.
 
 For the full technique, use [How to Propagate Variegated Monstera](/posts/propagate-variegated-monstera/) and the detailed [sphagnum moss propagation guide](/posts/is-sphagnum-moss-actually-the-holy-grail-for-rare-plant-propagation/).
+
+![Sphagnum moss used for rare plant propagation](/images/is-sphagnum-moss-actually-the-holy-grail-for-rare-plant-propagation.jpg)
+
+*Keep sphagnum airy and lightly damp rather than compressed and saturated.*
 
 ## Do you need rooting hormone for Monstera?
 
@@ -189,6 +197,10 @@ If you use a rooting product, follow its label. Do not assume that more powder p
 You do not need an expensive branded kit. A clear container, clean water, labels, a hygrometer if you use an enclosed box, and stable light are enough for many setups.
 
 The purpose of the station is to make the cutting **easy to inspect**. If you cannot see whether the stem is softening, the moss is saturated or roots are developing, the setup is harder to manage than it needs to be.
+
+![Monstera cutting rooting in water during propagation](/images/propagation-water-rooting.jpg)
+
+*A simple, visible setup is often more useful than a complicated propagation kit.*
 
 ## FAQ
 
