@@ -2,7 +2,7 @@
 title: "3 Best Grow Lights for Rare Plants in 2026"
 description: "Three grow lights for rare indoor plants, chosen for existing lamp fixtures, compact one-plant setups and small multi-plant collections."
 date: 2026-08-29
-lastmod: 2026-08-29
+lastmod: 2026-10-04
 keywords: ["best grow lights for rare plants", "best grow lights for indoor plants", "grow lights for monstera", "amazon grow lights"]
 market_snapshot: "2026 buying guide • Amazon US"
 eyebrow: "INDOOR PLANT LIGHTING • 2026 BUYING GUIDE"
