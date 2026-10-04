@@ -83,10 +83,10 @@
 
   {{- if $products }}{{- range first 1 $products }}
   <section class="winner-card" aria-label="Featured pick">
-    <div class="winner-media">
+    {{ if ne $.Params.show_featured_image false }}<div class="winner-media">
       <span class="winner-badge">{{ .medal }}</span>
       <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" data-product-name="{{ .name }}" data-product-category="{{ $.Title }}" data-affiliate-id="therareplantg-20" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="eager" decoding="async" referrerpolicy="no-referrer"></a>
-    </div>
+    </div>{{ end }}
     <div class="winner-copy">
       <p class="winner-kicker">{{- with $.Params.featured_kicker }}{{ . }}{{ else }}OUR #1 RECOMMENDATION{{ end }}</p>
       <h2><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" data-product-name="{{ .name }}" data-product-category="{{ $.Title }}" data-affiliate-id="therareplantg-20">{{ .name }}</a></h2>
@@ -123,10 +123,10 @@
     <div class="product-card-grid">
       {{- range $products }}
       <article class="product-card{{ if .highlight }} product-card-featured{{ end }}">
-        <div class="product-card-media">
+        {{ if ne $.Params.show_shortlist_images false }}<div class="product-card-media">
           <span class="product-rank">#{{ .rank }}</span><span class="product-badge">{{ .medal }}</span>
           <a href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" data-product-name="{{ .name }}" data-product-category="{{ $.Title }}" data-affiliate-id="therareplantg-20" aria-label="View {{ .name }} on Amazon"><img src="{{ .image }}" alt="{{ .image_alt }}" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
-        </div>
+        </div>{{ end }}
         <div class="product-card-body">
           <h3><a class="product-title-link" href="{{ .amazon_url }}" target="_blank" rel="sponsored nofollow noopener" data-product-name="{{ .name }}" data-product-category="{{ $.Title }}" data-affiliate-id="therareplantg-20">{{ .name }}</a></h3>
           <div class="card-trust"><span class="card-editor-score">Editor score <strong>{{ .editor_score }}</strong></span><span>{{ .badge }}</span></div>
