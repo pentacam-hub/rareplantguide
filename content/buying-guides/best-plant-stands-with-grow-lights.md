@@ -2,7 +2,7 @@
 title: "3 Best Plant Stands With Grow Lights for Apartments in 2026"
 description: "Three plant stands with integrated grow lights, chosen for narrow spaces, maximum plant capacity and design-first living rooms."
 date: 2026-08-29
-lastmod: 2026-08-29
+lastmod: 2026-10-04
 keywords: ["best plant stands with grow lights", "plant stand with grow lights", "indoor plant shelf with grow lights", "plant shelf with grow lights", "plant stands for apartments"]
 market_snapshot: "2026 buying guide • Amazon US"
 eyebrow: "APARTMENT PLANT SETUPS • 2026 BUYING GUIDE"
