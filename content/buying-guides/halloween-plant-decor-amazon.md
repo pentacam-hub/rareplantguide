@@ -2,7 +2,7 @@
 title: "3 Best Halloween Plant Decor Picks for 2026"
 description: "Three Halloween decorations for indoor plant displays: hanging bats, stretchy spider webs and battery-powered LED lights."
 date: 2026-09-26
-lastmod: 2026-09-26
+lastmod: 2026-10-04
 image_strategy: "proxied Amazon product photos for reliable browser rendering"
 keywords: ["best Halloween plant decor", "Halloween decorations for houseplants", "Halloween plant decor", "Amazon Halloween decorations"]
 market_snapshot: "2026 buying guide • Amazon US"
