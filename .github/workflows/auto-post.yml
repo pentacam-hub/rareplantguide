@@ -1,7 +1,12 @@
-name: Pinterest + Content Agent (manual fallback)
+name: Pinterest + Content Agent (weekly)
 
 on:
   workflow_dispatch: {}
+  schedule:
+    # One new article + Pinterest creative every Monday at 08:20 Italy time.
+    # Keep the manual trigger as a fallback.
+    - cron: '20 8 * * 1'
+      timezone: "Europe/Rome"
 
 permissions:
   contents: write
@@ -25,7 +30,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Run legacy fallback agent
+      - name: Run weekly content agent
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
