@@ -374,7 +374,14 @@ topics:
   - pink princess care
   image_query: pink princess philodendron leaf
   cluster: variegation-care
-  status: pending
+  status: done
+  published_date: '2026-10-05'
+  slug: how-to-keep-philodendron-pink-princess-variegation-stable
+  pin_title: How to Keep Philodendron Pink Princess Variegation Stable
+  pin_description: Learn the lighting, pruning, and care techniques required to maintain
+    and stabilize the vibrant variegation on a Philodendron Pink Princess.
+  pin_image_path: /images/pins/how-to-keep-philodendron-pink-princess-variegation-stable.jpg
+  pin_status: pending
 - title: How to Tell If a Rare Plant Cutting Will Actually Root
   keywords:
   - plant cuttings
