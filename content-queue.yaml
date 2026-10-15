@@ -408,7 +408,14 @@ topics:
   - rare plant nutrition
   image_query: liquid fertilizer houseplant watering
   cluster: care-troubleshooting
-  status: pending
+  status: done
+  published_date: '2026-10-15'
+  slug: fertilizing-rare-plants-how-much-is-too-much
+  pin_title: 'Fertilizing Rare Plants: How Much Is Too Much?'
+  pin_description: Learn how to safely feed rare and variegated houseplants, recognize
+    overfertilization symptoms, and establish a balanced nutrition routine.
+  pin_image_path: /images/pins/fertilizing-rare-plants-how-much-is-too-much.jpg
+  pin_status: pending
 - title: Best Rare Plants for Beginners Who Want a Challenge (But Not a Disaster)
   keywords:
   - beginner rare plants
