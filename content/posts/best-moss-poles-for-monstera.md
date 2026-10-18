@@ -132,14 +132,16 @@ Before buying a moss pole, check:
 
 If you cannot answer #4 and #5, do not automatically buy sphagnum just because it is marketed as the premium option. **The best pole is the one that matches the way you actually care for the plant.**
 
-## Where to Buy: Quick Links
+## Complete the Setup: Our Tested Picks
 
-- [Sphagnum moss poles](https://www.amazon.com/s?k=sphagnum+moss+pole+for+monstera&tag=therareplantg-20): for aerial roots that grow into the support
-- [Coir moss poles](https://www.amazon.com/s?k=coir+moss+pole+for+monstera&tag=therareplantg-20): for simple, low-maintenance support
-- [Extendable moss poles](https://www.amazon.com/s?k=extendable+moss+pole+for+monstera&tag=therareplantg-20): for fast-growing vines
-- [Heavy-duty plant supports](https://www.amazon.com/s?k=heavy+duty+plant+support+stake+for+large+monstera&tag=therareplantg-20): for large, heavy Monstera
-- [Soft plant ties](https://www.amazon.com/s?k=soft+plant+ties+for+climbing+plants&tag=therareplantg-20): for attaching the stem without damage
-- [Heavy ceramic pots](https://www.amazon.com/s?k=heavy+ceramic+plant+pot+with+drainage+10+inch&tag=therareplantg-20): to keep a tall pole from tipping
+A moss pole is only one part of a healthy climbing Monstera. These guides have specific products, compared side by side, for the other parts of the setup:
+
+- [3 Best Grow Lights for Rare Plants](/buying-guides/best-selling-grow-lights/): from the Briignite full-spectrum bulbs for a lamp you already own to the GooingTop clip light for one plant
+- [3 Best Plant Stands With Grow Lights](/buying-guides/best-plant-stands-with-grow-lights/): including the Bamworld 7-tier corner stand for apartments
+- [3 Best Humidifiers for Rare Plants](/buying-guides/best-humidifiers-for-rare-plants/): including the Levoit Classic 300S for larger plant rooms
+- [3 Essential Propagation Supplies for Variegated Monstera](/buying-guides/best-propagation-supplies-variegated-monstera/): Fiskars pruning snips and orchid moss for clean cuts and rooting
+
+Still choosing the pole itself? These searches show current options on Amazon: [sphagnum poles](https://www.amazon.com/s?k=sphagnum+moss+pole+for+monstera&tag=therareplantg-20), [coir poles](https://www.amazon.com/s?k=coir+moss+pole+for+monstera&tag=therareplantg-20), [extendable poles](https://www.amazon.com/s?k=extendable+moss+pole+for+monstera&tag=therareplantg-20) and [heavy-duty supports](https://www.amazon.com/s?k=heavy+duty+plant+support+stake+for+large+monstera&tag=therareplantg-20).
 
 ## Common Mistakes
 
