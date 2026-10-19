@@ -425,8 +425,15 @@ topics:
   - starting a collection
   image_query: beginner houseplant collection
   cluster: buying-market
-  status: pending
+  status: done
   featured_weight: 3
+  published_date: '2026-10-19'
+  slug: best-rare-plants-for-beginners-seeking-an-engaging-challenge
+  pin_title: Best Rare Plants for Beginners Seeking an Engaging Challenge
+  pin_description: Discover rewarding beginner rare plants that offer a fun indoor
+    gardening challenge without requiring expensive setup equipment.
+  pin_image_path: /images/pins/best-rare-plants-for-beginners-seeking-an-engaging-challenge.jpg
+  pin_status: pending
 - title: How to Photograph Your Rare Plants Like the Pros on Instagram
   keywords:
   - plant photography
