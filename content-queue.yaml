@@ -443,7 +443,14 @@ topics:
   - showcasing collection
   image_query: houseplant photography phone
   cluster: buying-market
-  status: pending
+  status: done
+  published_date: '2026-10-22'
+  slug: photographing-rare-plants-a-guide-to-stunning-photos
+  pin_title: 'Photographing Rare Plants: A Guide to Stunning Photos'
+  pin_description: Master the art of rare plant photography with simple lighting,
+    framing, and camera techniques to highlight foliage and showcase your collection.
+  pin_image_path: /images/pins/photographing-rare-plants-a-guide-to-stunning-photos.jpg
+  pin_status: pending
 - title: Should You Quarantine New Rare Plants? A Practical Guide
   keywords:
   - plant quarantine
